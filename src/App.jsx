@@ -1,13 +1,24 @@
 
-import './App.css'
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from "react-router-dom";
+import "./App.css";
 
-function App() {
+import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage"
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/">
+      <Route index element={<Home />} />
+      <Route path="login" element={<LoginPage />} />
+    </Route>
+  )
+);
+
+function App({ routes }) {
   return (
     <>
-fancy fleet app
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
-
-export default App
+export default App;
