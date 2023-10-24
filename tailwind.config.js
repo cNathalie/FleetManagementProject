@@ -13,9 +13,11 @@ module.exports = {
     },
     fontSize: {
       btnFontSize: "21px",
+      titleFontSize: "21px",
     },
     fontWeight: {
       btnFontWeigt: "600",
+      titleFontWeigt: "600",
     },
     extend: {},
   },
