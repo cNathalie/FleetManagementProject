@@ -21,12 +21,15 @@ export default function Login() {
     // authenticateUser();
   };
 
-  //Handle Login API Integration here
+  //Handle Login
   const authenticateUser = () => {};
 
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-      <div className="-space-y-px">
+    <form 
+    className="mt-8 space-y-6" 
+    onSubmit={handleSubmit}>
+      <div 
+      className="-space-y-px">
         {fields.map((field, index) => (
           <div 
           key={index} 
@@ -52,7 +55,9 @@ export default function Login() {
           </div>
         ))}
       </div>
-      <FormAction handleSubmit={handleSubmit} text="Login" />
+      <FormAction 
+      handleSubmit={handleSubmit} 
+      text="Login" />
     </form>
   );
 }

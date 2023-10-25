@@ -10,9 +10,11 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route index element={<Home />} />
       <Route path="login" element={<LoginPage />} />
+      {/* hier nog routes naar andere pagina's */}
     </Route>
   )
 );
+
 
 function App({ routes }) {
   return (
