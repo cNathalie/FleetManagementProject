@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\ConsoleAppTest\\ConsoleAppTest.csproj": {}
+    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\backend.ConsoleAppTest\\backend.ConsoleAppTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\ConsoleAppTest\\ConsoleAppTest.csproj": {
+    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\backend.ConsoleAppTest\\backend.ConsoleAppTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\ConsoleAppTest\\ConsoleAppTest.csproj",
-        "projectName": "ConsoleAppTest",
-        "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\ConsoleAppTest\\ConsoleAppTest.csproj",
+        "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\backend.ConsoleAppTest\\backend.ConsoleAppTest.csproj",
+        "projectName": "backend.ConsoleAppTest",
+        "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\backend.ConsoleAppTest\\backend.ConsoleAppTest.csproj",
         "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\ConsoleAppTest\\obj\\",
+        "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\backend.ConsoleAppTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
