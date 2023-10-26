@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+<<<<<<< Updated upstream
 /*eslint-env node*/
 
 module.exports = {
@@ -18,9 +19,27 @@ module.exports = {
     fontWeight: {
       btnFontWeigt: "600",
       titleFontWeigt: "600",
+=======
+
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    colors: {
+      blueBtn: "#19b9ce",
+    },
+    fontFamily: {
+      'Helvetica': ['Helvetica', 'Arial', 'sans-serif'],
+>>>>>>> Stashed changes
     },
     extend: {},
   },
   plugins: [],
+<<<<<<< Updated upstream
 };
+=======
+}
+>>>>>>> Stashed changes
 
