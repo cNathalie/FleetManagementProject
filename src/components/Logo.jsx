@@ -1,4 +1,4 @@
-import logo from '../assets/img/Logo.png'
+import logo from '../assets/Media/FM_noBG.png'
 
 const LogoImg = () => {
     return (
