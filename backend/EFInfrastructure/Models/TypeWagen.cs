@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace EFInfrastructure.Models;
+
+public partial class TypeWagen
+{
+    public int Id { get; set; }
+
+    public string Type { get; set; } = null!;
+
+    public virtual ICollection<Voertuig> Voertuigs { get; set; } = new List<Voertuig>();
+}
