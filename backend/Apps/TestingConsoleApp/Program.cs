@@ -1,5 +1,5 @@
 ﻿using EF_Repositories;
-using EFInfrastructure.Context;
+using EF_Infrastructure.Context;
 
 internal class Program
 {

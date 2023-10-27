@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EF_Infrastructure.Models;
 
-public partial class Tankkaart
+public partial class Tankkaarten
 {
     public int Id { get; set; }
 

@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using EFInfrastructure.Context;
+using EF_Infrastructure.Context;
 using FM_Domain;
 using Microsoft.Extensions.Logging;
 
@@ -51,7 +51,7 @@ public class EFBestuurderRepository
     public void Insert(Bestuurder bestuurder) // een nieuwe bestuurder toevoegen aan de database
     {
         //Stap 1: Omzetten van het interne domein-model naar het EntityFramework-model
-        EFInfrastructure.Models.Bestuurder nieuweBestuurder = new()
+        EF_Infrastructure.Models.Bestuurder nieuweBestuurder = new()
         {
             Id = bestuurder.Id,
             Naam = bestuurder.Naam,
@@ -153,7 +153,7 @@ public class EFBestuurderRepository
 
 
 
-    private EFInfrastructure.Models.Bestuurder GetEFBestuurder(Bestuurder bestuurder)
+    private EF_Infrastructure.Models.Bestuurder GetEFBestuurder(Bestuurder bestuurder)
     {
         var efBestuurder = _dbContext.Bestuurders.Find(bestuurder.Id);
         return efBestuurder;

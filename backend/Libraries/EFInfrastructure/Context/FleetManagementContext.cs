@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using EFInfrastructure.Models;
+using EF_Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFInfrastructure.Context;
+namespace EF_Infrastructure.Context;
 
 public partial class FleetManagementContext : DbContext
 {
@@ -22,7 +22,9 @@ public partial class FleetManagementContext : DbContext
 
     public virtual DbSet<Fleet> Fleets { get; set; }
 
-    public virtual DbSet<Tankkaart> Tankkaarten { get; set; }
+    public virtual DbSet<Login> Logins { get; set; }
+
+    public virtual DbSet<Tankkaarten> Tankkaartens { get; set; }
 
     public virtual DbSet<TypeRijbewijs> TypeRijbewijs { get; set; }
 
@@ -38,7 +40,7 @@ public partial class FleetManagementContext : DbContext
     {
         modelBuilder.Entity<Bestuurder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Bestuurd__3213E83F7C4EC7E6");
+            entity.HasKey(e => e.Id).HasName("PK__Bestuurd__3213E83F2FC7A6A0");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Adres)
@@ -67,7 +69,7 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<BrantstofType>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Brantsto__3213E83F0014E1D6");
+            entity.HasKey(e => e.Id).HasName("PK__Brantsto__3213E83F1C90EB52");
 
             entity.ToTable("BrantstofType");
 
@@ -80,7 +82,7 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<Fleet>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Fleet__3213E83F30EBE2F0");
+            entity.HasKey(e => e.Id).HasName("PK__Fleet__3213E83F6992E6B9");
 
             entity.ToTable("Fleet");
 
@@ -94,7 +96,7 @@ public partial class FleetManagementContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fleet_fk0");
 
-            entity.HasOne(d => d.Tankkaarten).WithMany(p => p.Fleets)
+            entity.HasOne(d => d.Tankkaart).WithMany(p => p.Fleets)
                 .HasForeignKey(d => d.TankkaartId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fleet_fk1");
@@ -105,9 +107,34 @@ public partial class FleetManagementContext : DbContext
                 .HasConstraintName("Fleet_fk2");
         });
 
-        modelBuilder.Entity<Tankkaart>(entity =>
+        modelBuilder.Entity<Login>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tankkaar__3213E83F169D3FC6");
+            entity
+                .HasNoKey()
+                .ToTable("Login");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id");
+            entity.Property(e => e.Rol)
+                .HasMaxLength(5)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('user')")
+                .HasColumnName("rol");
+            entity.Property(e => e.Wachtwoord)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('fleet')")
+                .HasColumnName("wachtwoord");
+        });
+
+        modelBuilder.Entity<Tankkaarten>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Tankkaar__3213E83FC32951FC");
 
             entity.ToTable("Tankkaarten");
 
@@ -129,7 +156,7 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<TypeRijbewijs>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TypeRijb__3213E83F71DB6A8E");
+            entity.HasKey(e => e.Id).HasName("PK__TypeRijb__3213E83FE0C284D7");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Type)
@@ -140,7 +167,7 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<TypeWagen>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TypeWage__3213E83F6CC176D4");
+            entity.HasKey(e => e.Id).HasName("PK__TypeWage__3213E83FF55A78C5");
 
             entity.ToTable("TypeWagen");
 
@@ -153,7 +180,7 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<Voertuig>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Voertuig__3213E83F46D5D225");
+            entity.HasKey(e => e.Id).HasName("PK__Voertuig__3213E83FF49AAD09");
 
             entity.ToTable("Voertuig");
 

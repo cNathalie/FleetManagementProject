@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EFInfrastructure.Models;
+namespace EF_Infrastructure.Models;
 
 public partial class TypeRijbewijs
 {
