@@ -15,7 +15,7 @@ public partial class Fleet
 
     public virtual Bestuurder Bestuurder { get; set; } = null!;
 
-    public virtual Tankkaarten Tankkaart { get; set; } = null!;
+    public virtual Tankkaart Tankkaarten { get; set; } = null!;
 
     public virtual Voertuig Voertuig { get; set; } = null!;
 }

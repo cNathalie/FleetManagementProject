@@ -22,9 +22,9 @@ public partial class FleetManagementContext : DbContext
 
     public virtual DbSet<Fleet> Fleets { get; set; }
 
-    public virtual DbSet<Tankkaarten> Tankkaartens { get; set; }
+    public virtual DbSet<Tankkaart> Tankkaarten { get; set; }
 
-    public virtual DbSet<TypeRijbewij> TypeRijbewijs { get; set; }
+    public virtual DbSet<TypeRijbewijs> TypeRijbewijs { get; set; }
 
     public virtual DbSet<TypeWagen> TypeWagens { get; set; }
 
@@ -94,7 +94,7 @@ public partial class FleetManagementContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fleet_fk0");
 
-            entity.HasOne(d => d.Tankkaart).WithMany(p => p.Fleets)
+            entity.HasOne(d => d.Tankkaarten).WithMany(p => p.Fleets)
                 .HasForeignKey(d => d.TankkaartId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fleet_fk1");
@@ -105,7 +105,7 @@ public partial class FleetManagementContext : DbContext
                 .HasConstraintName("Fleet_fk2");
         });
 
-        modelBuilder.Entity<Tankkaarten>(entity =>
+        modelBuilder.Entity<Tankkaart>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Tankkaar__3213E83F169D3FC6");
 
@@ -127,7 +127,7 @@ public partial class FleetManagementContext : DbContext
             entity.Property(e => e.Pincode).HasColumnName("pincode");
         });
 
-        modelBuilder.Entity<TypeRijbewij>(entity =>
+        modelBuilder.Entity<TypeRijbewijs>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__TypeRijb__3213E83F71DB6A8E");
 

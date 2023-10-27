@@ -19,5 +19,5 @@ public partial class Bestuurder
 
     public virtual ICollection<Fleet> Fleets { get; set; } = new List<Fleet>();
 
-    public virtual TypeRijbewij Typerijbewijs { get; set; } = null!;
+    public virtual TypeRijbewijs Typerijbewijs { get; set; } = null!;
 }

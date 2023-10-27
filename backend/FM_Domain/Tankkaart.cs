@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace FM_Domain;
 
-namespace EFInfrastructure.Models;
-
-public partial class Tankkaarten
+public class Tankkaart
 {
     public int Id { get; set; }
 
@@ -16,6 +13,4 @@ public partial class Tankkaarten
     public string Brandstoffen { get; set; } = null!;
 
     public bool? Actief { get; set; }
-
-    public virtual ICollection<Fleet> Fleets { get; set; } = new List<Fleet>();
 }
