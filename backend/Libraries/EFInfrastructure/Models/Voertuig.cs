@@ -5,7 +5,7 @@ namespace EF_Infrastructure.Models;
 
 public partial class Voertuig
 {
-    public int Id { get; set; }
+    public int VoertuigId { get; set; }
 
     public string MerkEnModel { get; set; } = null!;
 
@@ -13,17 +13,17 @@ public partial class Voertuig
 
     public string Nummerplaat { get; set; } = null!;
 
-    public int BrandstoftypeId { get; set; }
+    public int BrandstofTypeId { get; set; }
 
-    public int TypewagenId { get; set; }
+    public int TypeWagenId { get; set; }
 
     public string Kleur { get; set; } = null!;
 
     public int AantalDeuren { get; set; }
 
-    public virtual BrantstofType Brandstoftype { get; set; } = null!;
+    public virtual BrandstofType BrandstofType { get; set; } = null!;
 
-    public virtual ICollection<Fleet> Fleets { get; set; } = new List<Fleet>();
+    public virtual Fleet Fleet { get; set; }
 
-    public virtual TypeWagen Typewagen { get; set; } = null!;
+    public virtual TypeWagen TypeWagen { get; set; } = null!;
 }

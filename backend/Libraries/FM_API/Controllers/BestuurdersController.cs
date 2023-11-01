@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EF_Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace FM_API;
 
@@ -16,6 +17,7 @@ public class BestuurdersController : ControllerBase
         _repository = repo;
         _mapper = mapper;
     }
+
 
     [HttpGet(Name = "GetBestuurders")]
     public ActionResult<IEnumerable<BestuurderDTO>> Get()

@@ -5,7 +5,7 @@ namespace EF_Infrastructure.Models;
 
 public partial class Tankkaart
 {
-    public int Id { get; set; }
+    public int TankkaartId { get; set; }
 
     public int Kaartnummer { get; set; }
 
@@ -13,9 +13,11 @@ public partial class Tankkaart
 
     public int Pincode { get; set; }
 
-    public string Brandstoffen { get; set; } = null!;
+    public int BrandstofTypeId { get; set; }
 
     public bool? Actief { get; set; }
 
-    public virtual ICollection<Fleet> Fleets { get; set; } = new List<Fleet>();
+    public virtual BrandstofType BrandstofType { get; set; } = null!;
+
+    public virtual Fleet Fleet { get; set; }
 }

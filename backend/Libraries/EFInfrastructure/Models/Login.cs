@@ -5,7 +5,7 @@ namespace EF_Infrastructure.Models;
 
 public partial class Login
 {
-    public int Id { get; set; }
+    public int LoginId { get; set; }
 
     public string Email { get; set; } = null!;
 

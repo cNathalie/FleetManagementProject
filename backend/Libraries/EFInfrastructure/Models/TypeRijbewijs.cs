@@ -5,7 +5,7 @@ namespace EF_Infrastructure.Models;
 
 public partial class TypeRijbewijs
 {
-    public int Id { get; set; }
+    public int TypeRijbewijsId { get; set; }
 
     public string Type { get; set; } = null!;
 

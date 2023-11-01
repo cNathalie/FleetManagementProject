@@ -5,44 +5,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EF_Infrastructure.Context;
 
-public partial class FleetManagementContext : DbContext
+public partial class FleetManagementDbContext : DbContext
 {
-    public FleetManagementContext()
+    public FleetManagementDbContext()
     {
     }
 
-    public FleetManagementContext(DbContextOptions<FleetManagementContext> options)
+    public FleetManagementDbContext(DbContextOptions<FleetManagementDbContext> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Bestuurder> Bestuurders { get; set; }
 
-    public virtual DbSet<BrantstofType> BrantstofTypes { get; set; }
+    public virtual DbSet<BrandstofType> BrandstofTypes { get; set; }
 
-    public virtual DbSet<Fleet> Fleets { get; set; }
+    public virtual DbSet<Fleet> Fleet { get; set; }
 
     public virtual DbSet<Login> Logins { get; set; }
 
-    public virtual DbSet<Tankkaarten> Tankkaartens { get; set; }
+    public virtual DbSet<Tankkaart> Tankkaarten { get; set; }
 
     public virtual DbSet<TypeRijbewijs> TypeRijbewijs { get; set; }
 
     public virtual DbSet<TypeWagen> TypeWagens { get; set; }
 
-    public virtual DbSet<Voertuig> Voertuigs { get; set; }
+    public virtual DbSet<Voertuig> Voertuigen { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost,1433;Initial Catalog=FleetManagement;Persist Security Info=True;User ID=sa;TrustServerCertificate=True;Password=FleetManagement007");
+        => optionsBuilder.UseSqlServer("Server=localhost,1433;Initial Catalog=FleetManagementDB;Persist Security Info=True;User ID=sa;TrustServerCertificate=True;Password=FleetManagement007");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Bestuurder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Bestuurd__3213E83F2FC7A6A0");
+            entity.ToTable("Bestuurder");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.BestuurderId).HasColumnName("bestuurderId");
             entity.Property(e => e.Adres)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -64,16 +64,14 @@ public partial class FleetManagementContext : DbContext
             entity.HasOne(d => d.Typerijbewijs).WithMany(p => p.Bestuurders)
                 .HasForeignKey(d => d.TyperijbewijsId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Bestuurders_fk0");
+                .HasConstraintName("FK_Bestuurder_TypeRijbewijs");
         });
 
-        modelBuilder.Entity<BrantstofType>(entity =>
+        modelBuilder.Entity<BrandstofType>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Brantsto__3213E83F1C90EB52");
+            entity.ToTable("BrandstofType");
 
-            entity.ToTable("BrantstofType");
-
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.BrandstofTypeId).HasColumnName("brandstofTypeId");
             entity.Property(e => e.Type)
                 .HasMaxLength(30)
                 .IsUnicode(false)
@@ -82,83 +80,83 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<Fleet>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Fleet__3213E83F6992E6B9");
-
             entity.ToTable("Fleet");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.HasIndex(e => e.BestuurderId, "UK_Fleet_B").IsUnique();
+
+            entity.HasIndex(e => new { e.BestuurderId, e.TankkaartId, e.VoertuigId }, "UK_Fleet_BTV").IsUnique();
+
+            entity.HasIndex(e => e.TankkaartId, "UK_Fleet_T").IsUnique();
+
+            entity.HasIndex(e => e.VoertuigId, "UK_Fleet_V").IsUnique();
+
+            entity.Property(e => e.FleetId).HasColumnName("fleetId");
             entity.Property(e => e.BestuurderId).HasColumnName("bestuurderId");
             entity.Property(e => e.TankkaartId).HasColumnName("tankkaartId");
             entity.Property(e => e.VoertuigId).HasColumnName("voertuigId");
 
-            entity.HasOne(d => d.Bestuurder).WithMany(p => p.Fleets)
-                .HasForeignKey(d => d.BestuurderId)
+            entity.HasOne(d => d.Bestuurder).WithOne(p => p.Fleet)
+                .HasForeignKey<Fleet>(d => d.BestuurderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Fleet_fk0");
+                .HasConstraintName("FK_Fleet_Bestuurder");
 
-            entity.HasOne(d => d.Tankkaart).WithMany(p => p.Fleets)
-                .HasForeignKey(d => d.TankkaartId)
+            entity.HasOne(d => d.Tankkaart).WithOne(p => p.Fleet)
+                .HasForeignKey<Fleet>(d => d.TankkaartId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Fleet_fk1");
+                .HasConstraintName("FK_Fleet_Tankkaart");
 
-            entity.HasOne(d => d.Voertuig).WithMany(p => p.Fleets)
-                .HasForeignKey(d => d.VoertuigId)
+            entity.HasOne(d => d.Voertuig).WithOne(p => p.Fleet)
+                .HasForeignKey<Fleet>(d => d.VoertuigId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Fleet_fk2");
+                .HasConstraintName("FK_Fleet_Voertuig");
         });
 
         modelBuilder.Entity<Login>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Login");
+            entity.ToTable("Login");
 
+            entity.Property(e => e.LoginId).HasColumnName("loginId");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("email");
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("id");
             entity.Property(e => e.Rol)
-                .HasMaxLength(5)
+                .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasDefaultValueSql("('user')")
+                .HasDefaultValueSql("('User')")
                 .HasColumnName("rol");
             entity.Property(e => e.Wachtwoord)
                 .HasMaxLength(20)
                 .IsUnicode(false)
-                .HasDefaultValueSql("('fleet')")
                 .HasColumnName("wachtwoord");
         });
 
-        modelBuilder.Entity<Tankkaarten>(entity =>
+        modelBuilder.Entity<Tankkaart>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tankkaar__3213E83FC32951FC");
+            entity.ToTable("Tankkaart");
 
-            entity.ToTable("Tankkaarten");
-
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.TankkaartId).HasColumnName("tankkaartId");
             entity.Property(e => e.Actief)
-                .IsRequired()
                 .HasDefaultValueSql("((1))")
                 .HasColumnName("actief");
-            entity.Property(e => e.Brandstoffen)
-                .HasMaxLength(30)
-                .IsUnicode(false)
-                .HasColumnName("brandstoffen");
+            entity.Property(e => e.BrandstofTypeId).HasColumnName("brandstofTypeId");
             entity.Property(e => e.Geldigheidsdatum)
                 .HasColumnType("datetime")
                 .HasColumnName("geldigheidsdatum");
             entity.Property(e => e.Kaartnummer).HasColumnName("kaartnummer");
             entity.Property(e => e.Pincode).HasColumnName("pincode");
+
+            entity.HasOne(d => d.BrandstofType).WithMany(p => p.Tankkaarts)
+                .HasForeignKey(d => d.BrandstofTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Tankkaart_BrandstofType");
         });
 
         modelBuilder.Entity<TypeRijbewijs>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TypeRijb__3213E83FE0C284D7");
+            entity.HasKey(e => e.TypeRijbewijsId);
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.TypeRijbewijsId).HasColumnName("typeRijbewijsId");
             entity.Property(e => e.Type)
                 .HasMaxLength(30)
                 .IsUnicode(false)
@@ -167,11 +165,9 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<TypeWagen>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__TypeWage__3213E83FF55A78C5");
-
             entity.ToTable("TypeWagen");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.TypeWagenId).HasColumnName("typeWagenId");
             entity.Property(e => e.Type)
                 .HasMaxLength(30)
                 .IsUnicode(false)
@@ -180,13 +176,11 @@ public partial class FleetManagementContext : DbContext
 
         modelBuilder.Entity<Voertuig>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Voertuig__3213E83FF49AAD09");
-
             entity.ToTable("Voertuig");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.VoertuigId).HasColumnName("voertuigId");
             entity.Property(e => e.AantalDeuren).HasColumnName("aantal_deuren");
-            entity.Property(e => e.BrandstoftypeId).HasColumnName("brandstoftypeId");
+            entity.Property(e => e.BrandstofTypeId).HasColumnName("brandstofTypeId");
             entity.Property(e => e.Chassisnummer)
                 .HasMaxLength(30)
                 .IsUnicode(false)
@@ -203,17 +197,17 @@ public partial class FleetManagementContext : DbContext
                 .HasMaxLength(30)
                 .IsUnicode(false)
                 .HasColumnName("nummerplaat");
-            entity.Property(e => e.TypewagenId).HasColumnName("typewagenId");
+            entity.Property(e => e.TypeWagenId).HasColumnName("typeWagenId");
 
-            entity.HasOne(d => d.Brandstoftype).WithMany(p => p.Voertuigs)
-                .HasForeignKey(d => d.BrandstoftypeId)
+            entity.HasOne(d => d.BrandstofType).WithMany(p => p.Voertuigs)
+                .HasForeignKey(d => d.BrandstofTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Voertuig_fk0");
+                .HasConstraintName("FK_Voertuig_BrandstofType");
 
-            entity.HasOne(d => d.Typewagen).WithMany(p => p.Voertuigs)
-                .HasForeignKey(d => d.TypewagenId)
+            entity.HasOne(d => d.TypeWagen).WithMany(p => p.Voertuigs)
+                .HasForeignKey(d => d.TypeWagenId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Voertuig_fk1");
+                .HasConstraintName("FK_Voertuig_TypeWagen");
         });
 
         OnModelCreatingPartial(modelBuilder);

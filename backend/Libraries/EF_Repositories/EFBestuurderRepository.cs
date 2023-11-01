@@ -8,7 +8,7 @@ namespace EF_Repositories;
 public class EFBestuurderRepository
 {
     // Properties
-    private readonly FleetManagementContext _dbContext;
+    private readonly FleetManagementDbContext _dbContext;
     private List<Bestuurder> _bestuurders;
     public List<Bestuurder> Bestuurders
     {
@@ -20,7 +20,7 @@ public class EFBestuurderRepository
     }
 
     //  Constructor
-    public EFBestuurderRepository(FleetManagementContext context)
+    public EFBestuurderRepository(FleetManagementDbContext context)
     {
         _dbContext = context;
         RefreshBestuurders(); // bij het aanmaken van de Repo wordt het _bestuurders property ingevuld
@@ -35,7 +35,7 @@ public class EFBestuurderRepository
         {
             var bestuurder = new Bestuurder
             {
-                Id = b.Id,
+                Id = b.BestuurderId,
                 Naam = b.Naam,
                 Voornaam = b.Voornaam,
                 Adres = b.Adres,
@@ -53,7 +53,7 @@ public class EFBestuurderRepository
         //Stap 1: Omzetten van het interne domein-model naar het EntityFramework-model
         EF_Infrastructure.Models.Bestuurder nieuweBestuurder = new()
         {
-            Id = bestuurder.Id,
+            BestuurderId = bestuurder.Id,
             Naam = bestuurder.Naam,
             Voornaam = bestuurder.Voornaam,
             Adres = bestuurder.Adres,

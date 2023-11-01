@@ -5,7 +5,7 @@ namespace EF_Infrastructure.Models;
 
 public partial class Bestuurder
 {
-    public int Id { get; set; }
+    public int BestuurderId { get; set; }
 
     public string Naam { get; set; } = null!;
 
@@ -17,7 +17,7 @@ public partial class Bestuurder
 
     public int TyperijbewijsId { get; set; }
 
-    public virtual ICollection<Fleet> Fleets { get; set; } = new List<Fleet>();
+    public virtual Fleet? Fleet { get; set; }
 
     public virtual TypeRijbewijs Typerijbewijs { get; set; } = null!;
 }

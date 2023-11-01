@@ -5,19 +5,24 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{9C634103-2EE7-437C-8D10-56D69174C30B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingConsoleApp", "Apps\TestingConsoleApp\TestingConsoleApp.csproj", "{C84BE6CA-71F3-4A3D-A838-B2CD0AC84146}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{422A6A92-AB1B-4154-9DFC-055852C58AAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FM_Domain", "Libraries\FM_Domain\FM_Domain.csproj", "{AED5ED6E-EEE0-477D-B8AD-3E80E20F3DD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FM_Domain", "Libraries\FM_Domain\FM_Domain.csproj", "{AED5ED6E-EEE0-477D-B8AD-3E80E20F3DD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Infrastructure", "Libraries\EFInfrastructure\EF_Infrastructure.csproj", "{86539A9E-F342-4B1C-B328-773FA3F0AD8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Infrastructure", "Libraries\EFInfrastructure\EF_Infrastructure.csproj", "{86539A9E-F342-4B1C-B328-773FA3F0AD8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Repositories", "Libraries\EF_Repositories\EF_Repositories.csproj", "{10B111A2-1D82-47D4-9976-38488A00FC6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Repositories", "Libraries\EF_Repositories\EF_Repositories.csproj", "{10B111A2-1D82-47D4-9976-38488A00FC6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FM_API", "Libraries\FM_API\FM_API.csproj", "{A680BBA4-9F6C-41C2-9D84-83B0E6501AE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FM_API", "Libraries\FM_API\FM_API.csproj", "{A680BBA4-9F6C-41C2-9D84-83B0E6501AE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMApi.App", "Apps\FM.Api\FMApi.App.csproj", "{BAE97250-9FE2-4F35-88C3-01541642A3F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FMApi.App", "Apps\FM.Api\FMApi.App.csproj", "{BAE97250-9FE2-4F35-88C3-01541642A3F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{3F845F44-9119-426E-AB59-74FBF968EF67}"
+	ProjectSection(SolutionItems) = preProject
+		Database\FMInserts.sql = Database\FMInserts.sql
+		Database\FMDBCreate.sql = Database\FMDBCreate.sql
+		Database\info.txt = Database\info.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C84BE6CA-71F3-4A3D-A838-B2CD0AC84146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C84BE6CA-71F3-4A3D-A838-B2CD0AC84146}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C84BE6CA-71F3-4A3D-A838-B2CD0AC84146}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C84BE6CA-71F3-4A3D-A838-B2CD0AC84146}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AED5ED6E-EEE0-477D-B8AD-3E80E20F3DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AED5ED6E-EEE0-477D-B8AD-3E80E20F3DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AED5ED6E-EEE0-477D-B8AD-3E80E20F3DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,11 +55,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C84BE6CA-71F3-4A3D-A838-B2CD0AC84146} = {9C634103-2EE7-437C-8D10-56D69174C30B}
 		{AED5ED6E-EEE0-477D-B8AD-3E80E20F3DD9} = {422A6A92-AB1B-4154-9DFC-055852C58AAF}
 		{86539A9E-F342-4B1C-B328-773FA3F0AD8C} = {422A6A92-AB1B-4154-9DFC-055852C58AAF}
 		{10B111A2-1D82-47D4-9976-38488A00FC6C} = {422A6A92-AB1B-4154-9DFC-055852C58AAF}
 		{A680BBA4-9F6C-41C2-9D84-83B0E6501AE6} = {422A6A92-AB1B-4154-9DFC-055852C58AAF}
 		{BAE97250-9FE2-4F35-88C3-01541642A3F2} = {9C634103-2EE7-437C-8D10-56D69174C30B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {639C9265-2553-49C6-9C2D-893FEE642801}
 	EndGlobalSection
 EndGlobal

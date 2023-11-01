@@ -13,8 +13,10 @@ namespace FM.Api.App
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<FleetManagementContext>()
-                  .AddScoped<EFBestuurderRepository>();
+            builder.Services.AddDbContext<FleetManagementDbContext>()
+                  .AddScoped<EFBestuurderRepository>()
+                  .AddScoped<EFTankkaartRepository>()
+                  .AddScoped<EFBrandstofTypeRepository>();
 
 
             builder.Services.AddAutoMapper(typeof(MappingConfig));
@@ -24,9 +26,21 @@ namespace FM.Api.App
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddCors();
 
-
+            {
+                Console.WriteLine("Cors active");
+                // Adding CORS Policy
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowOrigin", builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                        // .SetPreflightMaxAge(TimeSpan.FromSeconds(3600));
+                    });
+                });
+            }
 
             var app = builder.Build();
 
@@ -35,22 +49,18 @@ namespace FM.Api.App
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-             
+
             }
+
+            // app.UseCors(MyPolicy);
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-            app.UseCors(builder =>
-            //TODO eens naar productie moet cors policy aangepast worden om enkel CRUD toe te laten vanop SPA
-                {
-                    builder.WithOrigins("http://localhost:5173/")
-                            .AllowAnyMethod()
-                            .AllowAnyHeader();
-                });
 
             app.MapControllers();
 
+            app.UseCors("AllowOrigin");
 
             app.Run();
         }

@@ -2,7 +2,7 @@
 
 public class Tankkaart
 {
-    public int Id { get; set; }
+    public int TankkaartId { get; set; }
 
     public int Kaartnummer { get; set; }
 
@@ -10,7 +10,9 @@ public class Tankkaart
 
     public int Pincode { get; set; }
 
-    public string Brandstoffen { get; set; } = null!;
+    public int BrandstofTypeId { get; set; } 
+
+    public string Brandstof { get; set; }
 
     public bool? Actief { get; set; }
 }

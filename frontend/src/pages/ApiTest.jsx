@@ -5,7 +5,7 @@ const ApiTest = () => {
 
   const getBestuurders = async () => {
     try {
-      const response = await fetch("http://localhost:5100/bestuurder");
+      const response = await fetch("http://localhost:5100/bestuurders");
 
       if (!response.ok) {
         // Handle non-successful response

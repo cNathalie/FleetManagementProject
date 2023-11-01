@@ -5,7 +5,7 @@ namespace EF_Infrastructure.Models;
 
 public partial class TypeWagen
 {
-    public int Id { get; set; }
+    public int TypeWagenId { get; set; }
 
     public string Type { get; set; } = null!;
 
