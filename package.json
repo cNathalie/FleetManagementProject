@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
+    "@material-tailwind/react": "^2.1.4",
     "autoprefixer": "^10.4.16",
+    "flowbite": "^2.0.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "mdb-react-ui-kit": "^6.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
     "react-router-dom": "^6.17.0",
     "sort-by": "^1.2.0"
   },
@@ -31,7 +34,6 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "postcss-import": "^15.1.0",
     "tailwindcss": "^3.3.3",
-
     "vite": "^4.4.5"
   }
 }
