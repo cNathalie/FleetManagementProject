@@ -1,0 +1,21 @@
+
+-----------
+   INFO
+___________
+
+
+BaseUrl API: http://localhost:5100/
+(deze zou normaal hetzelfde zijn bij iedereen, tenzij jullie appsettings hebben aangepast)
+
+Swagger: http://localhost:5100/swagger/index.html
+
+
+
+
+
+Database - SQL Container Nathalie
+localhost,1433
+FleetManagement007
+ConnectionString Nathalie: "Server=localhost,1433;Initial Catalog=FleetManagementDB;Persist Security Info=True;User ID=sa;TrustServerCertificate=True;Password=FleetManagement007"
+Scaffold commando:
+dotnet ef dbcontext scaffold  "Server=localhost,1433;Initial Catalog=FleetManagementDB;Persist Security Info=True;User ID=sa;TrustServerCertificate=True;Password=FleetManagement007" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models --context-dir Context --force

@@ -1,0 +1,10 @@
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.csproj.AssemblyReference.cache
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.AssemblyInfoInputs.cache
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.AssemblyInfo.cs
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.csproj.CoreCompileInputs.cache
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.dll
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\refint\SISApi.App.dll
+C:\Users\Nathalie\HoGent\2023-2024\Semester-1\ProgrammerenSpecialisatie-Vervoort\SIS-Opdracht\SIS2023\Apps\SISApi\obj\Debug\net7.0\SISApi.App.pdb

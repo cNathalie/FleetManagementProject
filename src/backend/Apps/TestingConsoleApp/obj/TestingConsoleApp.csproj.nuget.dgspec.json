@@ -1,0 +1,252 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Apps\\TestingConsoleApp\\TestingConsoleApp.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Apps\\TestingConsoleApp\\TestingConsoleApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Apps\\TestingConsoleApp\\TestingConsoleApp.csproj",
+        "projectName": "TestingConsoleApp",
+        "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Apps\\TestingConsoleApp\\TestingConsoleApp.csproj",
+        "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Apps\\TestingConsoleApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Apps\\EF_Repositories\\EF_Repositories.csproj": {
+                "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Apps\\EF_Repositories\\EF_Repositories.csproj"
+              },
+              "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj": {
+                "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
+        "projectName": "EF_Infrastructure",
+        "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
+        "projectName": "EF_Repositories",
+        "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
+        "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj"
+              },
+              "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
+                "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
+        "projectName": "FM_Domain",
+        "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
+        "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
