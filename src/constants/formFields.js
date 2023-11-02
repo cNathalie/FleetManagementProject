@@ -33,7 +33,7 @@ const signupFields = [
     placeholder: "Username",
   },
   {
-    labelText: "Email address",
+    labelText: "E-mail",
     labelFor: "email-address",
     id: "email-address",
     name: "email",
@@ -43,7 +43,7 @@ const signupFields = [
     placeholder: "Email address",
   },
   {
-    labelText: "Password",
+    labelText: "Wachtwoord",
     labelFor: "password",
     id: "password",
     name: "password",
@@ -53,14 +53,21 @@ const signupFields = [
     placeholder: "Password",
   },
   {
-    labelText: "Confirm Password",
+    labelText: "Wachtwoord bevestigen",
     labelFor: "confirm-password",
     id: "confirm-password",
-    name: "confirm-password",
+    name: "confirmPassword",
     type: "password",
     autoComplete: "confirm-password",
     isRequired: true,
     placeholder: "Confirm Password",
+  },
+  {
+    labelText: "Admin?",
+    labelFor: "admin-privileges",
+    id: "admin-privileges",
+    name: "isAdmin",
+    type: "checkbox",
   },
 ];
 
