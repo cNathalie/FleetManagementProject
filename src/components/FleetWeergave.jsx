@@ -1,61 +1,37 @@
 import React from "react";
-/* eslint-disable react/prop-types*/ 
+/* eslint-disable react/prop-types*/
 
 const FleetWeergave = (props) => {
-  
-  const { fleetweergave: {id, title, text, btnValue, imgSrc, alt} } = props;
-  
-  let div
+  const {
+    fleetweergave: { title, text, btnValue, imgSrc, alt },
+  } = props;
 
-  if (id % 2 !== 0 ) {
-    div = <>
-    <div className="w-1/2 mt-[68px]">
-      <div>
-        <h1 className="ml-[25%] font-semibold text-[64px] font-Helvetica">{title}</h1>
+  let divs;
+
+  divs = (
+    <>
+      <div className="h-[50%]">
+        <img
+          className="rounded-md object-cover h-full w-full"
+          src={imgSrc}
+          alt={alt}
+        />
       </div>
       <div>
-        <p className="mt-[10%] ml-[25%] font-semibold text-[21px] font-Helvetica">
+        <h1 className="font-titleFontWeigt text-[32px] font-Helvetica text-center mt-4">
+          {title}
+        </h1>
+        <p className="mt-[5%] font-semibold text-[20px] font-Helvetica text-center font-titleFontWeigt">
           {text}
         </p>
+        <button className="w-1/2 h-[53px] rounded-[10px] mt-[10%] ml-[25%] font-btnFontWeigt font-Helvetica text-btnFontSize text-[#FFFFFF] bg-blueBtn hover:bg-hoverBtn cursor-pointer">
+          {btnValue}
+        </button>
       </div>
-      <div>
-        <button className="w-[235px] h-[53px] rounded-[10px] mt-[10%] ml-[25%] font-semibold font-Helvetica text-[#FFFFFF] bg-blueBtn">
-          {btnValue}</button>
-      </div>
-    </div>
-    <div className="w-[458px] h-[569px] ml-[12%]">
-      <img src={imgSrc} alt={alt} className="object-cover h-full w-full rounded-[10px]" />
-    </div>
-    </>;
-  } else {
-    div = <>
-    <div className="w-[458px] h-[569px] ml-[12%]">
-      <img src={imgSrc} alt={alt} className="object-cover h-full w-full rounded-[10px]" />
-    </div>
-    <div className="w-1/2 mt-[68px]">
-      <div>
-        <h1 className="ml-[25%] font-semibold text-[64px] font-Helvetica">{title}</h1>
-      </div>
-      <div>
-        <p className="mt-[10%] ml-[25%] font-semibold text-[21px] font-Helvetica">
-          {text}
-        </p>
-      </div>
-      <div>
-        <button className="w-[235px] h-[53px] rounded-[10px] mt-[10%] ml-[25%] font-semibold font-Helvetica text-[#FFFFFF] bg-blueBtn">
-          {btnValue}</button>
-      </div>
-    </div>
-    </>;
-  }
-
-  return (
-    <div>
-      <div className="flex flex-wrap p-5">
-      {div}
-    </div>
-    </div>
+    </>
   );
+
+  return <div className="shadow-lg rounded-md h-[100%]">{divs}</div>;
 };
 
 export default FleetWeergave;

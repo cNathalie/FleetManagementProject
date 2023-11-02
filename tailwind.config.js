@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-<<<<<<< Updated upstream
+
 /*eslint-env node*/
 
 module.exports = {
@@ -8,38 +8,23 @@ module.exports = {
     colors: {
       blueBtn: "#19B9CE",
       blueText: "#0B5A64",
+      whiteText: "#FFFFFF",
+      hoverBtn: "#118190",
     },
     fontFamily: {
       mainFont: "inter",
+
+      Helvetica: ["Helvetica", "Arial", "sans-serif"],
+
     },
     fontSize: {
       btnFontSize: "21px",
       titleFontSize: "21px",
+      popupTextSize: "16px",
     },
     fontWeight: {
       btnFontWeigt: "600",
       titleFontWeigt: "600",
-=======
-
-module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    colors: {
-      blueBtn: "#19b9ce",
-    },
-    fontFamily: {
-      'Helvetica': ['Helvetica', 'Arial', 'sans-serif'],
->>>>>>> Stashed changes
-    },
-    extend: {},
-  },
-  plugins: [],
-<<<<<<< Updated upstream
-};
-=======
+    }
+  }
 }
->>>>>>> Stashed changes
-
