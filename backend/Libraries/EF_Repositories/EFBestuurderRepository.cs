@@ -40,7 +40,9 @@ public class EFBestuurderRepository
                 Voornaam = b.Voornaam,
                 Adres = b.Adres,
                 Rijksregisternummer = b.Rijksregisternummer,
-                TyperijbewijsId = b.TyperijbewijsId
+                TyperijbewijsId = b.TyperijbewijsId,
+                Rijbewijs = "Nog in te vullen wanneer andere repo af is" //b.Typerijbewijs.Type
+                
             };
             _bestuurders.Add(bestuurder);
         }

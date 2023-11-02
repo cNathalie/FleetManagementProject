@@ -6,12 +6,12 @@ namespace FM_API;
 
 [ApiController]
 [Route ("[controller]")]
-public class TankkaartController : ControllerBase
+public class TankkaartenController : ControllerBase
 {
     private readonly EFTankkaartRepository _repository;
     private readonly IMapper _mapper;
 
-    public TankkaartController(EFTankkaartRepository repo, IMapper mapper)
+    public TankkaartenController(EFTankkaartRepository repo, IMapper mapper)
     {
         _repository = repo;
         _mapper = mapper;

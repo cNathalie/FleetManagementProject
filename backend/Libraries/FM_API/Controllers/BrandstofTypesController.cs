@@ -7,12 +7,12 @@ namespace FM_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BrandstofTypeController : ControllerBase
+    public class BrandstofTypesController : ControllerBase
     {
         private readonly EFBrandstofTypeRepository _repository;
         private readonly IMapper _mapper;
 
-        public BrandstofTypeController(EFBrandstofTypeRepository repo, IMapper mapper)
+        public BrandstofTypesController(EFBrandstofTypeRepository repo, IMapper mapper)
         {
             _repository = repo;
             _mapper = mapper;

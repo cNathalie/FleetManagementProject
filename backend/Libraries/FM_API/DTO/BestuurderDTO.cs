@@ -13,5 +13,7 @@
         public string Rijksregisternummer { get; set; } = string.Empty;
 
         public int TyperijbewijsId { get; set; }
+
+        public string Rijbewijs { get; set; }
     }
 }
