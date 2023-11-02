@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using EF_Infrastructure.Context;
 using FM_Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace EF_Repositories;
 
@@ -8,7 +9,7 @@ public class EFTankkaartRepository
 {
     // Properties
     private readonly FleetManagementDbContext _dbContext;
-    //private readonly EFBrandstofTypeRepository _brandstoftypeRepository;
+    private readonly EFBrandstofTypeRepository _brandstoftypeRepository;
     private List<Tankkaart> _tankkaarten;
     public List<Tankkaart> Tankkaarten
     {
@@ -21,10 +22,10 @@ public class EFTankkaartRepository
     }
 
     //  Constructor
-    public EFTankkaartRepository(FleetManagementDbContext context/*, EFBrandstofTypeRepository brandstofRepo*/)
+    public EFTankkaartRepository(FleetManagementDbContext context, EFBrandstofTypeRepository brandstofRepo)
     {
         _dbContext = context;
-        //_brandstoftypeRepository = brandstofRepo;
+        _brandstoftypeRepository = brandstofRepo;
         _tankkaarten = RefreshTankkaarten(); // bij het aanmaken van de Repo wordt het _tankkaarten property ingevuld
     }
 
@@ -32,7 +33,7 @@ public class EFTankkaartRepository
     private List<Tankkaart> RefreshTankkaarten() //Alle tankkaarten uit de database ophalen en omzetten naar interne domeinmodellen
     {
         _tankkaarten = new();
-        var dbTankkaarten = _dbContext.Tankkaarten.ToList();
+        var dbTankkaarten = _dbContext.Tankkaarten.Include(tk => tk.BrandstofType).ToList();
         foreach (var t in dbTankkaarten)
         {
             var tankkaart = new Tankkaart
@@ -43,8 +44,7 @@ public class EFTankkaartRepository
                 Pincode = t.Pincode,
                 BrandstofTypeId = t.BrandstofTypeId,
                 Geldigheidsdatum = t.Geldigheidsdatum,
-                //TODO: brandstofrepo aanspreken
-                Brandstof = "efkes zo"
+                Brandstof = t.BrandstofType.Type
             };
             _tankkaarten.Add(tankkaart);
         }

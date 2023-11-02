@@ -19,9 +19,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FMApi.App", "Apps\FM.Api\FM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{3F845F44-9119-426E-AB59-74FBF968EF67}"
 	ProjectSection(SolutionItems) = preProject
+		Database\DB_Diagram.png = Database\DB_Diagram.png
+		Database\FleetManagementDB_CreateScript.sql = Database\FleetManagementDB_CreateScript.sql
+		Database\FMDBCreateSimpel.sql = Database\FMDBCreateSimpel.sql
 		Database\FMInserts.sql = Database\FMInserts.sql
-		Database\FMDBCreate.sql = Database\FMDBCreate.sql
 		Database\info.txt = Database\info.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAD8139A-87FD-4621-A6BD-7DA68069F83B}"
+	ProjectSection(SolutionItems) = preProject
+		ProjectInfo.txt = ProjectInfo.txt
 	EndProjectSection
 EndProject
 Global

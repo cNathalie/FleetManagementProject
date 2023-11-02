@@ -1,0 +1,73 @@
+
+------------------------
+	Om op te starten
+------------------------
+
+1. Hermaak de database met het meegeleverde script in de map Database, belangrijk!: noem de database FleetManagementDB 
+2. Vul de database met de meegeleverde inserts in de map Database
+3. !! Gelieve NIET te scaffolden !!, omdat we Nederlandse termen in de database gebruiken maakt Entity Framework er soms rare dingen van en dan komt de naamgeving niet overeen en zal er niets werken!
+4. Pas in het project Libraries > EF_Infrastructure > Context > FleetManagementDbContext de connectionstring aan naar die van jouw databank
+5. Zet Apps > FMApi.App project als startup project
+6. Debug in http
+7. Swagger zou moeten opstarten en werken
+(8. Lees zeker onderstaande info ook eens door om te zien hoe de solution in elkaar zit)
+
+
+------------------------
+	Projectstructuur
+------------------------
+
+EF_Infrastructure: 
+..................
+Dit is een class library project, die automatisch in ingevuld.
+Dit is het Entity Framework project die voor ons de link naar de database voorziet.
+De FleetManagementDbContext klasse bevat de connectionstring (pas die aan naar jou eigen connectionstring) en de methodes om de database te bewerken.
+De map Models zijn de klasses gegenereerd door EF om de database-objecten op te mappen.
+In principe moet je hier (behalve voor de connectionstring) nooit iets in aanpassen!
+
+
+EF_Repositories:
+................
+Dit is een class library project.
+Deze klasses spreken de FleetManagementDbContext klasse van EF_Infrastructure aan om de objecten uit de databank op te halen en zet ze dan om naar de 
+interne Domain modellen. Dit is belangrijk zodat we niet rechtsreeks onze databasemodellen één op één doorgeven aan de volgende laag of bewerken.
+Hierin zitten alle methoden die nodig zijn om alle bestaande objecten uit de database op te halen, een object te bewerken, een object toe te voegen of een
+object te verwijderen.
+
+
+FM_Domain:
+..........
+Dit is een class library project.
+Hierin zitten onze interne domain modellen van alle objecten in de database. Dit zijn de modellen die we gebruiken om objecten van repository naar de API controllers te
+sturen en omgekeerd.
+
+
+FM_API:
+.......
+Dit is een class library project.
+Dit project bevat de Api Controller klasses die de http-requests behandelen.
+De controllers ontvangen domain modellen van de repositories (zoals bijvoorbeeld een lijst van FM_Domain.Bestuurder objecten) en sturen die door naar de client als
+DTO's. De DTO's bevinden zich ook in de project en het mappen tussen domain modellen en DTO's wordt voor ons automatisch verzorgd door AutoMapper.
+Deze mapping configuratie zie je in de MappingConfig klasse.
+
+
+FMApi.App:
+..........
+Dit is een ASP.NET Core Web API project.
+Hierin zit enkel een Program klasse die alles configureert, het heeft als enige directe dependency het FM_API project waaruit het de Controllers toevoegt aan 
+de configuratie. Hier worden ook de repositories, CORS, swagger en andere geconfigureert.
+
+
+
+-----------------------------------
+	API Aanspreken vanuit React
+-----------------------------------
+Het spreekt voor zich dat je de FMApi.App moet opstarten zodat de React app er aan kan.
+In Visual Studio Code doe je dit door in de SOLUTION EXPLORER rechts te klikken op het FMApi.App project en te kiezen voor Debug > Start without debugging.
+Nadien kan je yarn dev uitvoeren in de React app.
+
+BaseUrl API in debug: http://localhost:5100/
+(deze zou normaal hetzelfde zijn bij iedereen, tenzij jullie appsettings hebben aangepast)
+
+Spreek het juiste endpoint aan:
+Als je met bestuurders wil werken is dit http://localhost:5100/Bestuurder (zie ApiTest pagina in React app)

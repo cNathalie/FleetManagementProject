@@ -7,12 +7,12 @@ namespace FM_API;
 
 [ApiController]
 [Route("[controller]")]
-public class BestuurdersController : ControllerBase
+public class BestuurderController : ControllerBase
 {
     private readonly EFBestuurderRepository _repository;
     private readonly IMapper _mapper;
 
-    public BestuurdersController(EFBestuurderRepository repo, IMapper mapper)
+    public BestuurderController(EFBestuurderRepository repo, IMapper mapper)
     {
         _repository = repo;
         _mapper = mapper;
