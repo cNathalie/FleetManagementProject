@@ -16,7 +16,8 @@ namespace FM.Api.App
             builder.Services.AddDbContext<FleetManagementDbContext>()
                   .AddScoped<EFBestuurderRepository>()
                   .AddScoped<EFTankkaartRepository>()
-                  .AddScoped<EFBrandstofTypeRepository>();
+                  .AddScoped<EFBrandstofTypeRepository>()
+                  .AddScoped<EFLoginRepository>();
 
 
             builder.Services.AddAutoMapper(typeof(MappingConfig));
@@ -51,8 +52,6 @@ namespace FM.Api.App
                 app.UseSwaggerUI();
 
             }
-
-            // app.UseCors(MyPolicy);
 
             app.UseHttpsRedirection();
 

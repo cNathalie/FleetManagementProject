@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using EF_Infrastructure.Context;
+﻿using EF_Infrastructure.Context;
 using FM_Domain;
-using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace EF_Repositories;
 
