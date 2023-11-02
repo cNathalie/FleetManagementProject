@@ -3,7 +3,8 @@ import LogoImg from "./Logo";
 const Nav = () => {
   return (
     <div className="bg-white flex flex-row justify-center w-full">
-      <div className="bg-white w-[100%] h-[200px] relative">
+      <div className="bg-white w-[100%] h-[100px] relative">
+
         <div className="absolute w-[1005px] h-[33px] top-[58px] left-[305px]">
           <div className="absolute w-[152px] h-[33px] top-0 left-[849px]">
             <button
