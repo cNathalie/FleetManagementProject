@@ -3,7 +3,10 @@
 /*eslint-env node*/
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/flowbite/**/*.js"
+],
   theme: {
     colors: {
       blueBtn: "#19B9CE",
@@ -30,7 +33,9 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 };
 
 
