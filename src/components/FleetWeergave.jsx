@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-/* eslint-disable react/prop-types*/ 
 
 const FleetWeergave = (props) => {
   
+  /* eslint-disable react/prop-types*/ 
   const { fleetweergave: {id, title, text, btnValue, imgSrc, alt} } = props;
   
   let div

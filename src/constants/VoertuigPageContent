@@ -1,0 +1,88 @@
+const VoertuigenContent = [
+    {
+        merk: "test1",
+        model: "test1",
+        chasisnummer: "test1",
+        nummerplaat: "test1",
+        brandstoftype: "test1"
+    },
+    {
+        merk: "test2",
+        model: "test2",
+        chasisnummer: "test2",
+        nummerplaat: "test2",
+        brandstoftype: "test2"
+    },
+    {
+        merk: "test3",
+        model: "test3",
+        chasisnummer: "test3",
+        nummerplaat: "test3",
+        brandstoftype: "test3"
+    },
+    {
+        merk: "tttttttttttttttttttttttttttttttttttt",
+        model: "ttttttttttttttttttttttttttttttest3",
+        chasisnummer: "ttttttttttttttttttttttttttttttest3",
+        nummerplaat: "ttttttttttttttttttttttttttttttest3",
+        brandstoftype: "ttttttttttttttttttttttttttttttest3"
+    },
+    {
+        merk: "test4",
+        model: "test4",
+        chasisnummer: "test4",
+        nummerplaat: "test4",
+        brandstoftype: "test4"
+    },
+    {
+        merk: "test5",
+        model: "test5",
+        chasisnummer: "test5",
+        nummerplaat: "test5",
+        brandstoftype: "test5"
+    },
+    {
+        merk: "test5",
+        model: "test5",
+        chasisnummer: "test5",
+        nummerplaat: "test5",
+        brandstoftype: "test5"
+    },
+    {
+        merk: "test6",
+        model: "test6",
+        chasisnummer: "test6",
+        nummerplaat: "test6",
+        brandstoftype: "test6"
+    },
+    {
+        merk: "test7",
+        model: "test7",
+        chasisnummer: "test7",
+        nummerplaat: "test7",
+        brandstoftype: "test7"
+    },
+    {
+        merk: "test8",
+        model: "test8",
+        chasisnummer: "test8",
+        nummerplaat: "test8",
+        brandstoftype: "test8"
+    },
+    {
+        merk: "test9",
+        model: "test9",
+        chasisnummer: "test9",
+        nummerplaat: "test9",
+        brandstoftype: "test9"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    }
+];
+
+export default VoertuigenContent;
