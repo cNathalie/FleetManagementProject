@@ -1,3 +1,4 @@
+
 import React from "react";
 import FleetWeergave from "../components/FleetWeergave";
 import homePage from "../constants/homePageContent";
@@ -26,3 +27,4 @@ const Homepage = () => {
 };
 
 export default Homepage;
+

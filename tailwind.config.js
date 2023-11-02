@@ -12,9 +12,11 @@ module.exports = {
       hoverBtn: "#118190",
     },
     fontFamily: {
+
       mainFont: "inter",
 
       Helvetica: ["Helvetica", "Arial", "sans-serif"],
+
 
     },
     fontSize: {
@@ -25,6 +27,10 @@ module.exports = {
     fontWeight: {
       btnFontWeigt: "600",
       titleFontWeigt: "600",
-    }
-  }
-}
+    },
+    extend: {},
+  },
+  plugins: [],
+};
+
+
