@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EF_Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Cors;
 
 namespace FM_API;
 

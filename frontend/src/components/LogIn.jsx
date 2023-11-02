@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { loginFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import Input from "./Input";
+import { useNavigate } from "react-router-dom";
+import baseUrl from "../constants/baseUrl"
+
 
 const fields = loginFields;
 let fieldsState = {};
@@ -9,20 +12,63 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
+  const [loginsState, setLoginsState] = useState([])
+  const [buttonState, setButtenState] = useState(false)
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("login button clicked");
+  const getLogins = async () => {
+    try {
+      const response = await fetch(baseUrl + "Logins");
 
-    // authenticateUser();
+      if (!response.ok) {
+        // Handle non-successful response
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+      console.log("GET successful");
+      const data = await response.json();
+      setLoginsState(data);
+    } catch (error) {
+      console.error(error);
+      // Handle the error gracefully 
+    }
   };
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("login button clicked, authenticating user");
+    setButtenState(true);
+    authenticateUser(loginState["email-address"], loginState["password"]);
+    setButtenState(false);
+  };
+
+
+    useEffect(() => {
+      getLogins();
+    }, [buttonState]);
+
+  
+    const navigate = useNavigate()
+
   //Handle Login
-  const authenticateUser = () => {};
+  const authenticateUser = (email, password) => {
+    const loginExists = loginsState.some(
+      (l) =>
+        l.email == email &&
+        l.wachtwoord == password
+    );
+
+    if(loginExists){
+      console.log("login bestaat");
+      navigate(`/home`)
+    }
+    else{
+      console.log("login bestaat niet")
+    }
+  };
 
   return (
     <form 
