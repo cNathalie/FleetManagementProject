@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {}
+    "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
+    "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
+        "projectUniqueName": "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
         "projectName": "FM_Domain",
-        "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
-        "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\obj\\",
+        "projectPath": "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
+        "packagesPath": "C:\\Users\\merel\\.nuget\\packages\\",
+        "outputPath": "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\merel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
