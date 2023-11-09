@@ -43,7 +43,7 @@ const DetailChange = () => {
             //Timeout for checkmark so it doesn't stay on the screen endlessly
             setTimeout(() => {
               setShowSetMark(false)
-            }, 3000);
+            }, 100000);
         }
         setIsEditing(!isEditing) // Toggle between edit and display mode
     }
@@ -117,7 +117,7 @@ const DetailChange = () => {
           </div>
           <div className="mr-3 mb-8 ml-[80%]">
                 {showCheckMark && (
-                  <div className="flex justify-items-start mt-10">
+                  <div className="flex mt-10">
                     <p className="text-[#858585] font-btnFontWeigt font-Helvetica p-5">Succes!</p>
                     <img src={CheckNoBg} alt="Checkmark" className="w-16 h-16"/>
                   </div>

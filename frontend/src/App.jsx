@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       <Route path="home" element={<Homepage />} />
       <Route path="admin" element={<AdminPage />} />
       <Route path="voertuigen" element={<VoertuigenPage/>} />
-      <Route path="detail" element={<TestDetailChange/>} />
+      <Route path="detailchange" element={<TestDetailChange/>} />
 
       {/* hier nog routes naar andere pagina's */}
       
