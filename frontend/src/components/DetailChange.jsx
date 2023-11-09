@@ -37,7 +37,7 @@ const DetailChange = () => {
     const handleToggleEditMode = () => {
         if (isEditing){
             // Handle logic to save data to DB
-
+            
             //Show checkmark to show success of actions
             setShowSetMark(true);
             //Timeout for checkmark so it doesn't stay on the screen endlessly
