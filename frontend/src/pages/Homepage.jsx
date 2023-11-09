@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import FleetWeergave from "../components/FleetWeergave";
 import homePage from "../constants/homePageContent";
@@ -9,7 +7,7 @@ const Homepage = () => {
   return (
     <>
       <Nav />
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pl-12 pr-12 mt-4 h-[600px]">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pl-12 pr-12 mt-20 h-[600px]">
         {homePage.map((h) => {
           return (
             <FleetWeergave
@@ -28,4 +26,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-

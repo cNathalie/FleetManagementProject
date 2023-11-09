@@ -2847,24 +2847,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\merel\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Nathalie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
       "projectName": "EF_Infrastructure",
-      "projectPath": "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\merel\\.nuget\\packages\\",
-      "outputPath": "C:\\GitHubProject\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\obj\\",
+      "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\merel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2872,7 +2867,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2916,7 +2910,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
