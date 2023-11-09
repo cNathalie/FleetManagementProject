@@ -21,13 +21,6 @@ const VoertuigenContent = [
         brandstoftype: "test3"
     },
     {
-        merk: "tttttttttttttttttttttttttttttttttttt",
-        model: "ttttttttttttttttttttttttttttttest3",
-        chasisnummer: "ttttttttttttttttttttttttttttttest3",
-        nummerplaat: "ttttttttttttttttttttttttttttttest3",
-        brandstoftype: "ttttttttttttttttttttttttttttttest3"
-    },
-    {
         merk: "test4",
         model: "test4",
         chasisnummer: "test4",
