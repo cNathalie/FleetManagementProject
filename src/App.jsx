@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       <Route index element={<LoginPage />} />
       <Route path="home" element={<Homepage />} />
       <Route path="admin" element={<AdminPage />} />
-      <Route path="voertuigen" element={<VoertuigenPage/>} />
+      <Route path="voertuigen" element={<VoertuigenPage/>}
 
       {/* hier nog routes naar andere pagina's */}
     </Route>
