@@ -18,11 +18,11 @@ const Table = (props) => {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="text" id="table-search" className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items"/>
+                        <input type="text" id="table-search" className="block p-2 pl-10 text-sm text-darkBlue border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blueBtn focus:border-blueBtn dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items"/>
                     </div>
                     <div className="absolute left-4 top-5">
                         {/* bg-cyan-500 wilt niet werken voor reden */}
-                        <button type="button" className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Toevoegen</button>
+                        <button type="button" className="text-white bg-blueBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Toevoegen</button>
                     </div>
                 </div>
                 <div className="table-container max-h-96 overflow-y-auto">            
@@ -60,7 +60,7 @@ const Table = (props) => {
                                             {v.brandstoftype}
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <a href="#" className="font-medium text-blueText dark:text-blue-500 hover:underline">Edit</a>
                                         </td>
                                     </tr>
                                     </>

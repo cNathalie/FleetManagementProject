@@ -123,7 +123,7 @@ const DetailChange = () => {
                   </div>
                 )}
                 <Button 
-                className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-[#FFFFFF] bg-blueBtn hover:bg-hoverBtn cursor-pointer"
+                className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer"
                 onClick={handleToggleEditMode}>
                 {isEditing ? 'Opslaan' : 'Bewerk'}
                 </Button>
