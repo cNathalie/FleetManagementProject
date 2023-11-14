@@ -43,7 +43,7 @@ const DetailChange = () => {
             //Timeout for checkmark so it doesn't stay on the screen endlessly
             setTimeout(() => {
               setShowSetMark(false)
-            }, 100000);
+            }, 3000);
         }
         setIsEditing(!isEditing) // Toggle between edit and display mode
     }
@@ -100,7 +100,7 @@ const DetailChange = () => {
                         name={field}
                         value={value}
                         onChange={(e) => handleDataChange(field, e.target.value)}
-                        className="w-[80%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent"
+                        className="w-[80%] h-9 p-2 rounded-md border border-b border-blueText text-blueText focus:ring-blueText focus:border-blueText bg-transparent"
                     />
                     </div>
                 ))}
@@ -115,18 +115,21 @@ const DetailChange = () => {
             )}
             
           </div>
-          <div className="mr-3 mb-8 ml-[80%]">
-                {showCheckMark && (
-                  <div className="flex mt-10">
-                    <p className="text-[#858585] font-btnFontWeigt font-Helvetica p-5">Succes!</p>
-                    <img src={CheckNoBg} alt="Checkmark" className="w-16 h-16"/>
-                  </div>
-                )}
-                <Button 
-                className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer"
-                onClick={handleToggleEditMode}>
-                {isEditing ? 'Opslaan' : 'Bewerk'}
-                </Button>
+          {showCheckMark && (
+              <div className="flex absolute bottom-[33%] right-[35%]">
+                <p className="text-[#858585] font-btnFontWeigt font-Helvetica p-5">
+                  Succes!
+                </p>
+                <img src={CheckNoBg} alt="Checkmark" className="w-16 h-16" />
+              </div>
+            )}
+            <div className="absolute right-[25%] bottom-[30%] p-8">
+            <Button
+              className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-[#FFFFFF] bg-blueBtn hover:bg-hoverBtn cursor-pointer"
+              onClick={handleToggleEditMode}
+            >
+              {isEditing ? "Opslaan" : "Bewerk"}
+            </Button>
             </div>
         </div>
       </div>

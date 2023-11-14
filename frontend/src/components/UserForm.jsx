@@ -47,7 +47,7 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
               name={field.name}
               value={formData[field.name]}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border-b bg-transparent border-darkBlue text-darkBlue placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-blueBtn"
+              className="w-full px-3 py-2 border-b bg-transparent border-whiteText text-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md"
               placeholder={field.placeholder}
             />
           )}
