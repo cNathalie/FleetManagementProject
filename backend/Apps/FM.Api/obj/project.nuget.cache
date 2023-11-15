@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nAmdgPIkLvWKeHQZtDTswV8Pup4fHJdTe3+rYlu7t4r0RlZwHnjZzZux5HnVGdW4iv9bdqWxuf+MBj2cRbRzpQ==",
+  "dgSpecHash": "u0KrbZqqfBYm8DBBL9HIfEJnlgVA3YQhgEAfhSeId3UeKd/TLPK64M46d0YL9XklIHLlr8YVzGj4Yqr7FL+l5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Apps\\FM.Api\\FMApi.App.csproj",
+  "projectFilePath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Apps\\FM.Api\\FMApi.App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yasse\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\yasse\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
