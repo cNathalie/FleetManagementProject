@@ -82,7 +82,90 @@ const VoertuigenContent = [
         chasisnummer: "test10",
         nummerplaat: "test10",
         brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "test10",
+        model: "test10",
+        chasisnummer: "test10",
+        nummerplaat: "test10",
+        brandstoftype: "test10"
+    },
+    {
+        merk: "last",
+        model: "last",
+        chasisnummer: "last",
+        nummerplaat: "last",
+        brandstoftype: "last"
     }
 ];
-
 export default VoertuigenContent;
