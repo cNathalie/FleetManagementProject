@@ -2,7 +2,7 @@
 
 public class Voertuig
 {
-    public int Id { get; set; }
+    public int VoertuigId { get; set; }
 
     public string MerkEnModel { get; set; } = null!;
 
@@ -10,9 +10,9 @@ public class Voertuig
 
     public string Nummerplaat { get; set; } = null!;
 
-    public int BrandstoftypeId { get; set; }
+    public string Brandstoftype { get; set; }
 
-    public int TypewagenId { get; set; }
+    public string Typewagen { get; set; }
 
     public string Kleur { get; set; } = null!;
 

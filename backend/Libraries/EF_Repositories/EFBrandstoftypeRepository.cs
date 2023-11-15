@@ -1,10 +1,11 @@
 ﻿using EF_Infrastructure.Context;
 using FM_Domain;
+using FM_Domain.Interfaces;
 using System.Diagnostics;
 
 namespace EF_Repositories;
 
-public class EFBrandstofTypeRepository
+public class EFBrandstofTypeRepository : IFMBrandstoftypeRepository
 {
     // Properties
     private readonly FleetManagementDbContext _dbContext;
@@ -13,8 +14,7 @@ public class EFBrandstofTypeRepository
     {
         get
         {
-            if (_brandstoffen != null) return _brandstoffen
-    ;
+            if (_brandstoffen != null) return _brandstoffen;
             return RefreshBrandstoffen();
         }
     }
@@ -27,7 +27,7 @@ public class EFBrandstofTypeRepository
     }
 
     // Methodes
-    private List<BrandstofType> RefreshBrandstoffen() 
+    public List<BrandstofType> RefreshBrandstoffen() 
     {
         _brandstoffen = new();
         var dbBrandstoffen = _dbContext.BrandstofTypes.ToList();
@@ -35,7 +35,7 @@ public class EFBrandstofTypeRepository
         {
             var brandstofType = new BrandstofType
             {
-                Id = bt.BrandstofTypeId,
+                BrandstofTypeId = bt.BrandstofTypeId,
                 Type = bt.Type,
             };
             _brandstoffen.Add(brandstofType);
@@ -45,12 +45,12 @@ public class EFBrandstofTypeRepository
 ;
     }
 
-    public void Insert(BrandstofType brandstofType) // een nieuwe tankkaart toevoegen aan de database
+    public void Insert(BrandstofType brandstofType)
     {
         //Stap 1: Omzetten van het interne domein-model naar het EntityFramework-model
         EF_Infrastructure.Models.BrandstofType nieuweBrandstof = new()
         {
-            BrandstofTypeId = brandstofType.Id,
+            BrandstofTypeId = brandstofType.BrandstofTypeId,
             Type = brandstofType.Type,
         };
         //Stap 2: het EntityFramework-model toevoegen aan de databank mbv de Context-klasse
@@ -64,100 +64,72 @@ public class EFBrandstofTypeRepository
         }
     }
 
-    //public void Update(Tankkaart tankkaart) //Tankkaart aanpassen
-    //{
-    //    if (!Exists(tankkaart))  // Kijk na of de tankkaart bestaan in de databank, als hij bestaat wordt hij bewerkt        
-    //    {
-    //        //TODO exeption gooien?
-    //        return;
-    //    };
+    public void Update(BrandstofType brandstofType) //Tankkaart aanpassen
+    {
+        if (!Exists(brandstofType))        
+        {
+            return;
+        };
 
-    //    //de nodige EF tankkaart ophalen
-    //    var updateTankkaart = GetEFTankkaart(tankkaart);
+        //de nodige EF brandstof entiteit ophalen
+        var efUpdateBrandstof = GetEFEntity(brandstofType);
 
-    //    //de EF tankkaart aanpassen als de nieuwe gegevens niet leeg zijn
-    //    if (tankkaart.Kaartnummer != null)
-    //    {
-    //        updateTankkaart.Kaartnummer = tankkaart.Kaartnummer;
-    //    };
-    //    if (tankkaart.Geldigheidsdatum != null)
-    //    {
-    //        updateTankkaart.Geldigheidsdatum = tankkaart.Geldigheidsdatum;
-    //    };
-    //    if (tankkaart.Pincode != null)
-    //    {
-    //        updateTankkaart.Pincode = tankkaart.Pincode;
-    //    };
-    //    if (tankkaart.BrandstofTypeId != null)
-    //    {
-    //        updateTankkaart.BrandstofType.BrandstofTypeId = tankkaart.BrandstofTypeId;
-    //    }
-    //    if (tankkaart.Actief != null)
-    //    {
-    //        updateTankkaart.Actief = tankkaart.Actief;
-    //    }
+        //de EF tankkaart aanpassen
+        try
+        {
+            efUpdateBrandstof.Type = brandstofType.Type;
+
+            var efUpdate = _dbContext.Update(efUpdateBrandstof).Entity; // de nieuwe gegevens doorgeven aan EF
+            var count = _dbContext.SaveChanges(); //EF: de updates opslaan in de databank
+            RefreshBrandstoffen();
+        }
+        catch (Exception ex)
+        {
+            //TODO Later logging toevoegen
+            Debug.WriteLine("An exception has occured while updating Brandstof: ", ex);
+            throw;
+        };
 
 
+    }
 
-    //    try
-    //    {
-    //        var efUpdate = _dbContext.Update(updateTankkaart).Entity; // de nieuwe gegevens doorgeven aan EF
-    //        var count = _dbContext.SaveChanges(); //EF: de updates opslaan in de databank
+    public void Delete(BrandstofType brandstof)
+    {
+        if (!Exists(brandstof))
+        {
+            return;
+        }
 
-    //        if (count == 1)
-    //        {
-    //            RefreshTankkaarten(); //De repo lijst updaten
-    //        }
-
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        //TODO Later logging toevoegen?
-    //        Debug.WriteLine("An exception has occured while updating Tankaart: ", ex);
-    //    };
-
-
-    //}
-
-    //public void Delete(Tankkaart tankkaart)
-    //{
-    //    if (!Exists(tankkaart))
-    //    {
-    //        return;
-    //    }
-
-    //    try
-    //    {
-    //        var efTankkaart = GetEFTankkaart(tankkaart);
-    //        var efDelete = _dbContext.Tankkaarten.Remove(efTankkaart).Entity;
-    //        var count = _dbContext.SaveChanges();
-    //        if (count == 1)
-    //        {
-    //            RefreshTankkaarten();
-    //        }
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Debug.WriteLine("An exception has occured while deleting Bestuurder: ", ex);
-    //    }
+        var efBrandstof = GetEFEntity(brandstof);
+        try
+        {
+            var efDelete = _dbContext.BrandstofTypes.Remove(efBrandstof).Entity;
+            var count = _dbContext.SaveChanges();
+            RefreshBrandstoffen();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"An exception has occured while deleting Brandstoftype ({efBrandstof.Type}): ", ex);
+        }
 
 
-    //}
+    }
 
 
-    //public bool Exists(Tankkaart tankkaart)
-    //{
-    //    RefreshTankkaarten();
-    //    bool exists = _tankkaarten.First(t => t.TankkaartId == tankkaart.TankkaartId && t.Kaartnummer == tankkaart.Kaartnummer) != null; //als er een tankkaart met dezelfde gegevens als de gezochte tankkaart aanwezig is = true
-    //    return exists;
-    //}
+    public bool Exists(BrandstofType brandstof)
+    {
+        return GetEFEntity(brandstof) != null;
+    }
 
 
 
-    //private EF_Infrastructure.Models.Tankkaart GetEFTankkaart(Tankkaart tankkaart)
-    //{
-    //    var efTankkaart = _dbContext.Tankkaarten.Find(tankkaart.TankkaartId);
-    //    return efTankkaart;
-    //}
+    private EF_Infrastructure.Models.BrandstofType GetEFEntity(BrandstofType brandstof)
+    {
+        if(brandstof.BrandstofTypeId != 0)
+        {
+            return  _dbContext.BrandstofTypes.Where(b =>b.BrandstofTypeId == brandstof.BrandstofTypeId).FirstOrDefault();
+        }
+        return _dbContext.BrandstofTypes.Where(b => b.Type == brandstof.Type).FirstOrDefault();
+    }
 
 }

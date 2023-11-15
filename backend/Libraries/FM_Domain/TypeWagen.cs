@@ -2,7 +2,6 @@
 
 public class TypeWagen
 {
-    public int Id { get; set; }
-
+    public int TypeWagenId { get; set; }
     public string Type { get; set; } = null!;
 }
