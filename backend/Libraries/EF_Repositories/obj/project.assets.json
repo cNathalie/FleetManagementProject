@@ -2881,19 +2881,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nathalie\\.nuget\\packages\\": {}
+    "C:\\Users\\yasse\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
+      "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
       "projectName": "EF_Repositories",
-      "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
-      "packagesPath": "C:\\Users\\Nathalie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\obj\\",
+      "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
+      "packagesPath": "C:\\Users\\yasse\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Nathalie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yasse\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2907,11 +2912,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj"
+            "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj"
             },
-            "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
-              "projectPath": "C:\\Users\\Nathalie\\HoGent\\2023-2024\\Semester-1\\Projectwerk-Delvaux\\FleetManagement\\fleet-app\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj"
+            "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
+              "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj"
             }
           }
         }
@@ -2941,7 +2946,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

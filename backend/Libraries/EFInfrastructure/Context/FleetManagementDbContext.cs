@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EF_Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EF_Infrastructure.Context;
 
@@ -36,8 +37,7 @@ public partial class FleetManagementDbContext : DbContext
 
         //VERVANG HIER DE CONNECTION STRING NAAR DIE VAN JOU DATABASE !!!
 
-        => optionsBuilder.UseSqlServer("Server=localhost,1433;Initial Catalog=FleetManagementDB;Persist Security Info=True;User ID=sa;TrustServerCertificate=True;Password=FleetManagement007");
-
+        => optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=FleetManagement007;Integrated Security=True;TrustServerCertificate=True");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Bestuurder>(entity =>
