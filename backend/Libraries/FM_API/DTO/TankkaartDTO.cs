@@ -10,9 +10,7 @@ public class TankkaartDTO
 
     public int Pincode { get; set; }
 
-    public int BrandstofTypeId { get; set; }
+    public string BrandstofType { get; set; }
 
-    public string Brandstof { get; set; }
-
-    public bool? Actief { get; set; }
+    public bool? IsActief { get; set; }
 }
