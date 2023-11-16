@@ -17,7 +17,12 @@ namespace FM.Api.App
                   .AddScoped<EFBestuurderRepository>()
                   .AddScoped<EFTankkaartRepository>()
                   .AddScoped<EFBrandstofTypeRepository>()
-                  .AddScoped<EFLoginRepository>();
+                  .AddScoped<EFLoginRepository>()
+                  .AddScoped<EFFleetRepository>()
+                  .AddScoped<EFVoertuigRepository>()
+                  .AddScoped<EFTypeWagenRepository>()
+                  .AddScoped<EFTypeRijbewijsRepository>();
+
 
 
             builder.Services.AddAutoMapper(typeof(MappingConfig));

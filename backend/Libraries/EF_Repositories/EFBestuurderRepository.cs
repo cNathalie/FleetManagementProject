@@ -1,10 +1,11 @@
 ﻿using EF_Infrastructure.Context;
 using FM_Domain;
+using FM_Domain.Interfaces;
 using System.Diagnostics;
 
 namespace EF_Repositories;
 
-public class EFBestuurderRepository
+public class EFBestuurderRepository : IFMBestuurderRepository
 {
     // Properties
     private readonly FleetManagementDbContext _dbContext;
@@ -26,7 +27,7 @@ public class EFBestuurderRepository
     }
 
     // Methodes
-    private List<Bestuurder> RefreshBestuurders() //Alle bestuurders uit de database ophalen en omzetten naar interne domeinmodellen
+    public List<Bestuurder> RefreshBestuurders() //Alle bestuurders uit de database ophalen en omzetten naar interne domeinmodellen
     {
         _bestuurders = new();
         var dbBestuurders = _dbContext.Bestuurders.ToList();
@@ -40,7 +41,7 @@ public class EFBestuurderRepository
                 Adres = b.Adres,
                 Rijksregisternummer = b.Rijksregisternummer,
                 TyperijbewijsId = b.TyperijbewijsId,
-                Rijbewijs = "Nog in te vullen wanneer andere repo af is" //b.Typerijbewijs.Type
+                Rijbewijs = "Nog in te vullen wanneer andere repo af is" //TODO  b.Typerijbewijs.Type
                 
             };
             _bestuurders.Add(bestuurder);
@@ -156,8 +157,11 @@ public class EFBestuurderRepository
 
     private EF_Infrastructure.Models.Bestuurder GetEFBestuurder(Bestuurder bestuurder)
     {
-        var efBestuurder = _dbContext.Bestuurders.Find(bestuurder.Id);
-        return efBestuurder;
+        if(bestuurder.Id != 0)
+        {
+            return _dbContext.Bestuurders.Where(b => b.BestuurderId == bestuurder.Id).FirstOrDefault();
+        }
+        return _dbContext.Bestuurders.Where(b => b.Voornaam == bestuurder.Voornaam && b.Naam == bestuurder.Voornaam).FirstOrDefault();
     }
 
 

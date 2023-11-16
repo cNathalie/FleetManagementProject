@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Apps\\FM.Api\\FMApi.App.csproj": {}
+    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Apps\\FM.Api\\FMApi.App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Apps\\FM.Api\\FMApi.App.csproj": {
+    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Apps\\FM.Api\\FMApi.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Apps\\FM.Api\\FMApi.App.csproj",
+        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Apps\\FM.Api\\FMApi.App.csproj",
         "projectName": "FMApi.App",
-        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Apps\\FM.Api\\FMApi.App.csproj",
+        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Apps\\FM.Api\\FMApi.App.csproj",
         "packagesPath": "C:\\Users\\yasse\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Apps\\FM.Api\\obj\\",
+        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Apps\\FM.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_API\\FM_API.csproj": {
-                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_API\\FM_API.csproj"
+              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_API\\FM_API.csproj": {
+                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_API\\FM_API.csproj"
               }
             }
           }
@@ -116,14 +116,14 @@
         }
       }
     },
-    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
+    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
         "projectName": "EF_Infrastructure",
-        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
+        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj",
         "packagesPath": "C:\\Users\\yasse\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EFInfrastructure\\obj\\",
+        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -185,14 +185,14 @@
         }
       }
     },
-    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EF_Repositories\\EF_Repositories.csproj": {
+    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
         "projectName": "EF_Repositories",
-        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
+        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj",
         "packagesPath": "C:\\Users\\yasse\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EF_Repositories\\obj\\",
+        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -213,11 +213,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj"
+              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EFInfrastructure\\EF_Infrastructure.csproj"
               },
-              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_Domain\\FM_Domain.csproj": {
-                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_Domain\\FM_Domain.csproj"
+              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
+                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj"
               }
             }
           }
@@ -251,14 +251,14 @@
         }
       }
     },
-    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_API\\FM_API.csproj": {
+    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_API\\FM_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_API\\FM_API.csproj",
+        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_API\\FM_API.csproj",
         "projectName": "FM_API",
-        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_API\\FM_API.csproj",
+        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_API\\FM_API.csproj",
         "packagesPath": "C:\\Users\\yasse\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_API\\obj\\",
+        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -279,8 +279,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EF_Repositories\\EF_Repositories.csproj": {
-                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\EF_Repositories\\EF_Repositories.csproj"
+              "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj": {
+                "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\EF_Repositories\\EF_Repositories.csproj"
               }
             }
           }
@@ -336,14 +336,14 @@
         }
       }
     },
-    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_Domain\\FM_Domain.csproj": {
+    "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_Domain\\FM_Domain.csproj",
+        "projectUniqueName": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
         "projectName": "FM_Domain",
-        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_Domain\\FM_Domain.csproj",
+        "projectPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\FM_Domain.csproj",
         "packagesPath": "C:\\Users\\yasse\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend - Copy\\Libraries\\FM_Domain\\obj\\",
+        "outputPath": "C:\\Users\\yasse\\Documents\\GitHub\\FleetManagementProject\\backend\\Libraries\\FM_Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
-using EF_Infrastructure.Context;
+﻿using EF_Infrastructure.Context;
 using FM_Domain;
+using FM_Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace EF_Repositories;
 
-public class EFTankkaartRepository
+public class EFTankkaartRepository : IFMTankkaartRepository
 {
     // Properties
     private readonly FleetManagementDbContext _dbContext;
@@ -15,8 +16,7 @@ public class EFTankkaartRepository
     {
         get
         {
-            if (_tankkaarten != null) return _tankkaarten
-    ;
+            if (_tankkaarten != null) return _tankkaarten;
             return RefreshTankkaarten();
         }
     }
@@ -30,7 +30,7 @@ public class EFTankkaartRepository
     }
 
     // Methodes
-    private List<Tankkaart> RefreshTankkaarten() //Alle tankkaarten uit de database ophalen en omzetten naar interne domeinmodellen
+    public List<Tankkaart> RefreshTankkaarten() //Alle tankkaarten uit de database ophalen en omzetten naar interne domeinmodellen
     {
         _tankkaarten = new();
         var dbTankkaarten = _dbContext.Tankkaarten.Include(tk => tk.BrandstofType).ToList();
@@ -40,11 +40,10 @@ public class EFTankkaartRepository
             {
                 TankkaartId = t.TankkaartId,
                 Kaartnummer = t.Kaartnummer,
-                Actief = t.Actief,
+                IsActief = t.Actief,
                 Pincode = t.Pincode,
-                BrandstofTypeId = t.BrandstofTypeId,
+                Brandstoftype = t.BrandstofType.Type,
                 Geldigheidsdatum = t.Geldigheidsdatum,
-                Brandstof = t.BrandstofType.Type
             };
             _tankkaarten.Add(tankkaart);
         }
@@ -55,19 +54,27 @@ public class EFTankkaartRepository
 
     public void Insert(Tankkaart tankkaart) // een nieuwe tankkaart toevoegen aan de database
     {
-        //Stap 1: Omzetten van het interne domein-model naar het EntityFramework-model
-        EF_Infrastructure.Models.Tankkaart nieuweTankkaart = new()
-        {
-            TankkaartId = tankkaart.TankkaartId
-        };
-        //Stap 2: het EntityFramework-model toevoegen aan de databank mbv de Context-klasse
-        var efTankkaart = _dbContext.Add(nieuweTankkaart).Entity; //toevoegen
-        var count = _dbContext.SaveChanges(); //opslaan, SaveChanges geeft het aantal bewerkte rijen terug, dus als = 1 is de nieuwe tankkaart succesvol toegevoegd
+        var efBrandstof = _dbContext.BrandstofTypes.Where(b => b.Type == tankkaart.Brandstoftype).FirstOrDefault();
 
-        //Stap 3: als succesvol nieuwe tankkaart toevoegen aan de Repository lijst (!! als domein-model, niet EF)
-        if (count == 1)
+        try
         {
-            _tankkaarten.Add(tankkaart);
+            //Stap 1: Omzetten van het interne domein-model naar het EntityFramework-model
+            EF_Infrastructure.Models.Tankkaart nieuweTankkaart = new()
+            {
+                Kaartnummer = tankkaart.Kaartnummer,
+                Geldigheidsdatum = tankkaart.Geldigheidsdatum,
+                Pincode = tankkaart.Pincode,
+                BrandstofTypeId = efBrandstof.BrandstofTypeId
+            };
+            //Stap 2: het EntityFramework-model toevoegen aan de databank mbv de Context-klasse
+            var efTankkaart = _dbContext.Add(nieuweTankkaart).Entity; //toevoegen
+            var count = _dbContext.SaveChanges(); //opslaan, SaveChanges geeft het aantal bewerkte rijen terug, dus als = 1 is de nieuwe tankkaart succesvol toegevoegd
+            RefreshTankkaarten();
+        }
+        catch (Exception ex)
+        {
+            // TODO logging
+            throw;
         }
     }
 
@@ -81,33 +88,33 @@ public class EFTankkaartRepository
 
         //de nodige EF tankkaart ophalen
         var updateTankkaart = GetEFTankkaart(tankkaart);
-
-        //de EF tankkaart aanpassen als de nieuwe gegevens niet leeg zijn
-        if (tankkaart.Kaartnummer != null)
-        {
-            updateTankkaart.Kaartnummer = tankkaart.Kaartnummer;
-        };
-        if (tankkaart.Geldigheidsdatum != null)
-        {
-            updateTankkaart.Geldigheidsdatum = tankkaart.Geldigheidsdatum;
-        };
-        if (tankkaart.Pincode != null)
-        {
-            updateTankkaart.Pincode = tankkaart.Pincode;
-        };
-        if (tankkaart.BrandstofTypeId != null)
-        {
-            updateTankkaart.BrandstofType.BrandstofTypeId = tankkaart.BrandstofTypeId;
-        }
-        if (tankkaart.Actief != null)
-        {
-            updateTankkaart.Actief = tankkaart.Actief;
-        }
-
+        var efBrandstof = _dbContext.BrandstofTypes.Where(b => b.Type == tankkaart.Brandstoftype).FirstOrDefault();
 
 
         try
         {
+            //de EF tankkaart aanpassen als de nieuwe gegevens niet leeg zijn
+            if (tankkaart.Kaartnummer != null)
+            {
+                updateTankkaart.Kaartnummer = tankkaart.Kaartnummer;
+            };
+            if (tankkaart.Geldigheidsdatum != null)
+            {
+                updateTankkaart.Geldigheidsdatum = tankkaart.Geldigheidsdatum;
+            };
+            if (tankkaart.Pincode != null)
+            {
+                updateTankkaart.Pincode = tankkaart.Pincode;
+            };
+            if (tankkaart.Brandstoftype != null)
+            {
+                updateTankkaart.BrandstofType.BrandstofTypeId = efBrandstof.BrandstofTypeId;
+            }
+            if (tankkaart.IsActief != null)
+            {
+                updateTankkaart.Actief = tankkaart.IsActief;
+            }
+
             var efUpdate = _dbContext.Update(updateTankkaart).Entity; // de nieuwe gegevens doorgeven aan EF
             var count = _dbContext.SaveChanges(); //EF: de updates opslaan in de databank
 
@@ -138,19 +145,14 @@ public class EFTankkaartRepository
             var efTankkaart = GetEFTankkaart(tankkaart);
             var efDelete = _dbContext.Tankkaarten.Remove(efTankkaart).Entity;
             var count = _dbContext.SaveChanges();
-            if (count == 1)
-            {
-                RefreshTankkaarten();
-            }
+            RefreshTankkaarten();
         }
         catch (Exception ex)
         {
             Debug.WriteLine("An exception has occured while deleting Bestuurder: ", ex);
+            throw;
         }
-
-
     }
-
 
     public bool Exists(Tankkaart tankkaart)
     {
@@ -159,12 +161,13 @@ public class EFTankkaartRepository
         return exists;
     }
 
-
-
     private EF_Infrastructure.Models.Tankkaart GetEFTankkaart(Tankkaart tankkaart)
     {
-        var efTankkaart = _dbContext.Tankkaarten.Find(tankkaart.TankkaartId);
-        return efTankkaart;
+        if (tankkaart.TankkaartId != 0)
+        {
+            return _dbContext.Tankkaarten.Where(t => t.TankkaartId == tankkaart.TankkaartId).FirstOrDefault();
+        }
+        return _dbContext.Tankkaarten.Where(t => t.Kaartnummer == tankkaart.Kaartnummer).FirstOrDefault();
     }
 
 }

@@ -2,7 +2,6 @@
 import React from 'react'
 import Nav from "../components/Nav"
 import Table from '../components/Table'
-import Tablev from '../components/voorbeeld table'
 
     
 const VoertuigenPage = () => {
