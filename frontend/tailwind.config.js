@@ -18,7 +18,6 @@ module.exports = {
     },
     fontFamily: {
       mainFont: "inter",
-
       Helvetica: ["Helvetica", "Arial", "sans-serif"],
     },
     fontSize: {
@@ -65,5 +64,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("flowbite/plugin"), require("tailwind-scrollbar")],
+  plugins: [
+    require("flowbite/plugin"), 
+    require("tailwind-scrollbar")
+  ],
 };
