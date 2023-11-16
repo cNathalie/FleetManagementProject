@@ -3,10 +3,7 @@
 /*eslint-env node*/
 
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/flowbite/**/*.js"
-],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/flowbite/**/*.js"],
   theme: {
     colors: {
       blueBtn: "#19B9CE",
@@ -15,12 +12,9 @@ module.exports = {
       hoverBtn: "#118190",
     },
     fontFamily: {
-
       mainFont: "inter",
 
       Helvetica: ["Helvetica", "Arial", "sans-serif"],
-
-
     },
     fontSize: {
       btnFontSize: "21px",
@@ -31,11 +25,10 @@ module.exports = {
       btnFontWeigt: "600",
       titleFontWeigt: "600",
     },
+    screens: {
+      xl3: "1920px",
+    },
     extend: {},
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
+  plugins: [require("flowbite/plugin")],
 };
-
-
