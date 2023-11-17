@@ -1,19 +1,19 @@
-﻿namespace FM_API
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FM_API
 {
     public class BestuurderDTO
     {
-        public int Id { get; set; }
+        public int BestuurderId { get; set; }
+        [Required] public string Naam { get; set; } = string.Empty;
 
-        public string Naam { get; set; } = string.Empty;
+        [Required] public string Voornaam { get; set; } = string.Empty;
 
-        public string Voornaam { get; set; } = string.Empty;
+        [Required] public string Adres { get; set; } = string.Empty;
 
-        public string Adres { get; set; } = string.Empty;
-
+        [Required] [MinLength(11)][MaxLength(11)] 
         public string Rijksregisternummer { get; set; } = string.Empty;
 
-        public int TyperijbewijsId { get; set; }
-
-        public string Rijbewijs { get; set; }
+        [Required] public string Rijbewijs { get; set; }
     }
 }

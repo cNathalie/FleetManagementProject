@@ -26,7 +26,7 @@ namespace FM_API.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet(Name = "GetVoertuigen")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<VoertuigDTO>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<IEnumerable<VoertuigDTO>> Get()
@@ -35,7 +35,7 @@ namespace FM_API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost(Name = "PostVoortuig")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -47,7 +47,7 @@ namespace FM_API.Controllers
             }
 
             var aangemaaktVoertuig = _repository.Insert(_mapper.Map<Voertuig>(nieuwVoertuigDTO));
-            return CreatedAtAction(nameof(Get), new { id = aangemaaktVoertuig.VoertuigId}, _mapper.Map<Voertuig>(aangemaaktVoertuig));
+            return CreatedAtAction(nameof(Get), new { id = aangemaaktVoertuig.VoertuigId}, _mapper.Map<VoertuigDTO>(aangemaaktVoertuig));
         }
     }
 }
