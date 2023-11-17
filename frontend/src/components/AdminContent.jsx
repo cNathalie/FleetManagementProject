@@ -1,20 +1,18 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react'
-import UserForm from './UserForm';
-import { signupFields } from '../constants/formFields'
-import Button from './Button';
-
+import React, { useState } from "react";
+import UserForm from "./UserForm";
+import { signupFields } from "../constants/formFields";
+import Button from "./Button";
 
 export const AdminContent = () => {
-
   const handleAddUserSubmit = (formData) => {
     // Handle form submission for adding a user
-    console.log('Add User:', formData);
-  }
+    console.log("Add User:", formData);
+  };
 
   const handleRemoveUserSubmit = (formData) => {
     // Handle the form submission for removing a user
-    console.log('Remove User:', formData.removeEmail);
+    console.log("Remove User:", formData.removeEmail);
   };
 
   return (
@@ -27,11 +25,13 @@ export const AdminContent = () => {
               Gebruiker toevoegen
             </div>
             {/* Add user form */}
-            <UserForm 
-            formFields={signupFields.filter((field) => field.name !== 'username')} 
-            onSubmit={handleAddUserSubmit} 
-            buttonText="Voeg toe"
-            ButtonComponent={Button} //Default button component
+            <UserForm
+              formFields={signupFields.filter(
+                (field) => field.name !== "username"
+              )}
+              onSubmit={handleAddUserSubmit}
+              buttonText="Voeg toe"
+              ButtonComponent={Button} //Default button component
             />
           </div>
           {/* Right side - remove user portion of the screen */}
@@ -41,17 +41,27 @@ export const AdminContent = () => {
             </div>
             {/* Remove user form */}
             <div className="w-full mt-23">
-              <UserForm 
-              formFields={signupFields.filter((field) => field.name === 'email')} 
-              onSubmit={handleRemoveUserSubmit} 
-              buttonText="Verwijder"
-              ButtonComponent={(props) => (
-                <div className="w-[60%] mb-5 flex items-center justify-center mt-44">
-                  <Button {...props} className="w-full py-2 rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText [font-family:'Inter-SemiBold',Helvetica] font-semibold text-darkBlue text-adminBtnFontSize text-center">
-                    {props.children}
-                  </Button>
-                </div>
-              )}
+              <UserForm
+                formFields={signupFields.filter(
+                  (field) => field.name === "email"
+                )}
+                onSubmit={handleRemoveUserSubmit}
+                ButtonComponent={() => (
+                  <div className="w-[60%] mb-5 flex items-center justify-center mt-44">
+                    <Button
+                      className="w-full py-2 rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText [font-family:'Inter-SemiBold',Helvetica] font-semibold text-darkBlue text-adminBtnFontSize text-center"
+                      onClick={() => {
+                        const popup =
+                          document.getElementById("popupRemoveUser");
+                        const overlay = document.getElementById("overlay");
+                        popup.style.display = "block";
+                        overlay.style.display = "block";
+                      }}
+                    >
+                      Verwijder
+                    </Button>
+                  </div>
+                )}
               />
             </div>
           </div>
@@ -73,5 +83,5 @@ export const AdminContent = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -1,27 +1,28 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const AdminHeader = () => {
-  const navigate = useNavigate();
-  
   return (
     <div className="w-[100%] h-[100px] flex justify-center">
-        {/* Header */}
+      {/* Header */}
       <div className="flex justify-between my-14 w-[786px] h-[43px]">
-        <button className="relative w-[201px] h-[43px] bg-whiteText text-darkBlue rounded-[10px] border border-solid border-darkBlue hover:bg-darkBlue hover:text-whiteText [font-family: 'Inter-SemiBold',Helvetica] font-semibold"
-        onClick={() => {
-          navigate(-1);
-        }}
+        <button
+          className="relative w-[201px] h-[43px] bg-whiteText text-darkBlue rounded-[10px] border border-solid border-darkBlue hover:bg-darkBlue hover:text-whiteText [font-family: 'Inter-SemiBold',Helvetica] font-semibold"
+          onClick={() => {
+            const popup = document.getElementById("popupGoBack");
+            const overlay = document.getElementById("overlay");
+            popup.style.display = "block";
+            overlay.style.display = "block";
+          }}
         >
-                <p>Terug naar homepagina</p>
+          <p>Terug naar homepagina</p>
         </button>
         <div className="[font-family:'Inter-SemiBold',Helvetica] font-semibold text-darkBlue text-adminTitle underline whitespace nowrap">
-            Administratie
+          Administratie
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default AdminHeader
+export default AdminHeader;
