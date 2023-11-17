@@ -21,6 +21,7 @@ public class EFFleetRepository : IFMFleetRepository
     public EFFleetRepository(FleetManagementDbContext dbContext)
     {
         _dbContext = dbContext;
+        RefreshFleet();
     }
 
     public void Delete(FleetMember fleetMember)
@@ -48,14 +49,20 @@ public class EFFleetRepository : IFMFleetRepository
         return GetEFEntity(fleetMember) != null;
     }
 
-    public void Insert(FleetMember fleetMember)
+    public FleetMember Insert(FleetMember fleetMember)
     {
-        var efBestuurder = _dbContext.Bestuurders.Where(b => b.Naam == fleetMember.BestuurderNaam && b.Voornaam == fleetMember.BestuurderVoornaam).FirstOrDefault();
-        var efTankkaart = _dbContext.Tankkaarten.Where(t => t.TankkaartId == fleetMember.TankkaartId).FirstOrDefault();
-        var efVoertuig = _dbContext.Voertuigen.Where(v => v.MerkEnModel == fleetMember.VoertuigMerkModel && v.Chassisnummer == fleetMember.VoertuigChassisnummer && v.Chassisnummer == fleetMember.VoertuigChassisnummer).FirstOrDefault();
-
+        if(Exists(fleetMember)) //als deze combo al bestaat komt dat bestaand object terug
+        {
+            fleetMember.FleetMemberId = GetEFEntity(fleetMember).FleetId;
+            return fleetMember;
+        }
+      
         try
         {
+            var efBestuurder = _dbContext.Bestuurders.Where(b => b.Naam == fleetMember.BestuurderNaam && b.Voornaam == fleetMember.BestuurderVoornaam).FirstOrDefault();
+            var efTankkaart = _dbContext.Tankkaarten.Where(t => t.TankkaartId == fleetMember.TankkaartId).FirstOrDefault();
+            var efVoertuig = _dbContext.Voertuigen.Where(v =>  v.Chassisnummer == fleetMember.VoertuigChassisnummer).FirstOrDefault();
+
             EF_Infrastructure.Models.Fleet newFleetMember = new()
             {
                 BestuurderId = efBestuurder.BestuurderId,
@@ -65,7 +72,10 @@ public class EFFleetRepository : IFMFleetRepository
 
             var efInsert = _dbContext.Fleet.Add(newFleetMember).Entity;
             var count = _dbContext.SaveChanges();
+            fleetMember.FleetMemberId = efInsert.FleetId;
+            fleetMember.VoertuigMerkModel = efInsert.Voertuig.MerkEnModel;
             RefreshFleet();
+            return fleetMember;
         } 
         catch(Exception ex)
         {
@@ -109,7 +119,7 @@ public class EFFleetRepository : IFMFleetRepository
 
         var efBestuurder = _dbContext.Bestuurders.Where(b => b.Naam == fleetMember.BestuurderNaam && b.Voornaam == fleetMember.BestuurderVoornaam).FirstOrDefault();
         var efTankkaart = _dbContext.Tankkaarten.Where(t => t.TankkaartId == fleetMember.TankkaartId).FirstOrDefault();
-        var efVoertuig = _dbContext.Voertuigen.Where(v => v.MerkEnModel == fleetMember.VoertuigMerkModel && v.Chassisnummer == fleetMember.VoertuigChassisnummer && v.Chassisnummer == fleetMember.VoertuigChassisnummer).FirstOrDefault();
+        var efVoertuig = _dbContext.Voertuigen.Where(v => v.Chassisnummer == fleetMember.VoertuigChassisnummer).FirstOrDefault();
 
         try
         {
@@ -134,10 +144,11 @@ public class EFFleetRepository : IFMFleetRepository
         {
             return _dbContext.Fleet.Where(fm => fm.FleetId == fleetMember.FleetMemberId).FirstOrDefault();
         }
+
         //to assist in insert
         var efBestuurder = _dbContext.Bestuurders.Where(b => b.Naam == fleetMember.BestuurderNaam && b.Voornaam == fleetMember.BestuurderVoornaam).FirstOrDefault();
         var efTankkaart = _dbContext.Tankkaarten.Where(t => t.TankkaartId == fleetMember.TankkaartId).FirstOrDefault();
-        var efVoertuig = _dbContext.Voertuigen.Where(v => v.MerkEnModel == fleetMember.VoertuigMerkModel && v.Chassisnummer == fleetMember.VoertuigChassisnummer && v.Chassisnummer == fleetMember.VoertuigChassisnummer).FirstOrDefault();
+        var efVoertuig = _dbContext.Voertuigen.Where(v => v.Chassisnummer == fleetMember.VoertuigChassisnummer).FirstOrDefault();
         return _dbContext.Fleet.Where(f => f.BestuurderId == efBestuurder.BestuurderId && f.TankkaartId == efTankkaart.TankkaartId && f.VoertuigId == efVoertuig.VoertuigId).FirstOrDefault();    
     }
 }

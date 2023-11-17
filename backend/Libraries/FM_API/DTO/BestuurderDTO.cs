@@ -11,7 +11,7 @@ namespace FM_API
 
         [Required] public string Adres { get; set; } = string.Empty;
 
-        [Required] [MinLength(11)][MaxLength(11)] 
+        [Required] [StringLength(11)] 
         public string Rijksregisternummer { get; set; } = string.Empty;
 
         [Required] public string Rijbewijs { get; set; }

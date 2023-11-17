@@ -25,15 +25,15 @@ public class BestuurdersController : ControllerBase
 
 
     [HttpGet(Name = "GetBestuurders")]
-    //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<BestuurderDTO>))]
-    //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<BestuurderDTO>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public ActionResult<IEnumerable<BestuurderDTO>> Get()
     {
         return Ok(_mapper.Map<List<BestuurderDTO>>(_repository.Bestuurders.ToList()));
     }
 
     [HttpGet("id", Name = "GetBestuurderById")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<BestuurderDTO>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BestuurderDTO))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public ActionResult<IEnumerable<BestuurderDTO>> GetById([Required] int id)

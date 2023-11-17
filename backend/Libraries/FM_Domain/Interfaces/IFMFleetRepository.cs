@@ -6,7 +6,7 @@ namespace FM_Domain.Interfaces
     {
         public List<FleetMember> Fleet { get; }
         public List<FleetMember> RefreshFleet();
-        public void Insert(FleetMember fleetMember);
+        public FleetMember Insert(FleetMember fleetMember);
         public void Update(FleetMember fleetMember);
         public void Delete(FleetMember fleetMember);
         public bool Exists(FleetMember fleetMember);
