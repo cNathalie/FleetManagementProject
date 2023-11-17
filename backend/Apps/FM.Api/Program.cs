@@ -2,7 +2,7 @@
 using EF_Repositories;
 using EF_Infrastructure.Context;
 using FM_API;
-
+using FM_Domain.Interfaces;
 
 namespace FM.Api.App
 {
@@ -14,14 +14,14 @@ namespace FM.Api.App
 
             // Add services to the container.
             builder.Services.AddDbContext<FleetManagementDbContext>()
-                  .AddScoped<EFBestuurderRepository>()
-                  .AddScoped<EFTankkaartRepository>()
-                  .AddScoped<EFBrandstofTypeRepository>()
-                  .AddScoped<EFLoginRepository>()
-                  .AddScoped<EFFleetRepository>()
-                  .AddScoped<EFVoertuigRepository>()
-                  .AddScoped<EFTypeWagenRepository>()
-                  .AddScoped<EFTypeRijbewijsRepository>();
+                  .AddScoped<IFMBestuurderRepository,EFBestuurderRepository>()
+                  .AddScoped<IFMTankkaartRepository,EFTankkaartRepository>()
+                  .AddScoped<IFMBrandstoftypeRepository,EFBrandstofTypeRepository>()
+                  .AddScoped<IFMLoginRepository,EFLoginRepository>()
+                  .AddScoped<IFMFleetRepository,EFFleetRepository>()
+                  .AddScoped<IFMVoertuigRepository,EFVoertuigRepository>()
+                  .AddScoped<IFMTypeWagenRepository,EFTypeWagenRepository>()
+                  .AddScoped<IFMTypeRijbewijsRepository,EFTypeRijbewijsRepository>();
 
 
 

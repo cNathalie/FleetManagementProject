@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EF_Repositories;
 using FM_API.DTO;
+using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FM_API.Controllers
@@ -9,14 +10,15 @@ namespace FM_API.Controllers
     [Route("[controller]")]
     public class BrandstofTypesController : ControllerBase
     {
-        private readonly EFBrandstofTypeRepository _repository;
+        private readonly IFMBrandstoftypeRepository _repository;
         private readonly IMapper _mapper;
 
-        public BrandstofTypesController(EFBrandstofTypeRepository repo, IMapper mapper)
+        public BrandstofTypesController(IFMBrandstoftypeRepository repository, IMapper mapper)
         {
-            _repository = repo;
+            _repository = repository;
             _mapper = mapper;
         }
+
 
 
         [HttpGet(Name = "GetBrandstoffen")]

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EF_Repositories;
+using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FM_API;
@@ -8,15 +9,14 @@ namespace FM_API;
 [Route ("[controller]")]
 public class TankkaartenController : ControllerBase
 {
-    private readonly EFTankkaartRepository _repository;
+    private readonly IFMTankkaartRepository _repository;
     private readonly IMapper _mapper;
 
-    public TankkaartenController(EFTankkaartRepository repo, IMapper mapper)
+    public TankkaartenController(IFMTankkaartRepository repository, IMapper mapper)
     {
-        _repository = repo;
+        _repository = repository;
         _mapper = mapper;
     }
-
 
     [HttpGet(Name = "GetTankkaarten")]
     public ActionResult<IEnumerable<TankkaartDTO>> Get()

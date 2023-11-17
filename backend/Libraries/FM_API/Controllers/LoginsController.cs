@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EF_Repositories;
 using FM_API.DTO;
+using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FM_API.Controllers
@@ -9,12 +10,12 @@ namespace FM_API.Controllers
     [Route("[controller]")]
     public class LoginsController : ControllerBase
     {
-        private readonly EFLoginRepository _repository;
+        private readonly IFMLoginRepository _repository;
         private readonly IMapper _mapper;
 
-        public LoginsController(EFLoginRepository repo, IMapper mapper)
+        public LoginsController(IFMLoginRepository repository, IMapper mapper)
         {
-            _repository = repo;
+            _repository = repository;
             _mapper = mapper;
         }
 
