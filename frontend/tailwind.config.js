@@ -64,6 +64,9 @@ module.exports = {
         45: "11.25rem",
       },
     },
+    screens: {
+      "3xl": "1920px",
+    },
   },
   plugins: [require("flowbite/plugin"), require("tailwind-scrollbar")],
 };

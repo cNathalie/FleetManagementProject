@@ -12,7 +12,15 @@ const DetailDisplay = () => {
             Detailweergave
           </h1>
           <div className="mr-8">
-            <Button className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt">
+            <Button
+              className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
+              onClick={() => {
+                const detailDisplay = document.getElementById("detailDisplay");
+                const overlay = document.getElementById("overlay");
+                detailDisplay.style.display = "none";
+                overlay.style.display = "none";
+              }}
+            >
               <img src="../src/assets/Media/closeButton.jpg" />
             </Button>
           </div>

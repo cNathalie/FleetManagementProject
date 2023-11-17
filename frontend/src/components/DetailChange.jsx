@@ -1,52 +1,51 @@
 /* eslint-disable no-unused-vars */
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import listHeaders from "../constants/listHeader";
 import List from "./List";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 
-
 const DetailChange = () => {
-    const [data, setData] = useState({
-    eigenaar: 'Test Eigenaar',
-    merk: 'Test Merk',
-    model: 'Test Model',
-    chassisnummer: 'Test Chassisnummer',
-    nummerplaat: 'Test Nummerplaat',
-    brandstoftype: 'Test Brandstoftype',
-    typeWagen: 'Test Type wagen',
-    kleur: 'Test Kleur',
-    aantalDeuren: 'Test Aantal deuren',
+  const [data, setData] = useState({
+    eigenaar: "Test Eigenaar",
+    merk: "Test Merk",
+    model: "Test Model",
+    chassisnummer: "Test Chassisnummer",
+    nummerplaat: "Test Nummerplaat",
+    brandstoftype: "Test Brandstoftype",
+    typeWagen: "Test Type wagen",
+    kleur: "Test Kleur",
+    aantalDeuren: "Test Aantal deuren",
+  });
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [showCheckMark, setShowSetMark] = useState(false);
+
+  const handleDataChange = (field, value) => {
+    setData({
+      ...data,
+      [field]: value,
     });
+  };
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [showCheckMark, setShowSetMark] = useState(false);
+  // const handleSaveChanges = () => {
+  //     // Logic to save changes to database goes here
+  //     setIsEditing(false); // Exit edit mode after saving
+  // }
 
-    const handleDataChange = (field, value) => {
-        setData({
-            ...data,
-            [field]: value,
-        });
-    };
+  const handleToggleEditMode = () => {
+    if (isEditing) {
+      // Handle logic to save data to DB
 
-    // const handleSaveChanges = () => {
-    //     // Logic to save changes to database goes here
-    //     setIsEditing(false); // Exit edit mode after saving
-    // }
-
-    const handleToggleEditMode = () => {
-        if (isEditing){
-            // Handle logic to save data to DB
-            
-            //Show checkmark to show success of actions
-            setShowSetMark(true);
-            //Timeout for checkmark so it doesn't stay on the screen endlessly
-            setTimeout(() => {
-              setShowSetMark(false)
-            }, 3000);
-        }
-        setIsEditing(!isEditing) // Toggle between edit and display mode
+      //Show checkmark to show success of actions
+      setShowSetMark(true);
+      //Timeout for checkmark so it doesn't stay on the screen endlessly
+      setTimeout(() => {
+        setShowSetMark(false);
+      }, 3000);
     }
+    setIsEditing(!isEditing); // Toggle between edit and display mode
+  };
 
   return (
     <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]">
@@ -56,7 +55,15 @@ const DetailChange = () => {
             Detailweergave
           </h1>
           <div className="mr-8">
-            <Button className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt">
+            <Button
+              className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
+              onClick={() => {
+                const popup = document.getElementById("popupGoBack");
+                const detailChange = document.getElementById("detailChange");
+                detailChange.style.display = "none";
+                popup.style.display = "block";
+              }}
+            >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
             </Button>
           </div>
@@ -145,4 +152,4 @@ const DetailChange = () => {
   );
 };
 
-export default DetailChange
+export default DetailChange;

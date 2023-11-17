@@ -1,8 +1,8 @@
-import React from 'react'
-import DetailChange from '../components/DetailChange'
+import React from "react";
+import DetailChange from "../components/DetailChange";
 
 const TestDetailChange = () => {
-  return <DetailChange/>
-}
+  return <DetailChange />;
+};
 
-export default TestDetailChange
+export default TestDetailChange;
