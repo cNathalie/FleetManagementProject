@@ -46,9 +46,14 @@ public class EFVoertuigRepository : IFMVoertuigRepository
         return GetEFEntity(voertuig) != null;
     }
 
-    public void Insert(Voertuig voertuig)
+    public Voertuig Insert(Voertuig voertuig)
     {
-        if (Exists(voertuig)) return;
+        if (Exists(voertuig))
+        {
+            var efVoertuig = GetEFEntity(voertuig);
+            voertuig.VoertuigId = efVoertuig.VoertuigId;
+            return voertuig;
+        };
 
         var efBrandstof = _dbContext.BrandstofTypes.Where(b => b.Type == voertuig.Brandstoftype).FirstOrDefault();
         var efWagen = _dbContext.TypeWagens.Where(w => w.Type == voertuig.Typewagen).FirstOrDefault();
@@ -68,6 +73,8 @@ public class EFVoertuigRepository : IFMVoertuigRepository
             var efInsert = _dbContext.Voertuigen.Add(nieuwVoertuig).Entity;
             var count = _dbContext.SaveChanges();
             RefreshVoertuigen();
+            voertuig.VoertuigId = efInsert.VoertuigId;
+            return voertuig;
         }
         catch (Exception ex)
         {

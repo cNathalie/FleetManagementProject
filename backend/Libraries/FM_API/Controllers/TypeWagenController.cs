@@ -15,13 +15,16 @@ namespace FM_API.Controllers
     [Route("[controller]")]
     public class TypeWagenController : ControllerBase
     {
-        private readonly EFTypeWagenRepository _repository;
+        private readonly IFMTypeWagenRepository _repository;
         private readonly IMapper _mapper;
-        public TypeWagenController(EFTypeWagenRepository repository, IMapper mapper)
+
+        public TypeWagenController(IFMTypeWagenRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
+
+
 
         [HttpGet]
         public ActionResult<IEnumerable<TypeWagenDTO>> Get() 

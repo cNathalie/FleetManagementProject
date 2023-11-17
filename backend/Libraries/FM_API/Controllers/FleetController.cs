@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EF_Repositories;
 using FM_API.DTO;
+using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FM_API.Controllers
@@ -9,14 +10,16 @@ namespace FM_API.Controllers
     [Route("[controller]")]
     public class FleetController : ControllerBase
     {
-        private readonly EFFleetRepository _repository;
+        private readonly IFMFleetRepository _repository;
         private readonly IMapper _mapper;
 
-        public FleetController(EFFleetRepository repository, IMapper mapper)
+        public FleetController(IFMFleetRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
+
+
 
         [HttpGet]
         public ActionResult<IEnumerable<FleetMemberDTO>> Get()

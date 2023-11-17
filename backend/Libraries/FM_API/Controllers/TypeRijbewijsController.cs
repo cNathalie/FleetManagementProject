@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EF_Repositories;
 using FM_API.DTO;
+using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,16 @@ namespace FM_API.Controllers
     [Route("[controller]")]
     public class TypeRijbewijsController : ControllerBase
     {
-        private readonly EFTypeRijbewijsRepository _repository;
+        private readonly IFMTypeRijbewijsRepository _repository;
         private readonly IMapper _mapper;
 
-        public TypeRijbewijsController(EFTypeRijbewijsRepository repository, IMapper mapper)
+        public TypeRijbewijsController(IFMTypeRijbewijsRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
+
+ 
 
         [HttpGet]
         public ActionResult<IEnumerable<TypeRijbewijsDTO>> Get() 

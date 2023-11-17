@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EF_Repositories;
+using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FM_API;
@@ -8,14 +9,15 @@ namespace FM_API;
 [Route("[controller]")]
 public class BestuurdersController : ControllerBase
 {
-    private readonly EFBestuurderRepository _repository;
+    private readonly IFMBestuurderRepository _repository;
     private readonly IMapper _mapper;
 
-    public BestuurdersController(EFBestuurderRepository repo, IMapper mapper)
+    public BestuurdersController(IFMBestuurderRepository repository, IMapper mapper)
     {
-        _repository = repo;
+        _repository = repository;
         _mapper = mapper;
     }
+
 
 
     [HttpGet(Name = "GetBestuurders")]

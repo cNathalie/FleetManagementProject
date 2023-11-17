@@ -10,7 +10,6 @@ public class EFTankkaartRepository : IFMTankkaartRepository
 {
     // Properties
     private readonly FleetManagementDbContext _dbContext;
-    private readonly EFBrandstofTypeRepository _brandstoftypeRepository;
     private List<Tankkaart> _tankkaarten;
     public List<Tankkaart> Tankkaarten
     {
@@ -22,10 +21,9 @@ public class EFTankkaartRepository : IFMTankkaartRepository
     }
 
     //  Constructor
-    public EFTankkaartRepository(FleetManagementDbContext context, EFBrandstofTypeRepository brandstofRepo)
+    public EFTankkaartRepository(FleetManagementDbContext context)
     {
         _dbContext = context;
-        _brandstoftypeRepository = brandstofRepo;
         _tankkaarten = RefreshTankkaarten(); // bij het aanmaken van de Repo wordt het _tankkaarten property ingevuld
     }
 

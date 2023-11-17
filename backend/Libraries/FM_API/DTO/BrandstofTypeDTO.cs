@@ -8,7 +8,7 @@ namespace FM_API.DTO
 {
     public class BrandstofTypeDTO
     {
-        public int Id { get; set; }
+        public int BrandstofTypeId { get; set; }
         public string Type { get; set; } = null!;
     }
 }
