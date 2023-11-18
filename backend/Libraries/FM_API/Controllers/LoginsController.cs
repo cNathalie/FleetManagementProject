@@ -66,5 +66,21 @@ namespace FM_API.Controllers
             return CreatedAtAction(nameof(Get), new { id = aangemaaktLogin.LoginId }, _mapper.Map<LoginDTO>(aangemaaktLogin));
         }
 
+        [HttpDelete("id", Name = "DeleteLoginById")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Delete([Required] int id)
+        {
+            var login = _repository.Logins.Where(l => l.LoginId == id).FirstOrDefault();
+            if (login == null)
+            {
+                return BadRequest("Id not found");
+            }
+
+            _repository.Delete(login);
+            return NoContent();
+        }
+
     }
 }

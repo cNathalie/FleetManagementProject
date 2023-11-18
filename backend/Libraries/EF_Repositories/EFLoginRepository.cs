@@ -121,7 +121,7 @@ public class EFLoginRepository : IFMLoginRepository
         var efLogin = GetEFEntity(login);
         try
         {
-            var efRemove = _dbContext.Remove(efLogin).Entity;
+            var efRemove = _dbContext.Logins.Remove(efLogin).Entity;
             var count = _dbContext.SaveChanges();
             RefreshLogins();
         }
@@ -146,7 +146,7 @@ public class EFLoginRepository : IFMLoginRepository
             return (FMRole)Enum.Parse(typeof (FMRole), efLogin.Rol);
         }
 
-        //Email excists but wrong password
+        //Email exists but wrong password
         return FMRole.None;
     }
 
