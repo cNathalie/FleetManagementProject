@@ -11,6 +11,7 @@ import PopupRemoveItem from "../components/PopupRemoveItem";
 import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
 import DetailChange from "../components/DetailChange";
 import DetailDisplay from "../components/DetailDisplay";
+import AddItem from "../components/AddItem";
 
 const VoertuigenPage = () => {
   const tableHeaderContent = [
@@ -76,6 +77,17 @@ const VoertuigenPage = () => {
           );
         })}
       </Popup>
+      <div
+        id="addItem"
+        style={{
+          zIndex: 60,
+          position: "absolute",
+          display: "none",
+          width: "100%",
+        }}
+      >
+        <AddItem />
+      </div>
 
       <Table tableHeaderContent={tableHeaderContent} />
     </>

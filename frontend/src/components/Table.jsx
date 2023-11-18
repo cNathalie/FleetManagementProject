@@ -45,7 +45,10 @@ const Table = (props) => {
                     type="button"
                     className="w-[150px] md:w-[150px] h-[29px] md:h-[43px] text-white bg-[#18b8ce] hover:bg-blue-300 flex items-center justify-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transform translate-x-2"
                     onClick={() => {
-                      // popup toevoegen
+                      const addItem = document.getElementById("addItem");
+                      const overlay = document.getElementById("overlay");
+                      addItem.style.display = "block";
+                      overlay.style.display = "block";
                     }}
                   >
                     Toevoegen

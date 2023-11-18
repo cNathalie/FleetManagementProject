@@ -23,6 +23,14 @@ const homePage = [
     imgSrc: "src/assets/Media/tankkaart.jpg",
     alt: "Foto van tankkaarten",
   },
+  {
+    id: 4,
+    title: "Fleet",
+    text: "Een handig overzicht van de hele fleet van dit wagenpark. Bekijk welke bestuurder welke auto en tankkaart heeft",
+    btnValue: "Ga naar fleet",
+    imgSrc: "src/assets/Media/fleet.jpg",
+    alt: "Foto van fleet",
+  },
 ];
 
 export default homePage;

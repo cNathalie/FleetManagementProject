@@ -1,33 +1,33 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
-import listHeaders from '../constants/listHeader';
-import List from './List';
-import Button from './Button';
+import React, { useState } from "react";
+import listHeaders from "../constants/listHeader";
+import List from "./List";
+import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 
 const AddItem = () => {
-    const [data, setData] = useState({});
-    const [showCheckMark, setShowSetMark] = useState(false);
+  const [data, setData] = useState({});
+  const [showCheckMark, setShowSetMark] = useState(false);
 
-    const handleDataChange = (field, value ) => {
-        setData({
-            ...data,
-            [field]: value,
-        });
-    };
+  const handleDataChange = (field, value) => {
+    setData({
+      ...data,
+      [field]: value,
+    });
+  };
 
-    const handleSaveChanges = () => {
-        // Logic to save data to DB
+  const handleSaveChanges = () => {
+    // Logic to save data to DB
 
-        // Reset data after saving
-        setData({});
+    // Reset data after saving
+    setData({});
 
-        //Checkmark to show saving was succesful
-        setShowSetMark(true);
-        setTimeout(() => {
-            setShowSetMark(false);
-        }, 3000);
-    }
+    //Checkmark to show saving was succesful
+    setShowSetMark(true);
+    setTimeout(() => {
+      setShowSetMark(false);
+    }, 3000);
+  };
 
   return (
     <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]">
@@ -37,7 +37,15 @@ const AddItem = () => {
             Item toevoegen
           </h1>
           <div className="mr-8">
-            <Button className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt">
+            <Button
+              className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
+              onClick={() => {
+                const overlay = document.getElementById("overlay");
+                const addItem = document.getElementById("addItem");
+                overlay.style.display = "none";
+                addItem.style.display = "none";
+              }}
+            >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
             </Button>
           </div>
@@ -68,20 +76,20 @@ const AddItem = () => {
             })}
           </div>
           <div className="ml-12 mt-14">
-            {listHeaders.map((headerObj, index) => (
+            {listHeaders.map((headerObj, index) =>
               Object.keys(headerObj).map((key) => (
                 <div key={`${key}-${index}`} className="flex flex-col">
                   <input
                     id={key}
                     type="text"
-                    value={data[key] || ''}
+                    value={data[key] || ""}
                     onChange={(e) => handleDataChange(key, e.target.value)}
                     placeholder={`Geef ${headerObj[key]}`}
                     className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
                   />
                 </div>
               ))
-            ))}
+            )}
           </div>
         </div>
         <div className="flex relative w-1/2 h-16 ml-[50%]">
@@ -111,4 +119,4 @@ const AddItem = () => {
   );
 };
 
-export default AddItem
+export default AddItem;
