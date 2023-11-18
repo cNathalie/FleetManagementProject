@@ -50,8 +50,14 @@ public class EFTankkaartRepository : IFMTankkaartRepository
 ;
     }
 
-    public void Insert(Tankkaart tankkaart) // een nieuwe tankkaart toevoegen aan de database
+    public Tankkaart Insert(Tankkaart tankkaart) // een nieuwe tankkaart toevoegen aan de database
     {
+        if (Exists(tankkaart))
+        {
+            tankkaart.TankkaartId = GetEFTankkaart(tankkaart).TankkaartId;
+            return tankkaart;
+        }
+
         var efBrandstof = _dbContext.BrandstofTypes.Where(b => b.Type == tankkaart.Brandstoftype).FirstOrDefault();
 
         try
@@ -67,7 +73,9 @@ public class EFTankkaartRepository : IFMTankkaartRepository
             //Stap 2: het EntityFramework-model toevoegen aan de databank mbv de Context-klasse
             var efTankkaart = _dbContext.Add(nieuweTankkaart).Entity; //toevoegen
             var count = _dbContext.SaveChanges(); //opslaan, SaveChanges geeft het aantal bewerkte rijen terug, dus als = 1 is de nieuwe tankkaart succesvol toegevoegd
+            tankkaart.TankkaartId = efTankkaart.TankkaartId;
             RefreshTankkaarten();
+            return tankkaart;
         }
         catch (Exception ex)
         {
@@ -154,9 +162,7 @@ public class EFTankkaartRepository : IFMTankkaartRepository
 
     public bool Exists(Tankkaart tankkaart)
     {
-        RefreshTankkaarten();
-        bool exists = _tankkaarten.First(t => t.TankkaartId == tankkaart.TankkaartId && t.Kaartnummer == tankkaart.Kaartnummer) != null; //als er een tankkaart met dezelfde gegevens als de gezochte tankkaart aanwezig is = true
-        return exists;
+        return GetEFTankkaart(tankkaart) != null;
     }
 
     private EF_Infrastructure.Models.Tankkaart GetEFTankkaart(Tankkaart tankkaart)

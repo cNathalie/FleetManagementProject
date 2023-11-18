@@ -12,6 +12,7 @@ public class MappingConfig : Profile
         CreateMap<Tankkaart, TankkaartDTO>().ReverseMap();
         CreateMap<BrandstofType, BrandstofTypeDTO>().ReverseMap();
         CreateMap<Login, LoginDTO>().ReverseMap();
+        CreateMap<Login, AuthLoginDTO>().ReverseMap();  
         CreateMap<FleetMember, FleetMemberDTO>().ReverseMap();
         CreateMap<TypeRijbewijs, TypeRijbewijsDTO>().ReverseMap();
         CreateMap<TypeWagen, TypeWagenDTO>().ReverseMap();

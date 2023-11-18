@@ -127,7 +127,7 @@ public class EFFleetRepository : IFMFleetRepository
             efFleetMember.TankkaartId = efTankkaart.TankkaartId;
             efFleetMember.VoertuigId = efVoertuig.VoertuigId;
 
-            var efUpdate = _dbContext.Update(efFleetMember).Entity;
+            var efUpdate = _dbContext.Fleet.Update(efFleetMember).Entity;
             var count = _dbContext.SaveChanges();
             RefreshFleet();
         }

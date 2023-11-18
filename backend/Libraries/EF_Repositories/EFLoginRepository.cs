@@ -1,6 +1,8 @@
 ﻿using EF_Infrastructure.Context;
 using FM_Domain;
+using FM_Domain.Enums;
 using FM_Domain.Interfaces;
+using System.Reflection.Metadata.Ecma335;
 
 namespace EF_Repositories;
 
@@ -33,12 +35,22 @@ public class EFLoginRepository : IFMLoginRepository
         var dbLogins = _dbContext.Logins.ToList();
         foreach (var l in dbLogins)
         {
+            FMRole rol;
+            if(Enum.TryParse(l.Rol.Trim(), out FMRole enumRole))
+            {
+                rol = enumRole;
+            }
+            else
+            {
+                rol = FMRole.None;
+            }
+
             var login = new Login
             {
                 LoginId = l.LoginId,
                 Email = l.Email,
                 Wachtwoord = l.Wachtwoord,
-                Rol = l.Rol
+                Rol = rol
             };
             _logins.Add(login);
         }
@@ -47,9 +59,13 @@ public class EFLoginRepository : IFMLoginRepository
 ;
     }
 
-    public void Insert(Login newLogin)
+    public Login Insert(Login newLogin)
     {
-        if(Exists(newLogin)) { return; }
+        if(Exists(newLogin)) 
+        {
+            newLogin.LoginId = GetEFEntity(newLogin).LoginId;
+            return newLogin;
+        }
 
         try
         {
@@ -58,13 +74,15 @@ public class EFLoginRepository : IFMLoginRepository
             {
                 Email = newLogin.Email,
                 Wachtwoord = newLogin.Wachtwoord,
-                Rol = newLogin.Rol
+                Rol = newLogin.Rol.ToString(),
             };
 
             //Stap 2: het EntityFramework-model toevoegen aan de databank mbv de Context-klasse
-            var efLogin = _dbContext.Add(nLogin).Entity; //toevoegen
+            var efLogin = _dbContext.Logins.Add(nLogin).Entity; //toevoegen
             var count = _dbContext.SaveChanges(); //opslaan, SaveChanges geeft het aantal bewerkte rijen terug
+            newLogin.LoginId = efLogin.LoginId;
             RefreshLogins();
+            return newLogin;
         }
         catch (Exception ex)
         {
@@ -84,7 +102,7 @@ public class EFLoginRepository : IFMLoginRepository
         {
             efLogin.Email = login.Email;
             efLogin.Wachtwoord = login.Wachtwoord;
-            efLogin.Rol = login.Rol;
+            efLogin.Rol = login.Rol.ToString();
 
             var efUpdate = _dbContext.Update(efLogin).Entity;
             var count = _dbContext.SaveChanges();
@@ -103,7 +121,7 @@ public class EFLoginRepository : IFMLoginRepository
         var efLogin = GetEFEntity(login);
         try
         {
-            var efRemove = _dbContext.Remove(efLogin).Entity;
+            var efRemove = _dbContext.Logins.Remove(efLogin).Entity;
             var count = _dbContext.SaveChanges();
             RefreshLogins();
         }
@@ -114,21 +132,22 @@ public class EFLoginRepository : IFMLoginRepository
         }
     }
 
-    public string Authenticate(Login login)
+    public FMRole Authenticate(Login login)
     {
         if(!Exists(login))
         {
-            return "Onbekende gebruiker";
+            return FMRole.None;
 
         }
         
         var efLogin = GetEFEntity(login);
         if(efLogin.Wachtwoord == login.Wachtwoord)
         {
-            return efLogin.Rol;
+            return (FMRole)Enum.Parse(typeof (FMRole), efLogin.Rol);
         }
 
-        return "Fout wachtwoord";
+        //Email exists but wrong password
+        return FMRole.None;
     }
 
     public bool Exists(Login login)

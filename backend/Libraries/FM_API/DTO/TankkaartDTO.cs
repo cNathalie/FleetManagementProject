@@ -2,7 +2,7 @@
 
 public class TankkaartDTO
 {
-    public int Id { get; set; }
+    public int TankkaartId { get; set; }
 
     public int Kaartnummer { get; set; }
 
