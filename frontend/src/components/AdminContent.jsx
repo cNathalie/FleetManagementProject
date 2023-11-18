@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import UserForm from "./UserForm";
 import { signupFields } from "../constants/formFields";
 import Button from "./Button";
+import { BUTTON_STYLES, TEXT_STYLES, CARD_STYLES } from "../constants/tailwindStyles";
 
 export const AdminContent = () => {
   const handleAddUserSubmit = (formData) => {
@@ -20,8 +21,8 @@ export const AdminContent = () => {
       <div className="relative flex my-10 w-[784px] h-[604px]">
         <div className="w-[790px] h-[604px]">
           {/* Left side - add user portion of the screen */}
-          <div className="left-0 flex justify-center absolute w-[324px] h-[604px] top-0 bg-blueBtn rounded-[10px] flex-col items-center shadow-2xl">
-            <div className="w-[200px] h-[100px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-whiteText text-adminHeader text-center wrap">
+          <div className={`${CARD_STYLES.BLUE_CARD} left-0 absolute w-[324px] h-[604px] top-0`}>
+            <div className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px]`}>
               Gebruiker toevoegen
             </div>
             {/* Add user form */}
@@ -35,8 +36,8 @@ export const AdminContent = () => {
             />
           </div>
           {/* Right side - remove user portion of the screen */}
-          <div className="right-0 flex absolute w-[324px] h-[604px] top-0 bg-blueBtn rounded-[10px] flex-col items-center shadow-2xl">
-            <div className="w-[200px] h-[100px] mt-12 [font-family:'Inter-SemiBold',Helvetica] font-semibold text-whiteText text-adminHeader text-center wrap">
+          <div className={`${CARD_STYLES.BLUE_CARD} right-0 absolute w-[324px] h-[604px] top-0`}>
+            <div className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px] mt-5`}>
               Gebruiker verwijderen
             </div>
             {/* Remove user form */}
@@ -49,7 +50,7 @@ export const AdminContent = () => {
                 ButtonComponent={() => (
                   <div className="w-[60%] mb-5 flex items-center justify-center mt-44">
                     <Button
-                      className="w-full py-2 rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText [font-family:'Inter-SemiBold',Helvetica] font-semibold text-darkBlue text-adminBtnFontSize text-center"
+                      className={`${BUTTON_STYLES.ADMIN_REMOVE} w-full py-2`}
                       onClick={() => {
                         const popup =
                           document.getElementById("popupRemoveUser");
@@ -66,7 +67,7 @@ export const AdminContent = () => {
             </div>
           </div>
           {/* Dividing two portions of the screen */}
-          <div className="absolute w-[36px] top-[294px] left-[374px] [font-family:'Inter',Helvetica] font-semibold text-darkBlue text-[18px] text-center tracking-[0] leading-[normal] whitespace-nowrap">
+          <div className={`${TEXT_STYLES.ADMIN_OR} absolute w-[36px] top-[294px] left-[374px]`}>
             OF
           </div>
           {/* Two lines to divide the add-user on the left and the remove-user on the right */}

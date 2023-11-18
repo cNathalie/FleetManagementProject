@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState} from 'react'
 import Button from './Button';
+import { TEXT_STYLES, INPUT_STYLES, BUTTON_STYLES } from '../constants/tailwindStyles';
 
 const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
     <form className="w-[80%] mx-auto" onSubmit={handleSubmit}>
       {formFields.map((field) => (
         <div className="mb-4" key={field.id}>
-          <label htmlFor={field.id} className="block text-whiteText font-semibold mb-2">
+          <label htmlFor={field.id} className={TEXT_STYLES.USERFORM_LABEL}>
             {field.labelText}
           </label>
           {field.type === 'checkbox' ? (
@@ -47,7 +48,7 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
               name={field.name}
               value={formData[field.name]}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border-b bg-transparent border-whiteText text-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md"
+              className={`${INPUT_STYLES.USERFORM_INPUT} w-full px-3 py-2`}
               placeholder={field.placeholder}
             />
           )}
@@ -56,7 +57,7 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
       <div className="w-full mb-2 flex items-center justify-center">
         <ButtonComponent
           type="submit"
-          className="w-[60%] py-2 mt-4 rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText [font-family:'Inter-SemiBold',Helvetica] font-semibold text-darkBlue text-adminBtnFontSize text-center"
+          className={`${BUTTON_STYLES.USERFORM_SUBMIT} w-[60%] py-2 mt-4`}
         >
           {buttonText}
         </ButtonComponent>
