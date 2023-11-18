@@ -15,14 +15,14 @@ const FleetWeergave = (props) => {
 
   divs = (
     <>
-      <div className="h-[50%]">
+      <div className="w-full">
         <img
           className="rounded-md object-cover h-full w-full"
           src={imgSrc}
           alt={alt}
         />
       </div>
-      <div>
+      <div className="w-[150%]">
         <h1 className="font-titleFontWeigt text-[32px] font-Helvetica text-center mt-4">
           {title}
         </h1>
@@ -41,7 +41,7 @@ const FleetWeergave = (props) => {
     </>
   );
 
-  return <div className="shadow-lg rounded-md h-[100%]">{divs}</div>;
+  return <div className="shadow-lg rounded-md flex h-[110%]">{divs}</div>;
 };
 
 export default FleetWeergave;
