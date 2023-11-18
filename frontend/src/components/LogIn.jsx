@@ -4,6 +4,7 @@ import FormAction from "./FormAction";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../constants/baseUrl";
+import Axios from "axios";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -18,48 +19,88 @@ export default function Login() {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
 
-  const getLogins = async () => {
-    try {
-      const response = await fetch(baseUrl + "Logins");
+  const login = async (email, password) => {
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-      console.log("GET successful");
-      const data = await response.json();
-      setLoginsState(data);
+
+    try {
+      const response = await Axios.post(
+        baseUrl + "Auth/login",
+        {
+          email: email,
+          wachtwoord: password,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+        console.log(response);
+      const { token, role } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("userRole", role);
+      return { succes: true, role };
     } catch (error) {
-      console.error(error);
+      console.error("Login failed: ", error.response?.data);
+      return { succes: false, error: error.response?.data };
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("login button clicked, authenticating user");
-    setButtenState(true);
-    authenticateUser(loginState["email-address"], loginState["password"]);
-    setButtenState(false);
-  };
+    const { succes, role, error } = await login(
+      loginState["email-address"],
+      loginState["password"]
+    );
 
-  useEffect(() => {
-    getLogins();
-  }, [buttonState]);
+    if(succes) {
+      navigate(`/home`);
+    } else{
+      console.error("Login failed: ", error)
+    }
+
+  }
+    
+  
+
+  // const getLogins = async () => {
+  //   try {
+  //     const response = await fetch(baseUrl + "Logins");
+
+  //     if (!response.ok) {
+  //       throw new Error(`Request failed with status: ${response.status}`);
+  //     }
+  //     console.log("GET successful");
+  //     const data = await response.json();
+  //     setLoginsState(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("login button clicked, authenticating user");
+  //   setButtenState(true);
+  //   authenticateUser(loginState["email-address"], loginState["password"]);
+  //   setButtenState(false);
+  // };
+
+  // useEffect(() => {
+  //   getLogins();
+  // }, [buttonState]);
 
   const navigate = useNavigate();
 
   //Handle Login
-  const authenticateUser = (email, password) => {
-    const loginExists = loginsState.some(
-      (l) => l.email == email && l.wachtwoord == password
-    );
+  // const authenticateUser = (email, password) => {
+  //   const loginExists = loginsState.some(
+  //     (l) => l.email == email && l.wachtwoord == password
+  //   );
 
-    if (loginExists) {
-      console.log("login bestaat");
-      navigate(`/home`);
-    } else {
-      console.log("login bestaat niet");
-    }
-  };
+  //   if (loginExists) {
+  //     console.log("login bestaat");
+  //     navigate(`/home`);
+  //   } else {
+  //     console.log("login bestaat niet");
+  //   }
+  // };
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
