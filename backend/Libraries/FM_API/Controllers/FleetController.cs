@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using EF_Repositories;
 using FM_API.DTO;
 using FM_Domain;
 using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 
@@ -43,12 +41,12 @@ namespace FM_API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<IEnumerable<FleetMemberDTO>> GetById([Required] int id)
         {
-            var bestuurder = _repository.Fleet.Where(fm => fm.FleetMemberId == id).FirstOrDefault();
-            if (bestuurder == null)
+            var fleetMember = _repository.Fleet.Where(fm => fm.FleetMemberId == id).FirstOrDefault();
+            if (fleetMember == null)
             {
                 return BadRequest("Id not found");
             }
-            return Ok(_mapper.Map<BestuurderDTO>(bestuurder));
+            return Ok(_mapper.Map<FleetMemberDTO>(fleetMember));
         }
 
         [HttpPost(Name = "PostFleetMember")]
