@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Table from "../components/Table";
-import ApiUrls from "../constants/baseUrl";
+import { getVoertuigen } from "../constants/Api";
 import Overlay from "../components/Overlay";
 import {
   textPopupVerwijderItem,
@@ -14,7 +14,7 @@ import DetailDisplay from "../components/DetailDisplay";
 import AddItem from "../components/AddItem";
 
 const VoertuigenPage = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const tableHeaderContent = [
     "Merk",
     "Model",
@@ -32,18 +32,18 @@ const VoertuigenPage = () => {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(ApiUrls.getVoertuigen);
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+    const fetchData = () => {
+      getVoertuigen()
+        .then((voertuigenData) => {
+          setData(voertuigenData);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     };
 
     fetchData();
-  }, []);
+  }, []); 
 
 
   return (

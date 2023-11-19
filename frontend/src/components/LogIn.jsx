@@ -3,7 +3,7 @@ import { loginFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
-import baseUrl from "../constants/baseUrl";
+import { baseUrl } from "../constants/Api";
 
 const fields = loginFields;
 let fieldsState = {};

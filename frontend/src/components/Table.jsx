@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import { useState } from "react";
+import { useState } from "react"; 
+import temp from "../constants/temp";
 
 const Table = (props) => {
   const { tableHeaderContent, inputData, data} = props;
@@ -89,6 +90,7 @@ const Table = (props) => {
                         alt="Bulleted list"
                         src="https://c.animaapp.com/1ptxcx7H/img/bulleted-list-1@2x.png"
                         onClick={() => {
+                          temp.tempId = v.voertuigId;
                           const detailDisplay = document.getElementById("detailDisplay");
                           const overlay = document.getElementById("overlay");
                           detailDisplay.style.display = "block";
@@ -100,6 +102,7 @@ const Table = (props) => {
                         alt="Edit"
                         src="https://c.animaapp.com/1ptxcx7H/img/edit-1@2x.png"
                         onClick={() => {
+                          temp.tempId = v.voertuigId;
                           const detailChange = document.getElementById("detailChange");
                           const overlay = document.getElementById("overlay");
                           detailChange.style.display = "block";
@@ -111,6 +114,7 @@ const Table = (props) => {
                         alt="Trash"
                         src="https://c.animaapp.com/1ptxcx7H/img/trash-1@2x.png"
                         onClick={() => {
+                          temp.tempId = v.voertuigId;
                           const popup = document.getElementById("popupRemoveItem");
                           const overlay = document.getElementById("overlay");
                           popup.style.display = "block";

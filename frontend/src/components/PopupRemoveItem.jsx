@@ -1,5 +1,6 @@
-import React from "react";
 import Button from "./Button";
+import temp from "../constants/temp";
+import { DeleteVoertuig } from "../constants/Api";
 /* eslint-disable react/prop-types*/
 
 const PopupRemoveItem = (props) => {
@@ -31,9 +32,22 @@ const PopupRemoveItem = (props) => {
         </Button>
         <Button
           className="bg-blueBtn w-[100px] h-8 text-center text-whiteText font-mainFont font-btnFontWeigt text-popupTextSize rounded-lg cursor-pointer hover:bg-hoverBtn ml-6"
-          onClick={() => {
+          onClick={async () => {
+            console.log("this object is removed" + temp.tempId);
+        
+            try {
+                await DeleteVoertuig(temp.tempId);
+            } catch (error) {
+                console.error('Error handling deleteVoertuig:', error);
+            }
+        
+            const popup = document.getElementById("popupRemoveItem");
+            const overlay = document.getElementById("overlay");
+            popup.style.display = "none";
+            overlay.style.display = "none";
+            
             // code om item te verwijderen, na het verwijderen popup en overlay display: none
-          }}
+        }}        
         >
           {textBtnRight}
         </Button>
