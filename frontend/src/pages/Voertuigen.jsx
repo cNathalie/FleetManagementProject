@@ -1,8 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { useState, useEffect } from "react";
 import Table from "../components/Table";
-import ApiUrls from "../constants/ApiUrls";
 import Overlay from "../components/Overlay";
 import {
   textPopupVerwijderItem,
@@ -13,9 +11,9 @@ import PopupRemoveItem from "../components/PopupRemoveItem";
 import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
 import DetailChange from "../components/DetailChange";
 import DetailDisplay from "../components/DetailDisplay";
+import AddItem from "../components/AddItem";
 
 const VoertuigenPage = () => {
-  const [data, setData] = useState([]);
   const tableHeaderContent = [
     "Merk",
     "Model",
@@ -24,28 +22,6 @@ const VoertuigenPage = () => {
     "Brandstoftype",
     "Acties",
   ];
-  const inputData = [
-    'v.merkEnModel?.split(" ")[0] ?? "no Data"',
-    'v.merkEnModel?.split(" ")[1] ?? "no Data"',
-    'v.chassisnummer ?? "no Data"',
-    'v.nummerplaat ?? "no Data"',
-    'v.brandstoftype ?? "no Data"',
-  ];
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(ApiUrls.GetVoertuigen);
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        console.log("Error fetching data:", error);
-      }
-    };
-  
-    fetchData();
-  }, []);
-  
 
   return (
     <>
