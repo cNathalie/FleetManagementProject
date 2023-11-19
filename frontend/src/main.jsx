@@ -1,7 +1,7 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "flowbite";
-import React, { Children } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import RootLayout from "./navigation/RootLayout.jsx";
@@ -9,7 +9,6 @@ import Homepage from "./pages/Homepage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
 import Voertuigen from "./pages/Voertuigen.jsx";
-
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
 
 const browserRouter = createBrowserRouter([
@@ -42,7 +41,9 @@ const browserRouter = createBrowserRouter([
       {
         path: "/admin",
         element: (
-          <PrivateRoute component={<AdminPage />} requiredRoles={["Admin"]} />
+          <PrivateRoute 
+          component={<AdminPage />} 
+          requiredRoles={["Admin"]} />
         ),
       },
     ],
