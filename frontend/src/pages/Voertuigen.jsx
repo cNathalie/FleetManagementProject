@@ -1,6 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-import React from "react";
+import { useEffect, useState } from "react";
 import Table from "../components/Table";
+import ApiUrls from "../constants/baseUrl";
 import Overlay from "../components/Overlay";
 import {
   textPopupVerwijderItem,
@@ -14,6 +14,7 @@ import DetailDisplay from "../components/DetailDisplay";
 import AddItem from "../components/AddItem";
 
 const VoertuigenPage = () => {
+  const [data, setData] = useState(null);
   const tableHeaderContent = [
     "Merk",
     "Model",
@@ -22,6 +23,28 @@ const VoertuigenPage = () => {
     "Brandstoftype",
     "Acties",
   ];
+  const inputData = [
+    "v.merkEnModel.split(' ')[0]",
+    "v.merkEnModel.split(' ')[1]",
+    "v.chassisnummer",
+    "v.nummerplaat",
+    "v.brandstoftype",
+  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrls.getVoertuigen);
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <>
@@ -89,7 +112,7 @@ const VoertuigenPage = () => {
         <AddItem />
       </div>
 
-      <Table tableHeaderContent={tableHeaderContent} />
+      <Table {...{tableHeaderContent, data, inputData}} />
     </>
   );
 };
