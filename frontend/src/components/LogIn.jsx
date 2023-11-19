@@ -5,6 +5,7 @@ import Input from "./Input";
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../constants/baseUrl";
 import Axios from "axios";
+import {sessionStorageItems, sessionStorageValues} from "../constants/sessionStorage"
 
 const fields = loginFields;
 let fieldsState = {};
@@ -12,15 +13,13 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
-  const [loginsState, setLoginsState] = useState([]);
-  const [buttonState, setButtenState] = useState(false);
+
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
 
   const login = async (email, password) => {
-
 
     try {
       const response = await Axios.post(
@@ -31,11 +30,16 @@ export default function Login() {
         },
         { headers: { "Content-Type": "application/json" } }
       );
-        console.log(response);
+
       const { token, role } = response.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("userRole", role);
+
+      sessionStorage.setItem(sessionStorageItems.token, token);
+      sessionStorage.setItem(sessionStorageItems.userRole, role);
+      sessionStorage.setItem(sessionStorageItems.isLoggedIn, sessionStorageValues.true)
+
+      console.log("Login authorized by API")
       return { succes: true, role };
+
     } catch (error) {
       console.error("Login failed: ", error.response?.data);
       return { succes: false, error: error.response?.data };
@@ -43,6 +47,7 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const { succes, role, error } = await login(
       loginState["email-address"],
@@ -52,10 +57,11 @@ export default function Login() {
     if(succes) {
       navigate(`/home`);
     } else{
+      navigate('/')
       console.error("Login failed: ", error)
     }
 
-  }
+  };
     
   
 

@@ -1,5 +1,5 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import "flowbite";
 import React, { Children } from "react";
 import ReactDOM from "react-dom/client";

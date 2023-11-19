@@ -1,30 +1,33 @@
-import {useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import React from "react";
-import LoginPage from "../pages/LoginPage";
-import ForbiddenPage from "../pages/ForbiddenPage";
+import ForbiddenPage from "../pages/AdminOnlyPage";
+import {
+  sessionStorageItems,
+  sessionStorageValues,
+} from "../constants/sessionStorage";
 
-const PrivateRoute = ({ component: Component, requiredRoles, parentRoutePath, ...rest }) => {
-  const navigate = useNavigate();
-  const isAuthenticated = localStorage.getItem("token") !== null;
-  const userRole = localStorage.getItem("userRole");
+const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
+
+  const isLoggedIn = sessionStorage.getItem(sessionStorageItems.isLoggedIn) == sessionStorageValues.true;
+  const isAuthenticated = sessionStorage.getItem(sessionStorageItems.token) !== null;
+  const userRole = sessionStorage.getItem(sessionStorageItems.userRole);
 
 
-  if (!isAuthenticated) {
-    console.log("Not authorized, pleas login")
-    // Redirect to login page if not authenticated
-    navigate("/"); // Redirect to login page
-    return null; // Render nothing until authentication is verified
+  if (isLoggedIn && isAuthenticated && requiredRoles.includes(userRole)) {
+    console.log("User is logged in and has rights");
+    return Component;
   }
 
-  if (!requiredRoles.includes(userRole)) {
+  if (isLoggedIn && isAuthenticated && !requiredRoles.includes(userRole)) {
     console.log(userRole);
-    console.log("wrong role");
-    // Redirect to a forbidden page or show a message
-    return <ForbiddenPage/>; // Render nothing for unauthorized users
+    console.log("User is logged in but has no rights");
+
+    return <ForbiddenPage/>; 
   }
 
-  console.log("user is known and has rights")
-  return Component;
+  console.log("User is not logged in, redirecting to loginpage");
+  return <Navigate to="/"/>
+
 };
 
 export default PrivateRoute;
