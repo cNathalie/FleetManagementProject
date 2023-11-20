@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
+import { BUTTON_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
 
 const AdminHeader = () => {
   return (
@@ -7,7 +8,7 @@ const AdminHeader = () => {
       {/* Header */}
       <div className="flex justify-between my-14 w-[786px] h-[43px]">
         <button
-          className="relative w-[201px] h-[43px] bg-whiteText text-darkBlue rounded-[10px] border border-solid border-darkBlue hover:bg-darkBlue hover:text-whiteText [font-family: 'Inter-SemiBold',Helvetica] font-semibold"
+          className={`${BUTTON_STYLES.ADMIN_GOBACK} relative w-[201px] h-[43px]`}
           onClick={() => {
             const popup = document.getElementById("popupGoBack");
             const overlay = document.getElementById("overlay");
@@ -17,7 +18,7 @@ const AdminHeader = () => {
         >
           <p>Terug naar homepagina</p>
         </button>
-        <div className="[font-family:'Inter-SemiBold',Helvetica] font-semibold text-darkBlue text-adminTitle underline whitespace nowrap">
+        <div className={TEXT_STYLES.ADMIN_TITLE}>
           Administratie
         </div>
       </div>
