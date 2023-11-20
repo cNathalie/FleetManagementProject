@@ -4,6 +4,7 @@ import FormAction from "./FormAction";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
 import { login } from "../constants/functions";
+import { loginInfo } from "../constants/loginInfo";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -28,7 +29,7 @@ export default function Login() {
     if(succes) {
       navigate(`/home`);
     } else{
-      navigate('/')
+      navigate('/', {state: loginInfo.loginUnknown})
       console.error("Login failed: ", error)
     }
   };

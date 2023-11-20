@@ -6,6 +6,7 @@ import {
   sessionStorageItems,
   sessionStorageValues,
 } from "../constants/sessionStorage";
+import { loginInfo } from "../constants/loginInfo";
 
 const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
   const isLoggedIn =
@@ -27,8 +28,9 @@ const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
     return < AdminOnlyPage />;
   }
 
+  const info = loginInfo.notLoggedIn;
   console.log("No user logged in, redirecting to loginpage");
-  return <Navigate to="/"/>;
+  return <Navigate to="/" state={info}/>;
 };
 
 export default PrivateRoute;

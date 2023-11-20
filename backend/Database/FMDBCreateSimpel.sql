@@ -44,7 +44,8 @@ CREATE TABLE [dbo].[Tankkaart](
 	[actief] [bit] NULL DEFAULT 1,
 	
 	CONSTRAINT PK_Tankkaart PRIMARY KEY (tankkaartId),
-	CONSTRAINT FK_Tankkaart_BrandstofType FOREIGN KEY (brandstofTypeId) REFERENCES BrandstofType(brandstofTypeId)
+	CONSTRAINT FK_Tankkaart_BrandstofType FOREIGN KEY (brandstofTypeId) REFERENCES BrandstofType(brandstofTypeId),
+	--CONSTRAINT UQ_Tankaart_Kaartnummer UNIQUE (kaartnummer)
 	
 );
 
@@ -73,7 +74,8 @@ CREATE TABLE [dbo].[Voertuig](
 
 	CONSTRAINT PK_Voertuig PRIMARY KEY (voertuigId),
 	CONSTRAINT FK_Voertuig_BrandstofType FOREIGN KEY (brandstofTypeId) REFERENCES BrandstofType(brandstofTypeId),
-	CONSTRAINT FK_Voertuig_TypeWagen FOREIGN KEY (typeWagenId) REFERENCES TypeWagen(typeWagenId)
+	CONSTRAINT FK_Voertuig_TypeWagen FOREIGN KEY (typeWagenId) REFERENCES TypeWagen(typeWagenId),
+	--CONSTRAINT FK_Voertuig_Chassisnummer UNIQUE (chassisnummer)
 );
 	
 
