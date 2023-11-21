@@ -1,7 +1,7 @@
 import Button from "./Button";
 /* eslint-disable react/prop-types*/
 
-const PopupRemoveItem = ({ popup, apiFunction, setPopupVisibility , tempVoertuigId}) => {
+const PopupRemoveItem = ({ popup, apiFunction, setPopupVisibility , tempId}) => {
   const { title, text, textBtnLeft, textBtnRight } = popup;
   //const { data } = useData();
   return (
@@ -27,9 +27,9 @@ const PopupRemoveItem = ({ popup, apiFunction, setPopupVisibility , tempVoertuig
         <Button
           className="bg-blueBtn w-[100px] h-8 text-center text-whiteText font-mainFont font-btnFontWeigt text-popupTextSize rounded-lg cursor-pointer hover:bg-hoverBtn ml-6"
           onClick={async () => {
-            console.log("this object is removed" + tempVoertuigId);      
+            console.log("this object is removed" + tempId);      
             try {
-                await apiFunction(tempVoertuigId);
+                await apiFunction(tempId);
             } catch (error) {
                 console.error('Error handling deleteVoertuig:', error);
             }

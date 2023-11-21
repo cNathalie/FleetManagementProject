@@ -73,13 +73,13 @@ export const signupFields = [
 
 export const initialVoertuigFormData = [
   {
-    id: "Test id",
+    voertuigId: 0,
     merkEnModel: "string",
-    chassisnummer: "Test Chassisnummer",
-    nummerplaat: "Test Nummerplaat",
-    brandstoftype: "Test Brandstoftype",
-    typeWagen: "Test Type wagen",
-    kleur: "Test Kleur",
-    aantalDeuren: "Test Aantal deuren",
-  },
+    chassisnummer: "string",
+    nummerplaat: "5-JWQ-162",
+    brandstoftype: "string",
+    typewagen: "string",
+    kleur: "string",
+    aantalDeuren: 5
+  }
 ];

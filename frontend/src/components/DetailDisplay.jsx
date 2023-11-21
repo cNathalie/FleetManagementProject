@@ -1,12 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import listHeaders from "../constants/listHeader";
-import List from "./List";
 import Button from "./Button";
 
-const DetailDisplay = ({ setPopupVisibility,  tempVoertuigContent}) => {
+const DetailDisplay = ({ setPopupVisibility,  tempObject}) => {
 
-  console.log(tempVoertuigContent);
+  console.log(tempObject);
 
   return (
     <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB] ">
@@ -27,8 +25,9 @@ const DetailDisplay = ({ setPopupVisibility,  tempVoertuigContent}) => {
             </Button>
           </div>
         </div>
+        {/*
         <div className="flex flex-wrap">
-          <div className="ml-9 mt-14 pb-6">
+           <div className="ml-9 mt-14 pb-6">
             {listHeaders.map((h) => {
               return (
                 <List
@@ -48,7 +47,7 @@ const DetailDisplay = ({ setPopupVisibility,  tempVoertuigContent}) => {
             })}
           </div>
           <div className="ml-12 mt-14">         
-            {tempVoertuigContent && tempVoertuigContent.map((d) => {
+            {tempContent && tempContent.map((d) => {
               return (
                 <List
                   className="pb-2 text-lg font-mainFont font-titleFontWeigt"
@@ -66,7 +65,33 @@ const DetailDisplay = ({ setPopupVisibility,  tempVoertuigContent}) => {
               );
             })}
           </div>
-        </div>
+        </div> 
+        */}
+        <div className="flex flex-wrap">
+              {tempObject ? (
+                Object.entries(tempObject).map(([key, value]) => (
+                  <>
+                    <div key={key} className="ml-9 mt-14 pb-6">
+                      <label htmlFor={key} className="pb-2 text-lg font-mainFont font-titleFontWeigt">
+                        {key}
+                      </label>
+                    </div>
+                    <div className="ml-12 mt-14">
+                        <p
+                          type="text"
+                          id={key}
+                          name={key}
+                          className="pb-2 text-lg font-mainFont font-titleFontWeigt"
+                        >
+                        {value}
+                        </p>
+                    </div>
+                  </>
+                ))
+              ) : (
+                <p>Error: tempVoertuigContent is null or undefined</p>
+              )}
+          </div>
       </div>
     </div>
   );

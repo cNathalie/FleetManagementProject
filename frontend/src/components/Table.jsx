@@ -90,7 +90,8 @@ const Table = (props) => {
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailDisplay", true);
-                          setTempContent('tempVoertuigContent' ,[v]);
+                          //setTempContent('tempContent' ,[v]);
+                          setTempContent('tempObject' ,v);
                         }}
                       />
                       <img
@@ -100,7 +101,7 @@ const Table = (props) => {
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailChange", true);
-                          setTempContent('tempVoertuigObject' ,v);
+                          setTempContent('tempObject' ,v);
                         }}
                       />
                       <img
@@ -111,7 +112,7 @@ const Table = (props) => {
                           //updateData(v.voertuigId);
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("Popup", true);
-                          setTempContent('tempVoertuigId' ,v.voertuigId);
+                          setTempContent('tempId' ,v.voertuigId);
                         }}
                       />
                     </td>

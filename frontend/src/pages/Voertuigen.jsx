@@ -58,9 +58,9 @@ const VoertuigenPage = () => {
 
 
   const [temp , setTemp] = useState({
-    tempVoertuigContent: [],
-    tempVoertuigId: 0,
-    tempVoertuigObject: {},
+    //tempContent: [],
+    tempId: 0,
+    tempObject: {},
   });
   const setTempContent = (key, value) => {
     setTemp({
@@ -88,7 +88,7 @@ const VoertuigenPage = () => {
                 }}
                 apiFunction={DeleteVoertuig}
                 setPopupVisibility={setPopupVisibility}
-                tempVoertuigId={temp.tempVoertuigId}
+                tempId={temp.tempId}
               />
             );
           })}
@@ -103,7 +103,7 @@ const VoertuigenPage = () => {
             display: "none",
           }}
         >
-          <DetailChange setPopupVisibility={setPopupVisibility} UpdateVoertuig={UpdateVoertuig} tempVoertuigObject={temp.tempVoertuigObject}/>
+          <DetailChange setPopupVisibility={setPopupVisibility} UpdateVoertuig={UpdateVoertuig} tempObject={temp.tempObject}/>
         </div>
 
         <div
@@ -115,7 +115,7 @@ const VoertuigenPage = () => {
             display: "none",
           }}
         >
-          <DetailDisplay setPopupVisibility={setPopupVisibility} tempVoertuigContent={temp.tempVoertuigContent}/>
+          <DetailDisplay setPopupVisibility={setPopupVisibility} tempObject={temp.tempObject}/>
         </div> 
 
         <Popup id="popupGoBack">

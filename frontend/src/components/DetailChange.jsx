@@ -5,14 +5,14 @@ import React, { useState } from "react";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 
-const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempVoertuigObject}) => {
-  const [data, setData] = useState(tempVoertuigObject); 
+const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject}) => {
+  const [data, setData] = useState(tempObject); 
   const [isEditing, setIsEditing] = useState(false);
   const [showCheckMark, setShowSetMark] = useState(false);
   
   const handleDataChange = (key, value) => {
     setData({
-      ...tempVoertuigObject,
+      ...tempObject,
       [key]: value,
     });
   };
@@ -59,8 +59,8 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempVoertuigObject})
           <div className="ml-9 mt-14 pb-6">
               {/* Data from database/testdata goes here */}
               {/* Display data for each field */}
-              {tempVoertuigObject ? (
-                Object.entries(tempVoertuigObject).map(([key, value]) => (
+              {tempObject ? (
+                Object.entries(tempObject).map(([key, value]) => (
                   <div key={key} className="flex items-center mb-4">
                     <label htmlFor={key} className="block text-blueText mr-2">
                       {key}
