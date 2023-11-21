@@ -1,6 +1,8 @@
+import { INPUT_STYLES } from "../constants/tailwindStyles";
+
 /* eslint-disable react/prop-types */
-const fixedInputClass =
-  " appearance-none relative block  w-full px-3 py-2 border-b bg-transparent border-blueText placeholder-blueText text-gray-900";
+// const fixedInputClass =
+//   " appearance-none relative block  w-full px-3 py-2 border-b bg-transparent border-blueText placeholder-blueText text-gray-900";
 
 export default function Input({
   handleChange,
@@ -23,7 +25,7 @@ export default function Input({
       name={name}
       type={type}
       required={isRequired}
-      className={fixedInputClass}
+      className={INPUT_STYLES.LOGIN_INPUT}
       placeholder={placeholder}
       autoComplete="on"
       style={{

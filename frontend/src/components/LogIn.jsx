@@ -5,6 +5,7 @@ import Input from "./Input";
 import { useNavigate } from "react-router-dom";
 import { login } from "../constants/functions";
 import { loginInfo } from "../constants/loginInfo";
+import { TEXT_STYLES } from "../constants/tailwindStyles";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -41,7 +42,7 @@ export default function Login() {
           <div key={index} className="p-5">
             <label
               htmlFor={field.labelFor}
-              className="text-left font-mainFont font-titleFontWeigt text-titleFontSize text-blueText"
+              className={TEXT_STYLES.LOGIN_LABEL}
             >
               {field.labelText}
             </label>

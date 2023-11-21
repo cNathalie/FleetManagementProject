@@ -1,3 +1,4 @@
+import { BUTTON_STYLES } from "../constants/tailwindStyles";
 
 export default function FormAction({
   handleSubmit,
@@ -10,7 +11,7 @@ export default function FormAction({
       {type === "Button" ? (
         <button
           type={action}
-          className="relative w-full flex justify-center py-2 px-4 bg-blueBtn border-blueBtn font-btnFontWeigt font-mainFont text-btnFontSize rounded-[10px]"
+          className={`${BUTTON_STYLES.LOGIN_SUBMIT} relative w-full flex justify-center py-2 px-4`}
           onClick={handleSubmit}
         >
           {text}
