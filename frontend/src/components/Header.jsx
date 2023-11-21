@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
 export default function Header({
@@ -15,7 +16,7 @@ export default function Header({
           src="src/assets/Media/FM_noBG.png"
         />
       </div>
-      <h2 className="mt-6 text-center text-3xl  text-gray-900">
+      {/* <h2 className="mt-6 text-center text-3xl  text-gray-900">
         {heading}
       </h2>
       <p className="mt-2 text-center text-sm mt-5">
@@ -26,7 +27,7 @@ export default function Header({
         >
           {linkName}
         </Link>
-      </p>
+      </p> */}
     </div>
   );
 }

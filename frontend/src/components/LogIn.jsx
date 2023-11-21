@@ -4,6 +4,8 @@ import FormAction from "./FormAction";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../constants/Api";
+import { login } from "../constants/functions";
+import { loginInfo } from "../constants/loginInfo";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -11,58 +13,30 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
-  const [loginsState, setLoginsState] = useState([]);
-  const [buttonState, setButtenState] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
 
-  const getLogins = async () => {
-    try {
-      const response = await fetch(baseUrl + "Logins");
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-      console.log("GET successful");
-      const data = await response.json();
-      setLoginsState(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("login button clicked, authenticating user");
-    setButtenState(true);
-    authenticateUser(loginState["email-address"], loginState["password"]);
-    setButtenState(false);
-  };
-
-  useEffect(() => {
-    getLogins();
-  }, [buttonState]);
-
-  const navigate = useNavigate();
-
-  //Handle Login
-  const authenticateUser = (email, password) => {
-    const loginExists = loginsState.some(
-      (l) => l.email == email && l.wachtwoord == password
+    const { succes, role, error } = await login(
+      loginState["email-address"],
+      loginState["password"]
     );
 
-    if (loginExists) {
-      console.log("login bestaat");
+    if(succes) {
       navigate(`/home`);
-    } else {
-      console.log("login bestaat niet");
+    } else{
+      navigate('/', {state: loginInfo.loginUnknown})
+      console.error("Login failed: ", error)
     }
   };
 
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+    <form className="mt-8 space-y-6" onSubmit={handleSubmit} >
       <div className="-space-y-px">
         {fields.map((field, index) => (
           <div key={index} className="p-5">

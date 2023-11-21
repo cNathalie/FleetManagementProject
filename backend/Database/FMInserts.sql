@@ -161,21 +161,3 @@ VALUES
   ('lucas.devos@example.com', 'mijnwachtwoord3', 'User'),
   ('lotte.peeters@example.com', 'mijnwachtwoord4', 'User');
 
-
-
-
-
-
-
--- Voeg gegevens toe aan de Fleet-tabel
-INSERT INTO [dbo].[Fleet] ([bestuurderId], [tankkaartId], [voertuigId])
-SELECT
-  b.bestuurderId,
-  t.tankkaartId,
-  v.voertuigId
-FROM [dbo].[Bestuurder] AS b
-JOIN [dbo].[Tankkaart] AS t ON b.bestuurderId = t.tankkaartId
-JOIN [dbo].[Voertuig] AS v ON v.brandstofTypeId = t.brandstofTypeId
-WHERE (b.bestuurderId, t.tankkaartId, v.voertuigId) NOT IN (
-  SELECT [bestuurderId], [tankkaartId], [voertuigId] FROM [dbo].[Fleet]
-);

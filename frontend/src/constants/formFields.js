@@ -1,6 +1,6 @@
 export const loginFields = [
   {
-    labelText: "Email adress",
+    labelText: "Email",
     labelFor: "email-address",
     id: "email-address",
     name: "email",

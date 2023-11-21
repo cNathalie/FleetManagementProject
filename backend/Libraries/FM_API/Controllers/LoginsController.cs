@@ -34,21 +34,7 @@ namespace FM_API.Controllers
             return Ok(_mapper.Map<List<LoginDTO>>(_repository.Logins.ToList()));
         }
 
-        // In React een dto met emailadres en wachtwoord versturen met deze request
-        // Geeft de rol van de gebruiker terug
-        [HttpPost("auth", Name = "AuthenticateLogin")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<String> GetAuthentication(AuthLoginDTO login)
-        {
-            var response = _repository.Authenticate(_mapper.Map<Login>(login));
-            if(response == FMRole.None)
-            {
-                return BadRequest("Wrong username or password");
-            }
-            return Ok(response.ToString());
-        }
+        // Authenticatie verplaatst naar eigen controller
 
         // In React een dto versturen waarin emailadres, wachtwoord en rol zijn ingevuld
         [HttpPost (Name = "CreateNewUser")]
@@ -76,6 +62,22 @@ namespace FM_API.Controllers
             if (login == null)
             {
                 return BadRequest("Id not found");
+            }
+
+            _repository.Delete(login);
+            return NoContent();
+        }
+
+        [HttpDelete("email", Name = "DeleteLoginByEmail")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Delete([Required][FromBody] string email)
+        {
+            var login = _repository.Logins.Where(l => l.Email == email.Trim()).FirstOrDefault();
+            if (login == null)
+            {
+                return BadRequest("Email not found");
             }
 
             _repository.Delete(login);
