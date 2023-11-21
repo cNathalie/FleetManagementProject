@@ -2,10 +2,8 @@ import React from "react";
 import Button from "./Button";
 /* eslint-disable react/prop-types*/
 
-const PopupCloseDetailChange = (props) => {
-  const {
-    popup: { title, text, textBtnLeft, textBtnRight },
-  } = props;
+const PopupCloseDetailChange = ({ popup, setPopupVisibility }) => {
+  const { title, text, textBtnLeft, textBtnRight } = popup;
 
   return (
     <div className="w-[30%] h-[85%] bg-[#DBDBDB] rounded-xl">
@@ -21,10 +19,8 @@ const PopupCloseDetailChange = (props) => {
         <Button
           className="bg-blueBtn w-[100px] h-8 text-center text-whiteText font-mainFont font-btnFontWeigt text-popupTextSize rounded-lg cursor-pointer hover:bg-hoverBtn"
           onClick={() => {
-            const popup = document.getElementById("popupGoBack");
-            const detailChange = document.getElementById("detailChange");
-            popup.style.display = "none";
-            detailChange.style.display = "block";
+            setPopupVisibility("popupGoBack", false);
+            setPopupVisibility("detailChange", true);
           }}
         >
           {textBtnLeft}
@@ -32,10 +28,8 @@ const PopupCloseDetailChange = (props) => {
         <Button
           className="bg-blueBtn w-[100px] h-8 text-center text-whiteText font-mainFont font-btnFontWeigt text-popupTextSize rounded-lg cursor-pointer hover:bg-hoverBtn ml-6"
           onClick={() => {
-            const popup = document.getElementById("popupGoBack");
-            const overlay = document.getElementById("overlay");
-            popup.style.display = "none";
-            overlay.style.display = "none";
+            setPopupVisibility("popupGoBack", false);
+            setPopupVisibility("overlay", false);
           }}
         >
           {textBtnRight}

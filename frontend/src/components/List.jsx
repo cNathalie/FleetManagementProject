@@ -3,9 +3,7 @@ import React from "react";
 /* eslint-disable react/prop-types*/
 
 const List = (props) => {
-  const {
-    listHeader: {
-      eigenaar,
+  const {  
       merk,
       model,
       chassisnummer,
@@ -14,12 +12,10 @@ const List = (props) => {
       typeWagen,
       kleur,
       aantalDeuren,
-    },
   } = props;
 
   return (
     <ul>
-      <li {...props}>{eigenaar}</li>
       <li {...props}>{merk}</li>
       <li {...props}>{model}</li>
       <li {...props}>{chassisnummer}</li>

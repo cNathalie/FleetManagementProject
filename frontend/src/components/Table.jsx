@@ -1,25 +1,11 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
+import { useState } from "react"; 
 
 const Table = (props) => {
-  const { tableHeaderContent } = props;
-  const [data, setData] = useState(null);
+  const { tableHeaderContent, inputData, data, setPopupVisibility, setTempContent} = props;
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:5100/Voertuig");
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const filteredData = data
     ? data.filter((v) =>
@@ -30,7 +16,7 @@ const Table = (props) => {
         )
       )
     : [];
-
+  
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="max-h-[585px] overflow-y-auto group group scrollbar-thin hover:scrollbar-thumb-gray-100">
@@ -89,32 +75,23 @@ const Table = (props) => {
                     key={v.voertuigId}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
-                    <th className="px-6 py-4 [font-family:'Inter',Helvetica] font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]">
-                      {v.merkEnModel.split(" ")[0]}
-                    </th>
-                    <td className="px-6 py-4 [font-family:'Inter',Helvetica] font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]">
-                      {v.merkEnModel.split(" ")[1]}
-                    </td>
-                    <td className="px-6 py-4 [font-family:'Inter',Helvetica] font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]">
-                      {v.chassisnummer}
-                    </td>
-                    <td className="px-6 py-4 [font-family:'Inter',Helvetica] font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]">
-                      {v.nummerplaat}
-                    </td>
-                    <td className="px-6 py-4 [font-family:'Inter',Helvetica] font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]">
-                      {v.brandstoftype}
-                    </td>
+                    {inputData.map((i) => {
+                      return(
+                        <th className="px-6 py-4 [font-family:'Inter',Helvetica] font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]">
+                          {eval(i)}
+                        </th>
+                      )
+                    })}
                     <td className="px-6 py-4 text-right flex items-center">
                       <img
                         className="w-6 h-6 cursor-pointer transition duration-300 transform hover:scale-110"
                         alt="Bulleted list"
                         src="https://c.animaapp.com/1ptxcx7H/img/bulleted-list-1@2x.png"
                         onClick={() => {
-                          const detailDisplay =
-                            document.getElementById("detailDisplay");
-                          const overlay = document.getElementById("overlay");
-                          detailDisplay.style.display = "block";
-                          overlay.style.display = "block";
+                          setPopupVisibility("overlay", true);
+                          setPopupVisibility("detailDisplay", true);
+                          //setTempContent('tempContent' ,[v]);
+                          setTempContent('tempObject' ,v);
                         }}
                       />
                       <img
@@ -122,11 +99,9 @@ const Table = (props) => {
                         alt="Edit"
                         src="https://c.animaapp.com/1ptxcx7H/img/edit-1@2x.png"
                         onClick={() => {
-                          const detailChange =
-                            document.getElementById("detailChange");
-                          const overlay = document.getElementById("overlay");
-                          detailChange.style.display = "block";
-                          overlay.style.display = "block";
+                          setPopupVisibility("overlay", true);
+                          setPopupVisibility("detailChange", true);
+                          setTempContent('tempObject' ,v);
                         }}
                       />
                       <img
@@ -134,11 +109,10 @@ const Table = (props) => {
                         alt="Trash"
                         src="https://c.animaapp.com/1ptxcx7H/img/trash-1@2x.png"
                         onClick={() => {
-                          const popup =
-                            document.getElementById("popupRemoveItem");
-                          const overlay = document.getElementById("overlay");
-                          popup.style.display = "block";
-                          overlay.style.display = "block";
+                          //updateData(v.voertuigId);
+                          setPopupVisibility("overlay", true);
+                          setPopupVisibility("Popup", true);
+                          setTempContent('tempId' ,v.voertuigId);
                         }}
                       />
                     </td>

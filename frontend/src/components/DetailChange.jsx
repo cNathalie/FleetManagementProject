@@ -1,42 +1,31 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import listHeaders from "../constants/listHeader";
-import List from "./List";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 
-const DetailChange = () => {
-  const [data, setData] = useState({
-    eigenaar: "Test Eigenaar",
-    merk: "Test Merk",
-    model: "Test Model",
-    chassisnummer: "Test Chassisnummer",
-    nummerplaat: "Test Nummerplaat",
-    brandstoftype: "Test Brandstoftype",
-    typeWagen: "Test Type wagen",
-    kleur: "Test Kleur",
-    aantalDeuren: "Test Aantal deuren",
-  });
-
+const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject}) => {
+  const [data, setData] = useState(tempObject); 
   const [isEditing, setIsEditing] = useState(false);
   const [showCheckMark, setShowSetMark] = useState(false);
-
-  const handleDataChange = (field, value) => {
+  
+  const handleDataChange = (key, value) => {
     setData({
-      ...data,
-      [field]: value,
+      ...tempObject,
+      [key]: value,
     });
   };
-
-  // const handleSaveChanges = () => {
-  //     // Logic to save changes to database goes here
-  //     setIsEditing(false); // Exit edit mode after saving
-  // }
 
   const handleToggleEditMode = () => {
     if (isEditing) {
       // Handle logic to save data to DB
-
+      try {
+        const result = UpdateVoertuig(data);
+        console.log('PUT request successful', result);
+      } catch (error) {
+          console.error('Error during PUT request:', error.message);
+      }
       //Show checkmark to show success of actions
       setShowSetMark(true);
       //Timeout for checkmark so it doesn't stay on the screen endlessly
@@ -58,10 +47,8 @@ const DetailChange = () => {
             <Button
               className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
               onClick={() => {
-                const popup = document.getElementById("popupGoBack");
-                const detailChange = document.getElementById("detailChange");
-                detailChange.style.display = "none";
-                popup.style.display = "block";
+                setPopupVisibility("popupGoBack", true);
+                setPopupVisibility("detailChange", false);
               }}
             >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
@@ -70,59 +57,28 @@ const DetailChange = () => {
         </div>
         <div className="flex flex-wrap">
           <div className="ml-9 mt-14 pb-6">
-            {/* Shows headers of the list on left of actual data */}
-            {listHeaders.map((h) => {
-              return (
-                <List
-                  className="pb-2 text-lg font-mainFont font-titleFontWeigt"
-                  key={h}
-                  field={h}
-                  value={data[h]}
-                  onChange={handleDataChange}
-                  eigenaar={h.eigenaar}
-                  merk={h.merk}
-                  model={h.model}
-                  chassisnummer={h.chassisnummer}
-                  nummerplaat={h.nummerplaat}
-                  brandstoftype={h.brandstoftype}
-                  typeWagen={h.typeWagen}
-                  kleur={h.kleur}
-                  aantalDeuren={h.aantalDeuren}
-                  listHeader={h}
-                />
-              );
-            })}
-          </div>
-          <div className="ml-12 mt-14">
-            {/* Data from database/testdata goes here */}
-            {/* Display data for each field */}
-            {isEditing ? (
-              //Edit mode
-              <>
-                {Object.entries(data).map(([field, value]) => (
-                  <div key={field}>
+              {/* Data from database/testdata goes here */}
+              {/* Display data for each field */}
+              {tempObject ? (
+                Object.entries(tempObject).map(([key, value]) => (
+                  <div key={key} className="flex items-center mb-4">
+                    <label htmlFor={key} className="block text-blueText mr-2">
+                      {key}
+                    </label>
                     <input
                       type="text"
-                      id={field}
-                      name={field}
-                      value={value}
-                      onChange={(e) => handleDataChange(field, e.target.value)}
-                      className="w-[80%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent"
+                      id={key}
+                      name={key}
+                      value={isEditing ? data[key] : value}
+                      onChange={(e) => handleDataChange(key, e.target.value)}
+                      className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
+                      disabled={!isEditing}
                     />
                   </div>
-                ))}
-              </>
-            ) : (
-              // Display mode
-              Object.entries(data).map(([field, value]) => (
-                <div
-                  key={field}
-                  className="text-s text-[#858585] font-mainFont font-titleFontWeigt pb-3"
-                >
-                  <span>{value}</span>
-                </div>
-              ))
-            )}
+                ))
+              ) : (
+                <p>Error: tempVoertuigContent is null or undefined</p>
+              )}
           </div>
         </div>
         <div className="flex relative w-1/2 h-16 ml-[50%]">

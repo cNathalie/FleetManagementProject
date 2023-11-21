@@ -1,6 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-import React from "react";
+import { useEffect, useState } from "react";
 import Table from "../components/Table";
+import { getVoertuigen, DeleteVoertuig, getVoertuig, UpdateVoertuig , PostVoertuig} from "../constants/Api";
 import Overlay from "../components/Overlay";
 import {
   textPopupVerwijderItem,
@@ -22,74 +22,133 @@ const VoertuigenPage = () => {
     "Brandstoftype",
     "Acties",
   ];
+  const inputData = [
+    "v.merkEnModel.split(' ')[0]",
+    "v.merkEnModel.split(' ')[1]",
+    "v.chassisnummer",
+    "v.nummerplaat",
+    "v.brandstoftype",
+  ];
+  
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = () => {
+      getVoertuigen()
+        .then((voertuigenData) => {
+          setData(voertuigenData);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    };
+
+    fetchData();
+  }, []); 
+
+
+  const setPopupVisibility = (popupId, visibility) => {
+    const element = document.getElementById(popupId);
+    if (element) {
+      element.style.display = visibility ? "block" : "none";
+    } else {
+      console.error(`Element with id ${popupId} not found.`);
+    }
+  };
+
+
+  const [temp , setTemp] = useState({
+    //tempContent: [],
+    tempId: 0,
+    tempObject: {},
+  });
+  const setTempContent = (key, value) => {
+    setTemp({
+      ...temp,
+      [key] : value
+    });
+  };
+
 
   return (
     <>
-      <Overlay />
-      <Popup id="popupRemoveItem">
-        {textPopupVerwijderItem.map((p) => {
-          return (
-            <PopupRemoveItem
-              key={p.id}
-              title={p.title}
-              text={p.text}
-              textBtnLeft={p.textBtnLeft}
-              textBtnRight={p.textBtnRight}
-              popup={p}
-            />
-          );
-        })}
-      </Popup>
-      <div
-        id="detailChange"
-        style={{
-          zIndex: 60,
-          position: "absolute",
-          display: "none",
-          width: "100%",
-        }}
-      >
-        <DetailChange />
-      </div>
-      <div
-        id="detailDisplay"
-        style={{
-          zIndex: 60,
-          position: "absolute",
-          display: "none",
-          width: "100%",
-        }}
-      >
-        <DetailDisplay />
-      </div>
+        <Overlay />
 
-      <Popup id="popupGoBack">
-        {textPopupGaTerug.map((p) => {
-          return (
-            <PopupCloseDetailChange
-              key={p.id}
-              title={p.title}
-              text={p.text}
-              textBtnLeft={p.textBtnLeft}
-              textBtnRight={p.textBtnRight}
-              popup={p}
-            />
-          );
-        })}
-      </Popup>
-      <div
-        id="addItem"
-        style={{
-          zIndex: 60,
-          position: "absolute",
-          display: "none",
-          width: "100%",
-        }}
-      >
-        <AddItem />
-      </div>
+        <Popup id="Popup">
+          {textPopupVerwijderItem.map((p) => {
+            return (
+              <PopupRemoveItem 
+                key={p.id}
+                popup={{
+                  title: p.title,
+                  text: p.text,
+                  textBtnLeft: p.textBtnLeft,
+                  textBtnRight: p.textBtnRight,
+                  popup: p
+                }}
+                apiFunction={DeleteVoertuig}
+                setPopupVisibility={setPopupVisibility}
+                tempId={temp.tempId}
+              />
+            );
+          })}
+        </Popup>
 
-      <Table tableHeaderContent={tableHeaderContent} />
+        <div
+          id="detailChange"
+          style={{
+            zIndex: 60,
+            position: "absolute",
+            width: "100%",
+            display: "none",
+          }}
+        >
+          <DetailChange setPopupVisibility={setPopupVisibility} UpdateVoertuig={UpdateVoertuig} tempObject={temp.tempObject}/>
+        </div>
+
+        <div
+          id="detailDisplay"
+          style={{
+            zIndex: 60,
+            position: "absolute",
+            width: "100%",
+            display: "none",
+          }}
+        >
+          <DetailDisplay setPopupVisibility={setPopupVisibility} tempObject={temp.tempObject}/>
+        </div> 
+
+        <Popup id="popupGoBack">
+          {textPopupGaTerug.map((p) => {
+            return (
+              <PopupCloseDetailChange
+                key={p.id}
+                popup={{
+                  title: p.title,
+                  text: p.text,
+                  textBtnLeft: p.textBtnLeft,
+                  textBtnRight: p.textBtnRight,
+                  popup: p
+                }}
+                setPopupVisibility={setPopupVisibility}
+              />
+            );
+          })}
+        </Popup>
+
+        <div
+          id="addItem"
+          style={{
+            zIndex: 60,
+            position: "absolute",
+            display: "none",
+            width: "100%",
+          }}
+        >
+          <AddItem setPopupVisibility={setPopupVisibility} apiCmd={PostVoertuig} />
+        </div>
+
+        <Table {...{tableHeaderContent, data, inputData, setPopupVisibility, setTempContent}} />
     </>
   );
 };

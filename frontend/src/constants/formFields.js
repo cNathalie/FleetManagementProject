@@ -1,4 +1,4 @@
-const loginFields = [
+export const loginFields = [
   {
     labelText: "Email",
     labelFor: "email-address",
@@ -21,7 +21,7 @@ const loginFields = [
   },
 ];
 
-const signupFields = [
+export const signupFields = [
   {
     labelText: "Username",
     labelFor: "username",
@@ -71,4 +71,15 @@ const signupFields = [
   },
 ];
 
-export { loginFields, signupFields };
+export const initialVoertuigFormData = [
+  {
+    voertuigId: 0,
+    merkEnModel: "string",
+    chassisnummer: "string",
+    nummerplaat: "5-JWQ-162",
+    brandstoftype: "string",
+    typewagen: "string",
+    kleur: "string",
+    aantalDeuren: 5
+  }
+];

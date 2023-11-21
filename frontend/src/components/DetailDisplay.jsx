@@ -1,9 +1,11 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
-import listHeaders from "../constants/listHeader";
-import List from "./List";
 import Button from "./Button";
 
-const DetailDisplay = () => {
+const DetailDisplay = ({ setPopupVisibility,  tempObject}) => {
+
+  console.log(tempObject);
+
   return (
     <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB] ">
       <div>
@@ -15,24 +17,22 @@ const DetailDisplay = () => {
             <Button
               className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
               onClick={() => {
-                const detailDisplay = document.getElementById("detailDisplay");
-                const overlay = document.getElementById("overlay");
-                detailDisplay.style.display = "none";
-                overlay.style.display = "none";
+                setPopupVisibility("overlay", false);
+                setPopupVisibility("detailDisplay", false);
               }}
             >
               <img src="../src/assets/Media/closeButton.jpg" />
             </Button>
           </div>
         </div>
+        {/*
         <div className="flex flex-wrap">
-          <div className="ml-9 mt-14 pb-6">
+           <div className="ml-9 mt-14 pb-6">
             {listHeaders.map((h) => {
               return (
                 <List
                   className="pb-2 text-lg font-mainFont font-titleFontWeigt"
                   key={h}
-                  eigenaar={h.eigenaar}
                   merk={h.merk}
                   model={h.model}
                   chassisnummer={h.chassisnummer}
@@ -46,10 +46,52 @@ const DetailDisplay = () => {
               );
             })}
           </div>
-          <div className="ml-12 mt-14">
-            {/* zelfde als hierboven maar met database data en andere styling */}
+          <div className="ml-12 mt-14">         
+            {tempContent && tempContent.map((d) => {
+              return (
+                <List
+                  className="pb-2 text-lg font-mainFont font-titleFontWeigt"
+                  key={d}
+                  merk={d.merkEnModel.split(" ")[0]}
+                  model={d.merkEnModel.split(" ")[1]}
+                  chassisnummer={d.chassisnummer}
+                  nummerplaat={d.nummerplaat}
+                  brandstoftype={d.brandstoftype}
+                  typeWagen={d.typewagen}
+                  kleur={d.kleur}
+                  aantalDeuren={d.aantalDeuren}
+                  listHeader={d}
+                />
+              );
+            })}
           </div>
-        </div>
+        </div> 
+        */}
+        <div className="flex flex-wrap">
+              {tempObject ? (
+                Object.entries(tempObject).map(([key, value]) => (
+                  <>
+                    <div key={key} className="ml-9 mt-14 pb-6">
+                      <label htmlFor={key} className="pb-2 text-lg font-mainFont font-titleFontWeigt">
+                        {key}
+                      </label>
+                    </div>
+                    <div className="ml-12 mt-14">
+                        <p
+                          type="text"
+                          id={key}
+                          name={key}
+                          className="pb-2 text-lg font-mainFont font-titleFontWeigt"
+                        >
+                        {value}
+                        </p>
+                    </div>
+                  </>
+                ))
+              ) : (
+                <p>Error: tempVoertuigContent is null or undefined</p>
+              )}
+          </div>
       </div>
     </div>
   );

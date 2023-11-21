@@ -1,10 +1,10 @@
-import React from "react";
 
-const Overlay = () => {
+const Overlay = (visible) => {
   return (
     <div
       id="overlay"
       style={{
+        display: visible ? 'none' : 'block',
         position: "fixed",
         top: 0,
         left: 0,
@@ -12,7 +12,6 @@ const Overlay = () => {
         height: "100vh",
         zIndex: 20,
         background: "rgb(111,111,111,0.5)",
-        display: "none",
       }}
     ></div>
   );
