@@ -38,15 +38,13 @@ const browserRouter = createBrowserRouter([
           />
         ),
       },
-      {
-        path: "/admin",
-        element: (
-          <PrivateRoute 
-          component={<AdminPage />} 
-          requiredRoles={["Admin"]} />
-        ),
-      },
     ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <PrivateRoute component={<AdminPage />} requiredRoles={["Admin"]} />
+    ),
   },
 ]);
 
