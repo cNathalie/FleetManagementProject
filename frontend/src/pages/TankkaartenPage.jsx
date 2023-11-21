@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Table from "../components/Table";
-import { getVoertuigen, DeleteVoertuig, getVoertuig, UpdateVoertuig , PostVoertuig} from "../constants/Api";
+import { getTankkaarten, UpdateTankkaart, DeleteTankkaart, PostTankkaart} from "../constants/Api";
 import Overlay from "../components/Overlay";
 import {
   textPopupVerwijderItem,
@@ -12,31 +12,32 @@ import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
 import DetailChange from "../components/DetailChange";
 import DetailDisplay from "../components/DetailDisplay";
 import AddItem from "../components/AddItem";
+import { initialTankkaartFormData } from "../constants/formFields";
 
-const VoertuigenPage = () => {
+const TankkaartenPage = () => {
   const tableHeaderContent = [
-    "Merk",
-    "Model",
-    "Chasisnummer",
-    "Nummerplaat",
-    "Brandstoftype",
-    "Acties",
+    "kaartnummer",
+    "geldigheidsdatum",
+    "pincode",
+    "brandstofType",
+    "isActief",
+    "Acties", //Laten blijven
   ];
   const inputData = [
-    "v.merkEnModel.split(' ')[0]",
-    "v.merkEnModel.split(' ')[1]",
-    "v.chassisnummer",
-    "v.nummerplaat",
-    "v.brandstoftype",
+    "d.kaartnummer",
+    "d.geldigheidsdatum",
+    "d.pincode",
+    "d.brandstofType",
+    "d.isActief ? 'vrij' : 'bezet'",
   ];
-  
+  const iDname = 'tankkaartId';
 
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = () => {
-      getVoertuigen()
-        .then((voertuigenData) => {
-          setData(voertuigenData);
+      getTankkaarten()
+        .then((Data) => {
+          setData(Data);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
@@ -86,7 +87,7 @@ const VoertuigenPage = () => {
                   textBtnRight: p.textBtnRight,
                   popup: p
                 }}
-                apiFunction={DeleteVoertuig}
+                apiFunction={DeleteTankkaart}
                 setPopupVisibility={setPopupVisibility}
                 tempId={temp.tempId}
               />
@@ -103,7 +104,7 @@ const VoertuigenPage = () => {
             display: "none",
           }}
         >
-          <DetailChange setPopupVisibility={setPopupVisibility} UpdateVoertuig={UpdateVoertuig} tempObject={temp.tempObject}/>
+          <DetailChange setPopupVisibility={setPopupVisibility} UpdateVoertuig={UpdateTankkaart} tempObject={temp.tempObject}/>
         </div>
 
         <div
@@ -115,7 +116,7 @@ const VoertuigenPage = () => {
             display: "none",
           }}
         >
-          <DetailDisplay setPopupVisibility={setPopupVisibility} tempObject={temp.tempObject}/>
+          <DetailDisplay setPopupVisibility={setPopupVisibility} tempObject={temp.tempObject} />
         </div> 
 
         <Popup id="popupGoBack">
@@ -145,12 +146,12 @@ const VoertuigenPage = () => {
             width: "100%",
           }}
         >
-          <AddItem setPopupVisibility={setPopupVisibility} apiCmd={PostVoertuig} />
+          <AddItem setPopupVisibility={setPopupVisibility} apiCmd={PostTankkaart} initialFormData={initialTankkaartFormData[0]}/>
         </div>
 
-        <Table {...{tableHeaderContent, data, inputData, setPopupVisibility, setTempContent}} />
+        <Table {...{tableHeaderContent, data, inputData, setPopupVisibility, setTempContent, iDname}} />
     </>
   );
 };
 
-export default VoertuigenPage;
+export default TankkaartenPage;

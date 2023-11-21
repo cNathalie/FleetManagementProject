@@ -83,3 +83,26 @@ export const initialVoertuigFormData = [
     aantalDeuren: 5
   }
 ];
+
+export const initialTankkaartFormData = [
+  {
+    tankkaartId: 0,
+    kaartnummer: 0,
+    geldigheidsdatum: "2023-11-21T17:08:58.155Z",
+    pincode: 0,
+    brandstofType: "string",
+    isActief: true
+  }
+];
+
+export const initialBestuurdersFormData = [
+  {
+    bestuurderId: 0,
+    naam: "string",
+    voornaam: "string",
+    adres: "string",
+    rijksregisternummer: "string",
+    rijbewijs: "string"
+  }
+];
+

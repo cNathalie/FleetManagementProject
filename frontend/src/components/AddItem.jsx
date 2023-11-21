@@ -2,35 +2,41 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
-import { initialVoertuigFormData } from "../constants/formFields";
+import isEqual from 'lodash/isEqual';
 
-const AddItem = ({ setPopupVisibility, apiCmd }) => {
-  const [data, setData] = useState(initialVoertuigFormData[0]);
+
+const AddItem = ({ setPopupVisibility, apiCmd , initialFormData}) => {
+  const [data, setData] = useState(initialFormData);
   const [showCheckMark, setShowSetMark] = useState(false);
 
   const handleDataChange = (field, value) => {
-    setData(prevData =>({
+    setData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
   };
-
+  
   const handleSaveChanges = async () => {
     // Logic to save data to DB
     try {
-      await apiCmd(data);
-      console.log(data);
-    } catch (error) {
-        console.error('Error during PUT request:', error.message);
-    }
-    // Reset data after saving
-    setData({});
+          await apiCmd(data);
+          console.log('Data to be saved:', data);
 
-    //Checkmark to show saving was succesful
-    setShowSetMark(true);
-    setTimeout(() => {
-      setShowSetMark(false);
-    }, 3000);
+          // Check if the format matches initialVoertuigFormData[0]
+          const isFormatValid = isEqual(data, initialFormData);
+          console.log('Is format valid:', isFormatValid);
+      } catch (error) {
+          console.error('Error during PUT request:', error.message);
+      }
+
+      // Reset data after saving
+      setData({});
+
+      // Checkmark to show saving was successful
+      setShowSetMark(true);
+      setTimeout(() => {
+          setShowSetMark(false);
+      }, 3000);
   };
 
   return (
@@ -46,6 +52,7 @@ const AddItem = ({ setPopupVisibility, apiCmd }) => {
               onClick={() => {
                 setPopupVisibility("overlay", false);
                 setPopupVisibility("addItem", false);
+
               }}
             >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
@@ -54,10 +61,8 @@ const AddItem = ({ setPopupVisibility, apiCmd }) => {
         </div>
         <div className="flex flex-wrap">
           <div className="ml-9 mt-14 pb-6">
-              {/* Data from database/testdata goes here */}
-              {/* Display data for each field */}
-              {initialVoertuigFormData ? (
-                Object.entries(initialVoertuigFormData[0]).map(([key]) => (
+              {initialFormData ? (
+                Object.entries(initialFormData).map(([key]) => (
                   <div key={key} className="flex items-center mb-4">
                     <label htmlFor={key} className="block text-blueText mr-2">
                       {key}

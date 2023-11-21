@@ -83,7 +83,7 @@ const DetailDisplay = ({ setPopupVisibility,  tempObject}) => {
                           name={key}
                           className="pb-2 text-lg font-mainFont font-titleFontWeigt"
                         >
-                        {value}
+                        {typeof value === 'boolean' ? (value ? 'vrij' : 'bezet') : value}
                         </p>
                     </div>
                   </>

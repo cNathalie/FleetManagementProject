@@ -4,7 +4,7 @@
 import { useState } from "react"; 
 
 const Table = (props) => {
-  const { tableHeaderContent, inputData, data, setPopupVisibility, setTempContent} = props;
+  const { tableHeaderContent, inputData, data, setPopupVisibility, setTempContent, iDname } = props;
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredData = data
@@ -21,7 +21,7 @@ const Table = (props) => {
     <div className="flex items-center justify-center h-screen ">
       <div className="max-h-[585px] overflow-y-auto group group scrollbar-thin hover:scrollbar-thumb-gray-100">
         <table className="w-full max-w-[1122px] h-[585px] text-sm text-left text-gray-500 dark:text-gray-400 shadow-md sm:rounded-lg">
-          <thead className="sticky top-0 bg-white z-10">
+          <thead className="sticky top-0 bg-white z-10 border-b-2 border-gray-300 shadow-sm">
             {/* First Section of thead */}
             <tr>
               <th colSpan={tableHeaderContent.length} className="py-3">
@@ -31,10 +31,8 @@ const Table = (props) => {
                     type="button"
                     className="w-[150px] md:w-[150px] h-[29px] md:h-[43px] text-white bg-[#18b8ce] hover:bg-blue-300 flex items-center justify-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transform translate-x-2"
                     onClick={() => {
-                      const addItem = document.getElementById("addItem");
-                      const overlay = document.getElementById("overlay");
-                      addItem.style.display = "block";
-                      overlay.style.display = "block";
+                      setPopupVisibility("overlay", true);
+                      setPopupVisibility("addItem", true);
                     }}
                   >
                     Toevoegen
@@ -68,11 +66,12 @@ const Table = (props) => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((v) => {
+            {filteredData.map((d) => {
+              const id = d[iDname];
               return (
                 <>
                   <tr
-                    key={v.voertuigId}
+                    key={id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
                     {inputData.map((i) => {
@@ -90,8 +89,7 @@ const Table = (props) => {
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailDisplay", true);
-                          //setTempContent('tempContent' ,[v]);
-                          setTempContent('tempObject' ,v);
+                          setTempContent('tempObject' ,d);
                         }}
                       />
                       <img
@@ -101,7 +99,7 @@ const Table = (props) => {
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailChange", true);
-                          setTempContent('tempObject' ,v);
+                          setTempContent('tempObject' ,d);
                         }}
                       />
                       <img
@@ -109,10 +107,10 @@ const Table = (props) => {
                         alt="Trash"
                         src="https://c.animaapp.com/1ptxcx7H/img/trash-1@2x.png"
                         onClick={() => {
-                          //updateData(v.voertuigId);
+                          //updateData(default.voertuigId);
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("Popup", true);
-                          setTempContent('tempId' ,v.voertuigId);
+                          setTempContent('tempId' , id);
                         }}
                       />
                     </td>

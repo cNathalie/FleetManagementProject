@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import {sessionStorageItems,sessionStorageValues,} from "../constants/sessionStorage";
-import baseUrl from './baseUrl';
-import { Navigate } from 'react-router-dom';
+  import { baseUrl } from '../constants/Api';
+  import { Navigate } from 'react-router-dom';
 
 
 export async function login(email, password) {

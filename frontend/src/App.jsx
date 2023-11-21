@@ -10,9 +10,9 @@ import 'flowbite';
 import Homepage from "./pages/Homepage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
-import VoertuigenPage from "./pages/Voertuigen";
-import TestDetailChange from "./pages/TestDetailChange";
-
+import VoertuigenPage from "./pages/VoertuigenPage";
+import TankkaartenPage from "./pages/TankkaartenPage";
+import BustuurderPage from "./pages/BustuurderPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,8 +22,8 @@ const router = createBrowserRouter(
       <Route path="home" element={<Homepage />} />
       <Route path="admin" element={<AdminPage />} />
       <Route path="voertuigen" element={<VoertuigenPage/>} />
-      <Route path="detailchange" element={<TestDetailChange/>} />
-
+      <Route path="tankkaarten" element={<TankkaartenPage/>} />
+      <Route path="bestuurders" element={<BustuurderPage/>} />
       {/* hier nog routes naar andere pagina's */}
       
     </Route>
