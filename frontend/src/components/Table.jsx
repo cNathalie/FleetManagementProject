@@ -2,12 +2,10 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import { useState } from "react"; 
-import temp from "../constants/temp";
 
 const Table = (props) => {
-  const { tableHeaderContent, inputData, data} = props;
+  const { tableHeaderContent, inputData, data, setPopupVisibility, setTempContent} = props;
   const [searchTerm, setSearchTerm] = useState("");
-
 
   const filteredData = data
     ? data.filter((v) =>
@@ -18,7 +16,7 @@ const Table = (props) => {
         )
       )
     : [];
-
+  
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="max-h-[585px] overflow-y-auto group group scrollbar-thin hover:scrollbar-thumb-gray-100">
@@ -90,11 +88,9 @@ const Table = (props) => {
                         alt="Bulleted list"
                         src="https://c.animaapp.com/1ptxcx7H/img/bulleted-list-1@2x.png"
                         onClick={() => {
-                          temp.tempId = v.voertuigId;
-                          const detailDisplay = document.getElementById("detailDisplay");
-                          const overlay = document.getElementById("overlay");
-                          detailDisplay.style.display = "block";
-                          overlay.style.display = "block";
+                          setPopupVisibility("overlay", true);
+                          setPopupVisibility("detailDisplay", true);
+                          setTempContent('tempVoertuigContent' ,[v]);
                         }}
                       />
                       <img
@@ -102,11 +98,9 @@ const Table = (props) => {
                         alt="Edit"
                         src="https://c.animaapp.com/1ptxcx7H/img/edit-1@2x.png"
                         onClick={() => {
-                          temp.tempId = v.voertuigId;
-                          const detailChange = document.getElementById("detailChange");
-                          const overlay = document.getElementById("overlay");
-                          detailChange.style.display = "block";
-                          overlay.style.display = "block";
+                          setPopupVisibility("overlay", true);
+                          setPopupVisibility("detailChange", true);
+                          setTempContent('tempVoertuigObject' ,v);
                         }}
                       />
                       <img
@@ -114,12 +108,10 @@ const Table = (props) => {
                         alt="Trash"
                         src="https://c.animaapp.com/1ptxcx7H/img/trash-1@2x.png"
                         onClick={() => {
-                          temp.tempId = v.voertuigId;
-                          const popup = document.getElementById("popupRemoveItem");
-                          const overlay = document.getElementById("overlay");
-                          popup.style.display = "block";
-                          overlay.style.display = "block";
-                          
+                          //updateData(v.voertuigId);
+                          setPopupVisibility("overlay", true);
+                          setPopupVisibility("Popup", true);
+                          setTempContent('tempVoertuigId' ,v.voertuigId);
                         }}
                       />
                     </td>
