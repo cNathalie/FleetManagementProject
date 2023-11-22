@@ -2,8 +2,7 @@
 import React from "react";
 import Button from "./Button";
 
-const DetailDisplay = ({ setPopupVisibility,  tempObject}) => {
-
+const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
   console.log(tempObject);
 
   return (
@@ -68,30 +67,37 @@ const DetailDisplay = ({ setPopupVisibility,  tempObject}) => {
         </div> 
         */}
         <div className="flex flex-wrap">
-              {tempObject ? (
-                Object.entries(tempObject).map(([key, value]) => (
-                  <>
-                    <div key={key} className="ml-9 mt-14 pb-6">
-                      <label htmlFor={key} className="pb-2 text-lg font-mainFont font-titleFontWeigt">
-                        {key}
-                      </label>
-                    </div>
-                    <div className="ml-12 mt-14">
-                        <p
-                          type="text"
-                          id={key}
-                          name={key}
-                          className="pb-2 text-lg font-mainFont font-titleFontWeigt"
-                        >
-                        {typeof value === 'boolean' ? (value ? 'vrij' : 'bezet') : value}
-                        </p>
-                    </div>
-                  </>
-                ))
-              ) : (
-                <p>Error: tempVoertuigContent is null or undefined</p>
-              )}
-          </div>
+          {tempObject ? (
+            Object.entries(tempObject).map(([key, value]) => (
+              <>
+                <div key={key} className="ml-9 mt-14 pb-6">
+                  <label
+                    htmlFor={key}
+                    className="pb-2 text-lg font-mainFont font-titleFontWeigt"
+                  >
+                    {key}
+                  </label>
+                </div>
+                <div className="ml-12 mt-14">
+                  <p
+                    type="text"
+                    id={key}
+                    name={key}
+                    className="pb-2 text-lg font-mainFont font-titleFontWeigt"
+                  >
+                    {typeof value === "boolean"
+                      ? value
+                        ? "vrij"
+                        : "bezet"
+                      : value}
+                  </p>
+                </div>
+              </>
+            ))
+          ) : (
+            <p>Error: tempVoertuigContent is null or undefined</p>
+          )}
+        </div>
       </div>
     </div>
   );

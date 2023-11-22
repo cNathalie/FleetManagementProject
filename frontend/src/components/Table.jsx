@@ -1,23 +1,29 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import { useState } from "react"; 
+import { useState } from "react";
 
 const Table = (props) => {
-  const { tableHeaderContent, inputData, data, setPopupVisibility, setTempContent, iDname } = props;
+  const {
+    tableHeaderContent,
+    inputData,
+    data,
+    setPopupVisibility,
+    setTempContent,
+    iDname,
+  } = props;
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredData = data
-  ? data.filter((v) =>
-      Object.values(v).some(
-        (value) =>
-          (typeof value === "string" || typeof value === "number") &&
-          String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    ? data.filter((v) =>
+        Object.values(v).some(
+          (value) =>
+            (typeof value === "string" || typeof value === "number") &&
+            String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        )
       )
-    )
-  : [];
+    : [];
 
-  
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="max-h-[585px] overflow-y-auto group group scrollbar-thin hover:scrollbar-thumb-gray-100">
@@ -76,11 +82,11 @@ const Table = (props) => {
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
                     {inputData.map((i) => {
-                      return(
+                      return (
                         <th className="px-6 py-4 [font-family:'Inter',Helvetica] font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]">
                           {eval(i)}
                         </th>
-                      )
+                      );
                     })}
                     <td className="px-6 py-4 text-right flex items-center">
                       <img
@@ -90,7 +96,7 @@ const Table = (props) => {
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailDisplay", true);
-                          setTempContent('tempObject' ,d);
+                          setTempContent("tempObject", d);
                         }}
                       />
                       <img
@@ -100,7 +106,7 @@ const Table = (props) => {
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailChange", true);
-                          setTempContent('tempObject' ,d);
+                          setTempContent("tempObject", d);
                         }}
                       />
                       <img
@@ -111,7 +117,7 @@ const Table = (props) => {
                           //updateData(default.voertuigId);
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("Popup", true);
-                          setTempContent('tempId' , id);
+                          setTempContent("tempId", id);
                         }}
                       />
                     </td>

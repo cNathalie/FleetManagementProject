@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
-import isEqual from 'lodash/isEqual';
+import isEqual from "lodash/isEqual";
 
-
-const AddItem = ({ setPopupVisibility, apiCmd , initialFormData}) => {
+const AddItem = ({ setPopupVisibility, apiCmd, initialFormData }) => {
   const [data, setData] = useState(initialFormData);
   const [showCheckMark, setShowSetMark] = useState(false);
 
@@ -15,28 +14,28 @@ const AddItem = ({ setPopupVisibility, apiCmd , initialFormData}) => {
       [field]: value,
     }));
   };
-  
+
   const handleSaveChanges = async () => {
     // Logic to save data to DB
     try {
-          await apiCmd(data);
-          console.log('Data to be saved:', data);
+      await apiCmd(data);
+      console.log("Data to be saved:", data);
 
-          // Check if the format matches initialVoertuigFormData[0]
-          const isFormatValid = isEqual(data, initialFormData);
-          console.log('Is format valid:', isFormatValid);
-      } catch (error) {
-          console.error('Error during PUT request:', error.message);
-      }
+      // Check if the format matches initialVoertuigFormData[0]
+      const isFormatValid = isEqual(data, initialFormData);
+      console.log("Is format valid:", isFormatValid);
+    } catch (error) {
+      console.error("Error during PUT request:", error.message);
+    }
 
-      // Reset data after saving
-      setData({});
+    // Reset data after saving
+    setData({});
 
-      // Checkmark to show saving was successful
-      setShowSetMark(true);
-      setTimeout(() => {
-          setShowSetMark(false);
-      }, 3000);
+    // Checkmark to show saving was successful
+    setShowSetMark(true);
+    setTimeout(() => {
+      setShowSetMark(false);
+    }, 3000);
   };
 
   return (
@@ -52,7 +51,6 @@ const AddItem = ({ setPopupVisibility, apiCmd , initialFormData}) => {
               onClick={() => {
                 setPopupVisibility("overlay", false);
                 setPopupVisibility("addItem", false);
-
               }}
             >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
@@ -61,23 +59,23 @@ const AddItem = ({ setPopupVisibility, apiCmd , initialFormData}) => {
         </div>
         <div className="flex flex-wrap">
           <div className="ml-9 mt-14 pb-6">
-              {initialFormData ? (
-                Object.entries(initialFormData).map(([key]) => (
-                  <div key={key} className="flex items-center mb-4">
-                    <label htmlFor={key} className="block text-blueText mr-2">
-                      {key}
-                    </label>
-                    <input
-                      id={key}
-                      type="text"
-                      onChange={(e) => handleDataChange(key, e.target.value)}
-                      className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
-                    />
-                  </div>
-                ))
-              ) : (
-                <p>Error: tempVoertuigContent is null or undefined</p>
-              )}
+            {initialFormData ? (
+              Object.entries(initialFormData).map(([key]) => (
+                <div key={key} className="flex items-center mb-4">
+                  <label htmlFor={key} className="block text-blueText mr-2">
+                    {key}
+                  </label>
+                  <input
+                    id={key}
+                    type="text"
+                    onChange={(e) => handleDataChange(key, e.target.value)}
+                    className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
+                  />
+                </div>
+              ))
+            ) : (
+              <p>Error: tempVoertuigContent is null or undefined</p>
+            )}
           </div>
         </div>
         <div className="flex relative w-1/2 h-16 ml-[50%]">

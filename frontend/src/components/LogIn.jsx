@@ -19,7 +19,6 @@ export default function Login() {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { succes, role, error } = await login(
@@ -27,16 +26,16 @@ export default function Login() {
       loginState["password"]
     );
 
-    if(succes) {
+    if (succes) {
       navigate(`/home`);
-    } else{
-      navigate('/', {state: loginInfo.loginUnknown})
-      console.error("Login failed: ", error)
+    } else {
+      navigate("/", { state: loginInfo.loginUnknown });
+      console.error("Login failed: ", error);
     }
   };
 
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit} >
+    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       <div className="-space-y-px">
         {fields.map((field, index) => (
           <div key={index} className="p-5">

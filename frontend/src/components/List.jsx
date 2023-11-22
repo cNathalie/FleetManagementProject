@@ -3,15 +3,15 @@ import React from "react";
 /* eslint-disable react/prop-types*/
 
 const List = (props) => {
-  const {  
-      merk,
-      model,
-      chassisnummer,
-      nummerplaat,
-      brandstoftype,
-      typeWagen,
-      kleur,
-      aantalDeuren,
+  const {
+    merk,
+    model,
+    chassisnummer,
+    nummerplaat,
+    brandstoftype,
+    typeWagen,
+    kleur,
+    aantalDeuren,
   } = props;
 
   return (

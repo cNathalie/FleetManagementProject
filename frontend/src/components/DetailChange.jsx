@@ -5,11 +5,11 @@ import React, { useState } from "react";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 
-const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject}) => {
-  const [data, setData] = useState(tempObject); 
+const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject }) => {
+  const [data, setData] = useState(tempObject);
   const [isEditing, setIsEditing] = useState(false);
   const [showCheckMark, setShowSetMark] = useState(false);
-  
+
   const handleDataChange = (field, value) => {
     setData((prevData) => ({
       ...prevData,
@@ -21,10 +21,10 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject}) => {
     if (isEditing) {
       // Handle logic to save data to DB
       try {
-        const updatedData = {...tempObject, ...data}
+        const updatedData = { ...tempObject, ...data };
         UpdateVoertuig(updatedData);
       } catch (error) {
-          console.error('Error during PUT request:', error.message);
+        console.error("Error during PUT request:", error.message);
       }
       //Show checkmark to show success of actions
       setShowSetMark(true);
@@ -57,28 +57,28 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject}) => {
         </div>
         <div className="flex flex-wrap">
           <div className="ml-9 mt-14 pb-6">
-              {/* Data from database/testdata goes here */}
-              {/* Display data for each field */}
-              {tempObject ? (
-                Object.entries(tempObject).map(([key, value]) => (
-                  <div key={key} className="flex items-center mb-4">
-                    <label htmlFor={key} className="block text-blueText mr-2">
-                      {key}
-                    </label>
-                    <input
-                      type="text"
-                      id={key}
-                      name={key}
-                      value={isEditing ? data[key] : value}
-                      onChange={(e) => handleDataChange(key, e.target.value)}
-                      className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
-                      disabled={!isEditing}
-                    />
-                  </div>
-                ))
-              ) : (
-                <p>Error: tempVoertuigContent is null or undefined</p>
-              )}
+            {/* Data from database/testdata goes here */}
+            {/* Display data for each field */}
+            {tempObject ? (
+              Object.entries(tempObject).map(([key, value]) => (
+                <div key={key} className="flex items-center mb-4">
+                  <label htmlFor={key} className="block text-blueText mr-2">
+                    {key}
+                  </label>
+                  <input
+                    type="text"
+                    id={key}
+                    name={key}
+                    value={isEditing ? data[key] : value}
+                    onChange={(e) => handleDataChange(key, e.target.value)}
+                    className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
+                    disabled={!isEditing}
+                  />
+                </div>
+              ))
+            ) : (
+              <p>Error: tempVoertuigContent is null or undefined</p>
+            )}
           </div>
         </div>
         <div className="flex relative w-1/2 h-16 ml-[50%]">

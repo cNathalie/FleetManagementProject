@@ -80,8 +80,8 @@ export const initialVoertuigFormData = [
     brandstoftype: "string",
     typewagen: "string",
     kleur: "string",
-    aantalDeuren: 5
-  }
+    aantalDeuren: 5,
+  },
 ];
 
 export const initialTankkaartFormData = [
@@ -91,8 +91,8 @@ export const initialTankkaartFormData = [
     geldigheidsdatum: "2023-11-21T17:08:58.155Z",
     pincode: 0,
     brandstofType: "string",
-    isActief: true
-  }
+    isActief: true,
+  },
 ];
 
 export const initialBestuurdersFormData = [
@@ -102,8 +102,8 @@ export const initialBestuurdersFormData = [
     voornaam: "string",
     adres: "string",
     rijksregisternummer: "string",
-    rijbewijs: "string"
-  }
+    rijbewijs: "string",
+  },
 ];
 
 export const initialFleetsFormData = [
@@ -114,7 +114,6 @@ export const initialFleetsFormData = [
     tankkaartId: 0,
     voertuigMerkModel: "string",
     voertuigNummerplaat: "string",
-    voertuigChassisnummer: "string"
-  }
+    voertuigChassisnummer: "string",
+  },
 ];
-

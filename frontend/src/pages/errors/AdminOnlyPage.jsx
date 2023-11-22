@@ -24,8 +24,13 @@ const AdminOnlyPage = () => {
               className="font-btnFontWeigt hover:underline cursor-pointer"
             >
               Ga terug
-            </span> of <span
-              onClick={() => {logout(); navigate("/")}}
+            </span>{" "}
+            of{" "}
+            <span
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
               className="font-btnFontWeigt hover:underline cursor-pointer"
             >
               meldt je aan als administrator.

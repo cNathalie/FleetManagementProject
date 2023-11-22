@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import UserForm from "./UserForm";
 import { signupFields } from "../constants/formFields";
 import Button from "./Button";
-import { BUTTON_STYLES, TEXT_STYLES, CARD_STYLES } from "../constants/tailwindStyles";
+import {
+  BUTTON_STYLES,
+  TEXT_STYLES,
+  CARD_STYLES,
+} from "../constants/tailwindStyles";
 
 export const AdminContent = () => {
   const handleAddUserSubmit = (formData) => {
@@ -21,8 +25,12 @@ export const AdminContent = () => {
       <div className="relative flex my-10 w-[784px] h-[604px]">
         <div className="w-[790px] h-[604px]">
           {/* Left side - add user portion of the screen */}
-          <div className={`${CARD_STYLES.BLUE_CARD} left-0 absolute w-[324px] h-[604px] top-0`}>
-            <div className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px]`}>
+          <div
+            className={`${CARD_STYLES.BLUE_CARD} left-0 absolute w-[324px] h-[604px] top-0`}
+          >
+            <div
+              className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px]`}
+            >
               Gebruiker toevoegen
             </div>
             {/* Add user form */}
@@ -36,8 +44,12 @@ export const AdminContent = () => {
             />
           </div>
           {/* Right side - remove user portion of the screen */}
-          <div className={`${CARD_STYLES.BLUE_CARD} right-0 absolute w-[324px] h-[604px] top-0`}>
-            <div className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px] mt-5`}>
+          <div
+            className={`${CARD_STYLES.BLUE_CARD} right-0 absolute w-[324px] h-[604px] top-0`}
+          >
+            <div
+              className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px] mt-5`}
+            >
               Gebruiker verwijderen
             </div>
             {/* Remove user form */}
@@ -67,7 +79,9 @@ export const AdminContent = () => {
             </div>
           </div>
           {/* Dividing two portions of the screen */}
-          <div className={`${TEXT_STYLES.ADMIN_OR} absolute w-[36px] top-[294px] left-[374px]`}>
+          <div
+            className={`${TEXT_STYLES.ADMIN_OR} absolute w-[36px] top-[294px] left-[374px]`}
+          >
             OF
           </div>
           {/* Two lines to divide the add-user on the left and the remove-user on the right */}

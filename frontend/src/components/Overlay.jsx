@@ -1,10 +1,9 @@
-
 const Overlay = (visible) => {
   return (
     <div
       id="overlay"
       style={{
-        display: visible ? 'none' : 'block',
+        display: visible ? "none" : "block",
         position: "fixed",
         top: 0,
         left: 0,
