@@ -17,12 +17,12 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject}) => {
     }));
   };
 
-  const handleToggleEditMode = async () => {
+  const handleToggleEditMode = () => {
     if (isEditing) {
       // Handle logic to save data to DB
       try {
-        await UpdateVoertuig(data);
-        console.log('updateTankaart:' + data);
+        const updatedData = {...tempObject, ...data}
+        UpdateVoertuig(updatedData);
       } catch (error) {
           console.error('Error during PUT request:', error.message);
       }
@@ -97,13 +97,7 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject}) => {
           <div className="pl-3 absolute right-[10%]">
             <Button
               className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer"
-              onClick={() => {
-                handleToggleEditMode;
-                if(showCheckMark === true) {
-                setPopupVisibility("overlay", false);
-                setPopupVisibility("detailChange", false)
-                }
-              }}
+              onClick={handleToggleEditMode}
             >
               {isEditing ? "Opslaan" : "Bewerk"}
             </Button>

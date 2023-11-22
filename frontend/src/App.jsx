@@ -13,6 +13,7 @@ import AdminPage from "./pages/AdminPage";
 import VoertuigenPage from "./pages/VoertuigenPage";
 import TankkaartenPage from "./pages/TankkaartenPage";
 import BustuurderPage from "./pages/BustuurderPage";
+import FleetPage from "./pages/FleetPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="voertuigen" element={<VoertuigenPage/>} />
       <Route path="tankkaarten" element={<TankkaartenPage/>} />
       <Route path="bestuurders" element={<BustuurderPage/>} />
+      <Route path="Fleets" element={<FleetPage/>} />
       {/* hier nog routes naar andere pagina's */}
       
     </Route>

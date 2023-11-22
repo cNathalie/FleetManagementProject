@@ -8,14 +8,15 @@ const Table = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredData = data
-    ? data.filter((v) =>
-        Object.values(v).some(
-          (value) =>
-            typeof value === "string" &&
-            value.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+  ? data.filter((v) =>
+      Object.values(v).some(
+        (value) =>
+          (typeof value === "string" || typeof value === "number") &&
+          String(value).toLowerCase().includes(searchTerm.toLowerCase())
       )
-    : [];
+    )
+  : [];
+
   
   return (
     <div className="flex items-center justify-center h-screen ">

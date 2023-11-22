@@ -11,6 +11,7 @@ import AdminPage from "./pages/AdminPage.jsx";
 import VoertuigenPage from "./pages/VoertuigenPage.jsx";
 import TankkaartenPage from "./pages/TankkaartenPage.jsx";
 import BustuurderPage from "./pages/BustuurderPage.jsx";
+import FleetPage from "./pages/FleetPage.jsx";
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
 
 const browserRouter = createBrowserRouter([
@@ -54,6 +55,15 @@ const browserRouter = createBrowserRouter([
         element: (
           <PrivateRoute
             component={<TankkaartenPage />}
+            requiredRoles={["User", "Admin"]}
+          />
+        ),
+      },
+      {
+        path: "/items/4",
+        element: (
+          <PrivateRoute
+            component={<FleetPage />}
             requiredRoles={["User", "Admin"]}
           />
         ),

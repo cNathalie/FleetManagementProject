@@ -106,3 +106,15 @@ export const initialBestuurdersFormData = [
   }
 ];
 
+export const initialFleetsFormData = [
+  {
+    fleetMemberId: 0,
+    bestuurderNaam: "string",
+    bestuurderVoornaam: "string",
+    tankkaartId: 0,
+    voertuigMerkModel: "string",
+    voertuigNummerplaat: "string",
+    voertuigChassisnummer: "string"
+  }
+];
+
