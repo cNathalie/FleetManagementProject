@@ -5,6 +5,7 @@ using FM_Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Threading.RateLimiting;
 
 namespace FM.Api.App
 {
@@ -43,6 +44,25 @@ namespace FM.Api.App
 
             builder.Services.AddControllers();
 
+            // HealthCheck for EntityFramework
+            builder.Services.AddHealthChecks()
+                    .AddDbContextCheck<FleetManagementDbContext>();
+
+            // RateLimitor
+            builder.Services.AddRateLimiter(options =>
+            {
+                options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+                        factory: partition => new FixedWindowRateLimiterOptions
+                        {
+                            AutoReplenishment = true,
+                            PermitLimit = 100,
+                            QueueLimit = 0,
+                            Window = TimeSpan.FromMinutes(1)
+                        }));
+            });
+
             // Add JWT Authentication
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>
@@ -68,7 +88,7 @@ namespace FM.Api.App
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-
+            //CORS
             {
                 Console.WriteLine("Cors active");
                 // Adding CORS Policy
@@ -100,6 +120,10 @@ namespace FM.Api.App
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.MapHealthChecks("/healtz");
+
+            app.UseRateLimiter();
 
             app.UseCors("AllowOrigin");
 
