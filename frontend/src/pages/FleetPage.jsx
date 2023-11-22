@@ -20,6 +20,8 @@ import AddItem from "../components/AddItem";
 import { initialFleetsFormData } from "../constants/formFields";
 
 const FleetPage = () => {
+  /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
+  element in the array represents a column header in the table.*/
   const tableHeaderContent = [
     "bestuurderNaam",
     "bestuurderVoornaam",
@@ -29,6 +31,7 @@ const FleetPage = () => {
     "voertuigChassisnummer",
     "Acties", //Laten blijven
   ];
+  /* The `inputData` array is used to define the data that will be displayed in each column of the table.*/
   const inputData = [
     "d.bestuurderNaam",
     "d.bestuurderVoornaam",
@@ -37,6 +40,7 @@ const FleetPage = () => {
     "d.voertuigNummerplaat",
     "d.voertuigChassisnummer",
   ];
+  /* The `iDname` variable is used to specify the name of the ID field in the table data.*/
   const iDname = "fleetMemberId";
 
   const [data, setData] = useState([]);
@@ -63,6 +67,8 @@ const FleetPage = () => {
     }
   };
 
+  /* lets a child component change the value in return other child component
+   use this value for their */
   const [temp, setTemp] = useState({
     //tempContent: [],
     tempId: 0,
@@ -160,7 +166,11 @@ const FleetPage = () => {
         <AddItem
           setPopupVisibility={setPopupVisibility}
           apiCmd={PostFleet}
-          initialFormData={initialFleetsFormData[0]}
+          initialFormData={
+            /* `initialFleetsFormData[0]` is accessing the first Array in the
+          `initialBestuurdersFormData` Object. */
+            initialFleetsFormData[0]
+          }
         />
       </div>
 

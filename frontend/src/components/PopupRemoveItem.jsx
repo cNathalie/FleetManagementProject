@@ -32,6 +32,9 @@ const PopupRemoveItem = ({
         <Button
           className="bg-blueBtn w-[100px] h-8 text-center text-whiteText font-mainFont font-btnFontWeigt text-popupTextSize rounded-lg cursor-pointer hover:bg-hoverBtn ml-6"
           onClick={async () => {
+            /* object that is gonna be removed from the database using tha apifuncion
+               that is given with this component on a page that uses this component.
+               (tempId comes from the page too) */
             console.log("this object is removed" + tempId);
             try {
               await apiFunction(tempId);
@@ -41,7 +44,6 @@ const PopupRemoveItem = ({
 
             setPopupVisibility("overlay", false);
             setPopupVisibility("Popup", false);
-            // code om item te verwijderen, na het verwijderen popup en overlay display: none
           }}
         >
           {textBtnRight}

@@ -14,6 +14,8 @@ const Table = (props) => {
   } = props;
   const [searchTerm, setSearchTerm] = useState("");
 
+/* The code is creating a variable called `filteredData` that stores the filtered data based on the
+search term entered by the user. */
   const filteredData = data
     ? data.filter((v) =>
         Object.values(v).some(

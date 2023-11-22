@@ -17,6 +17,10 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject }) => {
     }));
   };
 
+  /**
+   * The function `handleToggleEditMode` toggles between edit and display mode, saves data to the
+   * database if in edit mode, and shows a checkmark to indicate success.
+   */
   const handleToggleEditMode = () => {
     if (isEditing) {
       // Handle logic to save data to DB
@@ -57,9 +61,7 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject }) => {
         </div>
         <div className="flex flex-wrap">
           <div className="ml-9 mt-14 pb-6">
-            {/* Data from database/testdata goes here */}
-            {/* Display data for each field */}
-            {tempObject ? (
+            {tempObject &&
               Object.entries(tempObject).map(([key, value]) => (
                 <div key={key} className="flex items-center mb-4">
                   <label htmlFor={key} className="block text-blueText mr-2">
@@ -75,10 +77,7 @@ const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject }) => {
                     disabled={!isEditing}
                   />
                 </div>
-              ))
-            ) : (
-              <p>Error: tempVoertuigContent is null or undefined</p>
-            )}
+              ))}
           </div>
         </div>
         <div className="flex relative w-1/2 h-16 ml-[50%]">
