@@ -15,6 +15,7 @@ namespace FM.Api.App
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Work in Progress
             //builder.Services.AddLogging(loggingBuilder =>
             //{
             //    var configuration = new ConfigurationBuilder()
@@ -63,7 +64,7 @@ namespace FM.Api.App
                         }));
             });
 
-            // Add JWT Authentication
+            // Add JWT Authentication - Work in Progress
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>
                             {
