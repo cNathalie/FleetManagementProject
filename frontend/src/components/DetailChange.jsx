@@ -1,107 +1,115 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
+import { useFormik } from "formik";
+import { TEXT_STYLES, INPUT_STYLES } from "../constants/tailwindStyles";
 
-const DetailChange = ({ setPopupVisibility, UpdateVoertuig, tempObject }) => {
-  const [data, setData] = useState(tempObject);
+const DetailChange = ({setPopupVisibility, UpdateApi, tempObject, formFields}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [showCheckMark, setShowSetMark] = useState(false);
+  const [showCheckMark, setShowCheckMark] = useState(false);
 
-  const handleDataChange = (field, value) => {
-    setData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
-
-  /**
-   * The function `handleToggleEditMode` toggles between edit and display mode, saves data to the
-   * database if in edit mode, and shows a checkmark to indicate success.
-   */
   const handleToggleEditMode = () => {
     if (isEditing) {
-      // Handle logic to save data to DB
-      try {
-        const updatedData = { ...tempObject, ...data };
-        UpdateVoertuig(updatedData);
-      } catch (error) {
-        console.error("Error during PUT request:", error.message);
-      }
-      //Show checkmark to show success of actions
-      setShowSetMark(true);
-      //Timeout for checkmark so it doesn't stay on the screen endlessly
-      setTimeout(() => {
-        setShowSetMark(false);
-      }, 3000);
+      formik.handleSubmit();
     }
-    setIsEditing(!isEditing); // Toggle between edit and display mode
+
+      // Reset checkmark after 3 seconds
+    setTimeout(() => {setShowCheckMark(true)}, 3000);
+
+    setIsEditing(!isEditing);
   };
 
+  const formik = useFormik({
+    initialValues: tempObject,
+    onSubmit: async (changedData) => {
+      // Check for required fields
+      const errors = formik.validateForm(changedData);
+
+      if (Object.keys(errors).length === 0) {
+        try {
+          const updatedData = { ...tempObject, ...changedData };
+          await UpdateApi(updatedData);
+          setShowCheckMark(true);
+        } catch (error) {
+          console.error("Error during PUT request:", error.message);
+        }
+      }
+    },
+    validate: (changedData) => {
+      const errors = {};
+      formFields.forEach((field) => {
+        if (field.required && !changedData[field.name]) {
+          errors[field.name] = "Verplicht veld";
+        }
+      });
+      return errors;
+    },
+  });
+
   return (
-    <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]">
-      <div>
-        <div className="ml-9 mt-6 pt-6 flex justify-between">
-          <h1 className="font-mainFont font-titleFontWeigt text-4xl">
-            Detailweergave
-          </h1>
-          <div className="mr-8">
+    <div className=" inline-block w-1/2 ml-[25%] mt-6 rounded-xl bg-[#DBDBDB] max-w-xl">
+      <div className="p-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-4">
+
+          <header className="flex justify-between">
+            <h1 className="font-mainFont font-titleFontWeigt text-4xl">
+              Detailweergave
+            </h1>
             <Button
               className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
               onClick={() => {
                 setPopupVisibility("popupGoBack", true);
                 setPopupVisibility("detailChange", false);
+                setIsEditing(!isEditing);
               }}
             >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
             </Button>
-          </div>
-        </div>
-        <div className="flex flex-wrap">
-          <div className="ml-9 mt-14 pb-6">
-            {tempObject &&
-              Object.entries(tempObject).map(([key, value]) => (
-                <div key={key} className="flex items-center mb-4">
-                  <label htmlFor={key} className="block text-blueText mr-2">
-                    {key}
-                  </label>
-                  <input
-                    type="text"
-                    id={key}
-                    name={key}
-                    value={isEditing ? data[key] : value}
-                    onChange={(e) => handleDataChange(key, e.target.value)}
-                    className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
-                    disabled={!isEditing}
-                  />
-                </div>
-              ))}
-          </div>
-        </div>
-        <div className="flex relative w-1/2 h-16 ml-[50%]">
-          {showCheckMark && (
-            <div className="flex ml-[25%] xl3:ml-[40%]">
-              <p className="text-[#858585] font-btnFontWeigt font-Helvetica p-3">
-                Succes!
-              </p>
-              <img
-                src={CheckNoBg}
-                alt="Checkmark"
-                className="w-10 h-10 rounded-full"
-              />
+          </header>
+          
+          {formFields.map((field) => (
+            <div key={field.name} className="space-x-4 items-center grid grid-cols-2">
+              <label className={TEXT_STYLES.ADMIN_OR} htmlFor={field.name}>
+                {field.label}:
+              </label>
+
+              {field.type === "select" ? (
+                <select id={field.name} name={field.name} onChange={formik.handleChange} value={formik.values[field.name]} className={INPUT_STYLES.USERFORM_INPUT_BLACK} disabled={!isEditing}>
+                  <option value="">Selecteer...</option>
+                  {field.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input id={field.name} name={field.name} type={field.type || "text"} onChange={formik.handleChange} value={formik.values[field.name]} className={INPUT_STYLES.USERFORM_INPUT_BLACK} disabled={!isEditing}/>
+              )}
+
+              {formik.errors[field.name] && (
+                <div className="text-red-500">{formik.errors[field.name]}</div>
+              )}
             </div>
-          )}
-          <div className="pl-3 absolute right-[10%]">
-            <Button
-              className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer"
-              onClick={handleToggleEditMode}
-            >
-              {isEditing ? "Opslaan" : "Bewerk"}
-            </Button>
-          </div>
-        </div>
+          ))}
+
+          <footer className="flex items-center mt-4">
+            {showCheckMark && (
+              <div className="flex items-center space-x-2">
+                <p className="text-[#858585] font-btnFontWeigt font-Helvetica">
+                  Succes!
+                </p>
+                <img src={CheckNoBg} alt="Checkmark" className="w-8 h-8 rounded-full"/>
+              </div>
+            )}
+            <div className="ml-auto">
+              <Button className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer" onClick={handleToggleEditMode} type="button">
+                {isEditing ? "Opslaan" : "Bewerk"}
+              </Button>
+            </div>
+          </footer>
+
+        </form>
       </div>
     </div>
   );

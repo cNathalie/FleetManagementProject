@@ -116,7 +116,7 @@ const FleetPage = () => {
       >
         <DetailChange
           setPopupVisibility={setPopupVisibility}
-          UpdateVoertuig={UpdateFleet}
+          UpdateApi={UpdateFleet}
           tempObject={temp.tempObject}
         />
       </div>

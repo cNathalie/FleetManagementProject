@@ -1,22 +1,17 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Table = (props) => {
-  const {
-    tableHeaderContent,
-    inputData,
-    data,
-    setPopupVisibility,
-    setTempContent,
-    iDname,
-  } = props;
+const Table = ({tableHeaderContent, inputData, data, setPopupVisibility, setTempContent, iDname}) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
-/* The code is creating a variable called `filteredData` that stores the filtered data based on the
+  /* The code is creating a variable called `filteredData` that stores the filtered data based on the
 search term entered by the user. */
-  const filteredData = data
+useEffect(() => {
+  // Apply filtering logic when the data or searchTerm changes
+  const updatedFilteredData = data
     ? data.filter((v) =>
         Object.values(v).some(
           (value) =>
@@ -25,6 +20,9 @@ search term entered by the user. */
         )
       )
     : [];
+
+  setFilteredData(updatedFilteredData);
+}, [data, searchTerm]);
 
   return (
     <div className="flex items-center justify-center h-screen ">

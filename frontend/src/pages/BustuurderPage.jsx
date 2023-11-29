@@ -114,7 +114,7 @@ const BustuurderPage = () => {
       >
         <DetailChange
           setPopupVisibility={setPopupVisibility}
-          UpdateVoertuig={UpdateBestuurder}
+          UpdateApi={UpdateBestuurder}
           tempObject={temp.tempObject}
         />
       </div>

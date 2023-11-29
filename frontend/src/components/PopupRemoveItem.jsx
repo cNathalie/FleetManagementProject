@@ -41,7 +41,7 @@ const PopupRemoveItem = ({
             } catch (error) {
               console.error("Error handling deleteVoertuig:", error);
             }
-
+            
             setPopupVisibility("overlay", false);
             setPopupVisibility("Popup", false);
           }}

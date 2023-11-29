@@ -5,6 +5,8 @@ import {
   DeleteVoertuig,
   UpdateVoertuig,
   PostVoertuig,
+  getTypeWagen,
+  getBrandstofTypes,
 } from "../constants/Api";
 import Overlay from "../components/Overlay";
 import {
@@ -42,19 +44,32 @@ element in the array represents a column header in the table.*/
   const iDname = "voertuigId";
 
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = () => {
-      getVoertuigen()
-        .then((Data) => {
-          setData(Data);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    };
+  const [typeWagenData, setTypeWagenData] = useState([]);
+  const [brandstofTypesData, setBrandstofTypesData] = useState([]);
 
+  //TODO: RERENDER THE DATA AFTER FETCHTING
+  //TODO: can not remove item when used in fleet
+  //TODO: fix dynamicform css + api function
+
+  useEffect(() => {
+    console.log("Effect is running");
+    const fetchData = async () => {
+      try {
+        const voertuigenData = await getVoertuigen();
+        const typeWagenData = await getTypeWagen();
+        const brandstofTypesData = await getBrandstofTypes();
+  
+        setData(voertuigenData);
+        setTypeWagenData(typeWagenData);
+        setBrandstofTypesData(brandstofTypesData);
+        console.log("Data is fetched");
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+  
     fetchData();
-  }, []);
+  }, []);  
 
   const setPopupVisibility = (popupId, visibility) => {
     const element = document.getElementById(popupId);
@@ -114,7 +129,52 @@ element in the array represents a column header in the table.*/
       >
         <DetailChange
           setPopupVisibility={setPopupVisibility}
-          UpdateVoertuig={UpdateVoertuig}
+          UpdateApi={UpdateVoertuig}
+          formFields={[
+            {
+              name: "merkEnModel",
+              label: "Merk",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "typewagen",
+              label: "Model",
+              type: "select",
+              options: typeWagenData.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "chassisnummer",
+              label: "Chasisnummer",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "nummerplaat",
+              label: "Nummerplaat",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "brandstoftype",
+              label: "Brandstoftype",
+              type: "select",
+              options: brandstofTypesData.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: false,
+            },
+          ]}
           tempObject={temp.tempObject}
         />
       </div>
@@ -173,14 +233,12 @@ element in the array represents a column header in the table.*/
       </div>
 
       <Table
-        {...{
-          tableHeaderContent,
-          data,
-          inputData,
-          setPopupVisibility,
-          setTempContent,
-          iDname,
-        }}
+        tableHeaderContent={tableHeaderContent}
+        inputData={inputData}
+        data={data}
+        setPopupVisibility={setPopupVisibility}
+        setTempContent={setTempContent}
+        iDname={iDname}
       />
     </>
   );

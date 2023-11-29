@@ -27,6 +27,8 @@ export const INPUT_STYLES = {
   //USERFORM COMPONENT
   USERFORM_INPUT:
     "border-b bg-transparent border-whiteText text-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md",
+  USERFORM_INPUT_BLACK:
+    "border-b bg-transparent border-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md",
 };
 
 export const CARD_STYLES = {
