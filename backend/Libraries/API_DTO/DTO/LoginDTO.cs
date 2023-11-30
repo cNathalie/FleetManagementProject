@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM_API.DTO
+namespace API_DTO
 {
-    public class AuthLoginDTO
+    public class LoginDTO
     {
+        public int LoginId { get; set; }
         public string Email { get; set; } = null!;
         public string Wachtwoord { get; set; } = null!;
+        public string Rol { get; set; } 
     }
 }

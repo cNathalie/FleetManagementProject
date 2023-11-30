@@ -1,6 +1,7 @@
 ﻿using EF_Infrastructure.Context;
 using FM_Domain;
 using FM_Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace EF_Repositories;
 
@@ -22,6 +23,26 @@ public class EFTypeRijbewijsRepository : IFMTypeRijbewijsRepository
     {
         _dbContext = context;
         RefreshTypesRijbewijs();
+    }
+
+
+//---------------ASYNC----------------------------------------------------------------------------
+
+
+    public async Task<List<TypeRijbewijs>> GetTypesRijbewijsAsync()
+    {
+        var dbTypesRijbewijs = await _dbContext.TypeRijbewijs.ToListAsync();
+        return dbTypesRijbewijs.Select(tr => MapToDomainTypeRijbewijs(tr)).ToList();
+    }
+
+    private TypeRijbewijs MapToDomainTypeRijbewijs(EF_Infrastructure.Models.TypeRijbewijs typeRijbewijs)
+    {
+        return new TypeRijbewijs()
+        {
+            TypeRijbewijsId = typeRijbewijs.TypeRijbewijsId,
+            Type = typeRijbewijs.Type
+        };
+
     }
 
     public void Delete(TypeRijbewijs typeRijbewijs)

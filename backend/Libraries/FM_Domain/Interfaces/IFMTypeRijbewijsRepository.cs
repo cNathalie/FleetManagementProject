@@ -4,6 +4,10 @@ namespace FM_Domain.Interfaces
 {
     public interface IFMTypeRijbewijsRepository
     {
+        public Task<List<TypeRijbewijs>> GetTypesRijbewijsAsync();
+
+
+
         public List<TypeRijbewijs> TypesRijbewijs { get; }
         public List<TypeRijbewijs> RefreshTypesRijbewijs();
         public void Insert(TypeRijbewijs typeRijbewijs);

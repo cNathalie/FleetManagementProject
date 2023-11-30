@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM_API.DTO
+namespace API_DTO
 {
     public class BrandstofTypeDTO
     {

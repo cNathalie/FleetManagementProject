@@ -14,6 +14,7 @@
 
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API_DTO\API_DTO.csproj" />
     <ProjectReference Include="..\EF_Repositories\EF_Repositories.csproj" />
   </ItemGroup>
 

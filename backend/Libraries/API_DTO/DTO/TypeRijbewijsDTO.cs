@@ -1,4 +1,4 @@
-﻿namespace FM_API.DTO
+﻿namespace API_DTO
 {
     public class TypeRijbewijsDTO
     {

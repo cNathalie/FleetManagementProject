@@ -1,4 +1,4 @@
-﻿namespace FM_API;
+﻿namespace API_DTO;
 
 public class TankkaartDTO
 {

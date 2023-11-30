@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FM_API
+namespace API_DTO
 {
     public class BestuurderDTO
     {

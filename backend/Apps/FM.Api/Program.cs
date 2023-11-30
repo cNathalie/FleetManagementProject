@@ -30,6 +30,7 @@ namespace FM.Api.App
 
             // Add services to the container.
             builder.Services.AddDbContext<FleetManagementDbContext>()
+                  .AddScoped<IFMTypeRijbewijsRepository, EFTypeRijbewijsRepository>()
                   .AddScoped<IFMBestuurderRepository, EFBestuurderRepository>()
                   .AddScoped<IFMTankkaartRepository, EFTankkaartRepository>()
                   .AddScoped<IFMBrandstoftypeRepository, EFBrandstofTypeRepository>()
@@ -37,7 +38,7 @@ namespace FM.Api.App
                   .AddScoped<IFMFleetRepository, EFFleetRepository>()
                   .AddScoped<IFMVoertuigRepository, EFVoertuigRepository>()
                   .AddScoped<IFMTypeWagenRepository, EFTypeWagenRepository>()
-                  .AddScoped<IFMTypeRijbewijsRepository, EFTypeRijbewijsRepository>();
+                  ;
 
             builder.Services.AddScoped<JWTokenService>();
 

@@ -5,11 +5,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
+using API_DTO;
 
 namespace FM_API;
 
 [ApiController]
-[Route("[controller]")]
+[Route("")]
 [Produces(MediaTypeNames.Application.Json)]
 [Consumes(MediaTypeNames.Application.Json)]
 public class BestuurdersController : ControllerBase
@@ -24,21 +25,28 @@ public class BestuurdersController : ControllerBase
     }
 
 
-    [HttpGet(Name = "GetBestuurders")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<BestuurderDTO>))]
+    [HttpGet("id", Name = "GetBestuurders")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<BestuurderDTO>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public ActionResult<IEnumerable<BestuurderDTO>> Get()
+    public ActionResult<IEnumerable<BestuurderDTO>> GetAll([Required] int id)
     {
-        return Ok(_mapper.Map<List<BestuurderDTO>>(_repository.Bestuurders.ToList()));
+        var bestuurders = _repository.GetBestuurders();
+        if (bestuurders == null)
+        {
+            return BadRequest("Id not found");
+        }
+        return Ok(_mapper.Map<BestuurderDTO>(bestuurders));
     }
+
 
     [HttpGet("id", Name = "GetBestuurderById")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BestuurderDTO))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public ActionResult<IEnumerable<BestuurderDTO>> GetById([Required] int id)
+    public ActionResult<BestuurderDTO> GetById([Required] int id)
     {
-        var bestuurder = _repository.Bestuurders.Where(b => b.BestuurderId == id).FirstOrDefault();
+        var bestuurder = _repository.GetBestuurderById(id);
         if (bestuurder == null)
         {
             return BadRequest("Id not found");
@@ -63,7 +71,7 @@ public class BestuurdersController : ControllerBase
         }
 
         var aangemaakteBestuurder = _repository.Insert(_mapper.Map<Bestuurder>(nieuweBestuurderDTO));
-        return CreatedAtAction(nameof(Get), new { id = aangemaakteBestuurder.BestuurderId }, _mapper.Map<BestuurderDTO>(aangemaakteBestuurder));
+        return CreatedAtAction(nameof(GetById), new { id = aangemaakteBestuurder.BestuurderId }, _mapper.Map<BestuurderDTO>(aangemaakteBestuurder));
     }
 
     //Om een bestuurder te bewerken vanuit React:
@@ -97,7 +105,7 @@ public class BestuurdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Delete([Required] int id)
     {
-        var bestuurder = _repository.Bestuurders.Where(b => b.BestuurderId == id).FirstOrDefault();
+        var bestuurder = _repository.GetBestuurderById(id);
         if (bestuurder == null)
         {
             return BadRequest("Id not found");
