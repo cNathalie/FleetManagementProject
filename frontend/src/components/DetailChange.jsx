@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 import { useFormik } from "formik";
@@ -14,26 +14,36 @@ const DetailChange = ({setPopupVisibility, UpdateApi, tempObject, formFields}) =
       formik.handleSubmit();
     }
 
-      // Reset checkmark after 3 seconds
-    setTimeout(() => {setShowCheckMark(true)}, 3000);
-
     setIsEditing(!isEditing);
   };
 
-  const formik = useFormik({
-    initialValues: tempObject,
-    onSubmit: async (changedData) => {
-      // Check for required fields
-      const errors = formik.validateForm(changedData);
+  useEffect(() => {
+    // Initialize formik with tempObject as initial values
+    formik.setValues(tempObject || {});
+  }, [tempObject]);
 
-      if (Object.keys(errors).length === 0) {
-        try {
-          const updatedData = { ...tempObject, ...changedData };
-          await UpdateApi(updatedData);
+  const formik = useFormik({
+    initialValues: tempObject || {},
+    onSubmit: async (changedData, { setSubmitting }) => {
+      try {
+        const updatedData = { ...tempObject, ...changedData };
+        const response = await UpdateApi(updatedData);
+        if(response.status === 200){
+          // If the API update is successful, toggle editing off and show checkmark
+          setIsEditing(false);
           setShowCheckMark(true);
-        } catch (error) {
-          console.error("Error during PUT request:", error.message);
+
+          // Reset checkmark after 3 seconds
+          setTimeout(() => {
+            setShowCheckMark(false);
+          }, 3000);
         }
+
+      } catch (error) {
+        console.error("Error during PUT request:", error.message);
+      } finally {
+        // Ensure to set submitting to false to unlock the form
+        setSubmitting(false);
       }
     },
     validate: (changedData) => {
@@ -46,10 +56,11 @@ const DetailChange = ({setPopupVisibility, UpdateApi, tempObject, formFields}) =
       return errors;
     },
   });
+  
 
   return (
-    <div className=" inline-block w-1/2 ml-[25%] mt-6 rounded-xl bg-[#DBDBDB] max-w-xl">
-      <div className="p-6">
+    <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]">
+      <div className="mt-6 p-6">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
 
           <header className="flex justify-between">
@@ -61,35 +72,38 @@ const DetailChange = ({setPopupVisibility, UpdateApi, tempObject, formFields}) =
               onClick={() => {
                 setPopupVisibility("popupGoBack", true);
                 setPopupVisibility("detailChange", false);
-                setIsEditing(!isEditing);
+                setIsEditing(false);
               }}
+              type="button"
             >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
             </Button>
           </header>
           
           {formFields.map((field) => (
-            <div key={field.name} className="space-x-4 items-center grid grid-cols-2">
-              <label className={TEXT_STYLES.ADMIN_OR} htmlFor={field.name}>
+            <div key={field.name} className="items-center grid grid-cols-3">
+              <label className={`${TEXT_STYLES.ADMIN_OR} text-right col-span-1`} htmlFor={field.name}>
                 {field.label}:
               </label>
 
-              {field.type === "select" ? (
-                <select id={field.name} name={field.name} onChange={formik.handleChange} value={formik.values[field.name]} className={INPUT_STYLES.USERFORM_INPUT_BLACK} disabled={!isEditing}>
-                  <option value="">Selecteer...</option>
-                  {field.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input id={field.name} name={field.name} type={field.type || "text"} onChange={formik.handleChange} value={formik.values[field.name]} className={INPUT_STYLES.USERFORM_INPUT_BLACK} disabled={!isEditing}/>
-              )}
+              <section className="col-span-2">
+                {field.type === "select" ? (
+                  <select id={field.name} name={field.name} onChange={formik.handleChange} value={formik.values[field.name]} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} disabled={!isEditing}>
+                    <option value="">Selecteer...</option>
+                    {field.options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input id={field.name} name={field.name} type={field.type || "text"} onChange={formik.handleChange} value={formik.values[field.name]} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} disabled={!isEditing}/>
+                )}
 
-              {formik.errors[field.name] && (
-                <div className="text-red-500">{formik.errors[field.name]}</div>
-              )}
+                {/* {formik.errors[field.name] && (
+                  <div className="text-red-500">{formik.errors[field.name]}</div>
+                )} */}
+              </section>
             </div>
           ))}
 

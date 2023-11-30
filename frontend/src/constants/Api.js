@@ -22,25 +22,25 @@ export const DeleteVoertuig = (tempid) => {
 };
 
 export const UpdateVoertuig = (formData) => {
-  fetch(baseUrl + "Voertuig", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  return new Promise((resolve, reject) => {
+    fetch(baseUrl + "Voertuig", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response); // Resolve the promise with the entire response object
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error); // Reject the promise with the error
+      });
+  });
 };
 
 export const getVoertuig = (tempid) => {
