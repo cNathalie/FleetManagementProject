@@ -1,22 +1,26 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState} from 'react'
-import Button from './Button';
-import { TEXT_STYLES, INPUT_STYLES, BUTTON_STYLES } from '../constants/tailwindStyles';
+import React, { useState } from "react";
+import Button from "./Button";
+import {
+  TEXT_STYLES,
+  INPUT_STYLES,
+  BUTTON_STYLES,
+} from "../constants/tailwindStyles";
 
-const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
+const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent }) => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
+    email: "",
+    password: "",
+    confirmPassword: "",
     isAdmin: false,
   });
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked} = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData({
-        ...formData,
-        [name]: type === 'checkbox' ? checked : value,
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -32,7 +36,7 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
           <label htmlFor={field.id} className={TEXT_STYLES.USERFORM_LABEL}>
             {field.labelText}
           </label>
-          {field.type === 'checkbox' ? (
+          {field.type === "checkbox" ? (
             <input
               type="checkbox"
               id={field.id}
@@ -66,4 +70,4 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent}) => {
   );
 };
 
-export default UserForm
+export default UserForm;

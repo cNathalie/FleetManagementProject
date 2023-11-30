@@ -4,15 +4,14 @@ import Login from "../components/Login";
 import { loginInfo } from "../constants/loginInfo";
 import { BG_STYLES, CARD_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
 
-
 export default function LoginPage() {
+  const { state } = useLocation();
 
-  const {state} = useLocation();
-  
   let info;
-  if(state != undefined){
+  if (state != undefined) {
     info = state;
   }
+
 
     return (
       <>
@@ -22,10 +21,10 @@ export default function LoginPage() {
             className={BG_STYLES.LOGIN_BG}
             style={{ backgroundImage: "url(src/assets/Media/login-bg.png)" }}
           ></div>
-          <div
-            id="flexContainer"
-            className="flex justify-center items-center min-h-screen"
-          >
+        <div
+          id="flexContainer"
+          className="flex justify-center items-center min-h-screen"
+        >
             <div
               id="formContainer"
               className={`${CARD_STYLES.LOGIN_CARD} w-[431px] h-[509px]`}
@@ -45,7 +44,6 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-      </>
-    );
-
+    </>
+  );
 }

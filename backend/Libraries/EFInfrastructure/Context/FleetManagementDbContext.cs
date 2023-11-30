@@ -36,7 +36,7 @@ public partial class FleetManagementDbContext : DbContext
 
         //VERVANG HIER DE CONNECTION STRING NAAR DIE VAN JOU DATABASE !!!
 
-        => optionsBuilder.UseSqlServer("Server=localhost,1433;Initial Catalog=FleetManagementDB;Persist Security Info=True;User ID=sa;TrustServerCertificate=True;Password=FleetManagement007");
+        => optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=FleetManagement007;Integrated Security=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

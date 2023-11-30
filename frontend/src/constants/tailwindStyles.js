@@ -1,4 +1,5 @@
 export const BUTTON_STYLES = {
+
     //ADMIN PAGE
     ADMIN_GOBACK: 'bg-whiteText text-darkBlue rounded-[10px] border border-solid border-darkBlue hover:bg-darkBlue hover:text-whiteText font-mainFont font-semibold',
     ADMIN_REMOVE: 'rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText font-mainFont font-semibold text-darkBlue text-adminBtnFontSize text-center',
@@ -26,7 +27,7 @@ export const TEXT_STYLES = {
 export const INPUT_STYLES = {
     //USERFORM COMPONENT
     USERFORM_INPUT: 'border-b bg-transparent border-whiteText text-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md',
-
+    USERFORM_INPUT_BLACK:   "border-b bg-transparent border-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md", 
     //LOGIN PAGE
     LOGIN_INPUT: 'appearance-none relative block  w-full px-3 py-2 border-b bg-transparent border-blueText placeholder-blueText text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blueText focus:border-blueText',
 };

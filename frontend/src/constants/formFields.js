@@ -1,4 +1,4 @@
-const loginFields = [
+export const loginFields = [
   {
     labelText: "Email",
     labelFor: "email-address",
@@ -21,7 +21,7 @@ const loginFields = [
   },
 ];
 
-const signupFields = [
+export const signupFields = [
   {
     labelText: "Username",
     labelFor: "username",
@@ -71,4 +71,49 @@ const signupFields = [
   },
 ];
 
-export { loginFields, signupFields };
+export const initialVoertuigFormData = [
+  {
+    voertuigId: 0,
+    merkEnModel: "string",
+    chassisnummer: "string",
+    nummerplaat: "5-JWQ-162",
+    brandstoftype: "string",
+    typewagen: "string",
+    kleur: "string",
+    aantalDeuren: 5,
+  },
+];
+
+export const initialTankkaartFormData = [
+  {
+    tankkaartId: 0,
+    kaartnummer: 0,
+    geldigheidsdatum: "2023-11-21T17:08:58.155Z",
+    pincode: 0,
+    brandstofType: "string",
+    isActief: true,
+  },
+];
+
+export const initialBestuurdersFormData = [
+  {
+    bestuurderId: 0,
+    naam: "string",
+    voornaam: "string",
+    adres: "string",
+    rijksregisternummer: "string",
+    rijbewijs: "string",
+  },
+];
+
+export const initialFleetsFormData = [
+  {
+    fleetMemberId: 0,
+    bestuurderNaam: "string",
+    bestuurderVoornaam: "string",
+    tankkaartId: 0,
+    voertuigMerkModel: "string",
+    voertuigNummerplaat: "string",
+    voertuigChassisnummer: "string",
+  },
+];

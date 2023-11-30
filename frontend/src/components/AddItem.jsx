@@ -1,28 +1,37 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import listHeaders from "../constants/listHeader";
-import List from "./List";
 import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
+import isEqual from "lodash/isEqual";
 
-const AddItem = () => {
-  const [data, setData] = useState({});
+const AddItem = ({ setPopupVisibility, apiCmd, initialFormData }) => {
+  const [data, setData] = useState(initialFormData);
   const [showCheckMark, setShowSetMark] = useState(false);
 
   const handleDataChange = (field, value) => {
-    setData({
-      ...data,
+    setData((prevData) => ({
+      ...prevData,
       [field]: value,
-    });
+    }));
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     // Logic to save data to DB
+    try {
+      await apiCmd(data);
+      console.log("Data to be saved:", data);
+
+      // Check if the format matches initialVoertuigFormData[0]
+      const isFormatValid = isEqual(data, initialFormData);
+      console.log("Is format valid:", isFormatValid);
+    } catch (error) {
+      console.error("Error during PUT request:", error.message);
+    }
 
     // Reset data after saving
     setData({});
 
-    //Checkmark to show saving was succesful
+    // Checkmark to show saving was successful
     setShowSetMark(true);
     setTimeout(() => {
       setShowSetMark(false);
@@ -40,10 +49,8 @@ const AddItem = () => {
             <Button
               className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
               onClick={() => {
-                const overlay = document.getElementById("overlay");
-                const addItem = document.getElementById("addItem");
-                overlay.style.display = "none";
-                addItem.style.display = "none";
+                setPopupVisibility("overlay", false);
+                setPopupVisibility("addItem", false);
               }}
             >
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
@@ -52,43 +59,22 @@ const AddItem = () => {
         </div>
         <div className="flex flex-wrap">
           <div className="ml-9 mt-14 pb-6">
-            {/* Shows headers of the list on left of actual data */}
-            {listHeaders.map((h) => {
-              return (
-                <List
-                  className="pb-2 text-lg font-mainFont font-titleFontWeigt"
-                  key={h}
-                  field={h}
-                  value={data[h]}
-                  onChange={handleDataChange}
-                  eigenaar={h.eigenaar}
-                  merk={h.merk}
-                  model={h.model}
-                  chassisnummer={h.chassisnummer}
-                  nummerplaat={h.nummerplaat}
-                  brandstoftype={h.brandstoftype}
-                  typeWagen={h.typeWagen}
-                  kleur={h.kleur}
-                  aantalDeuren={h.aantalDeuren}
-                  listHeader={h}
-                />
-              );
-            })}
-          </div>
-          <div className="ml-12 mt-14">
-            {listHeaders.map((headerObj, index) =>
-              Object.keys(headerObj).map((key) => (
-                <div key={`${key}-${index}`} className="flex flex-col">
+            {initialFormData ? (
+              Object.entries(initialFormData).map(([key]) => (
+                <div key={key} className="flex items-center mb-4">
+                  <label htmlFor={key} className="block text-blueText mr-2">
+                    {key}
+                  </label>
                   <input
                     id={key}
                     type="text"
-                    value={data[key] || ""}
                     onChange={(e) => handleDataChange(key, e.target.value)}
-                    placeholder={`Geef ${headerObj[key]}`}
                     className="w-[100%] h-9 p-2 rounded-md border border-b border-blueText text-blueText bg-transparent focus:ring-blueText focus:border-blueText"
                   />
                 </div>
               ))
+            ) : (
+              <p>Error: tempVoertuigContent is null or undefined</p>
             )}
           </div>
         </div>

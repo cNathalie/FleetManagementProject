@@ -8,7 +8,10 @@ import RootLayout from "./navigation/RootLayout.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
-import Voertuigen from "./pages/Voertuigen.jsx";
+import VoertuigenPage from "./pages/VoertuigenPage.jsx";
+import TankkaartenPage from "./pages/TankkaartenPage.jsx";
+import BustuurderPage from "./pages/BustuurderPage.jsx";
+import FleetPage from "./pages/FleetPage.jsx";
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
 
 const browserRouter = createBrowserRouter([
@@ -30,14 +33,40 @@ const browserRouter = createBrowserRouter([
         ),
       },
       {
-        path: "/items/:id",
+        path: "/items/1",
         element: (
           <PrivateRoute
-            component={<Voertuigen />}
+            component={<VoertuigenPage />}
             requiredRoles={["User", "Admin"]}
           />
         ),
       },
+      {
+        path: "/items/2",
+        element: (
+          <PrivateRoute
+            component={<BustuurderPage />}
+            requiredRoles={["User", "Admin"]}
+          />
+        ),
+      },
+      {
+        path: "/items/3",
+        element: (
+          <PrivateRoute
+            component={<TankkaartenPage />}
+            requiredRoles={["User", "Admin"]}
+          />
+        ),
+      },
+      {
+        path: "/items/4",
+        element: (
+          <PrivateRoute
+            component={<FleetPage />}
+            requiredRoles={["User", "Admin"]}
+          />
+        ),
     ],
   },
   {

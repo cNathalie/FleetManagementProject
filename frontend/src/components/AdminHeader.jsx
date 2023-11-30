@@ -18,9 +18,7 @@ const AdminHeader = () => {
         >
           <p>Terug naar homepagina</p>
         </button>
-        <div className={TEXT_STYLES.ADMIN_TITLE}>
-          Administratie
-        </div>
+        <div className={TEXT_STYLES.ADMIN_TITLE}>Administratie</div>
       </div>
     </div>
   );
