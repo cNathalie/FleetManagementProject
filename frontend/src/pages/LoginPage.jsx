@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Login from "../components/Login";
 import { loginInfo } from "../constants/loginInfo";
+import { BG_STYLES, CARD_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
 
 
 export default function LoginPage() {
@@ -18,7 +19,7 @@ export default function LoginPage() {
         <div>
           <div
             id="pageContainer"
-            className="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-fixed bg-cover filter blur-md z-[-10]"
+            className={BG_STYLES.LOGIN_BG}
             style={{ backgroundImage: "url(src/assets/Media/login-bg.png)" }}
           ></div>
           <div
@@ -27,17 +28,17 @@ export default function LoginPage() {
           >
             <div
               id="formContainer"
-              className="w-[431px] h-[509px] bg-opacity-50 bg-white  p-5 bg-[#FFFFFF] rounded-lg"
+              className={`${CARD_STYLES.LOGIN_CARD} w-[431px] h-[509px]`}
             >
               <Header heading="" />
               <Login />
               {info == loginInfo.notLoggedIn && (
-                <div className="text-center text-red-600 font-btnFontWeigt text-xs">
+                <div className={TEXT_STYLES.LOGIN_ERROR}>
                   Gelieve je eerst aan te melden.
                 </div>
               )}
               {info == loginInfo.loginUnknown && (
-                <div className="text-center text-red-600 font-btnFontWeigt text-xs">
+                <div className={TEXT_STYLES.LOGIN_ERROR}>
                   Deze inloggegevens zijn niet gekend, probeer opnieuw.
                 </div>
               )}
