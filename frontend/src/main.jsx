@@ -67,14 +67,13 @@ const browserRouter = createBrowserRouter([
             requiredRoles={["User", "Admin"]}
           />
         ),
-      },
-      {
-        path: "/admin",
-        element: (
-          <PrivateRoute component={<AdminPage />} requiredRoles={["Admin"]} />
-        ),
-      },
     ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <PrivateRoute component={<AdminPage />} requiredRoles={["Admin"]} />
+    ),
   },
 ]);
 
