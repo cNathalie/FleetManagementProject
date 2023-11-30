@@ -24,8 +24,13 @@ const AdminOnlyPage = () => {
               className="font-btnFontWeigt hover:underline cursor-pointer"
             >
               Ga terug
-            </span> of <span
-              onClick={() => {logout(); navigate("/")}}
+            </span>{" "}
+            of{" "}
+            <span
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
               className="font-btnFontWeigt hover:underline cursor-pointer"
             >
               meldt je aan als administrator.
@@ -34,12 +39,12 @@ const AdminOnlyPage = () => {
         </div>
       </div>
 
-      {/* staat hier om te tonen en testen */}
+      {/* staat hier om te tonen en testen
       <div className="pt-16">
         deze knop staat hier voorlopig om te tonen, je kan hem gebruiken waar je
         wil
       </div>
-      <LogOutButton />
+      <LogOutButton /> */}
     </div>
   );
 };
