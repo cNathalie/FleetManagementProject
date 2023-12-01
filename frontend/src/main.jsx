@@ -67,6 +67,7 @@ const browserRouter = createBrowserRouter([
             requiredRoles={["User", "Admin"]}
           />
         ),
+      },
     ],
   },
   {

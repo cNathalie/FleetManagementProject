@@ -5,7 +5,7 @@ import homePage from "../constants/homePageContent";
 const Homepage = () => {
   return (
     <>
-      <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-y-12 gap-x-10 px-12 pt-26">
+      <div className="h-screen flex flex-wrap justify-around gap-y-7 px-12 pt-24 pb-8">
         {homePage.map((h) => {
           return (
             <FleetWeergave
