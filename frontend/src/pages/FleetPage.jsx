@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Table from "../components/Table";
 import {
   getFleets,
+  getBestuurders,
+  getTankkaarten,
+  getVoertuigen,
   UpdateFleet,
   DeleteFleet,
   PostFleet,
@@ -14,10 +17,8 @@ import {
 import Popup from "../components/Popup";
 import PopupRemoveItem from "../components/PopupRemoveItem";
 import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
-import DetailChange from "../components/DetailChange";
 import DetailDisplay from "../components/DetailDisplay";
-import AddItem from "../components/AddItem";
-import { initialFleetsFormData } from "../constants/formFields";
+import DynamicForm from "../components/DynamicForm";
 
 const FleetPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
@@ -43,20 +44,45 @@ const FleetPage = () => {
   /* The `iDname` variable is used to specify the name of the ID field in the table data.*/
   const iDname = "fleetMemberId";
 
+  const [counter, setCounter] = useState(0);
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = () => {
-      getFleets()
-        .then((Data) => {
-          setData(Data);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    };
+  const [voertuigenData, setvoertuigenData] = useState([]);
+  const [tankkaartenData, settankkaartenData] = useState([]);
+  const [bestuurdersData, setbestuurdersData] = useState([]);
 
+  //TODO: RERENDER THE DATA AFTER FETCHTING
+  //TODO: can not remove item when used in fleet
+  //TODO: fix dynamicform css + api function
+
+  useEffect(() => {
+    console.log("Effect is running");
+    const fetchData = async () => {
+      try {
+        const fleetData = await getFleets();
+        const voertuigenData = await getVoertuigen();
+        const tankkaartenData = await getTankkaarten();
+        const bustuurdersData = await getBestuurders();
+  
+        setData(fleetData);
+        setvoertuigenData(voertuigenData);
+        settankkaartenData(tankkaartenData);
+        setbestuurdersData(bustuurdersData);
+
+        console.log("Data is fetched");
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+  
     fetchData();
-  }, []);
+  }, [counter]);  
+
+  const triggerRerender = () => {
+    setTimeout(() => {
+      setCounter(counter + 1);
+    }, 100);
+  };
+
 
   const setPopupVisibility = (popupId, visibility) => {
     const element = document.getElementById(popupId);
@@ -100,6 +126,7 @@ const FleetPage = () => {
               apiFunction={DeleteFleet}
               setPopupVisibility={setPopupVisibility}
               tempId={temp.tempId}
+              triggerRerender={triggerRerender}
             />
           );
         })}
@@ -114,10 +141,79 @@ const FleetPage = () => {
           display: "none",
         }}
       >
-        <DetailChange
+      <DynamicForm
           setPopupVisibility={setPopupVisibility}
-          UpdateApi={UpdateFleet}
-          tempObject={temp.tempObject}
+          apiCmd={UpdateFleet}
+          formFields={[
+            {
+              name: "bestuurderNaam",
+              label: "bestuurderNaam",
+              type: "select",
+              options: bestuurdersData.map((t) => ({
+                value: t.naam,
+                label: t.naam,
+              })),
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "bestuurderVoornaam",
+              label: "bestuurderVoornaam",
+              type: "select",
+              options: bestuurdersData.map((t) => ({
+                value: t.voornaam,
+                label: t.voornaam,
+              })),
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "tankkaartId",
+              label: "tankkaartId",
+              type: "select",
+              options: tankkaartenData.map((t) => ({
+                value: t.tankkaartId,
+                label: t.tankkaartId,
+              })),
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "voertuigMerkModel",
+              label: "voertuigMerkModel",
+              type: "select",
+              options: voertuigenData.map((t) => ({
+                value: t.merkEnModel,
+                label: t.merkEnModel,
+              })),
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "voertuigNummerplaat",
+              label: "voertuigNummerplaat",
+              type: "select",
+              options: voertuigenData.map((t) => ({
+                value: t.nummerplaat,
+                label: t.nummerplaat,
+              })),
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "voertuigChassisnummer",
+              label: "voertuigChassisnummer",
+              type: "select",
+              options: voertuigenData.map((t) => ({
+                value: t.chassisnummer,
+                label: t.chassisnummer,
+              })),
+              initialValue: "",
+              required: false,
+            },
+          ]}
+          tempObject={temp.tempObject}  
+          triggerRerender={triggerRerender}
         />
       </div>
 
@@ -163,14 +259,79 @@ const FleetPage = () => {
           width: "100%",
         }}
       >
-        <AddItem
+      <DynamicForm
           setPopupVisibility={setPopupVisibility}
           apiCmd={PostFleet}
-          initialFormData={
-            /* `initialFleetsFormData[0]` is accessing the first Array in the
-          `initialBestuurdersFormData` Object. */
-            initialFleetsFormData[0]
-          }
+          formFields={[
+            {
+              name: "bestuurderNaam",
+              label: "bestuurderNaam",
+              type: "select",
+              options: bestuurdersData.map((t) => ({
+                value: t.naam,
+                label: t.naam,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "bestuurderVoornaam",
+              label: "bestuurderVoornaam",
+              type: "select",
+              options: bestuurdersData.map((t) => ({
+                value: t.voornaam,
+                label: t.voornaam,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "tankkaartId",
+              label: "tankkaartId",
+              type: "select",
+              options: tankkaartenData.map((t) => ({
+                value: t.tankkaartId,
+                label: t.tankkaartId,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "voertuigMerkModel",
+              label: "voertuigMerkModel",
+              type: "select",
+              options: voertuigenData.map((t) => ({
+                value: t.merkEnModel,
+                label: t.merkEnModel,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "voertuigNummerplaat",
+              label: "voertuigNummerplaat",
+              type: "select",
+              options: voertuigenData.map((t) => ({
+                value: t.nummerplaat,
+                label: t.nummerplaat,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "voertuigChassisnummer",
+              label: "voertuigChassisnummer",
+              type: "select",
+              options: voertuigenData.map((t) => ({
+                value: t.chassisnummer,
+                label: t.chassisnummer,
+              })),
+              initialValue: "",
+              required: true,
+            },
+          ]}
+          tempObject={{}}  
+          triggerRerender={triggerRerender}
         />
       </div>
 

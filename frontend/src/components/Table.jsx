@@ -20,7 +20,7 @@ useEffect(() => {
         )
       )
     : [];
-
+  
   setFilteredData(updatedFilteredData);
 }, [data, searchTerm]);
 

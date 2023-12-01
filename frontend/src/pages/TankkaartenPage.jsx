@@ -5,6 +5,7 @@ import {
   UpdateTankkaart,
   DeleteTankkaart,
   PostTankkaart,
+  getBrandstofTypes,
 } from "../constants/Api";
 import Overlay from "../components/Overlay";
 import {
@@ -14,10 +15,8 @@ import {
 import Popup from "../components/Popup";
 import PopupRemoveItem from "../components/PopupRemoveItem";
 import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
-import DetailChange from "../components/DetailChange";
 import DetailDisplay from "../components/DetailDisplay";
-import AddItem from "../components/AddItem";
-import { initialTankkaartFormData } from "../constants/formFields";
+import DynamicForm from "../components/DynamicForm";
 
 const TankkaartenPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
@@ -41,20 +40,33 @@ const TankkaartenPage = () => {
   /* The `iDname` variable is used to specify the name of the ID field in the table data.*/
   const iDname = "tankkaartId";
 
+  const [counter, setCounter] = useState(0);
   const [data, setData] = useState([]);
+  const [brandstofTypesData, setBrandstofTypesData] = useState([]);
+
   useEffect(() => {
-    const fetchData = () => {
-      getTankkaarten()
-        .then((Data) => {
-          setData(Data);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+    console.log("Effect is running");
+    const fetchData = async () => {
+      try {
+        const tankkaartData = await getTankkaarten();
+        const brandstofTypesData = await getBrandstofTypes();
+
+        setData(tankkaartData);
+        setBrandstofTypesData(brandstofTypesData);
+        console.log("Data is fetched");
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
     };
 
     fetchData();
-  }, []);
+  }, [counter]);
+
+  const triggerRerender = () => {
+    setTimeout(() => {
+      setCounter(counter + 1);
+    }, 100);
+  };
 
   const setPopupVisibility = (popupId, visibility) => {
     const element = document.getElementById(popupId);
@@ -98,6 +110,7 @@ const TankkaartenPage = () => {
               apiFunction={DeleteTankkaart}
               setPopupVisibility={setPopupVisibility}
               tempId={temp.tempId}
+              triggerRerender={triggerRerender}
             />
           );
         })}
@@ -112,10 +125,49 @@ const TankkaartenPage = () => {
           display: "none",
         }}
       >
-        <DetailChange
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
-          UpdateApi={UpdateTankkaart}
+          apiCmd={UpdateTankkaart}
+          formFields={[
+            {
+              name: "geldigheidsdatum",
+              label: "geldigheidsdatum",
+              type: "date",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "pincode",
+              label: "pincode",
+              type: "number",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "brandstofType",
+              label: "brandstofType",
+              type: "select",
+              options: brandstofTypesData.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "isActief",
+              label: "isActief",
+              type: "select",
+              options: [
+                { label: "True", value: true },
+                { label: "False", value: false }
+              ],              
+              initialValue: "",
+              required: false,
+            },
+          ]}
           tempObject={temp.tempObject}
+          triggerRerender={triggerRerender}
         />
       </div>
 
@@ -161,14 +213,56 @@ const TankkaartenPage = () => {
           width: "100%",
         }}
       >
-        <AddItem
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
           apiCmd={PostTankkaart}
-          initialFormData={
-            /* `initialTankkaartFormData[0]` is accessing the first Array in the
-          `initialBestuurdersFormData` Object. */
-            initialTankkaartFormData[0]
-          }
+          formFields={[
+            {
+              name: "kaartnummer",
+              label: "kaartnummer",
+              type: "number",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "geldigheidsdatum",
+              label: "geldigheidsdatum",
+              type: "date",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "pincode",
+              label: "pincode",
+              type: "number",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "brandstofType",
+              label: "brandstofType",
+              type: "select",
+              options: brandstofTypesData.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "isActief",
+              label: "isActief",
+              type: "select",
+              options: [
+                { label: "True", value: true },
+                { label: "False", value: false }
+              ],              
+              initialValue: "",
+              required: false,
+            },
+          ]}
+          tempObject={{}}
+          triggerRerender={triggerRerender}
         />
       </div>
 

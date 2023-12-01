@@ -15,8 +15,6 @@ export const getVoertuigen = () => {
     });
 };
 
-
-
 export const DeleteVoertuig = (tempid) => {
   fetch(baseUrl + `Voertuig/id?id=${tempid}`, { method: "DELETE" });
 };
@@ -48,26 +46,29 @@ export const getVoertuig = (tempid) => {
 };
 
 export const PostVoertuig = (formData) => {
-  fetch(baseUrl + "Voertuig", {
-    method: "POST",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  return new Promise((resolve, reject) => {
+    fetch(baseUrl + "Voertuig", {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response);
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error); // Reject the promise with the error
+      });
+  });
 };
 //#endregion
 
@@ -84,25 +85,28 @@ export const DeleteTankkaart = (tempid) => {
 };
 
 export const UpdateTankkaart = (formData) => {
-  fetch(baseUrl + "Tankkaarten", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  return new Promise((resolve, reject) => {
+    fetch(baseUrl + "Tankkaarten", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response);
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error);
+      });
+  });
 };
 
 export const getTankkaart = (tempid) => {
@@ -110,6 +114,7 @@ export const getTankkaart = (tempid) => {
 };
 
 export const PostTankkaart = (formData) => {
+  return new Promise((resolve, reject) => {
   fetch(baseUrl + "Tankkaarten", {
     method: "POST",
     headers: {
@@ -122,14 +127,16 @@ export const PostTankkaart = (formData) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      return response.json();
+       resolve(response);
     })
     .then((data) => {
       console.log("Success:", data);
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
+      reject(error);
     });
+  });
 };
 //#endregion
 
@@ -145,25 +152,28 @@ export const DeleteBestuurder = (tempid) => {
 };
 
 export const UpdateBestuurder = (formData) => {
-  fetch(baseUrl + "Bestuurders", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  return new Promise((resolve, reject) => {
+    fetch(baseUrl + "Bestuurders", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response);
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error);
+      });
+  });
 };
 
 export const getBestuurder = (tempid) => {
@@ -171,26 +181,29 @@ export const getBestuurder = (tempid) => {
 };
 
 export const PostBestuurder = (formData) => {
-  fetch(baseUrl + "Bestuurders", {
-    method: "POST",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  return new Promise((resolve, reject) => {
+    fetch(baseUrl + "Bestuurders", {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response);
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error);
+      });
+  });
 };
 //#endregion
 
@@ -207,25 +220,28 @@ export const DeleteFleet = (tempid) => {
 };
 
 export const UpdateFleet = (formData) => {
-  fetch(baseUrl + "Fleet", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  return new Promise((resolve, reject) => {
+    fetch(baseUrl + "Fleet", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response);
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error);
+      });
+  });
 };
 
 export const getFleet = (tempid) => {
@@ -233,26 +249,29 @@ export const getFleet = (tempid) => {
 };
 
 export const PostFleet = (formData) => {
-  fetch(baseUrl + "Fleet", {
-    method: "POST",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  return new Promise((resolve, reject) => {
+    fetch(baseUrl + "Fleet", {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response);
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error);
+      });
+  });
 };
 //#endregion
 
@@ -273,8 +292,8 @@ export const getTypeWagen = () => {
 };
 //#endregion
 
-
 //#region BrandstofTypes Api
+
 export const getBrandstofTypes = () => {
   return fetch(baseUrl + "BrandstofTypes")
     .then((response) => {
@@ -290,5 +309,22 @@ export const getBrandstofTypes = () => {
     });
 };
 
+//#endregion
+
+//#region RijbewijsTypes Api
+
+export const getTypeRijbewijs = () => {
+  return fetch(baseUrl + "TypeRijbewijs")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data. Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error.message);
+      throw error; // Rethrow the error to handle it at the calling site if needed
+    });
+};
 
 //#endregion

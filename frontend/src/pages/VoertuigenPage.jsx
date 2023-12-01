@@ -16,10 +16,9 @@ import {
 import Popup from "../components/Popup";
 import PopupRemoveItem from "../components/PopupRemoveItem";
 import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
-import DetailChange from "../components/DetailChange";
 import DetailDisplay from "../components/DetailDisplay";
-import AddItem from "../components/AddItem";
-import { initialVoertuigFormData } from "../constants/formFields";
+import DynamicForm from "../components/DynamicForm";
+
 
 const VoertuigenPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
@@ -43,6 +42,7 @@ element in the array represents a column header in the table.*/
   /* The `iDname` variable is used to specify the name of the ID field in the table data.*/
   const iDname = "voertuigId";
 
+  const [counter, setCounter] = useState(0);
   const [data, setData] = useState([]);
   const [typeWagenData, setTypeWagenData] = useState([]);
   const [brandstofTypesData, setBrandstofTypesData] = useState([]);
@@ -69,7 +69,13 @@ element in the array represents a column header in the table.*/
     };
   
     fetchData();
-  }, []);  
+  }, [counter]);  
+
+  const triggerRerender = () => {
+    setTimeout(() => {
+      setCounter(counter + 1);
+    }, 100);
+  };
 
   const setPopupVisibility = (popupId, visibility) => {
     const element = document.getElementById(popupId);
@@ -79,6 +85,7 @@ element in the array represents a column header in the table.*/
       console.error(`Element with id ${popupId} not found.`);
     }
   };
+
 
   /* lets a child component change the value in return other child component
    use this value for their */
@@ -113,6 +120,7 @@ element in the array represents a column header in the table.*/
               apiFunction={DeleteVoertuig}
               setPopupVisibility={setPopupVisibility}
               tempId={temp.tempId}
+              triggerRerender={triggerRerender}
             />
           );
         })}
@@ -127,9 +135,9 @@ element in the array represents a column header in the table.*/
           display: "none",
         }}
       >
-        <DetailChange
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
-          UpdateApi={UpdateVoertuig}
+          apiCmd={UpdateVoertuig}
           formFields={[
             {
               name: "merkEnModel",
@@ -174,8 +182,23 @@ element in the array represents a column header in the table.*/
               initialValue: "",
               required: false,
             },
+            {
+              name: "kleur",
+              label: "kleur",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "aantalDeuren",
+              label: "aantalDeuren",
+              type: "number",
+              initialValue: "",
+              required: false,
+            },
           ]}
-          tempObject={temp.tempObject}
+          tempObject={temp.tempObject}  
+          triggerRerender={triggerRerender}
         />
       </div>
 
@@ -221,14 +244,70 @@ element in the array represents a column header in the table.*/
           width: "100%",
         }}
       >
-        <AddItem
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
           apiCmd={PostVoertuig}
-          initialFormData={
-            /* `initialVoertuigFormData[0]` is accessing the first Array in the
-          `initialBestuurdersFormData` Object. */
-            initialVoertuigFormData[0]
-          }
+          formFields={[
+            {
+              name: "merkEnModel",
+              label: "Merk",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "typewagen",
+              label: "Model",
+              type: "select",
+              options: typeWagenData.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "chassisnummer",
+              label: "Chasisnummer",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "nummerplaat",
+              label: "Nummerplaat",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "brandstoftype",
+              label: "Brandstoftype",
+              type: "select",
+              options: brandstofTypesData.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "kleur",
+              label: "kleur",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "aantalDeuren",
+              label: "aantalDeuren",
+              type: "number",
+              initialValue: "",
+              required: true,
+            },
+          ]}
+          tempObject={{}}
+          triggerRerender={triggerRerender}
         />
       </div>
 

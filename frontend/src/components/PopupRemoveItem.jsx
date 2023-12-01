@@ -6,6 +6,7 @@ const PopupRemoveItem = ({
   apiFunction,
   setPopupVisibility,
   tempId,
+  triggerRerender
 }) => {
   const { title, text, textBtnLeft, textBtnRight } = popup;
   //const { data } = useData();
@@ -41,7 +42,7 @@ const PopupRemoveItem = ({
             } catch (error) {
               console.error("Error handling deleteVoertuig:", error);
             }
-            
+            triggerRerender();
             setPopupVisibility("overlay", false);
             setPopupVisibility("Popup", false);
           }}
