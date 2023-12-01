@@ -14,6 +14,7 @@ export const BUTTON_STYLES = {
     NAV_BUTTONS: 'text-blueText rounded hover:bg-gray-100 md:p-0 font-mainFont',
     NAV_ADMINBUTTON: 'text-white font-mainFont bg-blueBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-sm text-center',
     NAV_LOGOUTBUTTON: 'rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText font-mainFont font-semibold text-darkBlue text-adminBtnFontSize text-center',
+    HOMEPAGE_CARDBUTTON: 'w-3/4 h-[53px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-white bg-blueBtn hover:bg-hoverBtn cursor-pointer',
 
     //POPUPS
     POPUP_LEFT: 'bg-blueBtn w-[100px] h-8 text-center text-whiteText font-mainFont font-btnFontWeigt text-popupTextSize rounded-lg cursor-pointer hover:bg-hoverBtn',
@@ -28,6 +29,10 @@ export const TEXT_STYLES = {
 
     //USERFORM COMPONENT
     USERFORM_LABEL: 'block text-whiteText font-semibold mb-2',
+
+    //HOMEPAGE
+    HOMEPAGE_CARDTITLE: 'font-titleFontWeigt text-[32px] font-Helvetica text-center h-[15%]',
+    HOMEPAGE_CARDTEXT: 'font-semibold text-[20px] font-Helvetica text-center font-titleFontWeigt h-[60%] flex items-center p-5',
 
     //LOGIN PAGE
     LOGIN_LABEL: 'text-left font-Helvetica font-titleFontWeigt text-titleFontSize text-blueText',
