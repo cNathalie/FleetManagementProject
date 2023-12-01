@@ -17,31 +17,33 @@ const FleetWeergave = (props) => {
     <>
       <div className="w-full">
         <img
-          className="rounded-md object-cover h-full w-full"
+          className="rounded-l object-cover h-full w-full"
           src={imgSrc}
           alt={alt}
         />
       </div>
       <div className="w-[150%]">
-        <h1 className="font-titleFontWeigt text-[32px] font-Helvetica text-center mt-4">
+        <h1 className="font-titleFontWeigt text-[32px] font-Helvetica text-center h-[15%]">
           {title}
         </h1>
-        <p className="mt-[5%] font-semibold text-[20px] font-Helvetica text-center font-titleFontWeigt">
+        <p className="font-semibold text-[20px] font-Helvetica text-center font-titleFontWeigt h-[60%] flex items-center p-5">
           {text}
         </p>
-        <Button
-          className="w-1/2 h-[53px] rounded-[10px] mt-[10%] ml-[25%] font-btnFontWeigt font-Helvetica text-btnFontSize text-[#FFFFFF] bg-blueBtn hover:bg-hoverBtn cursor-pointer"
-          onClick={() => {
-            navigate(`/items/${id}`);
-          }}
-        >
-          {btnValue}
-        </Button>
+        <div className="flex items-center h-[25%] justify-center">
+          <Button
+            className="w-3/4 h-[53px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-white bg-blueBtn hover:bg-hoverBtn cursor-pointer"
+            onClick={() => {
+              navigate(`/items/${id}`);
+            }}
+          >
+            {btnValue}
+          </Button>
+        </div>
       </div>
     </>
   );
 
-  return <div className="shadow-lg rounded-md flex h-[110%]">{divs}</div>;
+  return <div className="shadow-lg rounded-md flex w-[45%]">{divs}</div>;
 };
 
 export default FleetWeergave;
