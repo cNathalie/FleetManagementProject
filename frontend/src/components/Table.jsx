@@ -2,27 +2,45 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import { useState, useEffect } from "react";
+import Pagination from './Table_Pagination';
 
-const Table = ({tableHeaderContent, inputData, data, setPopupVisibility, setTempContent, iDname}) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const Table = ({ tableHeaderContent, inputData, data, setPopupVisibility, setTempContent, iDname }) => {
+  const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
 
-  /* The code is creating a variable called `filteredData` that stores the filtered data based on the
-search term entered by the user. */
-useEffect(() => {
-  // Apply filtering logic when the data or searchTerm changes
-  const updatedFilteredData = data
-    ? data.filter((v) =>
-        Object.values(v).some(
-          (value) =>
-            (typeof value === "string" || typeof value === "number") &&
-            String(value).toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      )
-    : [];
+  useEffect(() => {
+    // Reset currentPage to 0 when search term changes
+    setCurrentPage(0);
   
-  setFilteredData(updatedFilteredData);
-}, [data, searchTerm]);
+    // Introduce a delay using setTimeout before updating filtered data
+    const timeoutId = setTimeout(() => {
+      const updatedFilteredData = data
+        ? data.filter((v) =>
+          Object.values(v).some(
+            (value) =>
+              (typeof value === 'string' || typeof value === 'number') &&
+              String(value).toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        )
+        : [];
+  
+      setFilteredData(updatedFilteredData);
+    }, 500); // Adjust the delay time (in milliseconds) as needed
+  
+    // Clear the timeout if the component unmounts or the search term changes again
+    return () => clearTimeout(timeoutId);
+  }, [data, searchTerm]);
+  
+  
+  const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const pagedData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
   return (
     <div className="flex items-center justify-center h-screen ">
@@ -73,7 +91,7 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((d) => {
+            {pagedData.map((d) => {
               const id = d[iDname];
               return (
                 <>
@@ -126,6 +144,12 @@ useEffect(() => {
               );
             })}
           </tbody>
+          <tfoot>
+            <Pagination
+              pageCount={Math.ceil(filteredData.length / itemsPerPage)}
+              onPageChange={handlePageChange}
+            />
+          </tfoot>
         </table>
       </div>
     </div>

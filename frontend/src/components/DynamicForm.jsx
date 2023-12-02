@@ -4,15 +4,9 @@ import Button from "./Button";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 import { useFormik } from "formik";
 import { TEXT_STYLES, INPUT_STYLES } from "../constants/tailwindStyles";
-import Select from 'react-select';
+import Select from "react-select";
 
-const DynamicForm = ({
-  setPopupVisibility,
-  apiCmd,
-  formFields,
-  tempObject,
-  triggerRerender,
-}) => {
+const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, triggerRerender, }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [showCheckMark, setShowCheckMark] = useState(false);
 
@@ -83,37 +77,24 @@ const DynamicForm = ({
 
           {formFields.map((field) => (
             <div key={field.name} className="items-center grid grid-cols-3">
-              <label
-                className={`${TEXT_STYLES.ADMIN_OR} text-right col-span-1`}
-                htmlFor={field.name}
-              >
+              <label className={`${TEXT_STYLES.ADMIN_OR} text-right col-span-1`} htmlFor={field.name}>
                 {field.label}:
               </label>
 
               {field.type === "select" ? (
-              <Select
-              id={field.name}
-              name={field.name}
-              onChange={(selectedOption) => {
-                formik.setFieldValue(field.name, selectedOption ? selectedOption.value : null);
-              }}
-              value={field.options.find((option) => option.value === formik.values[field.name])}
-              className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`}
-              isDisabled={!isEditing}
-              options={field.options}
-              isSearchable
-              placeholder="Search or Select..."
-              />
-              ) : (
-                <input
-                  id={field.name}
-                  name={field.name}
-                  type={field.type || "text"}
-                  onChange={formik.handleChange}
-                  value={formik.values[field.name]}
-                  className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`}
-                  disabled={!isEditing}
+                <Select id={field.name} name={field.name} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} isDisabled={!isEditing} options={field.options} isSearchable placeholder="Search or Select..."
+                  onChange={(selectedOption) => {
+                    formik.setFieldValue(
+                      field.name,
+                      selectedOption ? selectedOption.value : null
+                    );
+                  }}
+                  value={field.options.find(
+                    (option) => option.value === formik.values[field.name]
+                  )}
                 />
+              ) : (
+                <input id={field.name} name={field.name} type={field.type || "text"} onChange={formik.handleChange} value={formik.values[field.name]} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} disabled={!isEditing} />
               )}
               {formik.errors[field.name] && (
                 <div className="text-red-500">{formik.errors[field.name]}</div>
@@ -128,11 +109,7 @@ const DynamicForm = ({
                   {" "}
                   Succes!{" "}
                 </p>
-                <img
-                  src={CheckNoBg}
-                  alt="Checkmark"
-                  className="w-8 h-8 rounded-full"
-                />
+                <img src={CheckNoBg} alt="Checkmark" className="w-8 h-8 rounded-full" />
               </div>
             )}
             <div className="ml-auto">

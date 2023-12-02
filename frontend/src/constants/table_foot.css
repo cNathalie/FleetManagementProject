@@ -1,0 +1,27 @@
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  position: fixed;
+  background-color: #fff; /* Add a background color if needed */
+  z-index: 1000; /* Set a high z-index to ensure it stays above other elements */
+  height: 100%;
+}
+
+.pagination-item {
+  list-style: none; /* Remove default list styles */
+}
+
+.pagination-link {
+  text-decoration: none;
+  padding: 5px 10px; /* Adjust padding as needed */
+  border: 1px solid #ccc; /* Add border for clarity, you can customize this */
+  border-radius: 3px; /* Add border-radius for rounded corners */
+  color: #333; /* Adjust text color as needed */
+  margin-right: 5px; /* Adjust the margin between items as needed */
+}
+
+.pagination-item.active .pagination-link {
+  background-color: #007bff; /* Customize the background color for the active item */
+  color: #fff; /* Customize text color for the active item */
+}
