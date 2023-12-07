@@ -18,12 +18,14 @@ const FleetWeergave = (props) => {
     <>
       <div className="w-full">
         <img
+
           className="rounded-1 object-cover h-full w-full"
           src={imgSrc}
           alt={alt}
         />
       </div>
       <div className="w-[150%]">
+
         <h1 className={TEXT_STYLES.HOMEPAGE_CARDTITLE}>
           {title}
         </h1>
@@ -32,7 +34,9 @@ const FleetWeergave = (props) => {
         </p>
         <div className="flex items-center h-[25%] justify-center">
           <Button
+
             className={BUTTON_STYLES.HOMEPAGE_CARDBUTTON}
+
             onClick={() => {
               navigate(`/items/${id}`);
             }}
