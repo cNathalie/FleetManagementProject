@@ -19,7 +19,7 @@ const FleetWeergave = (props) => {
       <div className="w-full">
         <img
 
-          className="rounded-1 object-cover h-full w-full"
+          className="rounded-l-md object-cover h-full w-full"
           src={imgSrc}
           alt={alt}
         />
