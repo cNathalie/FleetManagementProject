@@ -2,6 +2,7 @@
 import React from "react";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import { BUTTON_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
 /* eslint-disable react/prop-types*/
 
 const FleetWeergave = (props) => {
@@ -17,21 +18,25 @@ const FleetWeergave = (props) => {
     <>
       <div className="w-full">
         <img
-          className="rounded-l object-cover h-full w-full"
+
+          className="rounded-1 object-cover h-full w-full"
           src={imgSrc}
           alt={alt}
         />
       </div>
       <div className="w-[150%]">
-        <h1 className="font-titleFontWeigt text-[32px] font-Helvetica text-center h-[15%]">
+
+        <h1 className={TEXT_STYLES.HOMEPAGE_CARDTITLE}>
           {title}
         </h1>
-        <p className="font-semibold text-[20px] font-Helvetica text-center font-titleFontWeigt h-[60%] flex items-center p-5">
+        <p className={TEXT_STYLES.HOMEPAGE_CARDTEXT}>
           {text}
         </p>
         <div className="flex items-center h-[25%] justify-center">
           <Button
-            className="w-3/4 h-[53px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-white bg-blueBtn hover:bg-hoverBtn cursor-pointer"
+
+            className={BUTTON_STYLES.HOMEPAGE_CARDBUTTON}
+
             onClick={() => {
               navigate(`/items/${id}`);
             }}

@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import homePage from "../constants/homePageContent";
 import LogOutButton from "./LogOutButton";
+import { BG_STYLES, BUTTON_STYLES } from "../constants/tailwindStyles";
 
 const Nav = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full bg-white fixed border-b border-gray-200 flex flex-wrap items-center justify-between mx-auto">
+    <div className={`${BG_STYLES.NAV_BG} w-full fixed flex flex-wrap items-center justify-between mx-auto`}>
       <div className="pt-2 pl-6">
         <Button
           onClick={() => {
@@ -32,7 +33,7 @@ const Nav = () => {
               onClick={() => {
                 navigate(`/items/${h.id}`);
               }}
-              className="py-2 pl-3 pr-4 text-blueText rounded hover:bg-gray-100 md:p-0"
+              className={`${BUTTON_STYLES.NAV_BUTTONS} py-2 pl-3 pr-4`}
             >
               {h.title}
             </Button>
@@ -42,7 +43,7 @@ const Nav = () => {
       <div>
         <div className="px-6 flex flex-wrap">
           <Button
-            className="text-white bg-blueBtn hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+            className={`${BUTTON_STYLES.NAV_ADMINBUTTON} px-4 py-2`}
             onClick={() => {
               navigate("/admin");
             }}
