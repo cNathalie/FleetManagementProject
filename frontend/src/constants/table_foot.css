@@ -4,7 +4,6 @@
   overflow-x: auto; /* Enable horizontal scrolling if needed */
   position: fixed;
   background-color: #fff; /* Add a background color if needed */
-  z-index: 1000; /* Set a high z-index to ensure it stays above other elements */
   height: 100%;
 }
 

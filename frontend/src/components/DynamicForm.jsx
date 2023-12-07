@@ -1,14 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import Button from "./Button";
+import StatusMessage from "./StatusMessage";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
+import ErrorNoBg from "../assets/Media/ErrorNoBg.png";
 import { useFormik } from "formik";
 import { TEXT_STYLES, INPUT_STYLES } from "../constants/tailwindStyles";
+
 import Select from "react-select";
 
 const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, triggerRerender, }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [showCheckMark, setShowCheckMark] = useState(false);
+  const [showCheckMark, setShowCheckMark] = useState('');
 
   const handleToggleEditMode = () => {
     if (isEditing) {
@@ -28,10 +31,9 @@ const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, trigg
         if (response.ok) {
           triggerRerender();
           setIsEditing(false);
-          setShowCheckMark(true);
-          setTimeout(() => {
-            setShowCheckMark(false);
-          }, 1000);
+          setShowCheckMark('success');
+        } else {
+          setShowCheckMark('error');
         }
       }
     },
@@ -103,15 +105,14 @@ const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, trigg
           ))}
 
           <footer className="flex items-center mt-4">
-            {showCheckMark && (
-              <div className="flex items-center space-x-2">
-                <p className="text-[#858585] font-btnFontWeigt font-Helvetica">
-                  {" "}
-                  Succes!{" "}
-                </p>
-                <img src={CheckNoBg} alt="Checkmark" className="w-8 h-8 rounded-full" />
-              </div>
-            )}
+
+                <StatusMessage
+                  type={showCheckMark}
+                  message={showCheckMark == 'succes' ? 'Success!' : 'Error! Something went wrong.'}
+                  successImage={CheckNoBg}
+                  errorImage={ErrorNoBg}
+                />
+
             <div className="ml-auto">
               <Button
                 className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer"

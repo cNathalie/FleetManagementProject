@@ -50,10 +50,6 @@ const FleetPage = () => {
   const [tankkaartenData, settankkaartenData] = useState([]);
   const [bestuurdersData, setbestuurdersData] = useState([]);
 
-  //TODO: RERENDER THE DATA AFTER FETCHTING
-  //TODO: can not remove item when used in fleet
-  //TODO: fix dynamicform css + api function
-
   useEffect(() => {
     console.log("Effect is running");
     const fetchData = async () => {
