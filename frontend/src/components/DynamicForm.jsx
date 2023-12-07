@@ -1,70 +1,131 @@
 /* eslint-disable react/prop-types */
-import { useFormik } from 'formik';
+import { useState, useEffect } from "react";
+import Button from "./Button";
+import StatusMessage from "./StatusMessage";
+import CheckNoBg from "../assets/Media/CheckNoBg.png";
+import ErrorNoBg from "../assets/Media/ErrorNoBg.png";
+import { useFormik } from "formik";
+import { TEXT_STYLES, INPUT_STYLES } from "../constants/tailwindStyles";
 
-const DynamicForm = ({ fields, onSubmit }) => {
-  const initialValues = {};
-  fields.map(field => {
-    initialValues[field.name] = field.initialValue || '';
-  });
+import Select from "react-select";
+
+const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, triggerRerender, }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [showCheckMark, setShowCheckMark] = useState('');
+
+  const handleToggleEditMode = () => {
+    if (isEditing) {
+      formik.handleSubmit();
+    }
+
+    setIsEditing(!isEditing);
+  };
 
   const formik = useFormik({
-    initialValues,
-    onSubmit: values => {
-      onSubmit(values);
-    },
-    validate: values => {
-      const errors = {};
-      fields.forEach(field => {
-        if (field.required && !values[field.name]) {
-          errors[field.name] = 'Verplicht veld';
+    initialValues: tempObject || {},
+    onSubmit: async (changedData) => {
+      const updatedData = { ...tempObject, ...changedData };
+      const errors = formik.validateForm(updatedData);
+      if (Object.keys(errors).length === 0) {
+        const response = await apiCmd(updatedData);
+        if (response.ok) {
+          triggerRerender();
+          setIsEditing(false);
+          setShowCheckMark('success');
+        } else {
+          setShowCheckMark('error');
         }
-
-        // You can add more validation logic based on the field type if needed
-
-        // // Example: Email validation
-        // if (field.type === 'email' && values[field.name]) {
-        //   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values[field.name])) {
-        //     errors[field.name] = 'Ongeldig e-mailadres';
-        //   }
-        // }
+      }
+    },
+    validateOnChange: false,
+    validate: (changedData) => {
+      const errors = {};
+      formFields.forEach((field) => {
+        if (field.required && !changedData[field.name]) {
+          errors[field.name] = "Verplicht veld";
+        }
       });
       return errors;
     },
   });
 
+  useEffect(() => {
+    // Initialize formik with tempObject as initial values
+    formik.setValues(tempObject || {});
+  }, [tempObject]);
+
   return (
-    <form onSubmit={formik.handleSubmit}>
-      {fields.map(field => (
-        <div key={field.name}>
-          <label htmlFor={field.name}>{field.label}:</label>
-          {field.type === 'select' ? (
-            <select
-              id={field.name}
-              name={field.name}
-              onChange={formik.handleChange}
-              value={formik.values[field.name]}
+    <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]">
+      <div className="mt-6 p-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-4">
+          <header className="flex justify-between">
+            <h1 className="font-mainFont font-titleFontWeigt text-4xl">
+              {" "}
+              Detailweergave{" "}
+            </h1>
+            <Button
+              className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
+              onClick={() => {
+                setPopupVisibility("popupGoBack", true);
+                setPopupVisibility("detailChange", false);
+                setPopupVisibility("addItem", false);
+                setIsEditing(false);
+              }}
+              type="button"
             >
-              <option value="">Selecteer...</option>
-              {field.options.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              id={field.name}
-              name={field.name}
-              type={field.type || 'text'}
-              onChange={formik.handleChange}
-              value={formik.values[field.name]}
-            />
-          )}
-          {formik.errors[field.name] && <div>{formik.errors[field.name]}</div>}
-        </div>
-      ))}
-      <button type="submit">Submit</button>
-    </form>
+              <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
+            </Button>
+          </header>
+
+          {formFields.map((field) => (
+            <div key={field.name} className="items-center grid grid-cols-3">
+              <label className={`${TEXT_STYLES.ADMIN_OR} text-right col-span-1`} htmlFor={field.name}>
+                {field.label}:
+              </label>
+
+              {field.type === "select" ? (
+                <Select id={field.name} name={field.name} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} isDisabled={!isEditing} options={field.options} isSearchable placeholder="Search or Select..."
+                  onChange={(selectedOption) => {
+                    formik.setFieldValue(
+                      field.name,
+                      selectedOption ? selectedOption.value : null
+                    );
+                  }}
+                  value={field.options.find(
+                    (option) => option.value === formik.values[field.name]
+                  )}
+                />
+              ) : (
+                <input id={field.name} name={field.name} type={field.type || "text"} onChange={formik.handleChange} value={formik.values[field.name]} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} disabled={!isEditing} />
+              )}
+              {formik.errors[field.name] && (
+                <div className="text-red-500">{formik.errors[field.name]}</div>
+              )}
+            </div>
+          ))}
+
+          <footer className="flex items-center mt-4">
+
+                <StatusMessage
+                  type={showCheckMark}
+                  message={showCheckMark == 'succes' ? 'Success!' : 'Error! Something went wrong.'}
+                  successImage={CheckNoBg}
+                  errorImage={ErrorNoBg}
+                />
+
+            <div className="ml-auto">
+              <Button
+                className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer"
+                onClick={handleToggleEditMode}
+                type="button"
+              >
+                {isEditing ? "Opslaan" : "Bewerk"}
+              </Button>
+            </div>
+          </footer>
+        </form>
+      </div>
+    </div>
   );
 };
 

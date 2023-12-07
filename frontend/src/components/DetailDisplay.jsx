@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import Button from "./Button";
+import { TEXT_STYLES } from "../constants/tailwindStyles";
 
 const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
   console.log(tempObject);
@@ -24,66 +25,24 @@ const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
             </Button>
           </div>
         </div>
-        {/*
-        <div className="flex flex-wrap">
-           <div className="ml-9 mt-14 pb-6">
-            {listHeaders.map((h) => {
-              return (
-                <List
-                  className="pb-2 text-lg font-mainFont font-titleFontWeigt"
-                  key={h}
-                  merk={h.merk}
-                  model={h.model}
-                  chassisnummer={h.chassisnummer}
-                  nummerplaat={h.nummerplaat}
-                  brandstoftype={h.brandstoftype}
-                  typeWagen={h.typeWagen}
-                  kleur={h.kleur}
-                  aantalDeuren={h.aantalDeuren}
-                  listHeader={h}
-                />
-              );
-            })}
-          </div>
-          <div className="ml-12 mt-14">         
-            {tempContent && tempContent.map((d) => {
-              return (
-                <List
-                  className="pb-2 text-lg font-mainFont font-titleFontWeigt"
-                  key={d}
-                  merk={d.merkEnModel.split(" ")[0]}
-                  model={d.merkEnModel.split(" ")[1]}
-                  chassisnummer={d.chassisnummer}
-                  nummerplaat={d.nummerplaat}
-                  brandstoftype={d.brandstoftype}
-                  typeWagen={d.typewagen}
-                  kleur={d.kleur}
-                  aantalDeuren={d.aantalDeuren}
-                  listHeader={d}
-                />
-              );
-            })}
-          </div>
-        </div> 
-        */}
-        <div className="flex flex-wrap">
+
+        <div className="items-center grid grid-cols-3">
           {tempObject ? (
             Object.entries(tempObject).map(([key, value]) => (
               <>
-                <div key={key} className="ml-9 mt-14 pb-6">
+                <div key={key} className="col-span-1">
                   <label
                     htmlFor={key}
-                    className="pb-2 text-lg font-mainFont font-titleFontWeigt"
+                    className={`${TEXT_STYLES.ADMIN_OR}`}
                   >
-                    {key}
+                    {key}:
                   </label>
                 </div>
-                <div className="ml-12 mt-14">
+                <div className="col-span-2">
                   <p
-                    type="text"
                     id={key}
                     name={key}
-                    className="pb-2 text-lg font-mainFont font-titleFontWeigt"
+                    className={`${TEXT_STYLES.ADMIN_OR} w-[75%]`}
                   >
                     {typeof value === "boolean"
                       ? value

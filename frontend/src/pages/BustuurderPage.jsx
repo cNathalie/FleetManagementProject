@@ -5,6 +5,7 @@ import {
   UpdateBestuurder,
   DeleteBestuurder,
   PostBestuurder,
+  getTypeRijbewijs,
 } from "../constants/Api";
 import Overlay from "../components/Overlay";
 import {
@@ -14,10 +15,8 @@ import {
 import Popup from "../components/Popup";
 import PopupRemoveItem from "../components/PopupRemoveItem";
 import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
-import DetailChange from "../components/DetailChange";
 import DetailDisplay from "../components/DetailDisplay";
-import AddItem from "../components/AddItem";
-import { initialBestuurdersFormData } from "../constants/formFields";
+import DynamicForm from "../components/DynamicForm";
 
 const BustuurderPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
@@ -41,20 +40,33 @@ const BustuurderPage = () => {
   /* The `iDname` variable is used to specify the name of the ID field in the table data.*/
   const iDname = "bestuurderId";
 
+  const [counter, setCounter] = useState(0);
   const [data, setData] = useState([]);
+  const [typeRijbewijs, setTypeRijbewijs] = useState([]);
+
   useEffect(() => {
-    const fetchData = () => {
-      getBestuurders()
-        .then((Data) => {
-          setData(Data);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+    console.log("Effect is running");
+    const fetchData = async () => {
+      try {
+        const voertuigenData = await getBestuurders();
+        const typeRijbewijsData = await getTypeRijbewijs();
+
+        setData(voertuigenData);
+        setTypeRijbewijs(typeRijbewijsData);
+        console.log("Data is fetched");
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
     };
 
     fetchData();
-  }, []);
+  }, [counter]);
+
+  const triggerRerender = () => {
+    setTimeout(() => {
+      setCounter(counter + 1);
+    }, 100);
+  };
 
   const setPopupVisibility = (popupId, visibility) => {
     const element = document.getElementById(popupId);
@@ -98,6 +110,7 @@ const BustuurderPage = () => {
               apiFunction={DeleteBestuurder}
               setPopupVisibility={setPopupVisibility}
               tempId={temp.tempId}
+              triggerRerender={triggerRerender}
             />
           );
         })}
@@ -112,10 +125,52 @@ const BustuurderPage = () => {
           display: "none",
         }}
       >
-        <DetailChange
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
-          UpdateApi={UpdateBestuurder}
+          apiCmd={UpdateBestuurder}
+          formFields={[
+            {
+              name: "naam",
+              label: "naam",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "voornaam",
+              label: "voornaam",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "adres",
+              label: "adres",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "rijksregisternummer",
+              label: "rijksregisternummer",
+              type: "text",
+              initialValue: "",
+              required: false,
+            },
+            {
+              name: "rijbewijs",
+              label: "rijbewijs",
+              type: "select",
+              options: typeRijbewijs.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: false,
+            },
+          ]}
           tempObject={temp.tempObject}
+          triggerRerender={triggerRerender}
         />
       </div>
 
@@ -161,14 +216,52 @@ const BustuurderPage = () => {
           width: "100%",
         }}
       >
-        <AddItem
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
           apiCmd={PostBestuurder}
-          initialFormData={
-            /* `initialBestuurdersFormData[0]` is accessing the first Array in the
-          `initialBestuurdersFormData` Object. */
-            initialBestuurdersFormData[0]
-          }
+          formFields={[
+            {
+              name: "naam",
+              label: "naam",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "voornaam",
+              label: "voornaam",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "adres",
+              label: "adres",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "rijksregisternummer",
+              label: "rijksregisternummer",
+              type: "text",
+              initialValue: "",
+              required: true,
+            },
+            {
+              name: "rijbewijs",
+              label: "rijbewijs",
+              type: "select",
+              options: typeRijbewijs.map((t) => ({
+                value: t.type,
+                label: t.type,
+              })),
+              initialValue: "",
+              required: true,
+            },
+          ]}
+          tempObject={{}}
+          triggerRerender={triggerRerender}
         />
       </div>
 

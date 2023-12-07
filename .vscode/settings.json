@@ -2,5 +2,6 @@
     "docwriter.progress.trackTypes": true,
     "docwriter.progress.trackClasses": true,
     "docwriter.progress.trackMethods": false,
-    "docwriter.progress.trackFunctions": false
+    "docwriter.progress.trackFunctions": false,
+    "livePreview.defaultPreviewPath": "/frontend/index.html"
 }
