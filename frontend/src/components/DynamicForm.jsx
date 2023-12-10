@@ -9,9 +9,15 @@ import { TEXT_STYLES, INPUT_STYLES } from "../constants/tailwindStyles";
 
 import Select from "react-select";
 
-const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, triggerRerender, }) => {
+const DynamicForm = ({
+  setPopupVisibility,
+  apiCmd,
+  formFields,
+  tempObject,
+  triggerRerender,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [showCheckMark, setShowCheckMark] = useState('');
+  const [showCheckMark, setShowCheckMark] = useState("");
 
   const handleToggleEditMode = () => {
     if (isEditing) {
@@ -31,9 +37,9 @@ const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, trigg
         if (response.ok) {
           triggerRerender();
           setIsEditing(false);
-          setShowCheckMark('success');
+          setShowCheckMark("success");
         } else {
-          setShowCheckMark('error');
+          setShowCheckMark("error");
         }
       }
     },
@@ -56,12 +62,12 @@ const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, trigg
 
   return (
     <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]">
-      <div className="mt-6 p-6">
+      <div className="mt-6 p-6 ml-4">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <header className="flex justify-between">
             <h1 className="font-mainFont font-titleFontWeigt text-4xl">
-              {" "}
-              Detailweergave{" "}
+              {/* voorlopig staat hier bewerk, dit moet nog dynamisch worden aan de hand van op welke knop je drukt --> misschien voor jou Mohamed aangezien jij deze component gemaakt hebt */}
+              Bewerk
             </h1>
             <Button
               className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
@@ -78,26 +84,46 @@ const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, trigg
           </header>
 
           {formFields.map((field) => (
-            <div key={field.name} className="items-center grid grid-cols-3">
-              <label className={`${TEXT_STYLES.ADMIN_OR} text-right col-span-1`} htmlFor={field.name}>
-                {field.label}:
-              </label>
+            <div key={field.name} className="items-center flex flex-wrap ml-6">
+              {/* in de lege classname moet je zelf is kijken die is voor de text voor u input velden idk welke kleur je wilt */}
+              <div className="w-1/4">
+                <label className={``} htmlFor={field.name}>
+                  {field.label}:
+                </label>
+              </div>
+              <div className="w-3/4">
+                {field.type === "select" ? (
+                  <Select
+                    id={field.name}
+                    name={field.name}
+                    className={`w-1/2`}
+                    isDisabled={!isEditing}
+                    options={field.options}
+                    isSearchable
+                    placeholder="Search or Select..."
+                    onChange={(selectedOption) => {
+                      formik.setFieldValue(
+                        field.name,
+                        selectedOption ? selectedOption.value : null
+                      );
+                    }}
+                    value={field.options.find(
+                      (option) => option.value === formik.values[field.name]
+                    )}
+                  />
+                ) : (
+                  <input
+                    id={field.name}
+                    name={field.name}
+                    type={field.type || "text"}
+                    onChange={formik.handleChange}
+                    value={formik.values[field.name]}
+                    className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-1/2`}
+                    disabled={!isEditing}
+                  />
+                )}
+              </div>
 
-              {field.type === "select" ? (
-                <Select id={field.name} name={field.name} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} isDisabled={!isEditing} options={field.options} isSearchable placeholder="Search or Select..."
-                  onChange={(selectedOption) => {
-                    formik.setFieldValue(
-                      field.name,
-                      selectedOption ? selectedOption.value : null
-                    );
-                  }}
-                  value={field.options.find(
-                    (option) => option.value === formik.values[field.name]
-                  )}
-                />
-              ) : (
-                <input id={field.name} name={field.name} type={field.type || "text"} onChange={formik.handleChange} value={formik.values[field.name]} className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-[75%]`} disabled={!isEditing} />
-              )}
               {formik.errors[field.name] && (
                 <div className="text-red-500">{formik.errors[field.name]}</div>
               )}
@@ -105,13 +131,16 @@ const DynamicForm = ({ setPopupVisibility, apiCmd, formFields, tempObject, trigg
           ))}
 
           <footer className="flex items-center mt-4">
-
-                <StatusMessage
-                  type={showCheckMark}
-                  message={showCheckMark == 'succes' ? 'Success!' : 'Error! Something went wrong.'}
-                  successImage={CheckNoBg}
-                  errorImage={ErrorNoBg}
-                />
+            <StatusMessage
+              type={showCheckMark}
+              message={
+                showCheckMark == "succes"
+                  ? "Success!"
+                  : "Error! Something went wrong."
+              }
+              successImage={CheckNoBg}
+              errorImage={ErrorNoBg}
+            />
 
             <div className="ml-auto">
               <Button

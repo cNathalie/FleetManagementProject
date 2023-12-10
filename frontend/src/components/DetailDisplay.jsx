@@ -9,7 +9,7 @@ const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
   return (
     <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB] ">
       <div>
-        <div className="ml-9 mt-6 pt-6 flex justify-between">
+        <div className="ml-9 mt-6 py-6 flex justify-between">
           <h1 className="font-mainFont font-titleFontWeigt text-4xl">
             Detailweergave
           </h1>
@@ -26,30 +26,33 @@ const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
           </div>
         </div>
 
-        <div className="items-center grid grid-cols-3">
+        <div className="items-center flex flex-wrap pb-8">
           {tempObject ? (
             Object.entries(tempObject).map(([key, value]) => (
               <>
-                <div key={key} className="col-span-1">
-                  <label
-                    htmlFor={key}
-                    className={`${TEXT_STYLES.ADMIN_OR}`}
-                  >
-                    {key}:
-                  </label>
+                <div className="w-1/4 my-2 text-right">
+                  <div key={key}>
+                    {/* hier ook styling voor de text mag je zelf kiezen */}
+                    <label htmlFor={key} className={``}>
+                      {key}:
+                    </label>
+                  </div>
                 </div>
-                <div className="col-span-2">
-                  <p
-                    id={key}
-                    name={key}
-                    className={`${TEXT_STYLES.ADMIN_OR} w-[75%]`}
-                  >
-                    {typeof value === "boolean"
-                      ? value
-                        ? "vrij"
-                        : "bezet"
-                      : value}
-                  </p>
+                <div className="w-2/3 ml-12">
+                  <div>
+                    <p
+                      id={key}
+                      name={key}
+                      // hier was de ${TEXT_STYLES.ADMIN_OR} misschien de kleuren veranderen da moet je zelf ik beijken hoe je die wilt heb nu dit snel copy paste gedaan
+                      className={`font-mainFont font-semibold text-darkBlue text-[18px] text-left tracking-[0] leading-[normal] whitespace-nowrap w-[75%] ml-12`}
+                    >
+                      {typeof value === "boolean"
+                        ? value
+                          ? "vrij"
+                          : "bezet"
+                        : value}
+                    </p>
+                  </div>
                 </div>
               </>
             ))

@@ -19,7 +19,6 @@ import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
 import DetailDisplay from "../components/DetailDisplay";
 import DynamicForm from "../components/DynamicForm";
 
-
 const VoertuigenPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
 element in the array represents a column header in the table.*/
@@ -54,7 +53,7 @@ element in the array represents a column header in the table.*/
         const voertuigenData = await getVoertuigen();
         const typeWagenData = await getTypeWagen();
         const brandstofTypesData = await getBrandstofTypes();
-  
+
         setData(voertuigenData);
         setTypeWagenData(typeWagenData);
         setBrandstofTypesData(brandstofTypesData);
@@ -63,9 +62,9 @@ element in the array represents a column header in the table.*/
         console.error("Error fetching data:", error.message);
       }
     };
-  
+
     fetchData();
-  }, [counter]);  
+  }, [counter]);
 
   const triggerRerender = () => {
     setTimeout(() => {
@@ -81,7 +80,6 @@ element in the array represents a column header in the table.*/
       console.error(`Element with id ${popupId} not found.`);
     }
   };
-
 
   /* lets a child component change the value in return other child component
    use this value for their */
@@ -180,20 +178,20 @@ element in the array represents a column header in the table.*/
             },
             {
               name: "kleur",
-              label: "kleur",
+              label: "Kleur",
               type: "text",
               initialValue: "",
               required: false,
             },
             {
               name: "aantalDeuren",
-              label: "aantalDeuren",
+              label: "Aantal Deuren",
               type: "number",
               initialValue: "",
               required: false,
             },
           ]}
-          tempObject={temp.tempObject}  
+          tempObject={temp.tempObject}
           triggerRerender={triggerRerender}
         />
       </div>

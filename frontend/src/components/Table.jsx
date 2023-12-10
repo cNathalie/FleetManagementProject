@@ -2,10 +2,17 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import { useState, useEffect } from "react";
-import Pagination from './Table_Pagination';
+import Pagination from "./Table_Pagination";
 
-const Table = ({ tableHeaderContent, inputData, data, setPopupVisibility, setTempContent, iDname }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const Table = ({
+  tableHeaderContent,
+  inputData,
+  data,
+  setPopupVisibility,
+  setTempContent,
+  iDname,
+}) => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
@@ -13,27 +20,26 @@ const Table = ({ tableHeaderContent, inputData, data, setPopupVisibility, setTem
   useEffect(() => {
     // Reset currentPage to 0 when search term changes
     setCurrentPage(0);
-  
+
     // Introduce a delay using setTimeout before updating filtered data
     const timeoutId = setTimeout(() => {
       const updatedFilteredData = data
         ? data.filter((v) =>
-          Object.values(v).some(
-            (value) =>
-              (typeof value === 'string' || typeof value === 'number') &&
-              String(value).toLowerCase().includes(searchTerm.toLowerCase())
+            Object.values(v).some(
+              (value) =>
+                (typeof value === "string" || typeof value === "number") &&
+                String(value).toLowerCase().includes(searchTerm.toLowerCase())
+            )
           )
-        )
         : [];
-  
+
       setFilteredData(updatedFilteredData);
     }, 500); // Adjust the delay time (in milliseconds) as needed
-  
+
     // Clear the timeout if the component unmounts or the search term changes again
     return () => clearTimeout(timeoutId);
   }, [data, searchTerm]);
-  
-  
+
   const indexOfLastItem = (currentPage + 1) * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const pagedData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -43,7 +49,7 @@ const Table = ({ tableHeaderContent, inputData, data, setPopupVisibility, setTem
   };
 
   return (
-    <div className="flex items-center justify-center h-screen ">
+    <div className="flex items-center justify-center h-screen">
       <div className="max-h-[585px] overflow-y-auto group group scrollbar-thin hover:scrollbar-thumb-gray-100">
         <table className="w-full max-w-[1122px] h-[585px] text-sm text-left text-gray-500 dark:text-gray-400 shadow-md sm:rounded-lg">
           <thead className="sticky top-0 bg-white z-10 border-b-2 border-gray-300 shadow-sm">
