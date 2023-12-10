@@ -5,7 +5,7 @@ import StatusMessage from "./StatusMessage";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 import ErrorNoBg from "../assets/Media/ErrorNoBg.png";
 import { useFormik } from "formik";
-import { TEXT_STYLES, INPUT_STYLES } from "../constants/tailwindStyles";
+import { TEXT_STYLES, INPUT_STYLES, BUTTON_STYLES, BG_STYLES } from "../constants/tailwindStyles";
 
 import Select from "react-select";
 
@@ -61,16 +61,16 @@ const DynamicForm = ({
   }, [tempObject]);
 
   return (
-    <div className="w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]">
+    <div className={BG_STYLES.OVERVIEW_BG}>
       <div className="mt-6 p-6 ml-4">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <header className="flex justify-between">
-            <h1 className="font-mainFont font-titleFontWeigt text-4xl">
+            <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>
               {/* voorlopig staat hier bewerk, dit moet nog dynamisch worden aan de hand van op welke knop je drukt --> misschien voor jou Mohamed aangezien jij deze component gemaakt hebt */}
               Bewerk
             </h1>
             <Button
-              className="rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt"
+              className={BUTTON_STYLES.OVERVIEW_EXITBUTTON}
               onClick={() => {
                 setPopupVisibility("popupGoBack", true);
                 setPopupVisibility("detailChange", false);
@@ -84,19 +84,19 @@ const DynamicForm = ({
           </header>
 
           {formFields.map((field) => (
-            <div key={field.name} className="items-center flex flex-wrap ml-6">
-              {/* in de lege classname moet je zelf is kijken die is voor de text voor u input velden idk welke kleur je wilt */}
-              <div className="w-1/4">
-                <label className={``} htmlFor={field.name}>
-                  {field.label}:
-                </label>
-              </div>
-              <div className="w-3/4">
-                {field.type === "select" ? (
+          <div key={field.name} className="items-center flex flex-wrap ml-1">
+            <div className="w-1/4">
+              <label className={`${TEXT_STYLES.OVERVIEW_DATAHEADER}`} htmlFor={field.name}>
+                {field.label}
+              </label>
+            </div>
+            <div className="w-3/4">
+              {isEditing ? (
+                field.type === "select" ? (
                   <Select
                     id={field.name}
                     name={field.name}
-                    className={`w-1/2`}
+                    className={INPUT_STYLES.OVERVIEW_DROPDWN_INPUT}
                     isDisabled={!isEditing}
                     options={field.options}
                     isSearchable
@@ -118,17 +118,20 @@ const DynamicForm = ({
                     type={field.type || "text"}
                     onChange={formik.handleChange}
                     value={formik.values[field.name]}
-                    className={`${INPUT_STYLES.USERFORM_INPUT_BLACK} w-1/2`}
+                    className={`${INPUT_STYLES.OVERVIEW_INPUT} w-1/2`}
                     disabled={!isEditing}
                   />
-                )}
-              </div>
-
-              {formik.errors[field.name] && (
-                <div className="text-red-500">{formik.errors[field.name]}</div>
+                )
+              ) : (
+                <span className={TEXT_STYLES.OVERVIEW_DATAVALUE}>{formik.values[field.name]}</span>
               )}
             </div>
-          ))}
+
+            {formik.errors[field.name] && (
+              <div className="text-red-500">{formik.errors[field.name]}</div>
+            )}
+          </div>
+        ))}
 
           <footer className="flex items-center mt-4">
             <StatusMessage
@@ -144,7 +147,7 @@ const DynamicForm = ({
 
             <div className="ml-auto">
               <Button
-                className="w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer"
+                className={BUTTON_STYLES.OVERVIEW_EDITBUTTON}
                 onClick={handleToggleEditMode}
                 type="button"
               >

@@ -7,20 +7,25 @@
   height: 100%;
 }
 
+
 .pagination-item {
   list-style: none; /* Remove default list styles */
+  padding-top: 5px;
 }
 
 .pagination-link {
   text-decoration: none;
   padding: 5px 10px; /* Adjust padding as needed */
-  border: 1px solid #ccc; /* Add border for clarity, you can customize this */
-  border-radius: 3px; /* Add border-radius for rounded corners */
-  color: #333; /* Adjust text color as needed */
+  border: 1px solid rounded #ccc; /* Add border for clarity, you can customize this */
+  border-radius: 15px; /* Add border-radius for rounded corners */
+  color: #0B5A64; /* Adjust text color as needed */
   margin-right: 5px; /* Adjust the margin between items as needed */
+  margin-left: 5px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
 }
 
 .pagination-item.active .pagination-link {
-  background-color: #007bff; /* Customize the background color for the active item */
+  background-color: #19B9CE; /* Customize the background color for the active item */
   color: #fff; /* Customize text color for the active item */
 }

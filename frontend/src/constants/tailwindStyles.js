@@ -22,6 +22,11 @@ export const BUTTON_STYLES = {
   HOMEPAGE_CARDBUTTON:
     "w-3/4 h-[53px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-white bg-blueBtn hover:bg-hoverBtn cursor-pointer",
 
+  //OVERVIEW PAGE
+  OVERVIEW_EXITBUTTON: "rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt",
+  OVERVIEW_EDITBUTTON: "w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer",
+  OVERVIEW_ADDBUTTON: "w-[150px] md:w-[150px] h-[35] md:h-[43px] font-mainFont font-semibold text-white bg-blueBtn hover:bg-hoverBtn flex items-center justify-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 transform translate-x-2",
+
   //POPUPS
   POPUP_LEFT:
     "bg-blueBtn w-[100px] h-8 text-center text-whiteText font-mainFont font-btnFontWeigt text-popupTextSize rounded-lg cursor-pointer hover:bg-hoverBtn",
@@ -43,31 +48,42 @@ export const TEXT_STYLES = {
 
   //HOMEPAGE
   HOMEPAGE_CARDTITLE:
-    "font-titleFontWeigt text-[32px] font-Helvetica text-center h-[15%]",
+    "font-titleFontWeight text-[32px] font-Helvetica text-center h-[15%]",
   HOMEPAGE_CARDTEXT:
-    "font-semibold text-[20px] font-Helvetica text-center font-titleFontWeigt h-[60%] flex items-center p-5",
+    "font-semibold text-[20px] font-Helvetica text-center font-titleFontWeight h-[60%] flex items-center p-5",
 
   //LOGIN PAGE
   LOGIN_LABEL:
-    "text-left font-Helvetica font-titleFontWeigt text-titleFontSize text-blueText",
+    "text-left font-Helvetica font-titleFontWeight text-titleFontSize text-blueText",
   LOGIN_ERROR: "text-center text-red-600 font-btnFontWeigt text-xs",
 
+  // OVERVIEW PAGE
+  OVERVIEW_TITLE: "font-mainFont font-titleFontWeight text-4xl",
+  OVERVIEW_DATAHEADER: "font-mainFont font-titleFontWeight uppercase",
+  OVERVIEW_DATAVALUE: "font-mainFont font-semibold text-overviewData text-[18px] text-left tracking-[0] leading-[normal] whitespace-nowrap w-[75%]",
+  OVERVIEW_TABLEHEAD: "w-full max-w-[1122px] h-[585px] font-mainFont text-sm text-left text-overviewData shadow-md sm:rounded-lg",
+  OVERVIEW_TABLETITLE: "px-6 py-3 font-mainFont font-semibold text-overviewData text-[17px] tracking-[0] leading-[normal]",
+  OVERVIEW_TABLEDATA: "px-6 py-4 font-mainFont font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]",
+
   //POPUPS
-  POPUP_TITLE: "font-mainFont font-titleFontWeigt text-titleFontSize",
+  POPUP_TITLE: "font-mainFont font-titleFontWeight text-titleFontSize",
   POPUP_TEXT:
-    "font-mainFont font-titleFontWeigt text-popupTextSize text-[#858585] pt-2",
+    "font-mainFont font-titleFontWeight text-popupTextSize text-[#858585] pt-2",
 };
 
 export const INPUT_STYLES = {
   //USERFORM COMPONENT
   USERFORM_INPUT:
     "border-b bg-transparent border-whiteText text-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md",
-  USERFORM_INPUT_BLACK:
-    "border-b bg-transparent border-whiteText placeholder-adminPlaceHolder focus:outline-none focus:ring-2 focus:ring-whiteText focus:border-whiteText rounded-md",
 
   //LOGIN PAGE
   LOGIN_INPUT:
     "appearance-none relative block  w-full px-3 py-2 border-b bg-transparent border-blueText placeholder-blueText text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blueText focus:border-blueText",
+
+  //OVERVIEW PAGE
+  OVERVIEW_INPUT: "border-2 bg-transparent border-white placeholder-adminPlaceHolder focus:outline-none focus:ring-1 focus:ring-white focus:border-white rounded-md font-mainFont font-semibold text-darkBlue",
+  OVERVIEW_DROPDWN_INPUT: "w-1/2 font-mainFont font-semibold text-darkBlue",
+  OVERVIEW_SEARCH_INPUT: "w-36 h-6 bg-[#EDEDED] rounded-lg text-overviewData font-semibold font-mainFont px-2 border-none focus:ring-2 focus:ring-blueBtn",
 };
 
 export const CARD_STYLES = {
@@ -89,4 +105,17 @@ export const BG_STYLES = {
 
   //HOMEPAGE
   NAV_BG: "bg-white border-b border-gray-200",
+
+  //OVERVIEW PAGE
+  OVERVIEW_BG: "w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]",
+  OVERVIEW_TABLEHEADBG: "sticky top-0 bg-white z-10 border-b-2 border-gray-300 shadow-sm",
+  OVERVIEW_TABLEDATABG: "bg-white border-b",
+};
+
+export const IMG_STYLES = {
+  //OVERVIEW PAGE
+
+  OVERVIEW_IMG_DETAIL: "w-6 h-6 cursor-pointer transition duration-300 transform hover:scale-110",
+  OVERVIEW_IMG_EDIT: "w-6 h-6 cursor-pointer transition duration-300 transform hover:scale-110",
+  OVERVIEW_IMG_DELETE: "w-6 h-6 cursor-pointer transition duration-300 transform hover:scale-110",
 };
