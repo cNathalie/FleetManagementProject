@@ -160,14 +160,15 @@ const TankkaartenPage = () => {
               type: "select",
               options: [
                 { label: "True", value: true },
-                { label: "False", value: false }
-              ],              
+                { label: "False", value: false },
+              ],
               initialValue: "",
               required: false,
             },
           ]}
           tempObject={temp.tempObject}
           triggerRerender={triggerRerender}
+          heading="Bewerk"
         />
       </div>
 
@@ -255,14 +256,15 @@ const TankkaartenPage = () => {
               type: "select",
               options: [
                 { label: "True", value: true },
-                { label: "False", value: false }
-              ],              
+                { label: "False", value: false },
+              ],
               initialValue: "",
               required: false,
             },
           ]}
           tempObject={{}}
           triggerRerender={triggerRerender}
+          heading="Toevoegen"
         />
       </div>
 

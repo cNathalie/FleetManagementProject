@@ -58,7 +58,7 @@ const FleetPage = () => {
         const voertuigenData = await getVoertuigen();
         const tankkaartenData = await getTankkaarten();
         const bustuurdersData = await getBestuurders();
-  
+
         setData(fleetData);
         setvoertuigenData(voertuigenData);
         settankkaartenData(tankkaartenData);
@@ -69,16 +69,15 @@ const FleetPage = () => {
         console.error("Error fetching data:", error.message);
       }
     };
-  
+
     fetchData();
-  }, [counter]);  
+  }, [counter]);
 
   const triggerRerender = () => {
     setTimeout(() => {
       setCounter(counter + 1);
     }, 100);
   };
-
 
   const setPopupVisibility = (popupId, visibility) => {
     const element = document.getElementById(popupId);
@@ -137,7 +136,7 @@ const FleetPage = () => {
           display: "none",
         }}
       >
-      <DynamicForm
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
           apiCmd={UpdateFleet}
           formFields={[
@@ -208,8 +207,9 @@ const FleetPage = () => {
               required: false,
             },
           ]}
-          tempObject={temp.tempObject}  
+          tempObject={temp.tempObject}
           triggerRerender={triggerRerender}
+          heading="Bewerk"
         />
       </div>
 
@@ -255,7 +255,7 @@ const FleetPage = () => {
           width: "100%",
         }}
       >
-      <DynamicForm
+        <DynamicForm
           setPopupVisibility={setPopupVisibility}
           apiCmd={PostFleet}
           formFields={[
@@ -326,8 +326,9 @@ const FleetPage = () => {
               required: true,
             },
           ]}
-          tempObject={{}}  
+          tempObject={{}}
           triggerRerender={triggerRerender}
+          heading="Toevoegen"
         />
       </div>
 

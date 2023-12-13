@@ -193,6 +193,7 @@ element in the array represents a column header in the table.*/
           ]}
           tempObject={temp.tempObject}
           triggerRerender={triggerRerender}
+          heading="Bewerk"
         />
       </div>
 
@@ -294,7 +295,7 @@ element in the array represents a column header in the table.*/
             },
             {
               name: "aantalDeuren",
-              label: "aantalDeuren",
+              label: "Aantal deuren",
               type: "number",
               initialValue: "",
               required: true,
@@ -302,6 +303,7 @@ element in the array represents a column header in the table.*/
           ]}
           tempObject={{}}
           triggerRerender={triggerRerender}
+          heading="Toevoegen"
         />
       </div>
 

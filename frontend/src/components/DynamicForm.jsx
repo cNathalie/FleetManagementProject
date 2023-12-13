@@ -5,7 +5,12 @@ import StatusMessage from "./StatusMessage";
 import CheckNoBg from "../assets/Media/CheckNoBg.png";
 import ErrorNoBg from "../assets/Media/ErrorNoBg.png";
 import { useFormik } from "formik";
-import { TEXT_STYLES, INPUT_STYLES, BUTTON_STYLES, BG_STYLES } from "../constants/tailwindStyles";
+import {
+  TEXT_STYLES,
+  INPUT_STYLES,
+  BUTTON_STYLES,
+  BG_STYLES,
+} from "../constants/tailwindStyles";
 
 import Select from "react-select";
 
@@ -15,6 +20,7 @@ const DynamicForm = ({
   formFields,
   tempObject,
   triggerRerender,
+  heading,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [showCheckMark, setShowCheckMark] = useState("");
@@ -65,10 +71,7 @@ const DynamicForm = ({
       <div className="mt-6 p-6 ml-4">
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <header className="flex justify-between">
-            <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>
-              {/* voorlopig staat hier bewerk, dit moet nog dynamisch worden aan de hand van op welke knop je drukt --> misschien voor jou Mohamed aangezien jij deze component gemaakt hebt */}
-              Bewerk
-            </h1>
+            <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>{heading}</h1>
             <Button
               className={BUTTON_STYLES.OVERVIEW_EXITBUTTON}
               onClick={() => {
@@ -84,54 +87,59 @@ const DynamicForm = ({
           </header>
 
           {formFields.map((field) => (
-          <div key={field.name} className="items-center flex flex-wrap ml-1">
-            <div className="w-1/4">
-              <label className={`${TEXT_STYLES.OVERVIEW_DATAHEADER}`} htmlFor={field.name}>
-                {field.label}
-              </label>
-            </div>
-            <div className="w-3/4">
-              {isEditing ? (
-                field.type === "select" ? (
-                  <Select
-                    id={field.name}
-                    name={field.name}
-                    className={INPUT_STYLES.OVERVIEW_DROPDWN_INPUT}
-                    isDisabled={!isEditing}
-                    options={field.options}
-                    isSearchable
-                    placeholder="Search or Select..."
-                    onChange={(selectedOption) => {
-                      formik.setFieldValue(
-                        field.name,
-                        selectedOption ? selectedOption.value : null
-                      );
-                    }}
-                    value={field.options.find(
-                      (option) => option.value === formik.values[field.name]
-                    )}
-                  />
+            <div key={field.name} className="items-center flex flex-wrap ml-1">
+              <div className="w-1/4">
+                <label
+                  className={`${TEXT_STYLES.OVERVIEW_DATAHEADER}`}
+                  htmlFor={field.name}
+                >
+                  {field.label}
+                </label>
+              </div>
+              <div className="w-3/4">
+                {isEditing ? (
+                  field.type === "select" ? (
+                    <Select
+                      id={field.name}
+                      name={field.name}
+                      className={INPUT_STYLES.OVERVIEW_DROPDWN_INPUT}
+                      isDisabled={!isEditing}
+                      options={field.options}
+                      isSearchable
+                      placeholder="Search or Select..."
+                      onChange={(selectedOption) => {
+                        formik.setFieldValue(
+                          field.name,
+                          selectedOption ? selectedOption.value : null
+                        );
+                      }}
+                      value={field.options.find(
+                        (option) => option.value === formik.values[field.name]
+                      )}
+                    />
+                  ) : (
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      type={field.type || "text"}
+                      onChange={formik.handleChange}
+                      value={formik.values[field.name]}
+                      className={`${INPUT_STYLES.OVERVIEW_INPUT} w-1/2`}
+                      disabled={!isEditing}
+                    />
+                  )
                 ) : (
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    type={field.type || "text"}
-                    onChange={formik.handleChange}
-                    value={formik.values[field.name]}
-                    className={`${INPUT_STYLES.OVERVIEW_INPUT} w-1/2`}
-                    disabled={!isEditing}
-                  />
-                )
-              ) : (
-                <span className={TEXT_STYLES.OVERVIEW_DATAVALUE}>{formik.values[field.name]}</span>
+                  <span className={TEXT_STYLES.OVERVIEW_DATAVALUE}>
+                    {formik.values[field.name]}
+                  </span>
+                )}
+              </div>
+
+              {formik.errors[field.name] && (
+                <div className="text-red-500">{formik.errors[field.name]}</div>
               )}
             </div>
-
-            {formik.errors[field.name] && (
-              <div className="text-red-500">{formik.errors[field.name]}</div>
-            )}
-          </div>
-        ))}
+          ))}
 
           <footer className="flex items-center mt-4">
             <StatusMessage
