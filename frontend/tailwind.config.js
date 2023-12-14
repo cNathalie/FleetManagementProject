@@ -15,6 +15,7 @@ module.exports = {
       darkBlue: "#0b5a64",
       transparent: "#ffffff00",
       adminPlaceHolder: "#ffffff7a",
+      overviewData: "#858585",
     },
     fontFamily: {
       mainFont: "inter",
@@ -31,7 +32,7 @@ module.exports = {
     },
     fontWeight: {
       btnFontWeigt: "600",
-      titleFontWeigt: "600",
+      titleFontWeight: "600",
     },
     extend: {
       spacing: {

@@ -5,8 +5,8 @@ import '../constants/table_foot.css'; // Import the CSS file
 const Pagination = ({ pageCount, onPageChange }) => {
   return (
     <ReactPaginate
-      previousLabel={'previous'}
-      nextLabel={'next'}
+      previousLabel={'<'}
+      nextLabel={'>'}
       breakLabel={'...'}
       breakClassName={'break-me'}
       pageCount={pageCount}
