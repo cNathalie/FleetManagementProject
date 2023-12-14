@@ -20,7 +20,7 @@ export const DeleteVoertuig = (tempid) => {
 };
 
 export const UpdateVoertuig = (formData) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     fetch(baseUrl + "Voertuig", {
       method: "PUT",
       headers: {
@@ -29,15 +29,11 @@ export const UpdateVoertuig = (formData) => {
       body: JSON.stringify(formData),
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        resolve(response); // Resolve the promise with the entire response object
+        resolve(response);
       })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-        reject(error); // Reject the promise with the error
-      });
+      .then((data) => {
+        console.log("data:", data);
+      })
   });
 };
 
@@ -59,7 +55,7 @@ export const PostVoertuig = (formData) => {
         resolve(response);
       })
       .then((data) => {
-        console.log("Success:", data);
+        console.log("data:", data);
       })
   });
 };
@@ -108,27 +104,27 @@ export const getTankkaart = (tempid) => {
 
 export const PostTankkaart = (formData) => {
   return new Promise((resolve, reject) => {
-  fetch(baseUrl + "Tankkaarten", {
-    method: "POST",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-       resolve(response);
+    fetch(baseUrl + "Tankkaarten", {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-      reject(error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        resolve(response);
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        reject(error);
+      });
   });
 };
 //#endregion
