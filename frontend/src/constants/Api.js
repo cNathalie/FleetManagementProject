@@ -1,8 +1,17 @@
-export const baseUrl = "http://localhost:5100/";
+import { sessionStorageItems } from "./sessionStorage";
+
+const accessToken = sessionStorage.getItem(sessionStorageItems.accessToken);
+
+export const baseUrl = "http://localhost:5210/";
 
 //#region Voertuigen Api
 export const getVoertuigen = () => {
-  return fetch(baseUrl + "Voertuig")
+  return fetch(baseUrl + "voertuigen", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    },
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to fetch data. Status: ${response.status}`);
@@ -16,14 +25,24 @@ export const getVoertuigen = () => {
 };
 
 export const DeleteVoertuig = (tempid) => {
-  fetch(baseUrl + `Voertuig/id?id=${tempid}`, { method: "DELETE" });
+  fetch(
+    baseUrl + `voeruigen/${tempid}`,
+    { method: "DELETE" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const UpdateVoertuig = (formData) => {
   return new Promise((resolve) => {
-    fetch(baseUrl + "Voertuig", {
+    fetch(baseUrl + "voertuigen", {
       method: "PUT",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
@@ -33,19 +52,29 @@ export const UpdateVoertuig = (formData) => {
       })
       .then((data) => {
         console.log("data:", data);
-      })
+      });
   });
 };
 
 export const getVoertuig = (tempid) => {
-  fetch(baseUrl + `Voertuig/id?id=${tempid}`, { method: "GET" });
+  fetch(
+    baseUrl + `voertuigen${tempid}`,
+    { method: "GET" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const PostVoertuig = (formData) => {
   return new Promise((resolve) => {
-    fetch(baseUrl + "Voertuig", {
+    fetch(baseUrl + "voertuigen", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         Accept: "*/*",
         "Content-Type": "application/json",
       },
@@ -56,28 +85,43 @@ export const PostVoertuig = (formData) => {
       })
       .then((data) => {
         console.log("data:", data);
-      })
+      });
   });
 };
 //#endregion
 
 //#region Tankkaarten Api
 export const getTankkaarten = async () => {
-  console.log(baseUrl + "Tankkaarten");
-  const response = await fetch(baseUrl + "Tankkaarten");
+  console.log(baseUrl + "tankkaarten");
+  const response = await fetch(baseUrl + "tankkaarten", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
   const data = await response.json();
   return data;
 };
 
 export const DeleteTankkaart = (tempid) => {
-  fetch(baseUrl + `Tankkaarten/id?id=${tempid}`, { method: "DELETE" });
+  fetch(
+    baseUrl + `tankkaarten/${tempid}`,
+    { method: "DELETE" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const UpdateTankkaart = (formData) => {
   return new Promise((resolve, reject) => {
-    fetch(baseUrl + "Tankkaarten", {
+    fetch(baseUrl + "tankkaarten", {
       method: "PUT",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
@@ -99,14 +143,24 @@ export const UpdateTankkaart = (formData) => {
 };
 
 export const getTankkaart = (tempid) => {
-  fetch(baseUrl + `Tankkaarten/id?id=${tempid}`, { method: "GET" });
+  fetch(
+    baseUrl + `tankkaarten/${tempid}`,
+    { method: "GET" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const PostTankkaart = (formData) => {
   return new Promise((resolve, reject) => {
-    fetch(baseUrl + "Tankkaarten", {
+    fetch(baseUrl + "tankkaarten", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         Accept: "*/*",
         "Content-Type": "application/json",
       },
@@ -131,20 +185,35 @@ export const PostTankkaart = (formData) => {
 
 //#region Bestuurders Api
 export const getBestuurders = async () => {
-  const response = await fetch(baseUrl + "Bestuurders");
+  const response = await fetch(baseUrl + "bestuurders", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
   const data = await response.json();
   return data;
 };
 
 export const DeleteBestuurder = (tempid) => {
-  fetch(baseUrl + `Bestuurders/id?id=${tempid}`, { method: "DELETE" });
+  fetch(
+    baseUrl + `bestuurders/${tempid}`,
+    { method: "DELETE" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const UpdateBestuurder = (formData) => {
   return new Promise((resolve, reject) => {
-    fetch(baseUrl + "Bestuurders", {
+    fetch(baseUrl + "bestuurders", {
       method: "PUT",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
@@ -166,14 +235,24 @@ export const UpdateBestuurder = (formData) => {
 };
 
 export const getBestuurder = (tempid) => {
-  fetch(baseUrl + `Bestuurders/id?id=${tempid}`, { method: "GET" });
+  fetch(
+    baseUrl + `bestuurders/${tempid}`,
+    { method: "GET" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const PostBestuurder = (formData) => {
   return new Promise((resolve, reject) => {
-    fetch(baseUrl + "Bestuurders", {
+    fetch(baseUrl + "bestuurders", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         Accept: "*/*",
         "Content-Type": "application/json",
       },
@@ -199,20 +278,35 @@ export const PostBestuurder = (formData) => {
 //#region Fleets Api
 
 export const getFleets = async () => {
-  const response = await fetch(baseUrl + "Fleet");
+  const response = await fetch(baseUrl + "fleet", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
   const data = await response.json();
   return data;
 };
 
 export const DeleteFleet = (tempid) => {
-  fetch(baseUrl + `Fleet/id?id=${tempid}`, { method: "DELETE" });
+  fetch(
+    baseUrl + `fleet/${tempid}`,
+    { method: "DELETE" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const UpdateFleet = (formData) => {
   return new Promise((resolve, reject) => {
-    fetch(baseUrl + "Fleet", {
+    fetch(baseUrl + "fleet", {
       method: "PUT",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
@@ -234,14 +328,15 @@ export const UpdateFleet = (formData) => {
 };
 
 export const getFleet = (tempid) => {
-  fetch(baseUrl + `Fleet/id?id=${tempid}`, { method: "GET" });
+  fetch(baseUrl + `fleet/${tempid}`, { method: "GET" });
 };
 
 export const PostFleet = (formData) => {
   return new Promise((resolve, reject) => {
-    fetch(baseUrl + "Fleet", {
+    fetch(baseUrl + "fleet", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         Accept: "*/*",
         "Content-Type": "application/json",
       },
@@ -266,7 +361,12 @@ export const PostFleet = (formData) => {
 
 //#region typeWagen Api
 export const getTypeWagen = () => {
-  return fetch(baseUrl + "TypeWagen")
+  return fetch(baseUrl + "typeswagen", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to fetch data. Status: ${response.status}`);
@@ -284,7 +384,12 @@ export const getTypeWagen = () => {
 //#region BrandstofTypes Api
 
 export const getBrandstofTypes = () => {
-  return fetch(baseUrl + "BrandstofTypes")
+  return fetch(baseUrl + "brandstoftypes", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to fetch data. Status: ${response.status}`);
@@ -303,7 +408,12 @@ export const getBrandstofTypes = () => {
 //#region RijbewijsTypes Api
 
 export const getTypeRijbewijs = () => {
-  return fetch(baseUrl + "TypeRijbewijs")
+  return fetch(baseUrl + "typesrijbewijs", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to fetch data. Status: ${response.status}`);

@@ -13,7 +13,7 @@ const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
     sessionStorage.getItem(sessionStorageItems.isLoggedIn) ==
     sessionStorageValues.true;
   const isAuthenticated =
-    sessionStorage.getItem(sessionStorageItems.token) !== null;
+    sessionStorage.getItem(sessionStorageItems.accessToken) !== null;
   const userRole = sessionStorage.getItem(sessionStorageItems.userRole);
 
   if (isLoggedIn && isAuthenticated && requiredRoles.includes(userRole)) {
