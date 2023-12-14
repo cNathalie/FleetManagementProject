@@ -23,7 +23,8 @@ const DynamicForm = ({
   heading,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [showCheckMark, setShowCheckMark] = useState("");
+  const [status, setStatus] = useState('');
+  const [showStatus, setShowStatus] = useState(false);
 
   const handleToggleEditMode = () => {
     if (isEditing) {
@@ -31,6 +32,13 @@ const DynamicForm = ({
     }
 
     setIsEditing(!isEditing);
+  };
+
+  const toggleShowStatus = () => {
+    setShowStatus(true);
+    setTimeout(() => {
+      setShowStatus(false);
+    }, 3000);
   };
 
   const formik = useFormik({
@@ -43,9 +51,11 @@ const DynamicForm = ({
         if (response.ok) {
           triggerRerender();
           setIsEditing(false);
-          setShowCheckMark("success");
+          setStatus('succes');
+          toggleShowStatus();
         } else {
-          setShowCheckMark("error");
+          setStatus('error');
+          toggleShowStatus();
         }
       }
     },
@@ -85,7 +95,6 @@ const DynamicForm = ({
               <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
             </Button>
           </header>
-
           {formFields.map((field) => (
             <div key={field.name} className="items-center flex flex-wrap ml-1">
               <div className="w-1/4">
@@ -134,24 +143,20 @@ const DynamicForm = ({
                   </span>
                 )}
               </div>
-
               {formik.errors[field.name] && (
                 <div className="text-red-500">{formik.errors[field.name]}</div>
               )}
             </div>
           ))}
-
           <footer className="flex items-center mt-4">
-            <StatusMessage
-              type={showCheckMark}
-              message={
-                showCheckMark == "succes"
-                  ? "Success!"
-                  : "Error! Something went wrong."
-              }
-              successImage={CheckNoBg}
-              errorImage={ErrorNoBg}
-            />
+            {setStatus && (
+              <StatusMessage
+                status={status}
+                successImage={CheckNoBg}
+                errorImage={ErrorNoBg}
+                isVisible={showStatus}
+              />
+            )}
 
             <div className="ml-auto">
               <Button

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "i2o7hWJ3QMyCAO6rjMVVT65xWXHxFuH90d+cQpvZVOg=",
+  "Source": "FMApi.App",
+  "BasePath": "_content/FMApi.App",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

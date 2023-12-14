@@ -139,6 +139,8 @@ const FleetPage = () => {
         <DynamicForm
           setPopupVisibility={setPopupVisibility}
           apiCmd={UpdateFleet}
+          //TODO: fix bestuurder naar 1 select
+          //TODO: fix voertuig naar 1 select
           formFields={[
             {
               name: "bestuurderNaam",
