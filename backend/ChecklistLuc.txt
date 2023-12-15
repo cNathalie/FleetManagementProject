@@ -1,0 +1,71 @@
+
+Checklist Luc
+
+ALGEMEEN
+	- .Net 8
+	- VSCode
+	- Unit test suite domein (min 10)
+	- Nuget packages up to date
+	
+
+REST API	
+	- **CHECK** Naming conventions 
+	- **CHECK** (I)ActionResult 
+	- **CHECK** Annotaties verplicht via code 
+	- **CHECK** Annotaties: produces/consumes, response codes, OperationId 
+	- **CHECK** Asynchroon 
+	- **CHECK** DTO's met data validations 
+	- **CHECK** AutoMapper 
+	- **CHECK** MediatR: DI, logging, validation
+
+PACKAGING
+	- Docker Compose (Linux Containers)
+	
+
+SECURITY
+	- **CHECK** CORS 
+	- **CHECK** JWT-Token met Refresh Tokens en login
+	- **CHECK** Paswoorden verlseuteld in DB
+	- **CHECK** HTTPS "only"
+	- **CHECK** Rate Limitor 
+	- **CHECK** Healthcheck met visualisatie
+	- IP Whitelisting
+	- **CHECK** Header beveiliging
+	
+	
+EF CORE
+	- **CHECK** Soft delete via generiek mechanisme 
+	- **CHECK** Asynchroon 
+	- SeriLog logging met Seq visulisatie
+	- **CHECK** SQL DLL in ASCII bestand (.sql)
+	- **CHECK** SQLServer
+
+
+
+
+
+// Assuming authToken is the JWT token obtained from your authentication process.
+const authToken = "your_jwt_token_here";
+
+// Make an API call with fetch
+fetch("https://api.example.com/resource", {
+  method: "GET",
+  headers: {
+    Authorization: `Bearer ${authToken}`,
+    "Content-Type": "application/json", // Include other headers as needed
+  },
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    // Process the API response data
+    console.log(data);
+  })
+  .catch((error) => {
+    // Handle errors
+    console.error("Error:", error);
+  });

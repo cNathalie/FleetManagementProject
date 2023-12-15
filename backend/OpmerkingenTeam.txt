@@ -1,0 +1,8 @@
+
+Opmerkingen Mohamed
+
+- Fleet: put en post met enkel ids			check
+- Voertuig: put kleur en deuren
+- Tankaart: dateonly ipv datetime			check
+- Tankkaart: brandstoftyp verandert niet	check
+- 
