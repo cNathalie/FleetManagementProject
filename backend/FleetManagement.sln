@@ -9,10 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FM.Infrastructure.EntityFra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5D246495-B1EF-4B21-A838-D18225D771DE}"
 	ProjectSection(SolutionItems) = preProject
-		DropTables.sql = DropTables.sql
+		Data\DropTables.sql = Data\DropTables.sql
 		Data\FMDBCreation.sql = Data\FMDBCreation.sql
 		Data\FMInserts.sql = Data\FMInserts.sql
-		FMTriggers.sql = FMTriggers.sql
+		Data\FMTriggers.sql = Data\FMTriggers.sql
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FM.Domain", "Libraries\FM.Domain\FM.Domain.csproj", "{3B602160-E33D-4116-AEAB-A6A3A38A4FA0}"
