@@ -195,22 +195,7 @@ namespace FleetManagement.Api
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement By CyberSentinels", Version = "v1" });
-
-                //c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
-                //{
-                //    Name = "Authorization",
-                //    Type = SecuritySchemeType.Http,
-                //    Scheme = "bearer",
-                //    BearerFormat = "JWT",
-                //    In = ParameterLocation.Header,
-                //    Description = "JWT Authorization header using the Bearer scheme.",
-                //});
-                ////////Add Operation Specific Authorization///////
-                //c.OperationFilter<AuthOperationFilter>();
-                //////////////////////////////////////////////////
             });
-
-
 
 
             // ----BUILD-----
