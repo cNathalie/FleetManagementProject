@@ -1,10 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FM.Domain.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FM.Domain.Validators;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FM.DomainTests.Validators
 {

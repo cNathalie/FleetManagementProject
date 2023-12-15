@@ -22,16 +22,6 @@ namespace FM.Infrastructure.EFRepositories
             _context = context;
         }
 
-        public Task DeleteByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Exists(DTypeRijbewijs entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<DTypeRijbewijs>> GetAllAsync()
         {
             try
@@ -61,16 +51,6 @@ namespace FM.Infrastructure.EFRepositories
                 if (ex is OperationCanceledException || ex is EntityDoesNotExistException) throw;
                 throw new TypeRijbewijsRepoException(ex.Message, ex);
             }
-        }
-
-        public Task<DTypeRijbewijs> InsertAsync(DTypeRijbewijs entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(DTypeRijbewijs entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -69,29 +69,5 @@ namespace FM.Infrastructure.EFRepositories
                 throw new TypeWagenException("TypeWagenRepo: " + ex.Message, ex);
             }
         }
-
-
-
-
-        public Task DeleteByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Exists(DTypeWagen entity)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public Task<DTypeWagen> InsertAsync(DTypeWagen entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(DTypeWagen entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

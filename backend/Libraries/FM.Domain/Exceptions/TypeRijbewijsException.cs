@@ -3,7 +3,7 @@
 namespace FM.Domain.Exceptions
 {
     [Serializable]
-    internal class TypeRijbewijsException : Exception
+    public class TypeRijbewijsException : Exception
     {
         public TypeRijbewijsException()
         {

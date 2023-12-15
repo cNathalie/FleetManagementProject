@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace FleetManagement.Api
+namespace FleetManagement.Api.Middleware
 {
     public class AuthOperationFilter : IOperationFilter
     {

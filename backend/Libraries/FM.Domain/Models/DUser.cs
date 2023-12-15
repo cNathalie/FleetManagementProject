@@ -6,6 +6,17 @@ namespace FM.Domain.Models
 {
     public class DUser
     {
+        public DUser(int userId, string? email, string? passwordSalt, string? passwordHash, FMRole? role)
+        {
+            UserId = userId;
+            Email = email;
+            PasswordSalt = passwordSalt;
+            PasswordHash = passwordHash;
+            Role = role;
+        }
+
+        public DUser() { }
+
         public int UserId { get; set; }
 
         private string? _email;
@@ -34,14 +45,31 @@ namespace FM.Domain.Models
         }
 
         private string? _passwordSalt;
-        public string? PasswordSalt { get; set; }
+        public string? PasswordSalt 
+        {
+            get { return _passwordSalt; } 
+            set
+            {
+                if(String.IsNullOrEmpty(value)) throw new LoginException("'PasswordSalt' is Empty");
+                _passwordSalt = value;   
+            }
+        }
 
-        private string? _passwordHash { get; set; }
-        public string? PasswordHash { get; set; }
+        private string? _passwordHash;
+        public string? PasswordHash 
+        {
+            get { return _passwordHash; } 
+            set
+            {
+                if(String.IsNullOrEmpty(value)) throw new LoginException("'PasswordHash' is Empty");
+                _passwordHash = value;
+            } 
+        }
 
 
 
         private FMRole? _role;
+
         public FMRole? Role
         {
             get
@@ -63,34 +91,5 @@ namespace FM.Domain.Models
                 }
             }
         }
-
-
-        //private string? _wachtwoord;
-        //public string? Wachtwoord 
-        //{ 
-        //    get { return _wachtwoord ?? throw new LoginException("'Wachtwoord' was not set to a proper value"); } 
-        //    set
-        //    {
-        //        if (!String.IsNullOrEmpty(value))
-        //        {
-        //            var ww = value.Trim();
-        //            if (PasswordValidator.IsValidPassword(ww))
-        //            {
-        //                _wachtwoord = ww;
-        //            }
-        //            else
-        //            {
-        //                throw new LoginException("'Wachtwoord' is Invalid (Must be at least 4 characters with at least 1 digit)");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            throw new LoginException("'Wachtwoord' is Empty");
-        //        }
-        //    }
-        //}
-
-
-
     }
 }
