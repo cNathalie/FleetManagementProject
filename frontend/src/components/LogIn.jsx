@@ -3,7 +3,7 @@ import { loginFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
-import { login } from "../constants/functions";
+import { login } from "../constants/Api";
 import { loginInfo } from "../constants/loginInfo";
 import { TEXT_STYLES } from "../constants/tailwindStyles";
 
@@ -19,11 +19,6 @@ export default function Login() {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
 
-  /**
-   * The handleSubmit function is used to handle form submission for a login form in a React application,
-   * and it navigates to the home page if the login is successful or displays an error message if the
-   * login fails.
-   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { succes, role, error } = await login(

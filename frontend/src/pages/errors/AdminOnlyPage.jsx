@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import LogOutButton from "../../components/LogOutButton";
-import { logout } from "../../constants/functions";
+import { logout } from "../../constants/Api";
 
 const AdminOnlyPage = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
-import { logout } from "../constants/functions";
+import { logout } from "../constants/Api";
 import { BUTTON_STYLES } from "../constants/tailwindStyles";
 
 const LogOutButton = () => {

@@ -10,6 +10,7 @@ using FM.Infrastructure.Services;
 using FM.Infrastructure.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -45,19 +46,32 @@ namespace FleetManagement.Api
             });
 
             // JWT-Authentication
+            builder.Services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.HttpOnly = HttpOnlyPolicy.Always;
+                options.Secure = CookieSecurePolicy.None;
+            });
+
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                             .AddEntityFrameworkStores<FleetManagementDbContext>();
-                            //.AddDefaultTokenProviders();
+            //.AddDefaultTokenProviders();
 
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
+            })
+            .AddCookie(options =>
             {
-                o.SaveToken = true;
-                o.TokenValidationParameters = new TokenValidationParameters
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     ValidAudience = builder.Configuration["Jwt:Audience"],
@@ -66,6 +80,14 @@ namespace FleetManagement.Api
                     ValidateAudience = true,
                     ValidateLifetime = false,
                     ValidateIssuerSigningKey = true
+                };
+                options.Events = new JwtBearerEvents // Get token from cookie
+                {
+                    OnMessageReceived = context =>
+                    {
+                        context.Token = context.Request.Cookies["accessToken"];
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
@@ -158,11 +180,12 @@ namespace FleetManagement.Api
                 {
                     options.AddPolicy("AllowOrigin", builder =>
                     {
-                        builder.AllowAnyOrigin()
+                        builder.WithOrigins("http://localhost:5173")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
-                            .WithHeaders("Authorization", "Content-Type");
-                        // .SetPreflightMaxAge(TimeSpan.FromSeconds(3600));
+                            .WithHeaders("Authorization", "Content-Type")
+                            .AllowCredentials()
+                            .SetPreflightMaxAge(TimeSpan.FromSeconds(3600));
                     });
                 });
             }
@@ -172,19 +195,19 @@ namespace FleetManagement.Api
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement By CyberSentinels", Version = "v1" });
-                c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
-                {
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer",
-                    BearerFormat = "JWT",
-                    In = ParameterLocation.Header,
-                    Description = "JWT Authorization header using the Bearer scheme.",
-                });
 
-                //////Add Operation Specific Authorization///////
-                c.OperationFilter<AuthOperationFilter>();
-                ////////////////////////////////////////////////
+                //c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+                //{
+                //    Name = "Authorization",
+                //    Type = SecuritySchemeType.Http,
+                //    Scheme = "bearer",
+                //    BearerFormat = "JWT",
+                //    In = ParameterLocation.Header,
+                //    Description = "JWT Authorization header using the Bearer scheme.",
+                //});
+                ////////Add Operation Specific Authorization///////
+                //c.OperationFilter<AuthOperationFilter>();
+                //////////////////////////////////////////////////
             });
 
 
@@ -244,22 +267,22 @@ namespace FleetManagement.Api
                 }
             };
 
-            
-            app.UseCors("AllowOrigin");          
+
+            app.UseCors("AllowOrigin");
             // Middleware
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 
             app.UseHealthChecks("/working", options);
 
-// Sequence important for auth !!
+            // Sequence important for auth !!
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
-// -----------------------------
+            // -----------------------------
             app.MapHealthChecksUI(); // url: /healthchecks-ui
             app.MapControllers();
-            
+
 
             app.UseRateLimiter();
 

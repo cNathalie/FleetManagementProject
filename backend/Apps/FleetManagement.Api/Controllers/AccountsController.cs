@@ -51,7 +51,7 @@ namespace FleetManagement.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthenticatedUserDTO))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserRoleDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -60,7 +60,25 @@ namespace FleetManagement.Api.Controllers
             try
             {
                 var response = await _userService.Login(_mapper.Map<LoginResource>(resource), cancellationToken);
-                return Ok(_mapper.Map<AuthenticatedUserDTO>(response));
+                Response.Cookies.Append("accessToken", response.Tokens!.AccessToken!, new CookieOptions
+                {
+                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    HttpOnly = true, // Preventing JavaScript access to the cookie
+                    Secure = true // Send the cookie over HTTPS
+                });
+                Response.Cookies.Append("refreshToken", response.Tokens!.RefreshToken!, new CookieOptions
+                {
+                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    HttpOnly = true, 
+                    Secure = true 
+                });
+
+                var userDTO = new UserRoleDTO()
+                {
+                    Role = response.Role
+                };
+
+                return Ok(userDTO);
             }
             catch (Exception e)
             {
@@ -71,6 +89,28 @@ namespace FleetManagement.Api.Controllers
             }
         }
 
+
+        //[AllowAnonymous]
+        //[HttpPost("refresh-token")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> RefreshToken([FromBody] TokensDTO resource)
+        //{
+        //    try
+        //    {
+        //        var response = await _userService.RefreshToken(_mapper.Map<Tokens>(resource));
+        //        return Ok(_mapper.Map<TokensDTO>(response));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.LogError("UserController: " + e.Message, e);
+        //        if (e is UnauthorizedAccessException || e is EntityDoesNotExistException)
+        //            return Unauthorized(new { ErrorMessage = e.Message });
+        //        return BadRequest(new { ErrorMessage = e.Message });
+        //    }
+        //}
 
         [AllowAnonymous]
         [HttpPost("refresh-token")]
@@ -83,7 +123,19 @@ namespace FleetManagement.Api.Controllers
             try
             {
                 var response = await _userService.RefreshToken(_mapper.Map<Tokens>(resource));
-                return Ok(_mapper.Map<TokensDTO>(response));
+                Response.Cookies.Append("accessToken", response.AccessToken!, new CookieOptions
+                {
+                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    HttpOnly = true, // Prevent JavaScript access to the cookie
+                    Secure = true // Only send the cookie over HTTPS
+                });
+                Response.Cookies.Append("refreshToken", response.RefreshToken!, new CookieOptions
+                {
+                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    HttpOnly = true, // Prevent JavaScript access to the cookie
+                    Secure = true // Only send the cookie over HTTPS
+                });
+                return Ok("Token refreshed");
             }
             catch (Exception e)
             {
@@ -93,7 +145,6 @@ namespace FleetManagement.Api.Controllers
                 return BadRequest(new { ErrorMessage = e.Message });
             }
         }
-
 
         [Authorize]
         [HttpGet]

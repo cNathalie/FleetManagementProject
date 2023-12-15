@@ -36,7 +36,7 @@ const FleetPage = () => {
   const inputData = [
     "d.bestuurderNaam",
     "d.bestuurderVoornaam",
-    "d.tankkaartId",
+    "d.tankaartId",
     "d.voertuigMerkModel",
     "d.voertuigNummerplaat",
     "d.voertuigChassisnummer",

@@ -22,11 +22,11 @@ const TankkaartenPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
   element in the array represents a column header in the table.*/
   const tableHeaderContent = [
-    "kaartnummer",
-    "geldigheidsdatum",
-    "pincode",
-    "brandstofType",
-    "isActief",
+    "Kaartnummer",
+    "Geldigheidsdatum",
+    "Pincode",
+    "Brandstof Type",
+    "Is Actief",
     "Acties", //Laten blijven
   ];
   /* The `inputData` array is used to define the data that will be displayed in each column of the table.*/
@@ -34,7 +34,7 @@ const TankkaartenPage = () => {
     "d.kaartnummer",
     "d.geldigheidsdatum",
     "d.pincode",
-    "d.brandstofType",
+    "d.brandstoftype",
     "d.isActief ? 'vrij' : 'bezet'",
   ];
   /* The `iDname` variable is used to specify the name of the ID field in the table data.*/
