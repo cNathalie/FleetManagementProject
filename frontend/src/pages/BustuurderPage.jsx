@@ -22,11 +22,11 @@ const BustuurderPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
   element in the array represents a column header in the table.*/
   const tableHeaderContent = [
-    "naam",
-    "voornaam",
-    "adres",
-    "rijksregisternummer",
-    "rijbewijs",
+    "Naam",
+    "Voornaam",
+    "Adres",
+    "Rijksregisternummer",
+    "Rijbewijs",
     "Acties", //Laten blijven
   ];
   /* The `inputData` array is used to define the data that will be displayed in each column of the table.*/

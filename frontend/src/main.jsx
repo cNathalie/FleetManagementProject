@@ -13,6 +13,7 @@ import TankkaartenPage from "./pages/TankkaartenPage.jsx";
 import BustuurderPage from "./pages/BustuurderPage.jsx";
 import FleetPage from "./pages/FleetPage.jsx";
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
+import DarkModeContextProvider from "../src/contexts/DarkModeContext.jsx";
 
 const browserRouter = createBrowserRouter([
   {
@@ -82,6 +83,8 @@ const browserRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={browserRouter}></RouterProvider>
+    <DarkModeContextProvider>
+      <RouterProvider router={browserRouter}></RouterProvider>
+    </DarkModeContextProvider>
   </React.StrictMode>
 );
