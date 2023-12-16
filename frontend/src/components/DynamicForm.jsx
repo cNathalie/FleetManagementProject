@@ -26,7 +26,7 @@ const DynamicForm = ({
   const [isEditing, setIsEditing] = useState(false);
   const [status, setStatus] = useState("");
   const [showStatus, setShowStatus] = useState(false);
-  const [changedRecord, setChangedRecord] = useState(false);
+  const [removeLeavePopup, setRemoveLeavePopup] = useState(true);
 
   const handleToggleEditMode = () => {
     if (isEditing) {
@@ -34,6 +34,7 @@ const DynamicForm = ({
     }
 
     setIsEditing(!isEditing);
+    setRemoveLeavePopup(false);
   };
 
   const toggleShowStatus = () => {
@@ -53,9 +54,9 @@ const DynamicForm = ({
         if (response.ok) {
           triggerRerender();
           setIsEditing(false);
+          setRemoveLeavePopup(true);
           setStatus("succes");
           toggleShowStatus();
-          setChangedRecord(true);
         } else {
           setStatus("error");
           toggleShowStatus();
@@ -91,17 +92,17 @@ const DynamicForm = ({
             <Button
               className={BUTTON_STYLES.OVERVIEW_EXITBUTTON}
               onClick={() => {
-                if (!changedRecord) {
+                if (!removeLeavePopup) {
                   setPopupVisibility("popupGoBack", true);
                   setPopupVisibility("detailChange", false);
                   setPopupVisibility("addItem", false);
                   setIsEditing(false);
+                  setRemoveLeavePopup(true);
                 } else {
                   setPopupVisibility("detailChange", false);
                   setPopupVisibility("addItem", false);
                   setPopupVisibility("overlay", false);
                   setIsEditing(false);
-                  setChangedRecord(false);
                 }
               }}
               type="button"
