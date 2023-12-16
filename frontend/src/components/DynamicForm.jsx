@@ -21,10 +21,12 @@ const DynamicForm = ({
   tempObject,
   triggerRerender,
   heading,
+  btnValue,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState("");
   const [showStatus, setShowStatus] = useState(false);
+  const [changedRecord, setChangedRecord] = useState(false);
 
   const handleToggleEditMode = () => {
     if (isEditing) {
@@ -51,10 +53,11 @@ const DynamicForm = ({
         if (response.ok) {
           triggerRerender();
           setIsEditing(false);
-          setStatus('succes');
+          setStatus("succes");
           toggleShowStatus();
+          setChangedRecord(true);
         } else {
-          setStatus('error');
+          setStatus("error");
           toggleShowStatus();
         }
       }
@@ -79,16 +82,27 @@ const DynamicForm = ({
   return (
     <div className={BG_STYLES.OVERVIEW_BG}>
       <div className="mt-6 p-6 ml-4">
-        <form onSubmit={formik.handleSubmit} className="space-y-4">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="space-y-4 relative pb-12"
+        >
           <header className="flex justify-between">
             <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>{heading}</h1>
             <Button
               className={BUTTON_STYLES.OVERVIEW_EXITBUTTON}
               onClick={() => {
-                setPopupVisibility("popupGoBack", true);
-                setPopupVisibility("detailChange", false);
-                setPopupVisibility("addItem", false);
-                setIsEditing(false);
+                if (!changedRecord) {
+                  setPopupVisibility("popupGoBack", true);
+                  setPopupVisibility("detailChange", false);
+                  setPopupVisibility("addItem", false);
+                  setIsEditing(false);
+                } else {
+                  setPopupVisibility("detailChange", false);
+                  setPopupVisibility("addItem", false);
+                  setPopupVisibility("overlay", false);
+                  setIsEditing(false);
+                  setChangedRecord(false);
+                }
               }}
               type="button"
             >
@@ -96,7 +110,10 @@ const DynamicForm = ({
             </Button>
           </header>
           {formFields.map((field) => (
-            <div key={field.name} className="items-center flex flex-wrap ml-1">
+            <div
+              key={field.name}
+              className="items-center flex flex-wrap ml-1 relative"
+            >
               <div className="w-1/4">
                 <label
                   className={`${TEXT_STYLES.OVERVIEW_DATAHEADER}`}
@@ -144,11 +161,13 @@ const DynamicForm = ({
                 )}
               </div>
               {formik.errors[field.name] && (
-                <div className="text-red-500">{formik.errors[field.name]}</div>
+                <div className="text-red-500 absolute right-30">
+                  {formik.errors[field.name]}
+                </div>
               )}
             </div>
           ))}
-          <footer className="flex items-center mt-4">
+          <footer className="flex absolute right-0">
             {setStatus && (
               <StatusMessage
                 status={status}
@@ -158,13 +177,13 @@ const DynamicForm = ({
               />
             )}
 
-            <div className="ml-auto">
+            <div className="pl-3">
               <Button
                 className={BUTTON_STYLES.OVERVIEW_EDITBUTTON}
                 onClick={handleToggleEditMode}
                 type="button"
               >
-                {isEditing ? "Opslaan" : "Bewerk"}
+                {isEditing ? "Opslaan" : btnValue}
               </Button>
             </div>
           </footer>

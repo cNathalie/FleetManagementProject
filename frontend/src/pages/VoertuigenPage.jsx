@@ -194,6 +194,7 @@ element in the array represents a column header in the table.*/
           tempObject={temp.tempObject}
           triggerRerender={triggerRerender}
           heading="Bewerk"
+          btnValue="Bewerk"
         />
       </div>
 
@@ -304,6 +305,7 @@ element in the array represents a column header in the table.*/
           tempObject={{}}
           triggerRerender={triggerRerender}
           heading="Toevoegen"
+          btnValue="Voeg toe"
         />
       </div>
 
