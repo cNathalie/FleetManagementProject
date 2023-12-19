@@ -172,6 +172,7 @@ const BustuurderPage = () => {
           tempObject={temp.tempObject}
           triggerRerender={triggerRerender}
           heading="Bewerk"
+          btnValue="Bewerk"
         />
       </div>
 
@@ -264,6 +265,7 @@ const BustuurderPage = () => {
           tempObject={{}}
           triggerRerender={triggerRerender}
           heading="Toevoegen"
+          btnValue="Voeg toe"
         />
       </div>
 
