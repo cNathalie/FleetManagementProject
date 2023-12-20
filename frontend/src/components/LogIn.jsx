@@ -3,15 +3,17 @@ import { loginFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
-import { login } from "../constants/Api";
 import { loginInfo } from "../constants/loginInfo";
 import { TEXT_STYLES } from "../constants/tailwindStyles";
+import useAuth from "../authentication/useAuth";
 
 const fields = loginFields;
 let fieldsState = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
+
+  const {login} = useAuth();
   const [loginState, setLoginState] = useState(fieldsState);
   const navigate = useNavigate();
 

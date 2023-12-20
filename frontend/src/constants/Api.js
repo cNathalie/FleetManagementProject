@@ -1,49 +1,5 @@
-import Axios from 'axios';
-import { sessionStorageItems, sessionStorageValues } from "./sessionStorage";
-
 
 export const baseUrl = "http://localhost:5210/";
-
-// Authentication
-export async function login(email, password) {
-  try {
-    const response = await Axios.post(
-      baseUrl + "accounts/authenticate",
-      {
-        email: email,
-        password: password,
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    );
-
-    const { role } = response.data;
-    sessionStorage.setItem(sessionStorageItems.accessToken, "accessToken");
-    sessionStorage.setItem(sessionStorageItems.refreshToken, "refreshToken");
-    sessionStorage.setItem(sessionStorageItems.userRole, role);
-    sessionStorage.setItem(sessionStorageItems.isLoggedIn,sessionStorageValues.true);
-
-    console.log("Login authorized by API");
-    return { succes: true, role };
-  } catch (error) {
-    console.error("Login failed: ", error);
-    return { succes: false, error: error.response?.data };
-  }
-}
-
-export function logout() {
-  console.log(
-    "Closing session, deleting token and userole from sessionStorage"
-  );
-  sessionStorage.setItem(sessionStorageItems.accesToken, null);
-  sessionStorage.setItem(sessionStorageItems.userRole, null);
-  sessionStorage.setItem(
-    sessionStorageItems.isLoggedIn,
-    sessionStorageValues.false
-  );
-}
 
 
 //#region Voertuigen Api

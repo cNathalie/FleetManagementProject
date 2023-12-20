@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../constants/Api";
+import useAuth from "../../authentication/useAuth";
+
 
 const AdminOnlyPage = () => {
+  const {logout} = useAuth();
   const navigate = useNavigate();
 
   return (

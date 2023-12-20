@@ -2,15 +2,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
-import { logout } from "../constants/Api";
+
 import { BUTTON_STYLES } from "../constants/tailwindStyles";
+import useAuth from "../authentication/useAuth";
 
 const LogOutButton = () => {
   /* In this code snippet, `useNavigate` is a hook provided by the `react-router-dom` library. It returns
 a navigate function that can be used to programmatically navigate to different routes in your
 application. */
   const navigate = useNavigate();
-
+  const {logout} = useAuth();
   const onClick = () => {
     logout();
     console.log("Navigating to loginpage");

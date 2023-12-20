@@ -47,8 +47,8 @@ namespace FM.Infrastructure.Services
                         new Claim(JwtRegisteredClaimNames.Jti,
                             Guid.NewGuid().ToString())
                     }),
-               
-                    Expires = DateTime.Now.AddMinutes(15),
+                
+                    Expires = DateTime.Now.AddMinutes(5),
                     Audience = _configuration["Jwt:Audience"],
                     Issuer = _configuration["Jwt:Issuer"],
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
@@ -82,7 +82,9 @@ namespace FM.Infrastructure.Services
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
+                ValidIssuer = _configuration["Jwt:Issuer"],
                 ValidateAudience = true,
+                ValidAudience = _configuration["Jwt:Audience"],
                 ValidateLifetime = false,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Key),
@@ -92,7 +94,7 @@ namespace FM.Infrastructure.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
             JwtSecurityToken? jwtSecurityToken = securityToken as JwtSecurityToken;
-            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature, StringComparison.InvariantCultureIgnoreCase))
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
             {
                 throw new SecurityTokenException("Invalid token");
             }

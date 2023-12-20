@@ -136,4 +136,10 @@ public sealed class EncryptedUserService : IEncryptedUserService
         }
     }
 
+    public async Task Logout(Tokens tokens)
+    {
+        var principal = _jwtManager.GetPrincipalFromExpiredToken(tokens.AccessToken!);
+        var userId = Int32.Parse(principal.FindFirst("UserId")!.Value);
+        await DeleteUserRefreshTokens(userId, tokens.RefreshToken!);
+    }
 }

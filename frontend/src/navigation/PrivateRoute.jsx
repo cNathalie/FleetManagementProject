@@ -1,31 +1,29 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import AdminOnlyPage from "../pages/errors/AdminOnlyPage";
-import {
-  sessionStorageItems,
-  sessionStorageValues,
-} from "../constants/sessionStorage";
 import { loginInfo } from "../constants/loginInfo";
+import useAuth from "../authentication/useAuth";
 
 const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
-  const isLoggedIn =
-    sessionStorage.getItem(sessionStorageItems.isLoggedIn) ==
-    sessionStorageValues.true;
-  const isAuthenticated =
-    sessionStorage.getItem(sessionStorageItems.accessToken) !== null;
-  const userRole = sessionStorage.getItem(sessionStorageItems.userRole);
+  
+  const {userRole, isLoading} = useAuth();
+  console.log(userRole);
+  
+  if(isLoading){
+    return <p>LOADING</p>
+  }
 
-  if (isLoggedIn && isAuthenticated && requiredRoles.includes(userRole)) {
+  if (userRole !== null && requiredRoles.includes(userRole)) {
     console.log("User is logged in and has rights");
     return Component;
   }
 
-  if (isLoggedIn && isAuthenticated && !requiredRoles.includes(userRole)) {
+  if (userRole !== null && !requiredRoles.includes(userRole)) {
     console.log(userRole);
     console.log("User is logged in but has no rights");
 
-    return < AdminOnlyPage />;
+    return <AdminOnlyPage />;
   }
 
   const info = loginInfo.notLoggedIn;

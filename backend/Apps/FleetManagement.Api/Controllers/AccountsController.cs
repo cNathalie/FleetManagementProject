@@ -62,13 +62,13 @@ namespace FleetManagement.Api.Controllers
                 var response = await _userService.Login(_mapper.Map<LoginResource>(resource), cancellationToken);
                 Response.Cookies.Append("accessToken", response.Tokens!.AccessToken!, new CookieOptions
                 {
-                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    Expires = DateTimeOffset.Now.AddMinutes(5),
                     HttpOnly = true, // Preventing JavaScript access to the cookie
                     Secure = true // Send the cookie over HTTPS
                 });
                 Response.Cookies.Append("refreshToken", response.Tokens!.RefreshToken!, new CookieOptions
                 {
-                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    Expires = DateTimeOffset.Now.AddMinutes(5),
                     HttpOnly = true, 
                     Secure = true 
                 });
@@ -90,48 +90,33 @@ namespace FleetManagement.Api.Controllers
         }
 
 
-        //[AllowAnonymous]
-        //[HttpPost("refresh-token")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<IActionResult> RefreshToken([FromBody] TokensDTO resource)
-        //{
-        //    try
-        //    {
-        //        var response = await _userService.RefreshToken(_mapper.Map<Tokens>(resource));
-        //        return Ok(_mapper.Map<TokensDTO>(response));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        _logger.LogError("UserController: " + e.Message, e);
-        //        if (e is UnauthorizedAccessException || e is EntityDoesNotExistException)
-        //            return Unauthorized(new { ErrorMessage = e.Message });
-        //        return BadRequest(new { ErrorMessage = e.Message });
-        //    }
-        //}
-
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost("refresh-token")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RefreshToken([FromBody] TokensDTO resource)
+        public async Task<IActionResult> RefreshToken()
         {
             try
             {
-                var response = await _userService.RefreshToken(_mapper.Map<Tokens>(resource));
+                var tokens = new Tokens()
+                {
+                    AccessToken = Request.Cookies["accessToken"],
+                    RefreshToken = Request.Cookies["refreshToken"]
+                };
+
+                var response = await _userService.RefreshToken(_mapper.Map<Tokens>(tokens));
+
                 Response.Cookies.Append("accessToken", response.AccessToken!, new CookieOptions
                 {
-                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    Expires = DateTimeOffset.Now.AddMinutes(5),
                     HttpOnly = true, // Prevent JavaScript access to the cookie
                     Secure = true // Only send the cookie over HTTPS
                 });
                 Response.Cookies.Append("refreshToken", response.RefreshToken!, new CookieOptions
                 {
-                    Expires = DateTimeOffset.Now.AddMinutes(13),
+                    Expires = DateTimeOffset.Now.AddMinutes(5),
                     HttpOnly = true, // Prevent JavaScript access to the cookie
                     Secure = true // Only send the cookie over HTTPS
                 });
@@ -142,6 +127,33 @@ namespace FleetManagement.Api.Controllers
                 _logger.LogError("UserController: " + e.Message, e);
                 if (e is UnauthorizedAccessException || e is EntityDoesNotExistException)
                     return Unauthorized(new { ErrorMessage = e.Message });
+                return BadRequest(new { ErrorMessage = e.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Logout()
+        {
+            try
+            {
+                var tokens = new Tokens()
+                {
+                    AccessToken = Request.Cookies["accessToken"],
+                    RefreshToken = Request.Cookies["refreshToken"]
+                };
+
+                await _userService.Logout(_mapper.Map<Tokens>(tokens));
+                Response.Cookies.Delete("accessToken");
+                Response.Cookies.Delete("refreshToken");
+                return Ok("Logged out");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("UserController: " + e.Message, e);
                 return BadRequest(new { ErrorMessage = e.Message });
             }
         }

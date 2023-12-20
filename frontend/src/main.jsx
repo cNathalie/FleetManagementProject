@@ -13,6 +13,7 @@ import TankkaartenPage from "./pages/TankkaartenPage.jsx";
 import BustuurderPage from "./pages/BustuurderPage.jsx";
 import FleetPage from "./pages/FleetPage.jsx";
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
+import AuthContextProvider from "./authentication/AuthContext.jsx";
 
 const browserRouter = createBrowserRouter([
   {
@@ -67,9 +68,7 @@ const browserRouter = createBrowserRouter([
             requiredRoles={["User", "Admin"]}
           />
         ),
-
       },
-
     ],
   },
   {
@@ -82,6 +81,8 @@ const browserRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={browserRouter}></RouterProvider>
+    <AuthContextProvider>
+      <RouterProvider router={browserRouter}></RouterProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );

@@ -55,7 +55,6 @@ namespace FleetManagement.Api
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                             .AddEntityFrameworkStores<FleetManagementDbContext>();
-            //.AddDefaultTokenProviders();
 
             builder.Services.AddAuthentication(options =>
             {
@@ -78,8 +77,9 @@ namespace FleetManagement.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:PrivateKey"]!)),
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidateLifetime = false,
-                    ValidateIssuerSigningKey = true
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ClockSkew = System.TimeSpan.Zero
                 };
                 options.Events = new JwtBearerEvents // Get token from cookie
                 {
@@ -254,8 +254,10 @@ namespace FleetManagement.Api
 
 
             app.UseCors("AllowOrigin");
-            // Middleware
+            
+            // Middleware for exceptions
             app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 
 
             app.UseHealthChecks("/working", options);
