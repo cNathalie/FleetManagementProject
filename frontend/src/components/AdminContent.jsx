@@ -8,11 +8,15 @@ import {
   TEXT_STYLES,
   CARD_STYLES,
 } from "../constants/tailwindStyles";
+import { addUser } from "../constants/Api";
 
 export const AdminContent = () => {
-  const handleAddUserSubmit = (formData) => {
+  const handleAddUserSubmit = async (formData) => {
     // Handle form submission for adding a user
-    console.log("Add User:", formData);
+    if (formData.password !== formData.confirmPassword) {
+      alert("Wachtwoorden komen niet overeen");
+    }
+    await addUser(formData);
   };
 
   const handleRemoveUserSubmit = (formData) => {

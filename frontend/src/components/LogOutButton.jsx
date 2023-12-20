@@ -12,8 +12,8 @@ a navigate function that can be used to programmatically navigate to different r
 application. */
   const navigate = useNavigate();
   const {logout} = useAuth();
-  const onClick = () => {
-    logout();
+  const onClick = async () => {
+    await logout();
     console.log("Navigating to loginpage");
     navigate("/");
   };

@@ -9,7 +9,6 @@ const AuthContextProvider = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const refreshAccessToken = async () => {
-    
     try {
       const response = await Axios.post(
         baseUrl + "accounts/refresh-token",
@@ -21,7 +20,7 @@ const AuthContextProvider = (props) => {
       );
       console.log(response.data);
     } catch (error) {
-      console.log(error);
+      logout();
     } 
   };
 
@@ -81,7 +80,7 @@ const AuthContextProvider = (props) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, logout, refreshAccessToken, userRole, isLoading }}
+      value={{ login, logout, userRole, isLoading }}
     >
       {props.children}
     </AuthContext.Provider>

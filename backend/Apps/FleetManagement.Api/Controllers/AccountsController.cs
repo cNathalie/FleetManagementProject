@@ -30,7 +30,7 @@ namespace FleetManagement.Api.Controllers
             _repository = repo;
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserOutgoingDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
