@@ -7,6 +7,15 @@
   height: 100%;
 }
 
+.dark-pagination-container {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  position: fixed;
+  background-color: #032030;
+  height: 100%;
+}
+
 
 .pagination-item {
   list-style: none; /* Remove default list styles */
@@ -25,7 +34,24 @@
   font-weight: bold;
 }
 
+.dark-pagination-link {
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid rounded #ccc;
+  border-radius: 15px;
+  color: #fff;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
 .pagination-item.active .pagination-link {
   background-color: #19B9CE; /* Customize the background color for the active item */
   color: #fff; /* Customize text color for the active item */
+}
+
+.dark-pagination-item.active .dark-pagination-link {
+  background-color: #004D74;
+  color: #fff;
 }

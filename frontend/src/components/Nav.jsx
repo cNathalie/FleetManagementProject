@@ -6,12 +6,17 @@ import Button from "./Button";
 import homePage from "../constants/homePageContent";
 import LogOutButton from "./LogOutButton";
 import { BG_STYLES, BUTTON_STYLES } from "../constants/tailwindStyles";
+import { Icon, IconButton } from "@mui/material";
+import { useDarkMode } from "../hooks/useDarkMode";
+import { LightModeOutlined, DarkModeOutlined } from "@mui/icons-material";
 
 const Nav = () => {
   const navigate = useNavigate();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <div className={`${BG_STYLES.NAV_BG} w-full fixed flex flex-wrap items-center justify-between mx-auto`}>
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className={`${BG_STYLES.NAV_BG} w-full fixed flex flex-wrap items-center justify-between mx-auto`}>
       <div className="pt-2 pl-6">
         <Button
           onClick={() => {
@@ -19,7 +24,7 @@ const Nav = () => {
           }}
         >
           <img
-            src="../src/assets/Media/FM_noBG.png"
+            src={isDarkMode ? "../src/assets/Media/DARK_FM_noBG.png" : "../src/assets/Media/FM_noBG.png"}
             alt="logo"
             className="w-[151px] h-[60px]"
           />
@@ -42,6 +47,14 @@ const Nav = () => {
       </div>
       <div>
         <div className="px-6 flex flex-wrap">
+          <div className="mr-4">
+            <IconButton
+          onClick={() => {
+            toggleDarkMode();
+          }}>
+            {isDarkMode ? <LightModeOutlined style={{fill: "white"}} /> : <DarkModeOutlined style={{fill: "#0B5A64"}} />}
+          </IconButton>
+          </div>
           <Button
             className={`${BUTTON_STYLES.NAV_ADMINBUTTON} px-4 py-2`}
             onClick={() => {
@@ -56,6 +69,8 @@ const Nav = () => {
         </div>
       </div>
     </div>
+    </div>
+    
     // <div className="bg-black fixed w-full z-20 border-b border-gray-200">
     //   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     //     <div className="fixed left-0 top-0">

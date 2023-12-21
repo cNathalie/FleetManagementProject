@@ -14,18 +14,18 @@ export const BUTTON_STYLES = {
     "bg-blueBtn text-white border-blueBtn font-btnFontWeigt font-Helvetica text-btnFontSize rounded-[10px] hover:bg-hoverBtn",
 
   //HOMEPAGE
-  NAV_BUTTONS: "text-blueText rounded hover:bg-gray-100 md:p-0 font-mainFont",
+  NAV_BUTTONS: "text-blueText rounded hover:bg-gray-100 md:p-0 font-mainFont dark:text-white dark:hover:bg-darkBlue4",
   NAV_ADMINBUTTON:
-    "text-white font-mainFont bg-blueBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-sm text-center",
+    "text-white font-mainFont bg-blueBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-sm text-center dark:bg-darkBlue4 dark:hover:bg-darkBlue5",
   NAV_LOGOUTBUTTON:
-    "rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText font-mainFont font-semibold text-darkBlue text-adminBtnFontSize text-center",
+    "rounded-[10px] bg-whiteText border border-solid border-darkBlue font-semibold hover:bg-darkBlue hover:text-whiteText font-mainFont font-semibold text-darkBlue text-adminBtnFontSize text-center dark:hover:bg-darkBlue5",
   HOMEPAGE_CARDBUTTON:
-    "w-3/4 h-[53px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-white bg-blueBtn hover:bg-hoverBtn cursor-pointer",
+    "w-3/4 h-[53px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-white bg-blueBtn hover:bg-hoverBtn cursor-pointer dark:bg-darkBlue1 dark:hover:bg-darkBlue4",
 
   //OVERVIEW PAGE
   OVERVIEW_EXITBUTTON: "rounded-full bg-whiteText w-10 h-10 font-btnFontWeigt",
   OVERVIEW_EDITBUTTON: "w-28 h-[40px] rounded-[10px] font-btnFontWeigt font-Helvetica text-btnFontSize text-whiteText bg-blueBtn hover:bg-hoverBtn cursor-pointer",
-  OVERVIEW_ADDBUTTON: "w-[150px] md:w-[150px] h-[35] md:h-[43px] font-mainFont font-semibold text-white bg-blueBtn hover:bg-hoverBtn flex items-center justify-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 transform translate-x-2",
+  OVERVIEW_ADDBUTTON: "w-[150px] md:w-[150px] h-[35] md:h-[43px] font-mainFont font-semibold text-white bg-blueBtn hover:bg-hoverBtn flex items-center justify-center focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 transform translate-x-2 dark:bg-darkBlue4 dark:hover:bg-darkBlue5",
 
   //POPUPS
   POPUP_LEFT:
@@ -48,7 +48,7 @@ export const TEXT_STYLES = {
 
   //HOMEPAGE
   HOMEPAGE_CARDTITLE:
-    "font-titleFontWeight text-[32px] font-Helvetica text-center h-[15%]",
+    "font-titleFontWeight text-[32px] font-Helvetica text-center h-[15%] pt-5",
   HOMEPAGE_CARDTEXT:
     "font-semibold text-[20px] font-Helvetica text-center font-titleFontWeight h-[60%] flex items-center p-5",
 
@@ -62,8 +62,8 @@ export const TEXT_STYLES = {
   OVERVIEW_DATAHEADER: "font-mainFont font-titleFontWeight uppercase",
   OVERVIEW_DATAVALUE: "font-mainFont font-semibold text-overviewData text-[18px] text-left tracking-[0] leading-[normal] whitespace-nowrap w-[75%]",
   OVERVIEW_TABLEHEAD: "w-full max-w-[1122px] h-[585px] font-mainFont text-sm text-left text-overviewData shadow-md sm:rounded-lg",
-  OVERVIEW_TABLETITLE: "px-6 py-3 font-mainFont font-semibold text-overviewData text-[17px] tracking-[0] leading-[normal]",
-  OVERVIEW_TABLEDATA: "px-6 py-4 font-mainFont font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal]",
+  OVERVIEW_TABLETITLE: "px-6 py-3 font-mainFont font-semibold text-overviewData text-[17px] tracking-[0] leading-[normal] dark:text-darkBlue6",
+  OVERVIEW_TABLEDATA: "px-6 py-4 font-mainFont font-semibold text-[#4c4c4c] text-[14px] tracking-[0] leading-[normal] dark:text-white",
 
   //POPUPS
   POPUP_TITLE: "font-mainFont font-titleFontWeight text-titleFontSize",
@@ -83,7 +83,7 @@ export const INPUT_STYLES = {
   //OVERVIEW PAGE
   OVERVIEW_INPUT: "border-2 bg-transparent border-white placeholder-adminPlaceHolder focus:outline-none focus:ring-1 focus:ring-white focus:border-white rounded-md font-mainFont font-semibold text-darkBlue",
   OVERVIEW_DROPDWN_INPUT: "w-1/2 font-mainFont font-semibold text-darkBlue",
-  OVERVIEW_SEARCH_INPUT: "w-36 h-6 bg-[#EDEDED] rounded-lg text-overviewData font-semibold font-mainFont px-2 border-none focus:ring-2 focus:ring-blueBtn",
+  OVERVIEW_SEARCH_INPUT: "w-36 h-6 bg-[#EDEDED] rounded-lg text-overviewData font-semibold font-mainFont px-2 border-none focus:ring-2 focus:ring-blueBtn dark:text-darkBlue1 dark:focus:ring-darkBlue6",
 };
 
 export const CARD_STYLES = {
@@ -104,12 +104,12 @@ export const BG_STYLES = {
     "absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-fixed bg-cover filter blur-md z-[-10]",
 
   //HOMEPAGE
-  NAV_BG: "bg-white border-b border-gray-200",
+  NAV_BG: "bg-white border-b border-gray-200 dark:bg-darkBlue2 dark:border-darkBlue1",
 
   //OVERVIEW PAGE
   OVERVIEW_BG: "w-1/2 ml-[25%] rounded-xl bg-[#DBDBDB]",
-  OVERVIEW_TABLEHEADBG: "sticky top-0 bg-white z-10 border-b-2 border-gray-300 shadow-sm",
-  OVERVIEW_TABLEDATABG: "bg-white border-b",
+  OVERVIEW_TABLEHEADBG: "sticky top-0 bg-white z-10 border-b-2 border-gray-300 shadow-sm dark:bg-darkBlue1",
+  OVERVIEW_TABLEDATABG: "bg-white border-b dark:bg-darkBlue1",
 };
 
 export const IMG_STYLES = {

@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import Pagination from "./Table_Pagination";
 import { BG_STYLES, BUTTON_STYLES, IMG_STYLES, INPUT_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const Table = ({
   tableHeaderContent,
@@ -17,6 +18,8 @@ const Table = ({
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
+
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   useEffect(() => {
     // Reset currentPage to 0 when search term changes
@@ -50,8 +53,9 @@ const Table = ({
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="max-h-[585px] overflow-y-auto group group scrollbar-thin hover:scrollbar-thumb-gray-100">
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className="flex items-center justify-center h-screen">
+      <div className="max-h-[585px] overflow-y-auto group group scrollbar-thin hover:scrollbar-thumb-gray-100 rounded-xl">
         <table className={TEXT_STYLES.OVERVIEW_TABLEHEAD}>
           <thead className={BG_STYLES.OVERVIEW_TABLEHEADBG}>
             {/* First Section of thead */}
@@ -117,7 +121,7 @@ const Table = ({
                       <img
                         className={IMG_STYLES.OVERVIEW_IMG_DETAIL}
                         alt="Bulleted list"
-                        src="https://c.animaapp.com/1ptxcx7H/img/bulleted-list-1@2x.png"
+                        src={`${isDarkMode ? "https://c.animaapp.com/NEqUXNGg/img/bulleted-list@2x.png" : "https://c.animaapp.com/1ptxcx7H/img/bulleted-list-1@2x.png"}`}
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailDisplay", true);
@@ -127,7 +131,7 @@ const Table = ({
                       <img
                         className={IMG_STYLES.OVERVIEW_IMG_EDIT}
                         alt="Edit"
-                        src="https://c.animaapp.com/1ptxcx7H/img/edit-1@2x.png"
+                        src={`${isDarkMode ? "https://c.animaapp.com/km1ykSHQ/img/edit@2x.png" : "https://c.animaapp.com/1ptxcx7H/img/edit-1@2x.png"}`}
                         onClick={() => {
                           setPopupVisibility("overlay", true);
                           setPopupVisibility("detailChange", true);
@@ -137,7 +141,7 @@ const Table = ({
                       <img
                         className={IMG_STYLES.OVERVIEW_IMG_DELETE}
                         alt="Trash"
-                        src="https://c.animaapp.com/1ptxcx7H/img/trash-1@2x.png"
+                        src={`${isDarkMode ? "https://c.animaapp.com/7y4T4Xk7/img/trash@2x.png" : "https://c.animaapp.com/1ptxcx7H/img/trash-1@2x.png"}`}
                         onClick={() => {
                           //updateData(default.voertuigId);
                           setPopupVisibility("overlay", true);
@@ -160,6 +164,8 @@ const Table = ({
         </table>
       </div>
     </div>
+    </div>
+    
   );
 };
 
