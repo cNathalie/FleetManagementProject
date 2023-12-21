@@ -1,5 +1,6 @@
 const sessionStorageItems = {
-  token: "token",
+  accessToken: "token",
+  refreshToken: "refreshToken",
   userRole: "userRole",
   isLoggedIn: "isLoggedIn",
 };

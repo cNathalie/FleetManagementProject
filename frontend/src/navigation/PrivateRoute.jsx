@@ -1,36 +1,47 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import AdminOnlyPage from "../pages/errors/AdminOnlyPage";
-import {
-  sessionStorageItems,
-  sessionStorageValues,
-} from "../constants/sessionStorage";
 import { loginInfo } from "../constants/loginInfo";
+import useAuth from "../authentication/useAuth";
 
 const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
-  const isLoggedIn =
-    sessionStorage.getItem(sessionStorageItems.isLoggedIn) ==
-    sessionStorageValues.true;
-  const isAuthenticated =
-    sessionStorage.getItem(sessionStorageItems.token) !== null;
-  const userRole = sessionStorage.getItem(sessionStorageItems.userRole);
+  const { userRole, isLoading, verify, refreshAccessToken } = useAuth();
+  console.log(userRole);
 
-  if (isLoggedIn && isAuthenticated && requiredRoles.includes(userRole)) {
+  //Verify userRole when reloading a page with valid tokens
+  useEffect(() => {
+    if (userRole === null) {
+      verify();
+    }
+  }, []);
+
+  //Refresh the token every 4 minutes when on a private route
+  useEffect(() => {
+    setInterval(async () => {
+      await refreshAccessToken();
+    }, 4 * 60 * 1000);
+  });
+
+  if (isLoading) {
+    return <p>LOADING</p>;
+  }
+
+  if (userRole !== null && requiredRoles.includes(userRole)) {
     console.log("User is logged in and has rights");
     return Component;
   }
 
-  if (isLoggedIn && isAuthenticated && !requiredRoles.includes(userRole)) {
+  if (userRole !== null && !requiredRoles.includes(userRole)) {
     console.log(userRole);
     console.log("User is logged in but has no rights");
 
-    return < AdminOnlyPage />;
+    return <AdminOnlyPage />;
   }
 
   const info = loginInfo.notLoggedIn;
   console.log("No user logged in, redirecting to loginpage");
-  return <Navigate to="/" state={info}/>;
+  return <Navigate to="/" state={info} />;
 };
 
 export default PrivateRoute;

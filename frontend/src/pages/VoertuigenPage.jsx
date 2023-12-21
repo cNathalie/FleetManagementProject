@@ -33,10 +33,10 @@ element in the array represents a column header in the table.*/
   /* The `inputData` array is used to define the data that will be displayed in each column of the table.*/
   const inputData = [
     "d.merkEnModel",
-    "d.typewagen",
+    "d.typeWagen",
     "d.chassisnummer",
     "d.nummerplaat",
-    "d.brandstoftype",
+    "d.brandstofType",
   ];
   /* The `iDname` variable is used to specify the name of the ID field in the table data.*/
   const iDname = "voertuigId";
@@ -53,6 +53,9 @@ element in the array represents a column header in the table.*/
         const voertuigenData = await getVoertuigen();
         const typeWagenData = await getTypeWagen();
         const brandstofTypesData = await getBrandstofTypes();
+
+        console.log(typeWagenData);
+        console.log(brandstofTypesData);
 
         setData(voertuigenData);
         setTypeWagenData(typeWagenData);

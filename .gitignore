@@ -363,3 +363,9 @@ MigrationBackup/
 FodyWeavers.xsd
 /backend/.vs/backend/v17/.suo
 *.v2
+*.dll
+*.config
+*.v2
+*.bin
+*.dll
+*.pdb

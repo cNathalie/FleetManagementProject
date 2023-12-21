@@ -8,20 +8,28 @@ import {
   BUTTON_STYLES,
 } from "../constants/tailwindStyles";
 
-const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent }) => {
+const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent, Data }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     isAdmin: false,
+    chosenUser: ""
   });
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+    if (name === "chosenUser") {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: type === "checkbox" ? checked : value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -45,7 +53,29 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent }) => {
               onChange={handleInputChange}
               className="mr-2"
             />
-          ) : (
+          ) : field.type === "dropdown" ? 
+          (
+            
+            <select 
+              id={field.id}
+              name={field.name}
+       
+              value={formData[field.name]}
+              onChange={handleInputChange}
+              className={INPUT_STYLES.USERFORM_INPUT + " w-full "}
+            >
+              {Data.map( (email, index) => {
+                return <option 
+                key={index} 
+                value={email}
+                className="bg-blueText">
+                  {email}
+                </option>
+              })}
+            </select>
+
+          )
+          :(
             <input
               type={field.type}
               id={field.id}

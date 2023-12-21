@@ -1,0 +1,41 @@
+
+Checklist Luc
+
+ALGEMEEN
+	- .Net 8
+	- VSCode
+	- Unit test suite domein (min 10)
+	- Nuget packages up to date
+	
+
+REST API	
+	- **CHECK** Naming conventions 
+	- **CHECK** (I)ActionResult 
+	- **CHECK** Annotaties verplicht via code 
+	- **CHECK** Annotaties: produces/consumes, response codes, OperationId 
+	- **CHECK** Asynchroon 
+	- **CHECK** DTO's met data validations 
+	- **CHECK** AutoMapper 
+	- **CHECK** MediatR: DI, logging, validation
+
+PACKAGING
+	- Docker Compose (Linux Containers)
+	
+
+SECURITY
+	- **CHECK** CORS 
+	- **CHECK** JWT-Token met Refresh Tokens en login
+	- **CHECK** Paswoorden verlseuteld in DB
+	- **CHECK** HTTPS "only"
+	- **CHECK** Rate Limitor 
+	- **CHECK** Healthcheck met visualisatie
+	- IP Whitelisting
+	- **CHECK** Header beveiliging
+	
+	
+EF CORE
+	- **CHECK** Soft delete via generiek mechanisme 
+	- **CHECK** Asynchroon 
+	- **CHECK** SeriLog logging met Seq visulisatie
+	- **CHECK** SQL DLL in ASCII bestand (.sql)
+	- **CHECK** SQLServer

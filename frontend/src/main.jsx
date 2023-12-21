@@ -13,7 +13,10 @@ import TankkaartenPage from "./pages/TankkaartenPage.jsx";
 import BustuurderPage from "./pages/BustuurderPage.jsx";
 import FleetPage from "./pages/FleetPage.jsx";
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
+import AuthContextProvider from "./authentication/AuthContext.jsx";
+import ConfirmContextProvider from "./confirmation/ConfirmContext.jsx";
 import DarkModeContextProvider from "../src/contexts/DarkModeContext.jsx";
+
 
 const browserRouter = createBrowserRouter([
   {
@@ -68,9 +71,7 @@ const browserRouter = createBrowserRouter([
             requiredRoles={["User", "Admin"]}
           />
         ),
-
       },
-
     ],
   },
   {
@@ -83,8 +84,13 @@ const browserRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DarkModeContextProvider>
+
+    <AuthContextProvider>
+      <ConfirmContextProvider>
+          <DarkModeContextProvider>
       <RouterProvider router={browserRouter}></RouterProvider>
-    </DarkModeContextProvider>
+          </DarkModeContextProvider>
+      </ConfirmContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
