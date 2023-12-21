@@ -158,3 +158,6 @@ VALUES
 
 INSERT INTO [dbo].[FleetMember] (bestuurderId, tankkaartId, voertuigId)
 VALUES (1,1,4), (2,2,8);
+
+INSERT INTO [dbo].[User] (Email, PasswordSalt, PasswordHash, [Role])
+VALUES ('admin@fm.com', 'oJcneo5hnsyaq96MlKTH8g==', 'DxGooDQNCqYhqhxq7SOAqxEd5WW+4gCKf35jWOcx6a0=', 'Admin');
