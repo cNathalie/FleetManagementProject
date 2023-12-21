@@ -89,6 +89,36 @@ namespace FleetManagement.Api.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPost("verify")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Verify()
+        {
+            try
+            {
+                var tokens = new Tokens()
+                {
+                    AccessToken = Request.Cookies["accessToken"],
+                    RefreshToken = Request.Cookies["refreshToken"]
+                };
+
+                var userRole = await _userService.Verify(tokens);
+                var userDTO = new UserRoleDTO()
+                {
+                    Role = userRole
+                };
+                return Ok(userDTO);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("UserController: " + e.Message, e);
+                    return BadRequest();;
+            }
+        }
+
 
         [Authorize]
         [HttpPost("refresh-token")]

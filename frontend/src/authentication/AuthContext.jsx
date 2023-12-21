@@ -8,7 +8,7 @@ const AuthContextProvider = (props) => {
   const [userRole, setUserRole] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Refresh Acces Token
+  // Refresh Access Token
   const refreshAccessToken = async () => {
     try {
       const response = await Axios.post(
@@ -54,6 +54,27 @@ const AuthContextProvider = (props) => {
     }
   }
 
+  // Verify userRole 
+  async function verify() {
+    setIsLoading(true);
+    try {
+      var response = await Axios.post(
+        baseUrl + "accounts/verify",
+        {},
+        {
+          withCredentials: true
+        }
+      );
+      setUserRole(response.data.role);
+    }
+    catch(error){
+      console.log(error);
+    }
+    finally{
+      setIsLoading(false);
+    }
+  }
+
 // Log out: server removes cookies from browser and refresh token from db
   async function logout() {
     console.log("Closing session");
@@ -74,7 +95,7 @@ const AuthContextProvider = (props) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, logout, refreshAccessToken, userRole, isLoading }}
+      value={{ login, logout, refreshAccessToken, verify, userRole, isLoading }}
     >
       {props.children}
     </AuthContext.Provider>

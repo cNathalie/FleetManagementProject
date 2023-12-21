@@ -44,13 +44,20 @@ export const AdminContent = () => {
   };
 
   // To observe changes in adminDecision => if true then admin confirmed removal
+  // and user will be removed
   useEffect(() => {
     if (adminDecision !== null) {
       if (adminDecision) {
         console.log("Admin confirmed removal.");
         (async () => {
-          const removal = await removeUser(userToRemove);
-          console.log(removal + "User removed with succes.");
+          try {
+            const removal = await removeUser(userToRemove);
+            console.log(removal + " User removed with succes.");
+          }
+          catch (error){
+            console.log(error);
+          }
+          
         })();
       } else {
         console.log("Admin aborted removal.");

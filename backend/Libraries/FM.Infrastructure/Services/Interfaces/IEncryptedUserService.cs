@@ -12,5 +12,6 @@ namespace FM.Infrastructure.Services.Interfaces
         Task DeleteUserRefreshTokens(int userId, string refreshtoken);
         Task<Tokens> RefreshToken(Tokens tokens);
         Task Logout(Tokens tokens);
+        Task<string> Verify(Tokens tokens);
     }
 }

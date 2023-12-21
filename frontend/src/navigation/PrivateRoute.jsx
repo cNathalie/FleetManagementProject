@@ -6,19 +6,26 @@ import { loginInfo } from "../constants/loginInfo";
 import useAuth from "../authentication/useAuth";
 
 const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
-  const { userRole, isLoading, refreshAccessToken } = useAuth();
+  const { userRole, isLoading, verify, refreshAccessToken } = useAuth();
   console.log(userRole);
 
-  // if(isLoading){
-  //   return <p>LOADING</p>
-  // }
-
-  //Refresh the token every 4 minutes
+  //Verify userRole when reloading a page with valid tokens
   useEffect(() => {
-    setInterval(() => {
-      refreshAccessToken();
-    }, 10000);
+    if (userRole === null) {
+      verify();
+    }
+  }, []);
+
+  //Refresh the token every 4 minutes when on a private route
+  useEffect(() => {
+    setInterval(async () => {
+      await refreshAccessToken();
+    }, 4 * 60 * 1000);
   });
+
+  if (isLoading) {
+    return <p>LOADING</p>;
+  }
 
   if (userRole !== null && requiredRoles.includes(userRole)) {
     console.log("User is logged in and has rights");

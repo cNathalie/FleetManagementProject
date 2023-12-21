@@ -59,16 +59,17 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent, Data }) =
             <select 
               id={field.id}
               name={field.name}
+       
               value={formData[field.name]}
               onChange={handleInputChange}
               className={INPUT_STYLES.USERFORM_INPUT + " w-full "}
             >
-              {Data.map( (d, index) => {
+              {Data.map( (email, index) => {
                 return <option 
                 key={index} 
-                value={d}
+                value={email}
                 className="bg-blueText">
-                  {d}
+                  {email}
                 </option>
               })}
             </select>

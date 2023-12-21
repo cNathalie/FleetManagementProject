@@ -62,7 +62,12 @@ public sealed class EncryptedUserService : IEncryptedUserService
         return new AuthenticatedUserResource(user.UserId, user.Email!, user.Role.ToString()!, tokens);
     }
 
-
+    public async Task<string> Verify(Tokens tokens)
+    {
+        var principal = _jwtManager.GetPrincipalFromExpiredToken(tokens.AccessToken!);
+        var userRole = principal.FindFirst("Role")!.Value;
+        return userRole;
+    }
 
     public async Task<Tokens> RefreshToken(Tokens tokens)
     {
@@ -103,7 +108,9 @@ public sealed class EncryptedUserService : IEncryptedUserService
     public async Task<DUser> GetUserAsync(LoginResource resource, CancellationToken cancellationToken)
     {
         var user = await _context.Users
-           .FirstOrDefaultAsync(x => x.Email == resource.Email && x.IsDeleted == false, cancellationToken);
+           .FirstOrDefaultAsync(x => x.Email == resource.Email && x.IsDeleted == false, cancellationToken)
+           ?? throw new EntityDoesNotExistException("User does not exist");
+
         return UserMapper.MapToDUser(user!);
     }
 
@@ -130,9 +137,8 @@ public sealed class EncryptedUserService : IEncryptedUserService
         var item = _context.UserRefreshTokens.FirstOrDefault(x => x.UserId == userId && x.RefreshToken == refreshToken);
         if (item != null)
         {
-            item.IsActive = false;
             _context.UserRefreshTokens.Remove(item);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges(); //Calling the sync save changes to bypass soft delete
         }
     }
 

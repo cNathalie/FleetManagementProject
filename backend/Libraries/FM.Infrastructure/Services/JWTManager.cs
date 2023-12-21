@@ -42,6 +42,7 @@ namespace FM.Infrastructure.Services
                     {
                         new Claim("Id", Guid.NewGuid().ToString()),
                         new Claim("UserId", user.UserId.ToString()),
+                        new Claim("Role", user.Role),
                         new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.Jti,
