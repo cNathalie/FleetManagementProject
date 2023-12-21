@@ -212,6 +212,7 @@ const FleetPage = () => {
           tempObject={temp.tempObject}
           triggerRerender={triggerRerender}
           heading="Bewerk"
+          btnValue="Bewerk"
         />
       </div>
 
@@ -331,6 +332,7 @@ const FleetPage = () => {
           tempObject={{}}
           triggerRerender={triggerRerender}
           heading="Toevoegen"
+          btnValue="Voeg toe"
         />
       </div>
 

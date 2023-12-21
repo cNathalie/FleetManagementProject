@@ -16,6 +16,12 @@ module.exports = {
       transparent: "#ffffff00",
       adminPlaceHolder: "#ffffff7a",
       overviewData: "#858585",
+      darkBlue1: "#032030",
+      darkBlue2: "#022B42",
+      darkBlue3: "#003554",
+      darkBlue4: "#004D74",
+      darkBlue5: "#006494",
+      darkBlue6: "#006DA4",
     },
     fontFamily: {
       mainFont: "inter",

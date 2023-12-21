@@ -15,6 +15,8 @@ import FleetPage from "./pages/FleetPage.jsx";
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
 import AuthContextProvider from "./authentication/AuthContext.jsx";
 import ConfirmContextProvider from "./confirmation/ConfirmContext.jsx";
+import DarkModeContextProvider from "../src/contexts/DarkModeContext.jsx";
+
 
 const browserRouter = createBrowserRouter([
   {
@@ -82,9 +84,12 @@ const browserRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+
     <AuthContextProvider>
       <ConfirmContextProvider>
-        <RouterProvider router={browserRouter}></RouterProvider>
+          <DarkModeContextProvider>
+      <RouterProvider router={browserRouter}></RouterProvider>
+          </DarkModeContextProvider>
       </ConfirmContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

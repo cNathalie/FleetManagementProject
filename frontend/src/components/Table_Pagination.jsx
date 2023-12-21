@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import '../constants/table_foot.css'; // Import the CSS file
+import { useDarkMode } from '../hooks/useDarkMode';
 
 const Pagination = ({ pageCount, onPageChange }) => {
+  const { isDarkMode } = useDarkMode();
+
   return (
     <ReactPaginate
       previousLabel={'<'}
@@ -13,11 +16,11 @@ const Pagination = ({ pageCount, onPageChange }) => {
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={onPageChange}
-      containerClassName={'pagination-container'}
+      containerClassName={`pagination-container ${isDarkMode ? 'dark-pagination-container' : ''}`}
       subContainerClassName={'pages pagination'}
-      activeClassName={'active'}
-      pageClassName={'pagination-item'}
-      pageLinkClassName={'pagination-link'}
+      activeClassName={`active ${isDarkMode ? 'dark-active' : ''}`}
+      pageClassName={`pagination-item ${isDarkMode ? 'dark-pagination-item' : ''}`}
+      pageLinkClassName={`pagination-link ${isDarkMode ? 'dark-pagination-link' : ''}`}
     />
   );
 };
