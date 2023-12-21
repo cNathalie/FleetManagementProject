@@ -6,12 +6,15 @@ import {
   CARD_STYLES,
   TEXT_STYLES,
 } from "../constants/tailwindStyles";
+import useConfirmation from "../confirmation/useConfirmation";
 /* eslint-disable react/prop-types*/
 
 const PopupRemoveUser = (props) => {
   const {
     popup: { title, text, textBtnLeft, textBtnRight },
   } = props;
+
+  const {setAdminDecision} = useConfirmation();
 
   return (
     <div className={`${CARD_STYLES.POPUP_CARD} w-[30%] h-[85%]`}>
@@ -24,6 +27,11 @@ const PopupRemoveUser = (props) => {
           className={`${BUTTON_STYLES.POPUP_LEFT}`}
           onClick={() => {
             // code om gebruiker te verwijderen, na het verwijderen popup en overlay display: none
+            setAdminDecision(true);
+            const popup = document.getElementById("popupRemoveUser");
+            const overlay = document.getElementById("overlay");
+            popup.style.display = "none";
+            overlay.style.display = "none";
           }}
         >
           {textBtnLeft}
@@ -31,6 +39,7 @@ const PopupRemoveUser = (props) => {
         <Button
           className={`${BUTTON_STYLES.POPUP_RIGHT}`}
           onClick={() => {
+            setAdminDecision(false);
             const popup = document.getElementById("popupRemoveUser");
             const overlay = document.getElementById("overlay");
             popup.style.display = "none";

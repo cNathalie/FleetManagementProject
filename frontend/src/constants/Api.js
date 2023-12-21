@@ -424,7 +424,25 @@ export const getTypeRijbewijs = () => {
 
 //#endregion
 
+
 // ADMIN PAGE
+
+export const getAllUsers = async () => {
+  try {
+    const response = await Axios.get(
+      baseUrl + "accounts",
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addUser = async (formData) => {
 
   const role = formData.isAdmin ? "Admin" : "User";
@@ -441,10 +459,33 @@ export const addUser = async (formData) => {
       withCredentials: true,
     }
   );
-
   console.log(response.data);
+  return true;
 
   } catch (error){
+    console.log(error);
+    return false;
+  }
+}
+
+const findUserbyEmail = async (userToFind) => {
+  const allUsers = await getAllUsers();
+  const user = allUsers.find(u => u.email === userToFind);
+  console.log(user);
+  return user;
+}
+
+export const removeUser = async (userToRemove) => {
+  const user = await findUserbyEmail(userToRemove);
+  console.log(user);
+  try{
+    const response = await Axios.delete(baseUrl + `accounts/${user.userId}`, 
+    {
+      withCredentials: true
+    });
+    return response.status
+  }
+  catch(error){
     console.log(error);
   }
 }

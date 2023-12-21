@@ -6,13 +6,19 @@ import { loginInfo } from "../constants/loginInfo";
 import useAuth from "../authentication/useAuth";
 
 const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
-  
-  const {userRole, isLoading} = useAuth();
+  const { userRole, isLoading, refreshAccessToken } = useAuth();
   console.log(userRole);
-  
-  if(isLoading){
-    return <p>LOADING</p>
-  }
+
+  // if(isLoading){
+  //   return <p>LOADING</p>
+  // }
+
+  //Refresh the token every 4 minutes
+  useEffect(() => {
+    setInterval(() => {
+      refreshAccessToken();
+    }, 10000);
+  });
 
   if (userRole !== null && requiredRoles.includes(userRole)) {
     console.log("User is logged in and has rights");
@@ -28,7 +34,7 @@ const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
 
   const info = loginInfo.notLoggedIn;
   console.log("No user logged in, redirecting to loginpage");
-  return <Navigate to="/" state={info}/>;
+  return <Navigate to="/" state={info} />;
 };
 
 export default PrivateRoute;

@@ -8,6 +8,7 @@ const AuthContextProvider = (props) => {
   const [userRole, setUserRole] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Refresh Acces Token
   const refreshAccessToken = async () => {
     try {
       const response = await Axios.post(
@@ -20,18 +21,11 @@ const AuthContextProvider = (props) => {
       );
       console.log(response.data);
     } catch (error) {
-      logout();
+      console.log("Could not refresh tokens")
     } 
   };
 
-  //Refresh the token every 4 minutes
-  useEffect(() => {
-    setInterval(() => {
-      refreshAccessToken();
-    }, 4* 60 *1000);
-  }, []);
-
-  // Authentication
+  // Authentication at login
   async function login(email, password) {
     setIsLoading(true);
     try {
@@ -53,14 +47,14 @@ const AuthContextProvider = (props) => {
 
       return { succes: true };
     } catch (error) {
-      console.error("Login failed: ", error);
+      console.error("Login failed: ");
       return { succes: false, error: error.response?.data };
     } finally {
       setIsLoading(false);
     }
   }
 
-  // Log out: server removes cookies from browser and refresh token from db
+// Log out: server removes cookies from browser and refresh token from db
   async function logout() {
     console.log("Closing session");
     try {
@@ -80,7 +74,7 @@ const AuthContextProvider = (props) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, logout, userRole, isLoading }}
+      value={{ login, logout, refreshAccessToken, userRole, isLoading }}
     >
       {props.children}
     </AuthContext.Provider>

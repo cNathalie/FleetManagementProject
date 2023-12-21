@@ -1,28 +1,78 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserForm from "./UserForm";
-import { signupFields } from "../constants/formFields";
+import { removeUserField, signupFields } from "../constants/formFields";
 import Button from "./Button";
 import {
   BUTTON_STYLES,
   TEXT_STYLES,
   CARD_STYLES,
 } from "../constants/tailwindStyles";
-import { addUser } from "../constants/Api";
+import { addUser, getAllUsers, removeUser } from "../constants/Api";
+import useConfirmation from "../confirmation/useConfirmation";
 
 export const AdminContent = () => {
+  const { adminDecision, setAdminDecision } = useConfirmation();
+  const [userToRemove, setUserToRemove] = useState(null);
+
+  // Handle form submission for adding a user
   const handleAddUserSubmit = async (formData) => {
-    // Handle form submission for adding a user
     if (formData.password !== formData.confirmPassword) {
       alert("Wachtwoorden komen niet overeen");
     }
-    await addUser(formData);
+    var result = await addUser(formData);
+    alert(
+      result ? "Gebruiker toegevoegd" : "Er liep iets mis, probeer opnieuw"
+    );
   };
 
-  const handleRemoveUserSubmit = (formData) => {
-    // Handle the form submission for removing a user
-    console.log("Remove User:", formData.removeEmail);
+  // Function is called by handleRemoveUserSubmit
+  const showPopUp = () => {
+    const popup = document.getElementById("popupRemoveUser");
+    const overlay = document.getElementById("overlay");
+    popup.style.display = "block";
+    overlay.style.display = "block";
   };
+
+  // Showing the pop up and setting the userToRemove to the selected user
+  // use Effect then handles the admin decision.
+  const handleRemoveUserSubmit = async (formData) => {
+    console.log("Pending confirmation to remove user:", formData.chosenUser);
+    showPopUp();
+    setUserToRemove(formData.chosenUser);
+  };
+
+  // To observe changes in adminDecision => if true then admin confirmed removal
+  useEffect(() => {
+    if (adminDecision !== null) {
+      if (adminDecision) {
+        console.log("Admin confirmed removal.");
+        (async () => {
+          const removal = await removeUser(userToRemove);
+          console.log(removal + "User removed with succes.");
+        })();
+      } else {
+        console.log("Admin aborted removal.");
+      }
+      setAdminDecision(null);
+    }
+  }, [adminDecision, setAdminDecision]);
+
+  // Getting all users from server to fill dropdown with email-addresses
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const getUsersData = async () => {
+      try {
+        const data = await getAllUsers();
+        console.log(data);
+        setUsers(data.map((user) => user.email));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUsersData();
+  }, []);
 
   return (
     <div className="flex justify-center">
@@ -59,21 +109,13 @@ export const AdminContent = () => {
             {/* Remove user form */}
             <div className="w-full mt-23">
               <UserForm
-                formFields={signupFields.filter(
-                  (field) => field.name === "email"
-                )}
+                Data={users}
+                formFields={removeUserField}
                 onSubmit={handleRemoveUserSubmit}
                 ButtonComponent={() => (
                   <div className="w-[60%] mb-5 flex items-center justify-center mt-44">
                     <Button
                       className={`${BUTTON_STYLES.ADMIN_REMOVE} w-full py-2`}
-                      onClick={() => {
-                        const popup =
-                          document.getElementById("popupRemoveUser");
-                        const overlay = document.getElementById("overlay");
-                        popup.style.display = "block";
-                        overlay.style.display = "block";
-                      }}
                     >
                       Verwijder
                     </Button>

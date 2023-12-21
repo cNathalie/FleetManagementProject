@@ -14,6 +14,7 @@ import BustuurderPage from "./pages/BustuurderPage.jsx";
 import FleetPage from "./pages/FleetPage.jsx";
 import PrivateRoute from "./navigation/PrivateRoute.jsx";
 import AuthContextProvider from "./authentication/AuthContext.jsx";
+import ConfirmContextProvider from "./confirmation/ConfirmContext.jsx";
 
 const browserRouter = createBrowserRouter([
   {
@@ -82,7 +83,9 @@ const browserRouter = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <RouterProvider router={browserRouter}></RouterProvider>
+      <ConfirmContextProvider>
+        <RouterProvider router={browserRouter}></RouterProvider>
+      </ConfirmContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

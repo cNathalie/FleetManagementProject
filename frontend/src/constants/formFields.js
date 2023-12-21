@@ -71,6 +71,14 @@ export const signupFields = [
   },
 ];
 
+export const removeUserField = [
+  {
+    type: "dropdown",
+    id: "email-dropdown",
+    name: "chosenUser",
+  },
+];
+
 export const initialVoertuigFormData = [
   {
     voertuigId: 0,
