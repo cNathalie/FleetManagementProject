@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Table from "../components/Table";
 import {
   getVoertuigen,
@@ -18,6 +19,7 @@ import PopupRemoveItem from "../components/PopupRemoveItem";
 import PopupCloseDetailChange from "../components/PopupCloseDetailChange";
 import DetailDisplay from "../components/DetailDisplay";
 import DynamicForm from "../components/DynamicForm";
+import { selectClasses } from "@mui/material";
 
 const VoertuigenPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each

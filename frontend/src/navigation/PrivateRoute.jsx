@@ -16,11 +16,12 @@ const PrivateRoute = ({ component: Component, requiredRoles, ...rest }) => {
     }
   }, []);
 
-  //Refresh the token every 4 minutes when on a private route
+  //Refresh the token every 2 minutes when on a private route
   useEffect(() => {
-    setInterval(async () => {
+    const intervalId = setInterval(async () => {
       await refreshAccessToken();
-    }, 4 * 60 * 1000);
+    }, 2 * 60 * 1000);
+    return () => clearInterval(intervalId);
   });
 
   if (isLoading) {

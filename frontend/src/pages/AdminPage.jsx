@@ -10,10 +10,27 @@ import PopupGoBack from "../components/PopupGoBack";
 import Overlay from "../components/Overlay";
 import Popup from "../components/Popup";
 import PopupRemoveUser from "../components/PopupRemoveUser";
+import PopupMessage from "../components/PopupMessage";
 
 const AdminPage = () => {
   return (
     <div>
+      <div style={{ display: "none" }} id="passErr">
+        <PopupMessage title="passErr">
+          Wachtwoorden komen niet overeen
+        </PopupMessage>
+      </div>
+      <div style={{ display: "none" }} id="generalErr">
+        <PopupMessage title="generalErr">
+          Er liep iets mis, probeer opnieuw
+        </PopupMessage>
+      </div>
+      <div style={{ display: "none" }} id="succes">
+        <PopupMessage title="succes">Gebruiker toegevoegd</PopupMessage>
+      </div>
+      <div style={{ display: "none" }} id="removedUser">
+        <PopupMessage title="removedUser">Gebruiker verwijderd</PopupMessage>
+      </div>
       <Overlay />
       <Popup id="popupGoBack">
         {textPopupGaTerug.map((p) => {
