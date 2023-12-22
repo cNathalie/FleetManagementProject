@@ -2,12 +2,15 @@
 import React from "react";
 import Button from "./Button";
 import { BG_STYLES, BUTTON_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
   console.log(tempObject);
 
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
-    <div className={BG_STYLES.OVERVIEW_BG}>
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className={BG_STYLES.OVERVIEW_BG}>
       <div>
         <div className="ml-9 mt-6 py-6 flex justify-between">
           <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>
@@ -21,7 +24,7 @@ const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
                 setPopupVisibility("detailDisplay", false);
               }}
             >
-              <img src="../src/assets/Media/closeButton.jpg" />
+              <img src= {`${isDarkMode ? "../src/assets/Media/dark_closeBtn.png" : "../src/assets/Media/closeButton.jpg"}`} />
             </Button>
           </div>
         </div>
@@ -60,6 +63,8 @@ const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 

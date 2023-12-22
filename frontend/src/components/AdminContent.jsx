@@ -11,11 +11,13 @@ import {
 } from "../constants/tailwindStyles";
 import { addUser, getAllUsers, removeUser } from "../constants/Api";
 import useConfirmation from "../confirmation/useConfirmation";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 export const AdminContent = () => {
   const { adminDecision, setAdminDecision } = useConfirmation();
   const [userToRemove, setUserToRemove] = useState(null);
   const [counter, setCounter] = useState(0);
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   // Handle form submission for adding a user
   const handleAddUserSubmit = async (formData) => {
@@ -97,7 +99,8 @@ export const AdminContent = () => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className="flex justify-center">
       <div className="relative flex my-10 w-[784px] h-[604px]">
         <div className="w-[790px] h-[604px]">
           {/* Left side - add user portion of the screen */}
@@ -124,12 +127,12 @@ export const AdminContent = () => {
             className={`${CARD_STYLES.BLUE_CARD} right-0 absolute w-[324px] h-[604px] top-0`}
           >
             <div
-              className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px] mt-5`}
+              className={`${TEXT_STYLES.ADMIN_CARDTITLE} w-[200px] h-[100px] mt-4`}
             >
               Gebruiker verwijderen
             </div>
             {/* Remove user form */}
-            <div className="w-full mt-23">
+            <div className="w-[80%] mt-30">
               <UserForm
                 Data={users}
                 formFields={removeUserField}
@@ -156,7 +159,7 @@ export const AdminContent = () => {
           <img
             className="top-0 absolute w-px h-[278px] left-[391px] object-cover"
             alt="Line"
-            src="https://c.animaapp.com/KarkG0Dg/img/line-3.svg"
+            src={`${isDarkMode ? "https://c.animaapp.com/ydShFIr0/img/line-3---white.png" : "https://c.animaapp.com/KarkG0Dg/img/line-3.svg"}`}
           />
           <img
             className="top-[326px] absolute w-px h-[278px] left-[391px] object-cover"
@@ -166,5 +169,7 @@ export const AdminContent = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };

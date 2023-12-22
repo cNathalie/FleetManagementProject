@@ -11,10 +11,17 @@ import Overlay from "../components/Overlay";
 import Popup from "../components/Popup";
 import PopupRemoveUser from "../components/PopupRemoveUser";
 import PopupMessage from "../components/PopupMessage";
+import { Box } from "@mui/material";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const AdminPage = () => {
+  const { isDarkMode } = useDarkMode();
   return (
-    <div>
+    <Box sx={
+      isDarkMode
+      ? { bgcolor: "#032030", color: "white"}
+      : { bgcolor: "white", color: "black"}
+    }>
       <div style={{ display: "none" }} id="passErr">
         <PopupMessage title="passErr">
           Wachtwoorden komen niet overeen
@@ -66,7 +73,7 @@ const AdminPage = () => {
       <div>
         <AdminContent />
       </div>
-    </div>
+    </Box>
   );
 };
 

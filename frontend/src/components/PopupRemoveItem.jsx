@@ -4,6 +4,7 @@ import {
   TEXT_STYLES,
 } from "../constants/tailwindStyles";
 import Button from "./Button";
+import { useDarkMode } from "../hooks/useDarkMode";
 /* eslint-disable react/prop-types*/
 
 const PopupRemoveItem = ({
@@ -15,13 +16,16 @@ const PopupRemoveItem = ({
 }) => {
   const { title, text, textBtnLeft, textBtnRight } = popup;
   //const { data } = useData();
+
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
-    <div className={`${CARD_STYLES.POPUP_CARD} w-[30%] h-[85%]`}>
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className={`${CARD_STYLES.POPUP_CARD} w-[30%] h-[85%]`}>
       <div className="h-[50%] pl-4 pt-4">
         <h1 className={`${TEXT_STYLES.POPUP_TITLE}`}>{title}</h1>
         <p className={`${TEXT_STYLES.POPUP_TEXT}`}>{text}</p>
       </div>
-      <div className="h-[50%] pl-4 mt-8">
+      <div className="h-[50%] pl-4 mt-8 pb-4">
         <Button
           className={`${BUTTON_STYLES.POPUP_LEFT}`}
           onClick={async () => {
@@ -52,6 +56,8 @@ const PopupRemoveItem = ({
         </Button>
       </div>
     </div>
+    </div>
+    
   );
 };
 
