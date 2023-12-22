@@ -17,7 +17,6 @@ import AuthContextProvider from "./authentication/AuthContext.jsx";
 import ConfirmContextProvider from "./confirmation/ConfirmContext.jsx";
 import DarkModeContextProvider from "../src/contexts/DarkModeContext.jsx";
 
-
 const browserRouter = createBrowserRouter([
   {
     path: "/",
@@ -84,12 +83,11 @@ const browserRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-
     <AuthContextProvider>
       <ConfirmContextProvider>
-          <DarkModeContextProvider>
-      <RouterProvider router={browserRouter}></RouterProvider>
-          </DarkModeContextProvider>
+        <DarkModeContextProvider>
+          <RouterProvider router={browserRouter}></RouterProvider>
+        </DarkModeContextProvider>
       </ConfirmContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

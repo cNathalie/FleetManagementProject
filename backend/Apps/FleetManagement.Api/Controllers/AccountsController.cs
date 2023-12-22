@@ -62,13 +62,13 @@ namespace FleetManagement.Api.Controllers
                 var response = await _userService.Login(_mapper.Map<LoginResource>(resource), cancellationToken);
                 Response.Cookies.Append("accessToken", response.Tokens!.AccessToken!, new CookieOptions
                 {
-                    Expires = DateTimeOffset.Now.AddMinutes(5),
+                    Expires = DateTimeOffset.Now.AddMinutes(15),
                     HttpOnly = true, // Preventing JavaScript access to the cookie
                     Secure = true // Send the cookie over HTTPS
                 });
                 Response.Cookies.Append("refreshToken", response.Tokens!.RefreshToken!, new CookieOptions
                 {
-                    Expires = DateTimeOffset.Now.AddMinutes(5),
+                    Expires = DateTimeOffset.Now.AddMinutes(15),
                     HttpOnly = true, 
                     Secure = true 
                 });

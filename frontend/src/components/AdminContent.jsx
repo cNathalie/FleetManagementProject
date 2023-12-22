@@ -15,16 +15,23 @@ import useConfirmation from "../confirmation/useConfirmation";
 export const AdminContent = () => {
   const { adminDecision, setAdminDecision } = useConfirmation();
   const [userToRemove, setUserToRemove] = useState(null);
+  const [counter, setCounter] = useState(0);
 
   // Handle form submission for adding a user
   const handleAddUserSubmit = async (formData) => {
     if (formData.password !== formData.confirmPassword) {
-      alert("Wachtwoorden komen niet overeen");
+      const passErr = document.getElementById("passErr");
+      passErr.style.display = "block";
+    } else {
+      var result = await addUser(formData);
+      const succes = document.getElementById("succes");
+      const generalErr = document.getElementById("generalErr");
+
+      result
+        ? (succes.style.display = "block")
+        : (generalErr.style.display = "block");
     }
-    var result = await addUser(formData);
-    alert(
-      result ? "Gebruiker toegevoegd" : "Er liep iets mis, probeer opnieuw"
-    );
+    triggerRerender();
   };
 
   // Function is called by handleRemoveUserSubmit
@@ -53,11 +60,12 @@ export const AdminContent = () => {
           try {
             const removal = await removeUser(userToRemove);
             console.log(removal + " User removed with succes.");
-          }
-          catch (error){
+            const removedUser = document.getElementById("removedUser");
+            triggerRerender();
+            removedUser.style.display = "block";
+          } catch (error) {
             console.log(error);
           }
-          
         })();
       } else {
         console.log("Admin aborted removal.");
@@ -79,7 +87,14 @@ export const AdminContent = () => {
       }
     };
     getUsersData();
-  }, []);
+  }, [counter]);
+
+  // Reload page
+  const triggerRerender = () => {
+    setTimeout(() => {
+      setCounter(counter + 1);
+    }, 100);
+  };
 
   return (
     <div className="flex justify-center">

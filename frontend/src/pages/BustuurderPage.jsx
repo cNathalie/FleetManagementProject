@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Table from "../components/Table";
 import {
   getBestuurders,
@@ -19,7 +20,6 @@ import DetailDisplay from "../components/DetailDisplay";
 import DynamicForm from "../components/DynamicForm";
 
 const BustuurderPage = () => {
-
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
   element in the array represents a column header in the table.*/
   const tableHeaderContent = [
