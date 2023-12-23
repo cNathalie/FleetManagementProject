@@ -17,19 +17,28 @@ export const AdminContent = () => {
   const [userToRemove, setUserToRemove] = useState(null);
   const [counter, setCounter] = useState(0);
 
+  const popupMsgIds = ["passErr", "succes", "generalErr", "removedUser"];
+
   // Handle form submission for adding a user
   const handleAddUserSubmit = async (formData) => {
     if (formData.password !== formData.confirmPassword) {
-      const passErr = document.getElementById("passErr");
-      passErr.style.display = "block";
+      excludePopup("passErr");
+      showPopUpMsg("passErr");
+      setTimeout(() => {
+        hidePopUpMsg("passErr");
+      }, 2500);
     } else {
       var result = await addUser(formData);
-      const succes = document.getElementById("succes");
-      const generalErr = document.getElementById("generalErr");
 
+      result ? excludePopup("succes") : excludePopup("generalErr");
+      result ? showPopUpMsg("succes") : showPopUpMsg("generalErr");
       result
-        ? (succes.style.display = "block")
-        : (generalErr.style.display = "block");
+        ? setTimeout(() => {
+            hidePopUpMsg("succes");
+          }, 2500)
+        : setTimeout(() => {
+            hidePopUpMsg("generalErr");
+          }, 2500);
     }
     triggerRerender();
   };
@@ -60,9 +69,12 @@ export const AdminContent = () => {
           try {
             const removal = await removeUser(userToRemove);
             console.log(removal + " User removed with succes.");
-            const removedUser = document.getElementById("removedUser");
             triggerRerender();
-            removedUser.style.display = "block";
+            excludePopup("removedUser");
+            showPopUpMsg("removedUser");
+            setTimeout(() => {
+              hidePopUpMsg("removedUser");
+            }, 2500);
           } catch (error) {
             console.log(error);
           }
@@ -94,6 +106,33 @@ export const AdminContent = () => {
     setTimeout(() => {
       setCounter(counter + 1);
     }, 100);
+  };
+
+  const showPopUpMsg = (popupId) => {
+    const popupMsg = document.getElementById(popupId);
+    popupMsg.style.display = "block";
+  };
+
+  const hidePopUpMsg = (popupId) => {
+    const popupMsgHide = document.getElementById(popupId);
+    popupMsgHide.style.display = "none";
+  };
+
+  const hideOtherPopupMsg = (popupIds) => {
+    popupIds.forEach((element) => {
+      const popup = document.getElementById(element);
+      popup.style.display = "none";
+    });
+  };
+
+  const excludePopup = (exludedPopup) => {
+    let hidePopups = [];
+    popupMsgIds.forEach((popup) => {
+      if (popup !== exludedPopup) {
+        hidePopups.push(popup);
+      }
+    });
+    hideOtherPopupMsg(hidePopups);
   };
 
   return (
