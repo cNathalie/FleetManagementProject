@@ -11,11 +11,12 @@ const RootLayout = () => {
   return (
     <div>
       <Box
-      sx={
-        isDarkMode
-        ? { bgcolor: "#032030", color: "white"}
-        : { bgcolor: "white", color: "black"}
-      }>
+        sx={
+          isDarkMode
+            ? { bgcolor: "#032030", color: "white" }
+            : { bgcolor: "white", color: "black" }
+        }
+      >
         <Nav />
         <Outlet />
       </Box>
