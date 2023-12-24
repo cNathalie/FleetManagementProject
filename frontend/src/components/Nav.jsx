@@ -23,8 +23,15 @@ const Nav = () => {
     for (let i = 0; i < navBtnRef.current.childNodes.length; i++) {
       if (i !== index - 1) {
         const notSelectedBtn = navBtnRef.current.childNodes[i];
-        notSelectedBtn.style.background = "white";
+        notSelectedBtn.style.background = "";
       }
+    }
+  };
+
+  const resetNavBtn = () => {
+    for (let index = 0; index < navBtnRef.current.childNodes.length; index++) {
+      const resetBtns = navBtnRef.current.childNodes[index];
+      resetBtns.style.background = "";
     }
   };
 
@@ -36,6 +43,7 @@ const Nav = () => {
         <div className="pt-2 pl-6">
           <Button
             onClick={() => {
+              resetNavBtn();
               navigate("/home");
             }}
           >
