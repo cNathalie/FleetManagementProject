@@ -11,6 +11,8 @@ import Overlay from "../components/Overlay";
 import Popup from "../components/Popup";
 import PopupRemoveUser from "../components/PopupRemoveUser";
 import PopupMessage from "../components/PopupMessage";
+import { Box } from "@mui/material";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const AdminPage = () => {
   const passErrRef = useRef();
@@ -20,12 +22,21 @@ const AdminPage = () => {
   const overlayRef = useRef();
   const removeUserRef = useRef();
   const goBackRef = useRef();
+  
+  const { isDarkMode } = useDarkMode();
+  return (
+    <Box sx={
+      isDarkMode
+      ? { bgcolor: "#032030", color: "white", minHeight: "100vh"}
+      : { bgcolor: "white", color: "black", minHeight: "100vh"}
+    }>
 
 <<<<<<< Updated upstream
   return (
     <div>
       <div style={{ display: "none" }} ref={passErrRef}>
         <PopupMessage msgRef={passErrRef}>
+
           Wachtwoorden komen niet overeen
         </PopupMessage>
       </div>
@@ -170,7 +181,7 @@ const AdminPage = () => {
           />
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 
