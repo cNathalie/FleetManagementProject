@@ -14,7 +14,7 @@ const PopupRemoveUser = (props) => {
     popup: { title, text, textBtnLeft, textBtnRight },
   } = props;
 
-  const {setAdminDecision} = useConfirmation();
+  const { setAdminDecision } = useConfirmation();
 
   return (
     <div className={`${CARD_STYLES.POPUP_CARD} w-[30%] h-[85%]`}>

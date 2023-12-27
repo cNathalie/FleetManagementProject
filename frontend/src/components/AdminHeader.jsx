@@ -2,7 +2,14 @@
 import React from "react";
 import { BUTTON_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
 
-const AdminHeader = () => {
+const AdminHeader = ({ refOverlay, refGoBack }) => {
+  const showPopup = (overlayRef, popupRef) => {
+    const popup = popupRef.current;
+    const overlay = overlayRef.current;
+    popup.style.display = "block";
+    overlay.style.display = "block";
+  };
+
   return (
     <div className="w-[100%] h-[100px] flex justify-center">
       {/* Header */}
@@ -10,10 +17,7 @@ const AdminHeader = () => {
         <button
           className={`${BUTTON_STYLES.ADMIN_GOBACK} relative w-[201px] h-[43px]`}
           onClick={() => {
-            const popup = document.getElementById("popupGoBack");
-            const overlay = document.getElementById("overlay");
-            popup.style.display = "block";
-            overlay.style.display = "block";
+            showPopup(refOverlay, refGoBack);
           }}
         >
           <p>Terug naar homepagina</p>

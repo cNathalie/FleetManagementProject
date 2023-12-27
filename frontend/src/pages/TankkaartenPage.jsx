@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
 import Table from "../components/Table";
 import {
   getTankkaarten,
@@ -44,6 +43,12 @@ const TankkaartenPage = () => {
   const [counter, setCounter] = useState(0);
   const [data, setData] = useState([]);
   const [brandstofTypesData, setBrandstofTypesData] = useState([]);
+  const overlayRef = useRef();
+  const removeItemRef = useRef();
+  const detailChangeRef = useRef();
+  const detailDisplayRef = useRef();
+  const goBackRef = useRef();
+  const addItemRef = useRef();
 
   useEffect(() => {
     console.log("Effect is running");
@@ -69,12 +74,12 @@ const TankkaartenPage = () => {
     }, 100);
   };
 
-  const setPopupVisibility = (popupId, visibility) => {
-    const element = document.getElementById(popupId);
+  const setPopupVisibility = (ref, visibility) => {
+    const element = ref.current;
     if (element) {
       element.style.display = visibility ? "block" : "none";
     } else {
-      console.error(`Element with id ${popupId} not found.`);
+      console.error(`Element with ref ${ref} not found.`);
     }
   };
 
@@ -94,31 +99,38 @@ const TankkaartenPage = () => {
 
   return (
     <>
-      <Overlay />
+      <div style={{ display: "none" }} ref={overlayRef}>
+        <Overlay />
+      </div>
 
-      <Popup id="Popup">
-        {textPopupVerwijderItem.map((p) => {
-          return (
-            <PopupRemoveItem
-              key={p.id}
-              popup={{
-                title: p.title,
-                text: p.text,
-                textBtnLeft: p.textBtnLeft,
-                textBtnRight: p.textBtnRight,
-                popup: p,
-              }}
-              apiFunction={DeleteTankkaart}
-              setPopupVisibility={setPopupVisibility}
-              tempId={temp.tempId}
-              triggerRerender={triggerRerender}
-            />
-          );
-        })}
-      </Popup>
+      <div style={{ display: "none" }} ref={removeItemRef}>
+        <Popup id="Popup">
+          {textPopupVerwijderItem.map((p) => {
+            return (
+              <PopupRemoveItem
+                key={p.id}
+                popup={{
+                  title: p.title,
+                  text: p.text,
+                  textBtnLeft: p.textBtnLeft,
+                  textBtnRight: p.textBtnRight,
+                  popup: p,
+                }}
+                apiFunction={DeleteTankkaart}
+                setPopupVisibility={setPopupVisibility}
+                tempId={temp.tempId}
+                triggerRerender={triggerRerender}
+                refOverlay={overlayRef}
+                refRemoveItem={removeItemRef}
+              />
+            );
+          })}
+        </Popup>
+      </div>
 
       <div
         id="detailChange"
+        ref={detailChangeRef}
         style={{
           zIndex: 60,
           position: "absolute",
@@ -171,11 +183,16 @@ const TankkaartenPage = () => {
           triggerRerender={triggerRerender}
           heading="Bewerk"
           btnValue="Bewerk"
+          refGoBack={goBackRef}
+          refDetailChange={detailChangeRef}
+          refAddItem={addItemRef}
+          refOverlay={overlayRef}
         />
       </div>
 
       <div
         id="detailDisplay"
+        ref={detailDisplayRef}
         style={{
           zIndex: 60,
           position: "absolute",
@@ -186,29 +203,36 @@ const TankkaartenPage = () => {
         <DetailDisplay
           setPopupVisibility={setPopupVisibility}
           tempObject={temp.tempObject}
+          refOverlay={overlayRef}
+          refDetailDisplay={detailDisplayRef}
         />
       </div>
-
-      <Popup id="popupGoBack">
-        {textPopupGaTerug.map((p) => {
-          return (
-            <PopupCloseDetailChange
-              key={p.id}
-              popup={{
-                title: p.title,
-                text: p.text,
-                textBtnLeft: p.textBtnLeft,
-                textBtnRight: p.textBtnRight,
-                popup: p,
-              }}
-              setPopupVisibility={setPopupVisibility}
-            />
-          );
-        })}
-      </Popup>
+      <div style={{ display: "none" }} ref={goBackRef}>
+        <Popup id="popupGoBack">
+          {textPopupGaTerug.map((p) => {
+            return (
+              <PopupCloseDetailChange
+                key={p.id}
+                popup={{
+                  title: p.title,
+                  text: p.text,
+                  textBtnLeft: p.textBtnLeft,
+                  textBtnRight: p.textBtnRight,
+                  popup: p,
+                }}
+                setPopupVisibility={setPopupVisibility}
+                refOverlay={overlayRef}
+                refDetailChange={detailChangeRef}
+                refGoBack={goBackRef}
+              />
+            );
+          })}
+        </Popup>
+      </div>
 
       <div
         id="addItem"
+        ref={addItemRef}
         style={{
           zIndex: 60,
           position: "absolute",
@@ -268,18 +292,25 @@ const TankkaartenPage = () => {
           triggerRerender={triggerRerender}
           heading="Toevoegen"
           btnValue="Voeg toe"
+          refGoBack={goBackRef}
+          refDetailChange={detailChangeRef}
+          refAddItem={addItemRef}
+          refOverlay={overlayRef}
         />
       </div>
 
       <Table
-        {...{
-          tableHeaderContent,
-          data,
-          inputData,
-          setPopupVisibility,
-          setTempContent,
-          iDname,
-        }}
+        tableHeaderContent={tableHeaderContent}
+        inputData={inputData}
+        data={data}
+        setPopupVisibility={setPopupVisibility}
+        setTempContent={setTempContent}
+        iDname={iDname}
+        refRemoveItem={removeItemRef}
+        refDetailChange={detailChangeRef}
+        refDetailDisplay={detailDisplayRef}
+        refAddItem={addItemRef}
+        refOverlay={overlayRef}
       />
     </>
   );

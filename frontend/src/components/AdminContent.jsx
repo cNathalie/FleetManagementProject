@@ -12,41 +12,48 @@ import {
 import { addUser, getAllUsers, removeUser } from "../constants/Api";
 import useConfirmation from "../confirmation/useConfirmation";
 
-export const AdminContent = () => {
+export const AdminContent = ({
+  refPass,
+  refSucces,
+  refGeneral,
+  refRemovedUser,
+  refOverlay,
+  refRemoveUser,
+}) => {
   const { adminDecision, setAdminDecision } = useConfirmation();
   const [userToRemove, setUserToRemove] = useState(null);
   const [counter, setCounter] = useState(0);
 
-  const popupMsgIds = ["passErr", "succes", "generalErr", "removedUser"];
+  const popupMsgRefs = [refPass, refSucces, refGeneral, refRemovedUser];
 
   // Handle form submission for adding a user
   const handleAddUserSubmit = async (formData) => {
     if (formData.password !== formData.confirmPassword) {
-      excludePopup("passErr");
-      showPopUpMsg("passErr");
+      excludePopup(refPass);
+      showPopUpMsg(refPass);
       setTimeout(() => {
-        hidePopUpMsg("passErr");
+        hidePopUpMsg(refPass);
       }, 2500);
     } else {
       var result = await addUser(formData);
 
-      result ? excludePopup("succes") : excludePopup("generalErr");
-      result ? showPopUpMsg("succes") : showPopUpMsg("generalErr");
+      result ? excludePopup(refSucces) : excludePopup(refGeneral);
+      result ? showPopUpMsg(refSucces) : showPopUpMsg(refGeneral);
       result
         ? setTimeout(() => {
-            hidePopUpMsg("succes");
+            hidePopUpMsg(refSucces);
           }, 2500)
         : setTimeout(() => {
-            hidePopUpMsg("generalErr");
+            hidePopUpMsg(refGeneral);
           }, 2500);
     }
     triggerRerender();
   };
 
   // Function is called by handleRemoveUserSubmit
-  const showPopUp = () => {
-    const popup = document.getElementById("popupRemoveUser");
-    const overlay = document.getElementById("overlay");
+  const showPopUp = (removeUserRef, overlayRef) => {
+    const popup = removeUserRef.current;
+    const overlay = overlayRef.current;
     popup.style.display = "block";
     overlay.style.display = "block";
   };
@@ -55,7 +62,7 @@ export const AdminContent = () => {
   // use Effect then handles the admin decision.
   const handleRemoveUserSubmit = async (formData) => {
     console.log("Pending confirmation to remove user:", formData.chosenUser);
-    showPopUp();
+    showPopUp(refRemoveUser, refOverlay);
     setUserToRemove(formData.chosenUser);
   };
 
@@ -70,10 +77,10 @@ export const AdminContent = () => {
             const removal = await removeUser(userToRemove);
             console.log(removal + " User removed with succes.");
             triggerRerender();
-            excludePopup("removedUser");
-            showPopUpMsg("removedUser");
+            excludePopup(refRemovedUser);
+            showPopUpMsg(refRemovedUser);
             setTimeout(() => {
-              hidePopUpMsg("removedUser");
+              hidePopUpMsg(refRemovedUser);
             }, 2500);
           } catch (error) {
             console.log(error);
@@ -108,26 +115,26 @@ export const AdminContent = () => {
     }, 100);
   };
 
-  const showPopUpMsg = (popupId) => {
-    const popupMsg = document.getElementById(popupId);
+  const showPopUpMsg = (ref) => {
+    const popupMsg = ref.current;
     popupMsg.style.display = "block";
   };
 
-  const hidePopUpMsg = (popupId) => {
-    const popupMsgHide = document.getElementById(popupId);
+  const hidePopUpMsg = (ref) => {
+    const popupMsgHide = ref.current;
     popupMsgHide.style.display = "none";
   };
 
-  const hideOtherPopupMsg = (popupIds) => {
-    popupIds.forEach((element) => {
-      const popup = document.getElementById(element);
+  const hideOtherPopupMsg = (popupRefs) => {
+    popupRefs.forEach((element) => {
+      const popup = element.current;
       popup.style.display = "none";
     });
   };
 
   const excludePopup = (exludedPopup) => {
     let hidePopups = [];
-    popupMsgIds.forEach((popup) => {
+    popupMsgRefs.forEach((popup) => {
       if (popup !== exludedPopup) {
         hidePopups.push(popup);
       }

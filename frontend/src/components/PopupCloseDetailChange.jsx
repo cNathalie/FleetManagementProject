@@ -8,7 +8,13 @@ import {
 } from "../constants/tailwindStyles";
 /* eslint-disable react/prop-types*/
 
-const PopupCloseDetailChange = ({ popup, setPopupVisibility }) => {
+const PopupCloseDetailChange = ({
+  popup,
+  setPopupVisibility,
+  refOverlay,
+  refDetailChange,
+  refGoBack,
+}) => {
   const { title, text, textBtnLeft, textBtnRight } = popup;
 
   return (
@@ -21,8 +27,8 @@ const PopupCloseDetailChange = ({ popup, setPopupVisibility }) => {
         <Button
           className={`${BUTTON_STYLES.POPUP_LEFT}`}
           onClick={() => {
-            setPopupVisibility("popupGoBack", false);
-            setPopupVisibility("overlay", false);
+            setPopupVisibility(refGoBack, false);
+            setPopupVisibility(refOverlay, false);
           }}
         >
           {textBtnLeft}
@@ -30,8 +36,8 @@ const PopupCloseDetailChange = ({ popup, setPopupVisibility }) => {
         <Button
           className={`${BUTTON_STYLES.POPUP_RIGHT}`}
           onClick={() => {
-            setPopupVisibility("popupGoBack", false);
-            setPopupVisibility("detailChange", true);
+            setPopupVisibility(refGoBack, false);
+            setPopupVisibility(refDetailChange, true);
           }}
         >
           {textBtnRight}

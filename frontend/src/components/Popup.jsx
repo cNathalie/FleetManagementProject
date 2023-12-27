@@ -6,7 +6,6 @@ const Popup = (props) => {
     <div
       {...props}
       style={{
-        display: "none",
         position: "absolute",
         zIndex: 100,
         width: "100%",
