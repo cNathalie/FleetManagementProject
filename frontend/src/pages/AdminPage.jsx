@@ -19,8 +19,8 @@ const AdminPage = () => {
   return (
     <Box sx={
       isDarkMode
-      ? { bgcolor: "#032030", color: "white"}
-      : { bgcolor: "white", color: "black"}
+      ? { bgcolor: "#032030", color: "white", minHeight: "100vh"}
+      : { bgcolor: "white", color: "black", minHeight: "100vh"}
     }>
       <div style={{ display: "none" }} id="passErr">
         <PopupMessage title="passErr">
