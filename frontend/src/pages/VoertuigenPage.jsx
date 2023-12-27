@@ -154,7 +154,7 @@ element in the array represents a column header in the table.*/
               required: false,
             },
             {
-              name: "typewagen",
+              name: "typeWagen",
               label: "Model",
               type: "select",
               options: typeWagenData.map((t) => ({
@@ -179,7 +179,7 @@ element in the array represents a column header in the table.*/
               required: false,
             },
             {
-              name: "brandstoftype",
+              name: "brandstofType",
               label: "Brandstoftype",
               type: "select",
               options: brandstofTypesData.map((t) => ({
@@ -277,7 +277,7 @@ element in the array represents a column header in the table.*/
               required: true,
             },
             {
-              name: "typewagen",
+              name: "typeWagen",
               label: "Model",
               type: "select",
               options: typeWagenData.map((t) => ({
@@ -302,7 +302,7 @@ element in the array represents a column header in the table.*/
               required: true,
             },
             {
-              name: "brandstoftype",
+              name: "brandstofType",
               label: "Brandstoftype",
               type: "select",
               options: brandstofTypesData.map((t) => ({

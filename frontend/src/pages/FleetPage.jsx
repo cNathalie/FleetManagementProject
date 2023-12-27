@@ -156,30 +156,19 @@ const FleetPage = () => {
           //TODO: fix voertuig naar 1 select
           formFields={[
             {
-              name: "bestuurderNaam",
-              label: "bestuurderNaam",
+              name: "bestuurderId",
+              label: "bestuurder",
               type: "select",
               options: bestuurdersData.map((t) => ({
-                value: t.naam,
-                label: t.naam,
-              })),
-              initialValue: "",
-              required: false,
-            },
-            {
-              name: "bestuurderVoornaam",
-              label: "bestuurderVoornaam",
-              type: "select",
-              options: bestuurdersData.map((t) => ({
-                value: t.voornaam,
-                label: t.voornaam,
+                value: t.bestuurderId,
+                label: Object.values(t).join(' '),
               })),
               initialValue: "",
               required: false,
             },
             {
               name: "tankkaartId",
-              label: "tankkaartId",
+              label: "tankkaart",
               type: "select",
               options: tankkaartenData.map((t) => ({
                 value: t.tankkaartId,
@@ -189,40 +178,23 @@ const FleetPage = () => {
               required: false,
             },
             {
-              name: "voertuigMerkModel",
-              label: "voertuigMerkModel",
+              name: "voertuigId",
+              label: "voertuig",
               type: "select",
               options: voertuigenData.map((t) => ({
-                value: t.merkEnModel,
-                label: t.merkEnModel,
-              })),
-              initialValue: "",
-              required: false,
-            },
-            {
-              name: "voertuigNummerplaat",
-              label: "voertuigNummerplaat",
-              type: "select",
-              options: voertuigenData.map((t) => ({
-                value: t.nummerplaat,
-                label: t.nummerplaat,
-              })),
-              initialValue: "",
-              required: false,
-            },
-            {
-              name: "voertuigChassisnummer",
-              label: "voertuigChassisnummer",
-              type: "select",
-              options: voertuigenData.map((t) => ({
-                value: t.chassisnummer,
-                label: t.chassisnummer,
+                value: t.voertuigId,
+                label: Object.values(t).join(' '),
               })),
               initialValue: "",
               required: false,
             },
           ]}
-          tempObject={temp.tempObject}
+          tempObject={{
+            "fleetId": temp.tempObject.fleetId,
+            "bestuurderId": `${temp.tempObject.bestuurderNaam} ${temp.tempObject.bestuurderVoornaam}`,
+            "voertuigId": temp.tempObject.voertuigMerkModel,
+            "tankkaartId": temp.tempObject.tankaartId
+          }}
           triggerRerender={triggerRerender}
           heading="Bewerk"
           btnValue="Bewerk"
@@ -288,30 +260,19 @@ const FleetPage = () => {
           apiCmd={PostFleet}
           formFields={[
             {
-              name: "bestuurderNaam",
-              label: "bestuurderNaam",
+              name: "bestuurderId",
+              label: "bestuurder",
               type: "select",
               options: bestuurdersData.map((t) => ({
-                value: t.naam,
-                label: t.naam,
-              })),
-              initialValue: "",
-              required: true,
-            },
-            {
-              name: "bestuurderVoornaam",
-              label: "bestuurderVoornaam",
-              type: "select",
-              options: bestuurdersData.map((t) => ({
-                value: t.voornaam,
-                label: t.voornaam,
+                value: t.bestuurderId,
+                label: Object.values(t).join(' '),
               })),
               initialValue: "",
               required: true,
             },
             {
               name: "tankkaartId",
-              label: "tankkaartId",
+              label: "tankkaart",
               type: "select",
               options: tankkaartenData.map((t) => ({
                 value: t.tankkaartId,
@@ -321,34 +282,12 @@ const FleetPage = () => {
               required: true,
             },
             {
-              name: "voertuigMerkModel",
-              label: "voertuigMerkModel",
+              name: "voertuigId",
+              label: "voertuig",
               type: "select",
               options: voertuigenData.map((t) => ({
-                value: t.merkEnModel,
-                label: t.merkEnModel,
-              })),
-              initialValue: "",
-              required: true,
-            },
-            {
-              name: "voertuigNummerplaat",
-              label: "voertuigNummerplaat",
-              type: "select",
-              options: voertuigenData.map((t) => ({
-                value: t.nummerplaat,
-                label: t.nummerplaat,
-              })),
-              initialValue: "",
-              required: true,
-            },
-            {
-              name: "voertuigChassisnummer",
-              label: "voertuigChassisnummer",
-              type: "select",
-              options: voertuigenData.map((t) => ({
-                value: t.chassisnummer,
-                label: t.chassisnummer,
+                value: t.voertuigId,
+                label: Object.values(t).join(' '),
               })),
               initialValue: "",
               required: true,

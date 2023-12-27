@@ -157,7 +157,7 @@ const TankkaartenPage = () => {
               required: false,
             },
             {
-              name: "brandstofType",
+              name: "brandstoftype",
               label: "brandstofType",
               type: "select",
               options: brandstofTypesData.map((t) => ({
@@ -266,7 +266,7 @@ const TankkaartenPage = () => {
               required: true,
             },
             {
-              name: "brandstofType",
+              name: "brandstoftype",
               label: "brandstofType",
               type: "select",
               options: brandstofTypesData.map((t) => ({
