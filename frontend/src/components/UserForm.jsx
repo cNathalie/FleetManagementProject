@@ -7,6 +7,7 @@ import {
   INPUT_STYLES,
   BUTTON_STYLES,
 } from "../constants/tailwindStyles";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent, Data }) => {
   const [formData, setFormData] = useState({
@@ -37,8 +38,10 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent, Data }) =
     onSubmit(formData);
   };
 
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
-    <form className="w-[80%] mx-auto" onSubmit={handleSubmit}>
+    <div className={isDarkMode ? "dark" : ""}>
+      <form className="w-full mx-auto" onSubmit={handleSubmit}>
       {formFields.map((field) => (
         <div className="mb-4" key={field.id}>
           <label htmlFor={field.id} className={TEXT_STYLES.USERFORM_LABEL}>
@@ -97,6 +100,8 @@ const UserForm = ({ formFields, onSubmit, buttonText, ButtonComponent, Data }) =
         </ButtonComponent>
       </div>
     </form>
+    </div>
+    
   );
 };
 

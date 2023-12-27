@@ -18,12 +18,26 @@ const Nav = () => {
   const selectNavBtn = (index) => {
     const selectedBtn = navBtnRef.current.childNodes[index - 1];
 
-    selectedBtn.style.background = "#19B9CE";
+    //selectedBtn.style.background = "#19B9CE";
+
+    if (isDarkMode) {
+      selectedBtn.style.background = "#006DA4";
+      selectedBtn.style.color = "#FFFFFF";
+    } else {
+      selectedBtn.style.background = "#19B9CE";
+      selectedBtn.style.color = "#FFFFFF";
+    }
 
     for (let i = 0; i < navBtnRef.current.childNodes.length; i++) {
       if (i !== index - 1) {
         const notSelectedBtn = navBtnRef.current.childNodes[i];
-        notSelectedBtn.style.background = "";
+        if (isDarkMode) {
+          notSelectedBtn.style.background = "#022B42";
+          notSelectedBtn.style.color = "#FFFFFF";
+        } else {
+          notSelectedBtn.style.background = "#FFFFFF";
+          notSelectedBtn.style.color = "#0B5A64";
+        }
       }
     }
   };
