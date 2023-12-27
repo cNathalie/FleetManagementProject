@@ -13,6 +13,7 @@ import {
 } from "../constants/tailwindStyles";
 
 import Select from "react-select";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const DynamicForm = ({
   setPopupVisibility,
@@ -31,6 +32,7 @@ const DynamicForm = ({
   const [status, setStatus] = useState("");
   const [showStatus, setShowStatus] = useState(false);
   const [removeLeavePopup, setRemoveLeavePopup] = useState(true);
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   const handleToggleEditMode = () => {
     if (isEditing) {
@@ -86,7 +88,8 @@ const DynamicForm = ({
   }, [tempObject]);
 
   return (
-    <div className={BG_STYLES.OVERVIEW_BG}>
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className={BG_STYLES.OVERVIEW_BG}>
       <div className="mt-6 p-6 ml-4">
         <form
           onSubmit={formik.handleSubmit}
@@ -112,7 +115,7 @@ const DynamicForm = ({
               }}
               type="button"
             >
-              <img src="../src/assets/Media/closeButton.jpg" alt="Close" />
+              <img src={`${isDarkMode ? "../src/assets/Media/dark_closeBtn.png" : "../src/assets/Media/closeButton.jpg"}`} alt="Close" />
             </Button>
           </header>
           {formFields.map((field) => (
@@ -196,6 +199,8 @@ const DynamicForm = ({
         </form>
       </div>
     </div>
+    </div>
+    
   );
 };
 

@@ -2,8 +2,11 @@
 import React from "react";
 import FleetWeergave from "../components/FleetWeergave";
 import homePage from "../constants/homePageContent";
+import { useOutletContext } from "react-router-dom";
 
 const Homepage = () => {
+  const navBtnRef = useOutletContext();
+  //console.log(navBtnRef.current);
   return (
     <>
       <div className="h-screen flex flex-wrap justify-around gap-y-7 px-12 pt-24 pb-8">
@@ -11,11 +14,14 @@ const Homepage = () => {
           return (
             <FleetWeergave
               key={h.id}
-              title={h.title}
-              text={h.text}
-              btnValue={h.btnValue}
-              imgSrc={h.imgSrc}
-              fleetweergave={h}
+              fleetweergave={{
+                id: h.id,
+                title: h.title,
+                text: h.text,
+                btnValue: h.btnValue,
+                imgSrc: h.imgSrc,
+              }}
+              navBtnRef={navBtnRef}
             />
           );
         })}
