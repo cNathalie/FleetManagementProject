@@ -10,11 +10,9 @@ import useConfirmation from "../confirmation/useConfirmation";
 import { useDarkMode } from "../hooks/useDarkMode";
 /* eslint-disable react/prop-types*/
 
-const PopupRemoveUser = (props) => {
-  const {
-    popup: { title, text, textBtnLeft, textBtnRight },
-  } = props;
-
+const PopupRemoveUser = ({ popup, refRemoveUser, refOverlay }) => {
+  const { title, text, textBtnLeft, textBtnRight } = popup;
+  
   const {setAdminDecision} = useConfirmation();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 

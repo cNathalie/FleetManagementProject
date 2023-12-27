@@ -10,10 +10,8 @@ import {
 import { useDarkMode } from "../hooks/useDarkMode";
 /* eslint-disable react/prop-types*/
 
-const PopupGoBack = (props) => {
-  const {
-    popup: { title, text, textBtnLeft, textBtnRight },
-  } = props;
+const PopupGoBack = ({ popup, refGoBack, refOverlay }) => {
+  const { title, text, textBtnLeft, textBtnRight } = popup;
 
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -46,7 +44,7 @@ const PopupGoBack = (props) => {
           {textBtnRight}
         </Button>
       </div>
-    </div>
+      </div>
     </div>
     
   );
