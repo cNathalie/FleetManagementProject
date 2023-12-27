@@ -56,6 +56,7 @@ const DynamicForm = ({
       const updatedData = { ...tempObject, ...changedData };
       const errors = formik.validateForm(updatedData);
       if (Object.keys(errors).length === 0) {
+        console.log(updatedData);
         const response = await apiCmd(updatedData);
         if (response.ok) {
           triggerRerender();
