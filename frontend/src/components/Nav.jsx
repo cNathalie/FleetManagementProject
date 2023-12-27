@@ -42,6 +42,13 @@ const Nav = () => {
     }
   };
 
+  const resetNavBtn = () => {
+    for (let index = 0; index < navBtnRef.current.childNodes.length; index++) {
+      const resetBtns = navBtnRef.current.childNodes[index];
+      resetBtns.style.background = "";
+    }
+  };
+
   return (
     <div className={isDarkMode ? "dark" : ""}>
       <div
@@ -50,6 +57,7 @@ const Nav = () => {
         <div className="pt-2 pl-6">
           <Button
             onClick={() => {
+              resetNavBtn();
               navigate("/home");
             }}
           >

@@ -13,6 +13,8 @@ const PopupRemoveItem = ({
   setPopupVisibility,
   tempId,
   triggerRerender,
+  refOverlay,
+  refRemoveItem,
 }) => {
   const { title, text, textBtnLeft, textBtnRight } = popup;
   //const { data } = useData();
@@ -39,8 +41,8 @@ const PopupRemoveItem = ({
               console.error("Error handling deleteVoertuig:", error);
             }
             triggerRerender();
-            setPopupVisibility("overlay", false);
-            setPopupVisibility("Popup", false);
+            setPopupVisibility(refOverlay, false);
+            setPopupVisibility(refRemoveItem, false);
           }}
         >
           {textBtnLeft}
@@ -48,8 +50,8 @@ const PopupRemoveItem = ({
         <Button
           className={`${BUTTON_STYLES.POPUP_RIGHT}`}
           onClick={() => {
-            setPopupVisibility("overlay", false);
-            setPopupVisibility("Popup", false);
+            setPopupVisibility(refOverlay, false);
+            setPopupVisibility(refRemoveItem, false);
           }}
         >
           {textBtnRight}

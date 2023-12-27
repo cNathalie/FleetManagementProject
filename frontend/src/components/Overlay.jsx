@@ -5,12 +5,11 @@
  * property of the div is set to "none" if the visible prop is true, and "block" if the visible prop is
  * false.
  */
-const Overlay = (visible) => {
+const Overlay = () => {
   return (
     <div
       id="overlay"
       style={{
-        display: visible ? "none" : "block",
         position: "fixed",
         top: 0,
         left: 0,

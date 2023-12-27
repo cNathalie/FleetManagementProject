@@ -13,33 +13,49 @@ import { addUser, getAllUsers, removeUser } from "../constants/Api";
 import useConfirmation from "../confirmation/useConfirmation";
 import { useDarkMode } from "../hooks/useDarkMode";
 
-export const AdminContent = () => {
+export const AdminContent = ({
+  refPass,
+  refSucces,
+  refGeneral,
+  refRemovedUser,
+  refOverlay,
+  refRemoveUser,
+}) => {
   const { adminDecision, setAdminDecision } = useConfirmation();
   const [userToRemove, setUserToRemove] = useState(null);
   const [counter, setCounter] = useState(0);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
+  const popupMsgRefs = [refPass, refSucces, refGeneral, refRemovedUser];
+
   // Handle form submission for adding a user
   const handleAddUserSubmit = async (formData) => {
     if (formData.password !== formData.confirmPassword) {
-      const passErr = document.getElementById("passErr");
-      passErr.style.display = "block";
+      excludePopup(refPass);
+      showPopUpMsg(refPass);
+      setTimeout(() => {
+        hidePopUpMsg(refPass);
+      }, 2500);
     } else {
       var result = await addUser(formData);
-      const succes = document.getElementById("succes");
-      const generalErr = document.getElementById("generalErr");
 
+      result ? excludePopup(refSucces) : excludePopup(refGeneral);
+      result ? showPopUpMsg(refSucces) : showPopUpMsg(refGeneral);
       result
-        ? (succes.style.display = "block")
-        : (generalErr.style.display = "block");
+        ? setTimeout(() => {
+            hidePopUpMsg(refSucces);
+          }, 2500)
+        : setTimeout(() => {
+            hidePopUpMsg(refGeneral);
+          }, 2500);
     }
     triggerRerender();
   };
 
   // Function is called by handleRemoveUserSubmit
-  const showPopUp = () => {
-    const popup = document.getElementById("popupRemoveUser");
-    const overlay = document.getElementById("overlay");
+  const showPopUp = (removeUserRef, overlayRef) => {
+    const popup = removeUserRef.current;
+    const overlay = overlayRef.current;
     popup.style.display = "block";
     overlay.style.display = "block";
   };
@@ -48,7 +64,7 @@ export const AdminContent = () => {
   // use Effect then handles the admin decision.
   const handleRemoveUserSubmit = async (formData) => {
     console.log("Pending confirmation to remove user:", formData.chosenUser);
-    showPopUp();
+    showPopUp(refRemoveUser, refOverlay);
     setUserToRemove(formData.chosenUser);
   };
 
@@ -62,9 +78,12 @@ export const AdminContent = () => {
           try {
             const removal = await removeUser(userToRemove);
             console.log(removal + " User removed with succes.");
-            const removedUser = document.getElementById("removedUser");
             triggerRerender();
-            removedUser.style.display = "block";
+            excludePopup(refRemovedUser);
+            showPopUpMsg(refRemovedUser);
+            setTimeout(() => {
+              hidePopUpMsg(refRemovedUser);
+            }, 2500);
           } catch (error) {
             console.log(error);
           }
@@ -96,6 +115,33 @@ export const AdminContent = () => {
     setTimeout(() => {
       setCounter(counter + 1);
     }, 100);
+  };
+
+  const showPopUpMsg = (ref) => {
+    const popupMsg = ref.current;
+    popupMsg.style.display = "block";
+  };
+
+  const hidePopUpMsg = (ref) => {
+    const popupMsgHide = ref.current;
+    popupMsgHide.style.display = "none";
+  };
+
+  const hideOtherPopupMsg = (popupRefs) => {
+    popupRefs.forEach((element) => {
+      const popup = element.current;
+      popup.style.display = "none";
+    });
+  };
+
+  const excludePopup = (exludedPopup) => {
+    let hidePopups = [];
+    popupMsgRefs.forEach((popup) => {
+      if (popup !== exludedPopup) {
+        hidePopups.push(popup);
+      }
+    });
+    hideOtherPopupMsg(hidePopups);
   };
 
   return (

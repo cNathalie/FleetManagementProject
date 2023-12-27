@@ -5,8 +5,15 @@ import { useDarkMode } from "../hooks/useDarkMode";
 import { Icon, IconButton } from "@mui/material";
 import { LightModeOutlined, DarkModeOutlined } from "@mui/icons-material";
 
-const AdminHeader = () => {
+const AdminHeader = ({ refOverlay, refGoBack }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const showPopup = (overlayRef, popupRef) => {
+    const popup = popupRef.current;
+    const overlay = overlayRef.current;
+    popup.style.display = "block";
+    overlay.style.display = "block";
+  };
+
   return (
     <div className={isDarkMode ? "dark" : ""}>
       <div className="w-[100%] h-[100px] flex justify-center">
@@ -15,10 +22,7 @@ const AdminHeader = () => {
         <button
           className={`${BUTTON_STYLES.ADMIN_GOBACK} relative w-[201px] h-[43px]`}
           onClick={() => {
-            const popup = document.getElementById("popupGoBack");
-            const overlay = document.getElementById("overlay");
-            popup.style.display = "block";
-            overlay.style.display = "block";
+            showPopup(refOverlay, refGoBack);
           }}
         >
           <p>Terug naar homepagina</p>

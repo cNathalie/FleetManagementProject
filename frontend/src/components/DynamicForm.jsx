@@ -23,6 +23,10 @@ const DynamicForm = ({
   triggerRerender,
   heading,
   btnValue,
+  refGoBack,
+  refDetailChange,
+  refAddItem,
+  refOverlay,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [status, setStatus] = useState("");
@@ -96,15 +100,15 @@ const DynamicForm = ({
               className={BUTTON_STYLES.OVERVIEW_EXITBUTTON}
               onClick={() => {
                 if (!removeLeavePopup) {
-                  setPopupVisibility("popupGoBack", true);
-                  setPopupVisibility("detailChange", false);
-                  setPopupVisibility("addItem", false);
+                  setPopupVisibility(refGoBack, true);
+                  setPopupVisibility(refDetailChange, false);
+                  setPopupVisibility(refAddItem, false);
                   setIsEditing(false);
                   setRemoveLeavePopup(true);
                 } else {
-                  setPopupVisibility("detailChange", false);
-                  setPopupVisibility("addItem", false);
-                  setPopupVisibility("overlay", false);
+                  setPopupVisibility(refDetailChange, false);
+                  setPopupVisibility(refAddItem, false);
+                  setPopupVisibility(refOverlay, false);
                   setIsEditing(false);
                 }
               }}

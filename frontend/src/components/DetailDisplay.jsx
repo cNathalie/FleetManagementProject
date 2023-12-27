@@ -4,7 +4,12 @@ import Button from "./Button";
 import { BG_STYLES, BUTTON_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
 import { useDarkMode } from "../hooks/useDarkMode";
 
-const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
+const DetailDisplay = ({
+  setPopupVisibility,
+  tempObject,
+  refOverlay,
+  refDetailDisplay,
+}) => {
   console.log(tempObject);
 
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -13,15 +18,13 @@ const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
       <div className={BG_STYLES.OVERVIEW_BG}>
       <div>
         <div className="ml-9 mt-6 py-6 flex justify-between">
-          <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>
-            Detailweergave
-          </h1>
+          <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>Detailweergave</h1>
           <div className="mr-8">
             <Button
               className={BUTTON_STYLES.OVERVIEW_EXITBUTTON}
               onClick={() => {
-                setPopupVisibility("overlay", false);
-                setPopupVisibility("detailDisplay", false);
+                setPopupVisibility(refOverlay, false);
+                setPopupVisibility(refDetailDisplay, false);
               }}
             >
               <img src= {`${isDarkMode ? "../src/assets/Media/dark_closeBtn.png" : "../src/assets/Media/closeButton.jpg"}`} />
@@ -35,7 +38,10 @@ const DetailDisplay = ({ setPopupVisibility, tempObject }) => {
               <>
                 <div className="w-1/4 my-2 text-left ml-9">
                   <div key={key}>
-                    <label htmlFor={key} className={`${TEXT_STYLES.OVERVIEW_DATAHEADER}`}>
+                    <label
+                      htmlFor={key}
+                      className={`${TEXT_STYLES.OVERVIEW_DATAHEADER}`}
+                    >
                       {key}
                     </label>
                   </div>
