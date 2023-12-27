@@ -48,6 +48,7 @@ const FleetWeergave = ({ fleetweergave, navBtnRef }) => {
       if (i === index - 1) {
         const selectedBtn = selectedBtns[i];
         selectedBtn.style.background = "#19B9CE";
+        selectedBtn.style.color = "#FFFFFF";
       } else {
         const notSelectedBtn = selectedBtns[i];
         notSelectedBtn.style.background = "";

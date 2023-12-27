@@ -47,6 +47,7 @@ const Nav = ({ navBtnRef }) => {
     for (let index = 0; index < navBtnRef.current.childNodes.length; index++) {
       const resetBtns = navBtnRef.current.childNodes[index];
       resetBtns.style.background = "";
+      resetBtns.style.color = "#0B5A64";
     }
   };
 
