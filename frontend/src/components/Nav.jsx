@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-unused-vars
+/* eslint-disable react/prop-types*/
 import React, { useState, useRef } from "react";
 import LogoImg from "./Logo";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +11,10 @@ import { Icon, IconButton } from "@mui/material";
 import { useDarkMode } from "../hooks/useDarkMode";
 import { LightModeOutlined, DarkModeOutlined } from "@mui/icons-material";
 
-const Nav = () => {
+const Nav = ({ navBtnRef }) => {
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const navBtnRef = useRef();
+  //const navBtnRef = useRef();
 
   const selectNavBtn = (index) => {
     const selectedBtn = navBtnRef.current.childNodes[index - 1];
