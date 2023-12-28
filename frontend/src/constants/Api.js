@@ -26,7 +26,7 @@ export const getVoertuigen = () => {
 
 export const DeleteVoertuig = (tempid) => {
   fetch(
-    baseUrl + `voeruigen/${tempid}`,
+    baseUrl + `voertuigen/${tempid}`,
     { method: "DELETE", credentials: "include" },
     {
       headers: {
