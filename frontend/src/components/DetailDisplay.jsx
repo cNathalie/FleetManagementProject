@@ -1,11 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import Button from "./Button";
-import {
-  BG_STYLES,
-  BUTTON_STYLES,
-  TEXT_STYLES,
-} from "../constants/tailwindStyles";
+import { BG_STYLES, BUTTON_STYLES, TEXT_STYLES } from "../constants/tailwindStyles";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const DetailDisplay = ({
   setPopupVisibility,
@@ -15,8 +12,10 @@ const DetailDisplay = ({
 }) => {
   console.log(tempObject);
 
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
-    <div className={BG_STYLES.OVERVIEW_BG}>
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className={BG_STYLES.OVERVIEW_BG}>
       <div>
         <div className="ml-9 mt-6 py-6 flex justify-between">
           <h1 className={TEXT_STYLES.OVERVIEW_TITLE}>Detailweergave</h1>
@@ -28,7 +27,7 @@ const DetailDisplay = ({
                 setPopupVisibility(refDetailDisplay, false);
               }}
             >
-              <img src="../src/assets/Media/closeButton.jpg" />
+              <img src= {`${isDarkMode ? "../src/assets/Media/dark_closeBtn.png" : "../src/assets/Media/closeButton.jpg"}`} />
             </Button>
           </div>
         </div>
@@ -70,6 +69,8 @@ const DetailDisplay = ({
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 

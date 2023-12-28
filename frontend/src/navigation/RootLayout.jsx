@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Nav from "../components/Nav";
 import { Outlet, useActionData } from "react-router-dom";
 import useAuth from "../authentication/useAuth";
@@ -7,6 +7,7 @@ import { useDarkMode } from "../hooks/useDarkMode";
 
 const RootLayout = () => {
   const { isDarkMode } = useDarkMode();
+  const navBtnRef = useRef();
 
   return (
     <div>
@@ -17,8 +18,8 @@ const RootLayout = () => {
             : { bgcolor: "white", color: "black" }
         }
       >
-        <Nav />
-        <Outlet />
+        <Nav navBtnRef={navBtnRef} />
+        <Outlet context={navBtnRef} />
       </Box>
     </div>
   );

@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-unused-vars
+/* eslint-disable react/prop-types*/
 import React, { useState, useRef } from "react";
 import LogoImg from "./Logo";
 import { useNavigate } from "react-router-dom";
@@ -10,20 +11,34 @@ import { Icon, IconButton } from "@mui/material";
 import { useDarkMode } from "../hooks/useDarkMode";
 import { LightModeOutlined, DarkModeOutlined } from "@mui/icons-material";
 
-const Nav = () => {
+const Nav = ({ navBtnRef }) => {
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const navBtnRef = useRef();
+  //const navBtnRef = useRef();
 
   const selectNavBtn = (index) => {
     const selectedBtn = navBtnRef.current.childNodes[index - 1];
 
-    selectedBtn.style.background = "#19B9CE";
+    //selectedBtn.style.background = "#19B9CE";
+
+    if (isDarkMode) {
+      selectedBtn.style.background = "#006DA4";
+      selectedBtn.style.color = "#FFFFFF";
+    } else {
+      selectedBtn.style.background = "#19B9CE";
+      selectedBtn.style.color = "#FFFFFF";
+    }
 
     for (let i = 0; i < navBtnRef.current.childNodes.length; i++) {
       if (i !== index - 1) {
         const notSelectedBtn = navBtnRef.current.childNodes[i];
-        notSelectedBtn.style.background = "";
+        if (isDarkMode) {
+          notSelectedBtn.style.background = "#022B42";
+          notSelectedBtn.style.color = "#FFFFFF";
+        } else {
+          notSelectedBtn.style.background = "#FFFFFF";
+          notSelectedBtn.style.color = "#0B5A64";
+        }
       }
     }
   };
