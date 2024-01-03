@@ -205,12 +205,12 @@ export const AdminContent = ({
           <img
             className="top-0 absolute w-px h-[278px] left-[391px] object-cover"
             alt="Line"
-            src={`${isDarkMode ? "https://c.animaapp.com/ydShFIr0/img/line-3---white.png" : "https://c.animaapp.com/KarkG0Dg/img/line-3.svg"}`}
+            src={`${isDarkMode ? "https://c.animaapp.com/NT6Z1UHh/img/line-3---white.png" : "https://c.animaapp.com/KarkG0Dg/img/line-3.svg"}`}
           />
           <img
             className="top-[326px] absolute w-px h-[278px] left-[391px] object-cover"
             alt="Line"
-            src="https://c.animaapp.com/KarkG0Dg/img/line-4.svg"
+            src={`${isDarkMode ? "https://c.animaapp.com/3eqTzT8l/img/line-4---white.svg" : "https://c.animaapp.com/KarkG0Dg/img/line-4.svg"}`}
           />
         </div>
       </div>
