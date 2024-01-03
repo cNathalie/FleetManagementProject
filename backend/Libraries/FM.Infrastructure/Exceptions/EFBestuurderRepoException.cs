@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected EFBestuurderRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected EFBestuurderRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

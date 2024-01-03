@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected VoertuigRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected VoertuigRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

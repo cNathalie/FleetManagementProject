@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected BrandstofTypeRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected BrandstofTypeRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

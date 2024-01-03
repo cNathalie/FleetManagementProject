@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected TypeWagenException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected TypeWagenException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

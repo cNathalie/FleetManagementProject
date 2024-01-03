@@ -62,7 +62,9 @@ public sealed class EncryptedUserService : IEncryptedUserService
         return new AuthenticatedUserResource(user.UserId, user.Email!, user.Role.ToString()!, tokens);
     }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     public async Task<string> Verify(Tokens tokens)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
         var principal = _jwtManager.GetPrincipalFromExpiredToken(tokens.AccessToken!);
         var userRole = principal.FindFirst("Role")!.Value;
@@ -132,7 +134,9 @@ public sealed class EncryptedUserService : IEncryptedUserService
     }
 
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     public async Task DeleteUserRefreshTokens(int userId, string refreshToken)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
         var item = _context.UserRefreshTokens.FirstOrDefault(x => x.UserId == userId && x.RefreshToken == refreshToken);
         if (item != null)

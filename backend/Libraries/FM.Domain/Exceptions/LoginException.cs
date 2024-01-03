@@ -17,8 +17,8 @@ namespace FM.Domain.Exceptions
         {
         }
 
-        protected LoginException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected LoginException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected TypeRijbewijsRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected TypeRijbewijsRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

@@ -17,8 +17,8 @@ namespace FM.Domain.Exceptions
         {
         }
 
-        protected TypeRijbewijsException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected TypeRijbewijsException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

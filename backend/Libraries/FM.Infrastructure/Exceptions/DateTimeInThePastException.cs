@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected DateTimeInThePastException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected DateTimeInThePastException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

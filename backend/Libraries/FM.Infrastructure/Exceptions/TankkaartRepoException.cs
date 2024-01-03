@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected TankkaartRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected TankkaartRepoException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

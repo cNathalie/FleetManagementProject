@@ -17,8 +17,8 @@ namespace FM.Domain.Exceptions
         {
         }
 
-        protected BrandstofTypeException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected BrandstofTypeException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

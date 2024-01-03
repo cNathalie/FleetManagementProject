@@ -24,12 +24,12 @@ const FleetPage = () => {
   /* The `tableHeaderContent` variable is an array that contains the header titles for a table. Each
   element in the array represents a column header in the table.*/
   const tableHeaderContent = [
-    "bestuurderNaam",
-    "bestuurderVoornaam",
-    "tankkaartId",
-    "voertuigMerkModel",
-    "voertuigNummerplaat",
-    "voertuigChassisnummer",
+    "Familienaam",
+    "Voornaam",
+    "Tankkaart",
+    "Voertuig",
+    "Nummerplaat",
+    "Chassisnummer",
     "Acties", //Laten blijven
   ];
   /* The `inputData` array is used to define the data that will be displayed in each column of the table.*/
@@ -161,7 +161,7 @@ const FleetPage = () => {
               type: "select",
               options: bestuurdersData.map((t) => ({
                 value: t.bestuurderId,
-                label: Object.values(t).join(' '),
+                label: Object.values(t).join(" "),
               })),
               initialValue: "",
               required: false,
@@ -183,17 +183,17 @@ const FleetPage = () => {
               type: "select",
               options: voertuigenData.map((t) => ({
                 value: t.voertuigId,
-                label: Object.values(t).join(' '),
+                label: Object.values(t).join(" "),
               })),
               initialValue: "",
               required: false,
             },
           ]}
           tempObject={{
-            "fleetId": temp.tempObject.fleetId,
-            "bestuurderId": `${temp.tempObject.bestuurderNaam} ${temp.tempObject.bestuurderVoornaam}`,
-            "voertuigId": temp.tempObject.voertuigMerkModel,
-            "tankkaartId": temp.tempObject.tankaartId
+            fleetId: temp.tempObject.fleetId,
+            bestuurderId: `${temp.tempObject.bestuurderNaam} ${temp.tempObject.bestuurderVoornaam}`,
+            voertuigId: temp.tempObject.voertuigMerkModel,
+            tankkaartId: temp.tempObject.tankaartId,
           }}
           triggerRerender={triggerRerender}
           heading="Bewerk"
@@ -265,7 +265,7 @@ const FleetPage = () => {
               type: "select",
               options: bestuurdersData.map((t) => ({
                 value: t.bestuurderId,
-                label: Object.values(t).join(' '),
+                label: Object.values(t).join(" "),
               })),
               initialValue: "",
               required: true,
@@ -287,7 +287,7 @@ const FleetPage = () => {
               type: "select",
               options: voertuigenData.map((t) => ({
                 value: t.voertuigId,
-                label: Object.values(t).join(' '),
+                label: Object.values(t).join(" "),
               })),
               initialValue: "",
               required: true,
