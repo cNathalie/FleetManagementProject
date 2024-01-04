@@ -27,6 +27,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestSuite", "TestSuite", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FM.DomainTests", "TestSuite\FM.DomainTests1\FM.DomainTests.csproj", "{80F30F85-8E6E-45EC-9FC9-BA584F75D6CE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql-container", "sql-container", "{444F0A18-9A43-4007-AA1C-3E86A98DD69D}"
+	ProjectSection(SolutionItems) = preProject
+		Data\sql-container\Dockerfile = Data\sql-container\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "init-scripts", "init-scripts", "{F5876B3A-E358-4AF0-8574-146BE4C8911F}"
+	ProjectSection(SolutionItems) = preProject
+		Data\sql-container\init-scripts\create-database.sql = Data\sql-container\init-scripts\create-database.sql
+		Data\sql-container\init-scripts\entrypoint.sh = Data\sql-container\init-scripts\entrypoint.sh
+		Data\sql-container\init-scripts\run-initialization.sh = Data\sql-container\init-scripts\run-initialization.sh
+	EndProjectSection
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "FleetManagement.ReactApp", "..\frontend\FleetManagement.ReactApp.esproj", "{4C231EA5-E19D-41B0-BA53-E070E61A8FD0}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F6E9DADF-F6C0-48F7-8C7D-5FB641B592A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +69,16 @@ Global
 		{80F30F85-8E6E-45EC-9FC9-BA584F75D6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80F30F85-8E6E-45EC-9FC9-BA584F75D6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80F30F85-8E6E-45EC-9FC9-BA584F75D6CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C231EA5-E19D-41B0-BA53-E070E61A8FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C231EA5-E19D-41B0-BA53-E070E61A8FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C231EA5-E19D-41B0-BA53-E070E61A8FD0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4C231EA5-E19D-41B0-BA53-E070E61A8FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C231EA5-E19D-41B0-BA53-E070E61A8FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C231EA5-E19D-41B0-BA53-E070E61A8FD0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F6E9DADF-F6C0-48F7-8C7D-5FB641B592A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6E9DADF-F6C0-48F7-8C7D-5FB641B592A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6E9DADF-F6C0-48F7-8C7D-5FB641B592A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6E9DADF-F6C0-48F7-8C7D-5FB641B592A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +89,9 @@ Global
 		{86096445-C06A-4DFA-9365-F50AEF2EFF16} = {8691626C-7A68-4BE2-8BAB-4A06DC1868C0}
 		{5E1DF741-E730-4F6B-A05B-C8192C8C38D0} = {E81017D1-8B4C-4223-923E-F0BFF52C0507}
 		{80F30F85-8E6E-45EC-9FC9-BA584F75D6CE} = {54753CA6-CB13-4704-94C2-1F605BC2E70B}
+		{444F0A18-9A43-4007-AA1C-3E86A98DD69D} = {5D246495-B1EF-4B21-A838-D18225D771DE}
+		{F5876B3A-E358-4AF0-8574-146BE4C8911F} = {444F0A18-9A43-4007-AA1C-3E86A98DD69D}
+		{4C231EA5-E19D-41B0-BA53-E070E61A8FD0} = {8691626C-7A68-4BE2-8BAB-4A06DC1868C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F82BCAC-06D7-407D-837A-A189F182BE39}
