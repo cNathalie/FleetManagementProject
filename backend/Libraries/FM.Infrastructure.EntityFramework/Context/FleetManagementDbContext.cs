@@ -41,11 +41,22 @@ public partial class FleetManagementDbContext : GeneratedDbContext
             }
 
         }
-        var activeConnectionString = _configuration[key: "ActiveConnectionString"];
-        if (!string.IsNullOrEmpty(activeConnectionString))
+
+        // When running in a docker container, use the docker connection string
+        if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
         {
-            optionsBuilder.UseSqlServer(_configuration["ConnectionStrings:" + activeConnectionString]);
+            optionsBuilder.UseSqlServer(_configuration["ConnectionStrings:Docker"]);
         }
+        // When not in a docker container, use the active connection string
+        else
+        {
+            var activeConnectionString = _configuration[key: "ActiveConnectionString"];
+            if (!string.IsNullOrEmpty(activeConnectionString))
+            {
+                optionsBuilder.UseSqlServer(_configuration["ConnectionStrings:" + activeConnectionString]);
+            }
+        }
+
     }
 
 
@@ -93,5 +104,5 @@ public partial class FleetManagementDbContext : GeneratedDbContext
                 }
             }
         }
-    }   
+    }
 }

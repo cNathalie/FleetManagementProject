@@ -1,9 +1,9 @@
 FROM node:alpine
-ENV VITE_DOCKER true
+ENV VITE_DOCKER=true
 WORKDIR /srv/app
-COPY package.json .
-COPY package-lock.json .
+COPY frontend/package.json ./
+COPY frontend/package-lock.json ./
 RUN yarn
-COPY . .
+COPY frontend/. ./
 EXPOSE 5173
 CMD ["yarn", "dev"]

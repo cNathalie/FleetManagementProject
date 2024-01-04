@@ -1,5 +1,6 @@
 
 using FleetManagement.Api.AutoMapper;
+using FleetManagement.Api.Extensions;
 using FleetManagement.Api.MediatR.Behaviors;
 using FleetManagement.Api.Middleware;
 using FluentValidation;
@@ -29,6 +30,15 @@ namespace FleetManagement.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // ----ADD SERVICES----
+
+            // Context
+            if(ContextExtension.IsDocker)
+            {
+                builder.WebHost.UseKestrel()
+                        .UseContentRoot(Directory.GetCurrentDirectory())
+                        .UseUrls("http://*:5210;https://*:443");
+            }
+            
 
             // Logging
             builder.Services.AddLogging(loggingBuilder =>
@@ -213,7 +223,11 @@ namespace FleetManagement.Api
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            if (!ContextExtension.IsDocker)
+            {
+                app.UseHttpsRedirection();
+            }
+            
 
 
             // All pages should be served over https in production "Release" mode:
