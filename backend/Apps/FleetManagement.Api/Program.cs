@@ -139,15 +139,6 @@ namespace FleetManagement.Api
             // Controllers
             builder.Services.AddControllers();
 
-            // HealthCheck for EntityFramework
-            builder.Services.AddHealthChecks()
-                    .AddDbContextCheck<FleetManagementDbContext>();
-            builder.Services.AddHealthChecksUI(setupSettings: setup =>
-            {
-                setup.DisableDatabaseMigrations();
-                setup.MaximumHistoryEntriesPerEndpoint(50);
-                setup.AddHealthCheckEndpoint("EntityFrameworkCore Connection", "/working");
-            }).AddInMemoryStorage();
 
             // Header Security
             var headers = new Dictionary<string, string>()
@@ -158,7 +149,7 @@ namespace FleetManagement.Api
                 {"Referrer-Policy", "no-referrer"},
                 {"X-Permitted-Cross-Domain-Policies", "none"},
                 {"Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"},
-                {"Content-Security-Policy", "default-src 'self'"}
+                {"Content-Security-Policy", "default-src 'self'; ; connect-src http://localhost:53834 http://localhost:5210 ws://localhost:53834 wss://localhost:44320;style-src 'unsafe-inline' http://localhost:5210; script-src 'unsafe-inline' http://localhost:5210; img-src https://avatars3.githubusercontent.com 'self' data:"},
             };
 
             // For full control
@@ -207,6 +198,10 @@ namespace FleetManagement.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement By CyberSentinels", Version = "v1" });
             });
 
+            // HealthCheck
+            builder.Services.AddHealthChecks()
+                .AddDbContextCheck<FleetManagementDbContext>();
+            builder.Services.AddHealthChecksUI().AddInMemoryStorage();
 
             // ----BUILD-----
 
@@ -250,7 +245,27 @@ namespace FleetManagement.Api
             });
 
 
-            // HealthCheck
+
+
+            app.UseCors("AllowOrigin");
+            
+            // Middleware for exceptions
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+
+
+           // app.UseHealthChecks("/working", options);
+
+            // Sequence important for auth !!
+            app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
+            // -----------------------------
+            app.MapControllers();
+
+
+            app.UseRateLimiter();
+
             var options = new HealthCheckOptions
             {
                 ResponseWriter = async (c, r) =>
@@ -266,26 +281,12 @@ namespace FleetManagement.Api
                 }
             };
 
-
-            app.UseCors("AllowOrigin");
-            
-            // Middleware for exceptions
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-
-
-            app.UseHealthChecks("/working", options);
-
-            // Sequence important for auth !!
-            app.UseAuthentication();
-            app.UseRouting();
-            app.UseAuthorization();
-            // -----------------------------
-            app.MapHealthChecksUI(); // url: /healthchecks-ui
-            app.MapControllers();
-
-
-            app.UseRateLimiter();
+            app.UseEndpoints(config =>
+            {
+                config.MapHealthChecks("healthz", options); // url: /healthchecks-ui/healtchecks
+                config.MapHealthChecksUI();
+                config.MapDefaultControllerRoute();
+            });
 
 
             app.Run();
