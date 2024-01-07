@@ -1,0 +1,46 @@
+version: '3.8'
+
+name: fleetmanagement-by-cybersentinels
+
+networks:
+    fmnetwork:
+
+services:
+  fleetmanagement.api:
+    image: ${DOCKER_REGISTRY-}fleetmanagementapi
+    container_name: FleetManagement-API
+    environment:
+          - ASPNETCORE_ENVIRONMENT=Development
+    build:
+      context: .
+      dockerfile: Apps/FleetManagement.Api/Dockerfile
+    networks:
+        fmnetwork:
+            aliases:
+               - fmapi
+    ports:
+        - 5210:5210
+
+  fleetmanagement.db:
+    image: ${DOCKER_REGISTRY-}fleetmanagementdb
+    container_name: FleetManagement-DB
+    build:
+      context: .
+      dockerfile: Data/sql-container/Dockerfile
+    networks:
+        fmnetwork:
+            aliases:
+               - fmdb
+    ports:
+        - 1433:1433
+  
+  fleetmanagement.reactclient:
+    image: ${DOCKER_REGISTRY-}fleetmanagementreactclient
+    container_name: FleetManagement-ReactClient
+    build:
+        context: ..
+        dockerfile: frontend/Dockerfile
+    networks:
+        - fmnetwork
+    ports:
+        - 5173:5173
