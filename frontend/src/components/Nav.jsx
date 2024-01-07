@@ -16,10 +16,10 @@ const Nav = ({ navBtnRef }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   //const navBtnRef = useRef();
 
+  let selectedBtnId;
+
   const selectNavBtn = (index) => {
     const selectedBtn = navBtnRef.current.childNodes[index - 1];
-
-    //selectedBtn.style.background = "#19B9CE";
 
     if (isDarkMode) {
       selectedBtn.style.background = "#006DA4";
@@ -33,10 +33,10 @@ const Nav = ({ navBtnRef }) => {
       if (i !== index - 1) {
         const notSelectedBtn = navBtnRef.current.childNodes[i];
         if (isDarkMode) {
-          notSelectedBtn.style.background = "#022B42";
+          notSelectedBtn.style.background = "";
           notSelectedBtn.style.color = "#FFFFFF";
         } else {
-          notSelectedBtn.style.background = "#FFFFFF";
+          notSelectedBtn.style.background = "";
           notSelectedBtn.style.color = "#0B5A64";
         }
       }
@@ -48,6 +48,46 @@ const Nav = ({ navBtnRef }) => {
       const resetBtns = navBtnRef.current.childNodes[index];
       resetBtns.style.background = "";
       resetBtns.style.color = "#0B5A64";
+    }
+  };
+
+  const getClickedBtn = () => {
+    let clickedBtnId = 0;
+
+    for (let index = 0; index < navBtnRef.current.childNodes.length; index++) {
+      const element = navBtnRef.current.childNodes[index];
+      if (
+        element.style.background === "rgb(0, 109, 164)" ||
+        element.style.background === "rgb(25, 185, 206)"
+      ) {
+        clickedBtnId = index + 1;
+      }
+    }
+    return clickedBtnId;
+  };
+
+  const toggleDarkNavBtns = (index) => {
+    const selectedBtn = navBtnRef.current.childNodes[index - 1];
+
+    if (!isDarkMode) {
+      selectedBtn.style.background = "#006DA4";
+      selectedBtn.style.color = "#FFFFFF";
+    } else {
+      selectedBtn.style.background = "#19B9CE";
+      selectedBtn.style.color = "#FFFFFF";
+    }
+
+    for (let i = 0; i < navBtnRef.current.childNodes.length; i++) {
+      if (i !== index - 1) {
+        const notSelectedBtn = navBtnRef.current.childNodes[i];
+        if (!isDarkMode) {
+          notSelectedBtn.style.background = "";
+          notSelectedBtn.style.color = "#FFFFFF";
+        } else {
+          notSelectedBtn.style.background = "";
+          notSelectedBtn.style.color = "#0B5A64";
+        }
+      }
     }
   };
 
@@ -81,10 +121,10 @@ const Nav = ({ navBtnRef }) => {
                 key={h.title}
                 onClick={() => {
                   navigate(`/items/${h.id}`);
-                  selectNavBtn(h.id);
+                  selectedBtnId = h.id;
+                  selectNavBtn(selectedBtnId);
                 }}
                 className={`${BUTTON_STYLES.NAV_BUTTONS} py-2 pl-3 pr-4`}
-                id={`navBtn${h.id}`}
               >
                 {h.title}
               </Button>
@@ -97,6 +137,8 @@ const Nav = ({ navBtnRef }) => {
               <IconButton
                 onClick={() => {
                   toggleDarkMode();
+                  selectedBtnId = getClickedBtn();
+                  toggleDarkNavBtns(selectedBtnId);
                 }}
               >
                 {isDarkMode ? (
