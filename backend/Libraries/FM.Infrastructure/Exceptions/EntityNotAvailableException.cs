@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected EntityNotAvailableException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected EntityNotAvailableException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

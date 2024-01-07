@@ -17,8 +17,8 @@ namespace FM.Domain.Exceptions
         {
         }
 
-        protected RRNException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected RRNException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

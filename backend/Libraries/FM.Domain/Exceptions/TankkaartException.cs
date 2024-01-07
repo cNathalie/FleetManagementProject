@@ -17,8 +17,8 @@ namespace FM.Domain.Exceptions
         {
         }
 
-        protected TankkaartException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected TankkaartException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

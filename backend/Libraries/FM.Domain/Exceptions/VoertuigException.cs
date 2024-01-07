@@ -17,8 +17,8 @@ namespace FM.Domain.Exceptions
         {
         }
 
-        protected VoertuigException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected VoertuigException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }

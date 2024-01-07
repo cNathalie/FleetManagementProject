@@ -229,7 +229,7 @@ namespace FleetManagement.Api
                 {
                     if (!context.Response.Headers.ContainsKey(keyvalue.Key))
                     {
-                        context.Response.Headers.Add(keyvalue.Key, keyvalue.Value);
+                        context.Response.Headers.Append(keyvalue.Key, keyvalue.Value);
                     }
                 }
                 await next(context);

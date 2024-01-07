@@ -17,8 +17,8 @@ namespace FM.Infrastructure.Exceptions
         {
         }
 
-        protected ActiveCardException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected ActiveCardException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
     }
 }
